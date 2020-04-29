@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.0">
+  <POU Name="FB_MotionFunctions" Id="{500ca146-bff1-4570-8da1-57ff34083845}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_MotionFunctions
+
+VAR_IN_OUT
+
+Ref					: AXIS_REF;
+
+
+END_VAR
+
+VAR_INPUT
+	
+Motion_In			: ST_Motion_Inputs;
+bHomingInput		: BOOL;
+bLimitSwitch		: BOOL;
+bHomeExecute		: BOOL;		
+
+END_VAR
+
+VAR_OUTPUT
+
+Motion_Out			: ST_Motion_Outputs;	
+
+END_VAR
+VAR
+
+mcPowerStepper	: MC_PowerStepper;
+
+mcHalt			: MC_Halt;
+
+mcStop			: MC_Stop;
+
+mcHome			: MC_Home;
+
+
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[PowerStepper();
+Stop();
+Halt();
+Home( );]]></ST>
+    </Implementation>
+    <Method Name="Halt" Id="{1d5eba30-d25b-44e4-9bd0-eb406bef5b04}">
+      <Declaration><![CDATA[METHOD Halt : BOOL;]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcHalt(
+	Axis:= Ref, 
+	Execute:= bHaltExecute, 
+	Deceleration:= Motion_In.bHaltDecel, 
+	Jerk:= Motion_In.bHaltJerk, 
+	BufferMode:= Motion_In.HaltBufferMode, 
+	Options:= Motion_In.HaltOptions, 
+	Done=> Motion_Out.bHaltDone, 
+	Busy=> Motion_Out.bHaltBusy, 
+	Active=> Motion_Out.bHaltActive, 
+	CommandAborted=> Motion_Out.bHaltAbort, 
+	Error=> Motion_Out.bHaltError, 
+	ErrorID=> Motion_Out.nHaltErrorID);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Home" Id="{1d749ffd-f5a6-45ff-a0e1-191b93a80305}">
+      <Declaration><![CDATA[METHOD Home : BOOL
+VAR_INPUT
+
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcHome(
+	Axis:= Ref, 
+	Execute:= bHomeExecute, 
+	Position:= 0.00, 
+	HomingMode:= MC_DefaultHoming, 
+	BufferMode:= , 
+	Options:= , 
+	bCalibrationCam:= bHomingInput, 
+	Done=> Motion_Out.bAxisHomed, 
+	Busy=> Motion_Out.bHomeBusy, 
+	Active=> Motion_Out.bHomeActive, 
+	CommandAborted=> Motion_Out.bHomeAborted, 
+	Error=> Motion_Out.bHomeError, 
+	ErrorID=> Motion_Out.bHomeErrorID);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PowerStepper" Id="{6a7b06a9-fc89-4287-b1b8-f228a9ca92a7}">
+      <Declaration><![CDATA[METHOD PowerStepper
+
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcPowerStepper(
+	Axis:= Ref, 
+	Enable:= bAxisEnable, 
+	Enable_Positive:= TRUE,// NOT bLimitSwitch, 
+	Enable_Negative:= TRUE, //NOT bHomingInput, 
+	Override:= bOverride, 
+	DestallParams:= Motion_In.bDestallParameters, 
+	KL_Status:= Motion_In.nKL_Status, 
+	KL_Status2:= Motion_In.nKL_Status2, 
+	Status=> Motion_Out.bPowerStatus, 
+	Error=> Motion_Out.bPowerError, 
+	ErrorID=> Motion_Out.nPowerErrorID, 
+	Stalled=> Motion_Out.bPowerStalled, 
+	StallError=> Motion_Out.bPowerStallError);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Stop" Id="{c1ce39fb-2615-4855-8be7-e49f38ce3586}">
+      <Declaration><![CDATA[METHOD Stop : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcStop(
+	Axis:= Ref, 
+	Execute:= bStopExecute, 
+	Deceleration:= Motion_In.bStopDecel, 
+	Jerk:= Motion_In.bStopJerk, 
+	Options:= Motion_In.stStopOptions, 
+	Done=> Motion_Out.bStopDone, 
+	Busy=> Motion_Out.bStopBusy, 
+	Active=> Motion_Out.bStopActive, 
+	CommandAborted=> Motion_Out.bStopAbort, 
+	Error=> Motion_Out.bStopError, 
+	ErrorID=> Motion_Out.nStopErrorID);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_MotionFunctions">
+      <LineId Id="9" Count="0" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="78" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.Halt">
+      <LineId Id="6" Count="11" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.Home">
+      <LineId Id="6" Count="12" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.PowerStepper">
+      <LineId Id="7" Count="12" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.Stop">
+      <LineId Id="6" Count="10" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

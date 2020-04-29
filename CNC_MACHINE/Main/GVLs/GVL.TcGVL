@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GVL Name="GVL" Id="{1cf9ca76-df72-4f66-8cff-9316cd7fcaa5}">
+    <Declaration><![CDATA[
+VAR_GLOBAL
+
+fbCNC				: FB_CNC;
+fbModbus			: FB_ModbusRTU;
+
+	
+
+bFirstScan			: BOOL := TRUE;
+bAxisEnable			: BOOL;
+bStopExecute		: BOOL;
+bHaltExecute		: BOOL;
+bOverride			: INT	:=100;
+bProgramDone		: BOOL;
+bBuild3DGroup		: BOOL;
+
+// MC Gear IN
+bGearInExecute		: BOOL;
+InGearComplete		: BOOL;
+bGearOutExecute		: BOOL;
+GearOutDone         : BOOL;
+
+END_VAR
+
+
+VAR_GLOBAL CONSTANT 
+
+X_HOME_POSITION		: LREAL	:= 10.00;
+Y_HOME_POSITION		: LREAL := 10.00;
+Z_HOME_POSITION		: LREAL := -10.00;
+
+END_VAR
+
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

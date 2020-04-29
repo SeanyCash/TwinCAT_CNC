@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	mcBuildGroup	: CfgBuildExt3DGroup;	
+	mcGearIn		: MC_GearIn;
+	mcGearOut		: MC_GearOut;
+
+	X_Motion		: FB_MotionFunctions;
+	X2_Motion 		: FB_MotionFunctions;
+	Y_Motion		: FB_MotionFunctions;
+	Z_Motion		: FB_MotionFunctions;
+	
+	
+	X_MC_IN			: ST_Motion_Inputs;
+	X2_MC_IN		: ST_Motion_Inputs;
+	Y_MC_IN			: ST_Motion_Inputs;
+	Z_MC_IN			: ST_Motion_Inputs;
+	
+	X_MC_OUT			: ST_Motion_Outputs;
+	X2_MC_OUT			: ST_Motion_Outputs;
+	Y_MC_OUT			: ST_Motion_Outputs;
+	Z_MC_OUT			: ST_Motion_Outputs;
+	
+	
+	X_Ref	: AXIS_REF;
+	X2_Ref	: AXIS_REF;
+	Y_Ref	: AXIS_REF;
+	Z_Ref	: AXIS_REF;
+	
+	
+	i_bXHomingSwitch		AT %I* : BOOL;
+	i_bX2HomingSwitch		AT %I* : BOOL;
+	i_bYHomingSwitch		AT %I* : BOOL;
+	i_bZHomingSwitch		AT %I* : BOOL;
+	
+	bXHomingSwitch		: BOOL;
+	bX2HomingSwitch		: BOOL;
+	bYHomingSwitch		: BOOL;
+	bZHomingSwitch		: BOOL;
+	
+	q_XHomingPWR			AT %Q* : BOOL;
+	q_X2HomingPWR			AT %Q* : BOOL;
+	q_YHomingPWR			AT %Q* : BOOL;
+	q_ZHomingPWR			AT %Q* : BOOL;
+	q_XLimitPWR				AT %Q* : BOOL;
+	q_YLimitPWR				AT %Q* : BOOL;
+	
+	bHomeX		: BOOL;
+	bHomeX2		: BOOL;
+	bHomeY		: BOOL;
+	bHomeZ		: BOOL;
+	
+	
+	i_bXLimitSwitch			AT %I* : BOOL;
+	i_bYLimitSwitch			AT %I* : BOOL;
+	bXLimitSwitch			: BOOL;
+	bYLimitSwitch			: BOOL;
+	
+	nHomeAllSeq	: INT;
+	nHomeXSeq	: INT;
+	nHomeYSeq	: INT;
+	nHomeZSeq	: INT;
+	
+	ProgramCall	: E_Programs;
+	
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Motion Calls
+
+X_Motion( 
+			Ref:= X_Ref,
+		  	Motion_In := X_MC_IN,
+		  	Motion_Out => X_MC_OUT,
+			bHomingInput := bXHomingSwitch,
+			bLimitSwitch := bXLimitSwitch,
+			bHomeExecute := bHomeX
+										);
+							
+X2_Motion( 
+			Ref:= X2_Ref,
+		  	Motion_In := X2_MC_IN,
+		  	Motion_Out => X2_MC_OUT,
+			bHomingInput := bX2HomingSwitch,
+			bLimitSwitch := bXLimitSwitch,
+			bHomeExecute := bHomeX2
+										);
+						
+Y_Motion( 
+			Ref:= Y_Ref,
+		  	Motion_In := Y_MC_IN,
+		  	Motion_Out => Y_MC_OUT,
+			bHomingInput := bYHomingSwitch,
+			bLimitSwitch := bYLimitSwitch,
+			bHomeExecute := bHomeY
+										);
+							
+Z_Motion( 
+			Ref:= Z_Ref,
+		  	Motion_In := Z_MC_IN,
+		  	Motion_Out => Z_MC_OUT ,
+			bHomingInput := bZHomingSwitch,
+			bHomeExecute := bHomeZ
+										);
+										
+
+ProgramLoader();
+NCI();
+Inputs();
+Outputs();]]></ST>
+    </Implementation>
+    <Method Name="Inputs" Id="{44930261-f7b3-46c2-ba50-0ddd8b114d05}">
+      <Declaration><![CDATA[METHOD Inputs : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Homing Switch Inputs
+
+bXHomingSwitch	:= i_bXHomingSwitch;	
+bX2HomingSwitch	:= i_bX2HomingSwitch;	
+bYHomingSwitch	:= i_bYHomingSwitch;	
+bZHomingSwitch	:= i_bZHomingSwitch;
+
+// Limit Switch Inputs
+
+bXLimitSwitch	:= i_bXLimitSwitch;
+bYLimitSwitch	:= i_bYLimitSwitch;	 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NCI" Id="{dc9731e6-e261-44f3-b6f6-41806c4884e1}">
+      <Declaration><![CDATA[METHOD NCI : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// bBuild3DGroup:= bFirstScan;
+
+mcBuildGroup(
+	bExecute:= bBuild3DGroup , 
+	nGroupId:= 5, 
+	nXAxisId:= 1, 
+	nYAxisId:= 3, 
+	nZAxisId:= 4, 
+	nQ1AxisId:= , 
+	nQ2AxisId:= , 
+	nQ3AxisId:= , 
+	nQ4AxisId:= , 
+	nQ5AxisId:= , 
+	tTimeOut:= , 
+	bBusy=> , 
+	bErr=> , 
+	nErrId=> );
+	
+	
+mcGearIn(
+	Master:= X_Ref , 
+	Slave:= X2_Ref, 
+	Execute:= bGearInExecute AND NOT InGearComplete, 
+	RatioNumerator:= 1, 
+	RatioDenominator:= 1, 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	BufferMode:= , 
+	Options:= , 
+	InGear=> InGearComplete, 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+	
+mcGearOut(
+	Slave:= X2_Ref, 
+	Execute:= bGearOutExecute AND NOT GearOutDone, 
+	Options:= , 
+	Done=> GearOutDone, 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> );
+	
+	
+	
+	
+IF InGearComplete THEN
+	
+	bGearInExecute:=FALSE;
+
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Outputs" Id="{bfb1dda8-5611-458d-bc52-800eff2f8798}">
+      <Declaration><![CDATA[METHOD Outputs : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[q_XHomingPWR 	:= TRUE;	
+q_X2HomingPWR 	:= TRUE;
+q_YHomingPWR	:= TRUE;
+q_ZHomingPWR	:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PRG_HomeAll" Id="{dab3d8ef-3b5b-4130-bf86-a872d94b2fd9}">
+      <Declaration><![CDATA[METHOD PRG_HomeAll : BOOL
+VAR_INPUT
+END_VAR
+
+VAR
+
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+
+CASE nHomeAllSeq OF
+		 		
+
+	0:
+		bProgramDone := FALSE;
+		bAxisEnable := TRUE;
+        IF X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus THEN
+            bGearInExecute := TRUE;
+            IF InGearComplete THEN
+            nHomeAllSeq :=10;	 
+		    END_IF
+		 END_IF
+	10:
+		// Home both geared axes first
+		IF X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus THEN
+			bHomeX := TRUE;
+			nHomeAllSeq:=20;	
+		ELSE
+			nHomeAllSeq:=0;
+		END_IF
+	20:
+		IF X_MC_OUT.bAxisHomed THEN
+			bHomeX:= FALSE;
+            bGearInExecute:=FALSE;
+            nHomeAllSeq:=30;
+		END_IF
+	30:
+		bGearOutExecute := TRUE;
+		IF X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus THEN
+            bHomeX := TRUE;
+            bHomeX2 := TRUE;
+            nHomeAllSeq := 40;
+		END_IF
+	40:
+		IF X_MC_OUT.bAxisHomed THEN
+			bHomeX := FALSE;		
+		END_IF
+        IF X2_MC_OUT.bAxisHomed THEN
+            bHomeX2 := FALSE;
+		END_IF
+        IF X_MC_OUT.bAxisHomed AND X2_MC_OUT.bAxisHomed THEN
+            nHomeAllSeq:=50;
+		END_IF
+		
+	50:
+	
+		bGearOutExecute := FALSE;
+        bGearInExecute := TRUE;
+        IF InGearComplete THEN
+            bAxisEnable := FALSE;
+            nHomeAllSeq := 0;
+            bProgramDone := TRUE;
+		END_IF
+
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PRG_HomeX" Id="{1d12177f-1165-4fe4-893e-75362f34ca0e}">
+      <Declaration><![CDATA[METHOD PRG_HomeX : BOOL
+VAR_INPUT
+END_VAR
+
+VAR
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+
+CASE nHomeXSeq OF
+		 		
+
+	0:
+		bProgramDone := FALSE;
+		bAxisEnable:=TRUE;
+		nHomeXSeq :=10;	
+	
+	10:
+	
+		IF X_MC_OUT.bPowerStatus THEN
+			
+			bHomeX := TRUE;
+			nHomeXSeq:=20;
+		
+		ELSE
+
+			nHomeXSeq:=0;		
+		
+		END_IF
+	
+	20:
+		IF X_MC_OUT.bAxisHomed THEN
+			
+			bHomeX:= FALSE;
+			nHomeXSeq:=30;
+		
+		END_IF
+		
+	30:
+		
+		bAxisEnable:=FALSE;
+		nHomeXSeq:=0;
+		bProgramDone := TRUE;
+
+
+
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PRG_HomeY" Id="{0559bf4f-f4eb-40eb-a1a9-aef1d5d76984}">
+      <Declaration><![CDATA[METHOD PRG_HomeY : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+
+CASE nHomeYSeq OF
+		 		
+
+	0:
+		bProgramDone := FALSE;
+		bAxisEnable:=TRUE;
+		nHomeYSeq :=10;	
+	
+	10:
+	
+		IF Y_MC_OUT.bPowerStatus THEN
+			
+			bHomeY := TRUE;
+			nHomeYSeq:=20;
+		
+		ELSE
+
+			nHomeYSeq:=0;		
+		
+		END_IF
+	
+	20:
+		IF Y_MC_OUT.bAxisHomed THEN
+			
+			bHomeY:= FALSE;
+			nHomeYSeq:=30;
+		
+		END_IF
+		
+	30:
+		
+		bAxisEnable:=FALSE;
+		nHomeYSeq:=0;
+		bProgramDone := TRUE;
+
+
+
+
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PRG_HomeZ" Id="{a0db440c-428a-4bcc-967b-6a14556f0e37}">
+      <Declaration><![CDATA[METHOD PRG_HomeZ : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+
+CASE nHomeZSeq OF
+		 		
+
+	0:
+		bProgramDone := FALSE;
+		bAxisEnable:=TRUE;
+		nHomeZSeq :=10;	
+	
+	10:
+	
+		IF Z_MC_OUT.bPowerStatus THEN
+			
+			bHomeZ := TRUE;
+			nHomeZSeq:=20;
+		
+		ELSE
+
+			nHomeZSeq:=0;		
+		
+		END_IF
+	
+	20:
+		IF Z_MC_OUT.bAxisHomed THEN
+			
+			bHomeZ:= FALSE;
+			nHomeZSeq:=30;
+		
+		END_IF
+		
+	30:
+		
+		bAxisEnable:=FALSE;
+		nHomeZSeq:=0;
+		bProgramDone := TRUE;
+
+
+
+
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PRG_Null" Id="{95052e96-06a1-4162-a970-9a7ef220b3e3}">
+      <Declaration><![CDATA[METHOD PRG_Null : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nHomeAllSeq:=0;
+nHomeXSeq:=0;
+nHomeYSeq:=0;
+nHomeZSeq:=0;
+bProgramDone:= FALSE;
+bAxisEnable:= FALSE;
+
+/////////////////////////////////]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ProgramLoader" Id="{89f9fb87-c1f3-4063-b9ac-059ba224bd26}">
+      <Declaration><![CDATA[METHOD ProgramLoader : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bProgramDone THEN
+	
+	ProgramCall := eNull;
+
+END_IF
+
+CASE ProgramCall OF	
+	
+	eNull:
+	
+		PRG_Null();
+
+	eHomeAll:
+	
+		bProgramDone:=FALSE;
+		PRG_HomeAll();
+	
+	eHomeX:
+	
+		bProgramDone:=FALSE;
+		PRG_HomeX();
+	
+	eHomeY:
+	
+		bProgramDone:=FALSE;
+		PRG_HomeY();	
+	
+	eHomeZ:
+	
+		bProgramDone:=FALSE;
+		PRG_HomeZ();
+
+END_CASE
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_CNC">
+      <LineId Id="579" Count="7" />
+      <LineId Id="682" Count="0" />
+      <LineId Id="587" Count="7" />
+      <LineId Id="683" Count="0" />
+      <LineId Id="595" Count="7" />
+      <LineId Id="684" Count="0" />
+      <LineId Id="603" Count="6" />
+      <LineId Id="685" Count="0" />
+      <LineId Id="610" Count="4" />
+      <LineId Id="679" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_CNC.Inputs">
+      <LineId Id="9" Count="1" />
+      <LineId Id="5" Count="3" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.NCI">
+      <LineId Id="20" Count="1" />
+      <LineId Id="6" Count="13" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="25" Count="15" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="59" Count="6" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="55" Count="1" />
+      <LineId Id="45" Count="3" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="49" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.Outputs">
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.PRG_HomeAll">
+      <LineId Id="61" Count="2" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="107" Count="1" />
+      <LineId Id="105" Count="1" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="75" Count="1" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="30" Count="2" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="92" Count="5" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="46" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="102" Count="1" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.PRG_HomeX">
+      <LineId Id="6" Count="7" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="15" Count="4" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="20" Count="2" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="25" Count="4" />
+      <LineId Id="42" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.PRG_HomeY">
+      <LineId Id="6" Count="5" />
+      <LineId Id="45" Count="29" />
+      <LineId Id="40" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.PRG_HomeZ">
+      <LineId Id="6" Count="5" />
+      <LineId Id="45" Count="29" />
+      <LineId Id="40" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.PRG_Null">
+      <LineId Id="5" Count="2" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.ProgramLoader">
+      <LineId Id="57" Count="3" />
+      <LineId Id="55" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="22" Count="2" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="33" Count="1" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="48" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

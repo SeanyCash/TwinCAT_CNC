@@ -1,0 +1,84 @@
+﻿<div id="Alarms" data-tchmi-type="tchmi-content" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="1900" data-tchmi-height="798">
+
+<div id="TcHmiEventGrid" data-tchmi-type="tchmi-event-grid" data-tchmi-height="659" data-tchmi-height-unit="px" data-tchmi-left="140" data-tchmi-left-unit="px" data-tchmi-show-menu-bar="True" data-tchmi-top="33" data-tchmi-top-unit="px" data-tchmi-width="1602" data-tchmi-width-unit="px">
+<script data-tchmi-target-attribute="data-tchmi-filter" type="application/json">
+[
+  {
+    "path": "domain",
+    "comparator": "==",
+    "value": "TcHmiEventLogger"
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-columns" type="application/json">
+[
+  {
+    "columnName": "type"
+  },
+  {
+    "columnName": "severity"
+  },
+  {
+    "columnName": "timeAndDateRaised"
+  },
+  {
+    "columnName": "text"
+  }
+]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-sorting" type="application/json">
+[
+  {
+    "name": "timeRaised",
+    "order": "Descending"
+  }
+]
+</script>
+
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Dotted",
+  "right": "Dotted",
+  "top": "Dotted",
+  "bottom": "Dotted"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+</div>
+
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+</div>

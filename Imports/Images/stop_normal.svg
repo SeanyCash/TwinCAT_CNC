@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80px"
+	 height="80px" viewBox="0 0 80 80" enable-background="new 0 0 80 80" xml:space="preserve">
+<g id="hintergrund">
+	<g>
+		
+			<image overflow="visible" opacity="0.4" width="92" height="93" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAABdCAYAAAAoswH9AAAACXBIWXMAAAsSAAALEgHS3X78AAAA
+GXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAm5JREFUeNrs3VFPE0EUxfFZOqWk
+SozIA1Ff/P7fy/giEUGiLew6k5ypt3dntltLfDD/k9y03QYefkxut7ycLrTTBXJKhrmonbneAf9X
+0EPl+Qi8PD+rDCd+/onuK7N734Nn3JhmaSaCfhT2U5qtmSdd3wO32Ks06zSvNCuDDngbvGD/SvND
+86jXO3S7RhbCfZ3mKs07PV7q+oKdPrmzn4V7n+Y2zVc9Puh6fr+PbncvBX6d5mOa90Jf670zfKvp
+tT4ehfxZrhthbwXeRbdSlsK9EvanNDc65eeslcl1stHp/qLrGf9bmu/GbYiNHV7WSsb+kOZNmgvA
+J8F/prnTtTsZjj7/ovth/8F5Key3bo+TffCyv4NO9Nph7xIrX3jKB+hSa2SluQB8EjzI6Vx2C3Oy
+uxq4vx+3+HYAr9+DLxxydf3GA/9LaQ05bFUNt3n/OIADDjgBHHACOOAEcMABJ4ADTgAHnAAOOOAE
+cMAJ4IATwAEHnAAOOAEccAI44IATwAEngANOAAcccAI44ARwwAnggANOAAecAA44ARxwwAnggBPA
+ASeAAw44ARxwAjjgBHDAASeA/5eZKt0YGkNOcIqNX9Cbx2czObScjL2sUe8Mm+CDQ86FbaW8rbQw
+0ePTBi9Om/Cn7K73J96fcNsJmcvbcplb6Reji60NbrvY7sO4R3N0wn0BZ+6AzDWFpTkv94vRNjgN
+btsGbY/mXmOsB/edkEF/Nfo0p1Ozu9XrbahU9NIYe/pdyqzGWDqRX3atzO5E9ui0fh8Pbm86DrZ+
++/VCr/1p6LN67S18V3lOjtvpofatcwoT6Jc58Xv5LcAA2p7WRUpM7BUAAAAASUVORK5CYII=" transform="matrix(1 0 0 1 -5 -5.9995)">
+		</image>
+		<g>
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="3.7769" y1="-3.1685" x2="76.2232" y2="83.1698">
+				<stop  offset="0.5" style="stop-color:#E94842"/>
+				<stop  offset="0.9998" style="stop-color:#E30613"/>
+			</linearGradient>
+			<rect y="0" fill="url(#SVGID_1_)" width="80" height="80"/>
+		</g>
+	</g>
+</g>
+<g id="grid" display="none">
+	<rect x="18.5" y="19.5" display="inline" fill="none" stroke="#FF00FF" stroke-miterlimit="10" width="43" height="43"/>
+	<line display="inline" fill="none" stroke="#FF00FF" stroke-miterlimit="10" x1="39.5" y1="12" x2="39.5" y2="71"/>
+	<line display="inline" fill="none" stroke="#FF00FF" stroke-miterlimit="10" x1="10" y1="41.5" x2="69" y2="41.5"/>
+</g>
+<g id="pfade">
+	<g>
+		
+			<polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			34.838,29.303 41.805,18.748 31.249,11.779 		"/>
+		<path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M41.16,19.344c-11.872-0.122-21.596,9.406-21.717,21.279c-0.121,11.874,9.407,21.597,21.28,21.717
+			c6.571,0.067,12.484-2.822,16.476-7.428"/>
+		<g>
+			<g>
+				<path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M55.956,56.179
+					c0.618-0.576,1.194-1.18,1.729-1.808"/>
+				
+					<path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.5487,4.5487" d="
+					M60.246,50.618c1.089-2.031,1.83-4.203,2.221-6.428"/>
+				<path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M62.742,41.938
+					c0.058-0.832,0.067-1.666,0.028-2.499"/>
+			</g>
+		</g>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="51.55" y1="13.429" x2="51.55" y2="25.572"/>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="59.375" y1="13.429" x2="59.375" y2="25.572"/>
+	</g>
+</g>
+</svg>

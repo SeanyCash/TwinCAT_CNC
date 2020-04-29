@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80px"
+	 height="80px" viewBox="0 0 80 80" enable-background="new 0 0 80 80" xml:space="preserve">
+<g id="hintergrund">
+	<g opacity="0.5">
+		<rect y="0" fill="#FFFFFF" width="80" height="80"/>
+	</g>
+</g>
+<g id="grid" display="none">
+</g>
+<g id="pfade">
+	<g>
+		
+			<polyline fill="none" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			43.659,28.956 56.201,27.326 54.572,14.782 		"/>
+		<path fill="none" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M55.329,27.228c-7.672-9.062-21.238-10.19-30.301-2.519S14.838,45.947,22.51,55.01c4.247,5.017,10.299,7.602,16.393,7.609"/>
+		<g>
+			<g>
+				<path fill="none" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M37.131,62.507
+					c0.84,0.091,1.673,0.132,2.498,0.126"/>
+				
+					<path fill="none" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.5488,4.5488" d="
+					M44.144,62.117c2.249-0.504,4.377-1.363,6.316-2.522"/>
+				<path fill="none" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M52.343,58.33
+					c0.667-0.5,1.304-1.039,1.909-1.613"/>
+			</g>
+		</g>
+		
+			<line fill="none" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="67.983" y1="28.853" x2="55.58" y2="39.353"/>
+	</g>
+</g>
+</svg>
