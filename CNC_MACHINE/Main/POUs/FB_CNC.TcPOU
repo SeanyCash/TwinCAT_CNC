@@ -440,7 +440,7 @@ nHomeXSeq:=0;
 nHomeYSeq:=0;
 nHomeZSeq:=0;
 bProgramDone:= FALSE;
-bAxisEnable:= FALSE;
+//bAxisEnable:= FALSE;
 
 /////////////////////////////////]]></ST>
       </Implementation>
