@@ -4298,7 +4298,7 @@ External Setpoint Generation:
 				<Image Id="5" AddrType="1" ImageType="3">
 					<Name>Image</Name>
 				</Image>
-				<Serial Baud="9600" Port="1016" Parity="1" StopBit="1" RsType="1" UPSDisableSysShutdown="true" WaitTimeToShutdown="60" DataSize="64" BufSize="4096" DataBit="8" SyncMode="true" FifoSize="16" ComPortNo="1" Timeout="300"/>
+				<Serial Baud="115200" Port="1016" StopBit="1" RsType="1" UPSDisableSysShutdown="true" WaitTimeToShutdown="60" DataSize="64" BufSize="4096" DataBit="8" SyncMode="true" FifoSize="16" ComPortNo="1" Timeout="300"/>
 			</Device>
 		</Io>
 	</Project>
