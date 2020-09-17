@@ -2864,11 +2864,11 @@ External Setpoint Generation:
 						<Velo RefSearch="1" RefSync="1" SlowManual="30" FastManual="80" Fast="10" Maximum="100"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="1">
-						<EncPara ScaleFactorNumerator="0.00078125" Inverse="true">
+					<Encoder Name="Enc" EncType="4">
+						<EncPara ScaleFactorNumerator="0.00078125" Inverse="true" MaxCount="#x0000ffff">
 							<SoftEndMinControl Enable="true" Range="-212.7"/>
 							<SoftEndMaxControl Enable="true" Range="0.3"/>
-							<Inc RefSoftSyncMask="#x0000ffff"/>
+							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -4298,7 +4298,7 @@ External Setpoint Generation:
 				<Image Id="5" AddrType="1" ImageType="3">
 					<Name>Image</Name>
 				</Image>
-				<Serial Baud="115200" Port="1016" StopBit="1" RsType="2" UPSDisableSysShutdown="true" WaitTimeToShutdown="60" DataSize="64" BufSize="4096" DataBit="8" SyncMode="true" FifoSize="16" ComPortNo="1" Timeout="300"/>
+				<Serial Baud="115200" Port="1016" StopBit="1" RsType="1" UPSDisableSysShutdown="true" WaitTimeToShutdown="60" DataSize="64" BufSize="4096" DataBit="8" SyncMode="true" FifoSize="16" ComPortNo="1" Timeout="300"/>
 			</Device>
 		</Io>
 	</Project>
