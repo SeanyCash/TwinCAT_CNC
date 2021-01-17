@@ -2864,11 +2864,11 @@ External Setpoint Generation:
 						<Velo RefSearch="1" RefSync="1" SlowManual="30" FastManual="80" Fast="10" Maximum="100"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="4">
-						<EncPara ScaleFactorNumerator="0.00078125" Inverse="true" MaxCount="#x0000ffff">
+					<Encoder Name="Enc" EncType="1">
+						<EncPara ScaleFactorNumerator="0.00078125" Inverse="true">
 							<SoftEndMinControl Enable="true" Range="-212.7"/>
 							<SoftEndMaxControl Enable="true" Range="0.3"/>
-							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+							<Inc RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
