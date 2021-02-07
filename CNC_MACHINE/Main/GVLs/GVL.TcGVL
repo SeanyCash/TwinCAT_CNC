@@ -13,15 +13,14 @@ bFirstScan			: BOOL := TRUE;
 bAxisEnable			: BOOL;
 bStopExecute		: BOOL;
 bHaltExecute		: BOOL;
+bGearInExecute		: BOOL;
+bGearOutExecute		: BOOL;
 bOverride			: INT	:=100;
 bProgramDone		: BOOL;
 bBuild3DGroup		: BOOL;
+bAxisReset          : BOOL;
 
-// MC Gear IN
-bGearInExecute		: BOOL;
-InGearComplete		: BOOL;
-bGearOutExecute		: BOOL;
-GearOutDone         : BOOL;
+
 
 END_VAR
 

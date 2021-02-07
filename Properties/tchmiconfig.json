@@ -74,7 +74,7 @@
         "readonly": false
       },
       "Unit": {
-        "value": "1",
+        "value": 1,
         "type": "tchmi:general#/definitions/INT",
         "persist": false,
         "readonly": false
