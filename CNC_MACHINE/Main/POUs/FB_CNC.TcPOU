@@ -140,7 +140,7 @@ bZHomingSwitch	:= i_bZHomingSwitch;
 // Limit Switch Inputs
 
 bXLimitSwitch	:= i_bXLimitSwitch;
-bYLimitSwitch	:= i_bYLimitSwitch;	]]></ST>
+bYLimitSwitch	:= i_bYLimitSwitch;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_NCI" Id="{dc9731e6-e261-44f3-b6f6-41806c4884e1}">
