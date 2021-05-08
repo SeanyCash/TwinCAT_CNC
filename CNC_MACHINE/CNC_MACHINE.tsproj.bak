@@ -4288,7 +4288,7 @@ External Setpoint Generation:
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="1" DevType="11" AmsPort="28673">
+			<Device Id="1" Disabled="true" DevType="11" AmsPort="28673">
 				<Name>PC Serial COM (COM Port)</Name>
 				<AddressInfo>
 					<Io>
