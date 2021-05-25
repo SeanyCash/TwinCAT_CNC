@@ -14,6 +14,8 @@ fbCNC();
 fbModbus();
 
 bFirstScan:=FALSE;
+
+// Testing for SourceTree 
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -22,6 +24,8 @@ bFirstScan:=FALSE;
       <LineId Id="26" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="12" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
       <LineId Id="19" Count="0" />
     </LineIds>
   </POU>
