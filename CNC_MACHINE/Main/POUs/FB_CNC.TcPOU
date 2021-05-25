@@ -13,6 +13,8 @@ VAR
 	X2_Motion 		: FB_MotionFunctions;
 	Y_Motion		: FB_MotionFunctions;
 	Z_Motion		: FB_MotionFunctions;
+    
+    eHomeX          : E_HomeX;
 	
 	
 	X_MC_IN			: ST_Motion_Inputs;
@@ -190,62 +192,20 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
-
+// Execute homing on all axes simultaneously
+// If there is an error during any Axis homing, continue with all other axes but return and error message of some sort i.e "X axis failed to Home" or something similar
 
 CASE nHomeAllSeq OF
 		 		
-
-	0:
-		bProgramDone := FALSE;
-		bAxisEnable := TRUE;
-        IF X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus THEN
-            bGearInExecute := TRUE;
-            IF X_MC_OUT.bGearInDone THEN
-            nHomeAllSeq :=10;	 
-		    END_IF
-		 END_IF
-	10:
-		// Home both geared axes first
-		IF X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus THEN
-			bHomeX := TRUE;
-			nHomeAllSeq:=20;	
-		ELSE
-			nHomeAllSeq:=0;
-		END_IF
-	20:
-		IF X_MC_OUT.bAxisHomed THEN
-			bHomeX:= FALSE;
-            bGearInExecute:=FALSE;
-            nHomeAllSeq:=30;
-		END_IF
-	30:
-		bGearOutExecute := TRUE;
-		IF X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus THEN
-            bHomeX := TRUE;
-            bHomeX2 := TRUE;
-            nHomeAllSeq := 40;
-		END_IF
-	40:
-		IF X_MC_OUT.bAxisHomed THEN
-			bHomeX := FALSE;		
-		END_IF
-        IF X2_MC_OUT.bAxisHomed THEN
-            bHomeX2 := FALSE;
-		END_IF
-        IF X_MC_OUT.bAxisHomed AND X2_MC_OUT.bAxisHomed THEN
-            nHomeAllSeq:=50;
-		END_IF
-		
-	50:
+0:
+    M_PRG_HomeX();
+    M_PRG_HomeY();
+    M_PRG_HomeZ();
+        
+    IF X_MC_OUT.bAxisHomed AND X2_MC_OUT.bAxisHomed AND Y_MC_OUT.bAxisHomed AND Z_MC_OUT.bAxisHomed THEN
+        bProgramDone:=TRUE;
+	END_IF
 	
-		bGearOutExecute := FALSE;
-        bGearInExecute := TRUE;
-        IF X_MC_OUT.bGearInDone THEN
-            bAxisEnable := FALSE;
-            nHomeAllSeq := 0;
-            bProgramDone := TRUE;
-		END_IF
-
 END_CASE]]></ST>
       </Implementation>
     </Method>
@@ -263,13 +223,15 @@ END_VAR]]></Declaration>
 CASE nHomeXSeq OF
 		 		
 
-	0:
+eHomeX.Init:
+
 		bProgramDone := FALSE;
 		bAxisEnable:=TRUE;
         bGearInExecute := TRUE;
 		nHomeXSeq :=10;	
 	
-	10:
+eHomeX.Power_On:
+
 	    // Home Both Axes Together
 		IF X_MC_OUT.bPowerStatus THEN
 			
@@ -282,7 +244,8 @@ CASE nHomeXSeq OF
 		
 		END_IF
 	
-	20:
+eHomeX.Check_Homed:
+
 		IF X_MC_OUT.bAxisHomed THEN
 			
 			bHomeX:= FALSE;
@@ -290,7 +253,7 @@ CASE nHomeXSeq OF
 		
 		END_IF
         
-    30:
+eHomeX.Home_X1:
         // Decouple Axes for individual Homing
         
         //X1 Homing
@@ -305,7 +268,7 @@ CASE nHomeXSeq OF
             nHomeXSeq:=30;
         END_IF
         
-     40:
+eHomeX.X1_Homed:
      
         IF X_MC_OUT.bAxisHomed THEN
 			
@@ -314,7 +277,7 @@ CASE nHomeXSeq OF
 		
 		END_IF
 
-     50:
+eHomeX.Home_X2:
         // X2 Homing
        IF X2_MC_OUT.bPowerStatus THEN
 			
@@ -326,7 +289,7 @@ CASE nHomeXSeq OF
             nHomeXSeq:=50;
         END_IF
         
-      60:
+eHomeX.X2_Homed:
       
         IF X2_MC_OUT.bAxisHomed THEN
 			
@@ -336,7 +299,7 @@ CASE nHomeXSeq OF
 		END_IF
         
 
-      70:
+eHomeX.Gear_In:
         bGearOutExecute:=FALSE;
         bGearInExecute:=TRUE;
         IF X_MC_OUT.bGearInDone AND X2_MC_OUT.bGearInDone THEN
@@ -344,7 +307,7 @@ CASE nHomeXSeq OF
 		END_IF
         
         
-     80:
+eHomeX.End_Sequence:
 		
 		bAxisEnable:=FALSE;
 		nHomeXSeq:=0;
@@ -536,54 +499,26 @@ END_CASE
       <LineId Id="15" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeAll">
-      <LineId Id="61" Count="2" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="63" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="9" Count="0" />
-      <LineId Id="54" Count="0" />
       <LineId Id="13" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="104" Count="0" />
-      <LineId Id="107" Count="1" />
-      <LineId Id="105" Count="1" />
       <LineId Id="51" Count="0" />
-      <LineId Id="27" Count="1" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="72" Count="0" />
-      <LineId Id="77" Count="0" />
-      <LineId Id="75" Count="1" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="80" Count="0" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="109" Count="0" />
-      <LineId Id="30" Count="2" />
-      <LineId Id="49" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="88" Count="0" />
-      <LineId Id="84" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="89" Count="0" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="92" Count="5" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="46" Count="1" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="99" Count="0" />
-      <LineId Id="98" Count="0" />
-      <LineId Id="100" Count="0" />
-      <LineId Id="102" Count="1" />
-      <LineId Id="101" Count="0" />
+      <LineId Id="116" Count="5" />
       <LineId Id="11" Count="0" />
       <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeX">
-      <LineId Id="6" Count="7" />
+      <LineId Id="6" Count="6" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="13" Count="0" />
       <LineId Id="63" Count="0" />
       <LineId Id="69" Count="0" />
-      <LineId Id="15" Count="4" />
+      <LineId Id="15" Count="2" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="18" Count="1" />
       <LineId Id="45" Count="0" />
       <LineId Id="51" Count="0" />
       <LineId Id="57" Count="0" />
@@ -593,7 +528,9 @@ END_CASE
       <LineId Id="55" Count="0" />
       <LineId Id="53" Count="0" />
       <LineId Id="46" Count="0" />
-      <LineId Id="20" Count="2" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="22" Count="0" />
       <LineId Id="58" Count="0" />
       <LineId Id="60" Count="0" />
       <LineId Id="62" Count="0" />
