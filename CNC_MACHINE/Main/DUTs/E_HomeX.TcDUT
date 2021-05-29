@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
   <DUT Name="E_HomeX" Id="{7737f691-b37c-43b8-aec3-3723fe7e4366}">
-    <Declaration><![CDATA[{attribute 'qualified_only'}
-{attribute 'strict'}
+    <Declaration><![CDATA[
 TYPE E_HomeX :
 (
 	Init := 0,

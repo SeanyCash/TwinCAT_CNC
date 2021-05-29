@@ -14,7 +14,7 @@ VAR
 	Y_Motion		: FB_MotionFunctions;
 	Z_Motion		: FB_MotionFunctions;
     
-    eHomeX          : E_HomeX;
+    eHomeXSeq       : E_HomeX;
 	
 	
 	X_MC_IN			: ST_Motion_Inputs;
@@ -220,17 +220,17 @@ END_VAR]]></Declaration>
         <ST><![CDATA[
 
 
-CASE nHomeXSeq OF
+CASE eHomeXSeq OF
 		 		
 
-eHomeX.Init:
+Init:
 
 		bProgramDone := FALSE;
 		bAxisEnable:=TRUE;
         bGearInExecute := TRUE;
 		nHomeXSeq :=10;	
 	
-eHomeX.Power_On:
+Power_On:
 
 	    // Home Both Axes Together
 		IF X_MC_OUT.bPowerStatus THEN
@@ -244,7 +244,7 @@ eHomeX.Power_On:
 		
 		END_IF
 	
-eHomeX.Check_Homed:
+Check_Homed:
 
 		IF X_MC_OUT.bAxisHomed THEN
 			
@@ -253,7 +253,7 @@ eHomeX.Check_Homed:
 		
 		END_IF
         
-eHomeX.Home_X1:
+Home_X1:
         // Decouple Axes for individual Homing
         
         //X1 Homing
@@ -268,7 +268,7 @@ eHomeX.Home_X1:
             nHomeXSeq:=30;
         END_IF
         
-eHomeX.X1_Homed:
+X1_Homed:
      
         IF X_MC_OUT.bAxisHomed THEN
 			
@@ -277,7 +277,7 @@ eHomeX.X1_Homed:
 		
 		END_IF
 
-eHomeX.Home_X2:
+Home_X2:
         // X2 Homing
        IF X2_MC_OUT.bPowerStatus THEN
 			
@@ -289,7 +289,7 @@ eHomeX.Home_X2:
             nHomeXSeq:=50;
         END_IF
         
-eHomeX.X2_Homed:
+X2_Homed:
       
         IF X2_MC_OUT.bAxisHomed THEN
 			
@@ -299,7 +299,7 @@ eHomeX.X2_Homed:
 		END_IF
         
 
-eHomeX.Gear_In:
+Gear_In:
         bGearOutExecute:=FALSE;
         bGearInExecute:=TRUE;
         IF X_MC_OUT.bGearInDone AND X2_MC_OUT.bGearInDone THEN
@@ -307,7 +307,7 @@ eHomeX.Gear_In:
 		END_IF
         
         
-eHomeX.End_Sequence:
+End_Sequence:
 		
 		bAxisEnable:=FALSE;
 		nHomeXSeq:=0;

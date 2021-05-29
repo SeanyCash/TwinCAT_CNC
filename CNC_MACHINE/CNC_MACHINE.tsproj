@@ -2365,9 +2365,11 @@ External Setpoint Generation:
 				<Axis Id="1" CreateSymbols="true" AxisType="1">
 					<Name>X</Name>
 					<AxisPara>
-						<Dynamic Acceleration="1237.25" Deceleration="1237.25" Jerk="624811"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="1237.25" Deceleration="1237.25" Jerk="624811"/>
 						<Velo RefSearch="10" RefSync="10" SlowManual="50" FastManual="180" Fast="150" Maximum="245"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
+						<ParameterChanged>242</ParameterChanged>
+						<ParameterChanged>241</ParameterChanged>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="1">
 						<EncPara ScaleFactorNumerator="0.001948153955" Inverse="true">
@@ -2693,9 +2695,11 @@ External Setpoint Generation:
 				<Axis Id="3" CreateSymbols="true" AxisType="1">
 					<Name>Y</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="810" Deceleration="810" Jerk="13668.7"/>
+						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="600" Deceleration="600" Jerk="13668.7"/>
 						<Velo RefSearch="10" RefSync="10" FastManual="200" Fast="180" Maximum="600"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
+						<ParameterChanged>257</ParameterChanged>
+						<ParameterChanged>258</ParameterChanged>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="1">
 						<EncPara ScaleFactorNumerator="0.001948153955">
@@ -2860,9 +2864,11 @@ External Setpoint Generation:
 				<Axis Id="4" CreateSymbols="true" AxisType="1">
 					<Name>Z</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="50" DecelerationMaximum="50" Acceleration="102" Deceleration="102" Jerk="5202.02"/>
+						<Dynamic AccelerationMaximum="50" DecelerationMaximum="50" Acceleration="50" Deceleration="50" Jerk="5202.02"/>
 						<Velo RefSearch="1" RefSync="1" SlowManual="30" FastManual="80" Fast="10" Maximum="100"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
+						<ParameterChanged>257</ParameterChanged>
+						<ParameterChanged>258</ParameterChanged>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="1">
 						<EncPara ScaleFactorNumerator="0.00078125" Inverse="true">
