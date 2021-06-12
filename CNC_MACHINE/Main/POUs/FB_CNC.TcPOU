@@ -22,45 +22,41 @@ VAR
 	Y_MC_IN			: ST_Motion_Inputs;
 	Z_MC_IN			: ST_Motion_Inputs;
 	
-	X_MC_OUT			: ST_Motion_Outputs;
-	X2_MC_OUT			: ST_Motion_Outputs;
-	Y_MC_OUT			: ST_Motion_Outputs;
-	Z_MC_OUT			: ST_Motion_Outputs;
+	X_MC_OUT		: ST_Motion_Outputs;
+	X2_MC_OUT		: ST_Motion_Outputs;
+	Y_MC_OUT		: ST_Motion_Outputs;
+	Z_MC_OUT		: ST_Motion_Outputs;
 	
 	
-	X_Ref	: AXIS_REF;
-	X2_Ref	: AXIS_REF;
-	Y_Ref	: AXIS_REF;
-	Z_Ref	: AXIS_REF;
+	X_Ref	        : AXIS_REF;
+	X2_Ref	        : AXIS_REF;
+	Y_Ref	        : AXIS_REF;
+	Z_Ref	        : AXIS_REF;
 	
 	
 	i_bXHomingSwitch		AT %I* : BOOL;
 	i_bX2HomingSwitch		AT %I* : BOOL;
+    i_bXLimitSwitch			AT %I* : BOOL;
 	i_bYHomingSwitch		AT %I* : BOOL;
+    i_bYLimitSwitch			AT %I* : BOOL;
 	i_bZHomingSwitch		AT %I* : BOOL;
+    
+    
 	
 	bXHomingSwitch		: BOOL;
 	bX2HomingSwitch		: BOOL;
 	bYHomingSwitch		: BOOL;
 	bZHomingSwitch		: BOOL;
+    bXLimitSwitch		: BOOL;
+	bYLimitSwitch		: BOOL;
 	
-	q_XHomingPWR			AT %Q* : BOOL;
-	q_X2HomingPWR			AT %Q* : BOOL;
-	q_YHomingPWR			AT %Q* : BOOL;
-	q_ZHomingPWR			AT %Q* : BOOL;
-	q_XLimitPWR				AT %Q* : BOOL;
-	q_YLimitPWR				AT %Q* : BOOL;
 	
 	bHomeX		: BOOL;
 	bHomeX2		: BOOL;
 	bHomeY		: BOOL;
 	bHomeZ		: BOOL;
 	
-	
-	i_bXLimitSwitch			AT %I* : BOOL;
-	i_bYLimitSwitch			AT %I* : BOOL;
-	bXLimitSwitch			: BOOL;
-	bYLimitSwitch			: BOOL;
+// Program Call Variables	
 	
 	nHomeAllSeq	: INT;
 	nHomeXSeq	: INT;
@@ -176,10 +172,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[q_XHomingPWR 	:= TRUE;	
-q_X2HomingPWR 	:= TRUE;
-q_YHomingPWR	:= TRUE;
-q_ZHomingPWR	:= TRUE;]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_PRG_HomeAll" Id="{dab3d8ef-3b5b-4130-bf86-a872d94b2fd9}">
@@ -494,8 +487,6 @@ END_CASE
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Outputs">
-      <LineId Id="5" Count="0" />
-      <LineId Id="9" Count="1" />
       <LineId Id="15" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeAll">
