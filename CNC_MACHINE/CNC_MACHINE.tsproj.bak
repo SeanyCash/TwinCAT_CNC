@@ -3186,6 +3186,9 @@ External Setpoint Generation:
 				<Image Id="1" ImageFlags="#x00000030" AddrType="9" ImageType="3">
 					<Name>Image</Name>
 				</Image>
+				<Image Id="4" AddrType="10" ImageType="3">
+					<Name>Image-2</Name>
+				</Image>
 				<Box Id="1" BoxType="9099">
 					<Name>Term 1 (EK1100)</Name>
 					<ImageId>1000</ImageId>
@@ -4266,32 +4269,32 @@ External Setpoint Generation:
 					<EtherCAT SlaveType="1" PdiType="#x0304" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f04052" RevisionNo="#x00110016" RepeatSupport="true" PortPhys="17" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EP1008-0022 8 Ch. Dig. Input 24V, 3ms, M12" Desc="EP1008-0022" PortABoxInfo="#x02000001">
 						<SyncMan>001001000000010004000000010001000100001000010000</SyncMan>
 						<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
-						<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
+						<Pdo Name="X1 Homing Prox" Index="#x1a00" Flags="#x0011" SyncMan="0">
 							<Entry Name="Input" Index="#x6000" Sub="#x01">
 								<Type>BIT</Type>
 							</Entry>
 						</Pdo>
-						<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
+						<Pdo Name="X2 Homing Prox" Index="#x1a01" Flags="#x0011" SyncMan="0">
 							<Entry Name="Input" Index="#x6010" Sub="#x01">
 								<Type>BIT</Type>
 							</Entry>
 						</Pdo>
-						<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="0">
+						<Pdo Name="X Limit Switch" Index="#x1a02" Flags="#x0011" SyncMan="0">
 							<Entry Name="Input" Index="#x6020" Sub="#x01">
 								<Type>BIT</Type>
 							</Entry>
 						</Pdo>
-						<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
+						<Pdo Name="Y Homing Prox" Index="#x1a03" Flags="#x0011" SyncMan="0">
 							<Entry Name="Input" Index="#x6030" Sub="#x01">
 								<Type>BIT</Type>
 							</Entry>
 						</Pdo>
-						<Pdo Name="Channel 5" Index="#x1a04" Flags="#x0011" SyncMan="0">
+						<Pdo Name="Y Limit Switch" Index="#x1a04" Flags="#x0011" SyncMan="0">
 							<Entry Name="Input" Index="#x6040" Sub="#x01">
 								<Type>BIT</Type>
 							</Entry>
 						</Pdo>
-						<Pdo Name="Channel 6" Index="#x1a05" Flags="#x0011" SyncMan="0">
+						<Pdo Name="Z Homing Prox" Index="#x1a05" Flags="#x0011" SyncMan="0">
 							<Entry Name="Input" Index="#x6050" Sub="#x01">
 								<Type>BIT</Type>
 							</Entry>
@@ -4496,6 +4499,14 @@ External Setpoint Generation:
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIPC^Main^Main Instance">
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^Prox Block (EP1008-0022)">
+				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bX2HomingSwitch" VarB="X2 Homing Prox^Input"/>
+				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bXHomingSwitch" VarB="X1 Homing Prox^Input"/>
+				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bXLimitSwitch" VarB="X Limit Switch^Input"/>
+				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bYHomingSwitch" VarB="Y Homing Prox^Input"/>
+				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bYLimitSwitch" VarB="Y Limit Switch^Input"/>
+				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bZHomingSwitch" VarB="Z Homing Prox^Input"/>
+			</OwnerB>
 			<OwnerB Name="TIID^PC Serial COM (COM Port)">
 				<Link VarA="PlcTask Inputs^GVL.fbModbus.ModbusMaster.InData^D" VarB="Inputs^Data1"/>
 				<Link VarA="PlcTask Inputs^GVL.fbModbus.ModbusMaster.InData^D" VarB="Inputs^Data10" Size="8" OffsA="72"/>

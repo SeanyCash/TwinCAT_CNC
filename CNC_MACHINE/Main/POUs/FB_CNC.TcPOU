@@ -78,7 +78,7 @@ X_Motion(
 		  	Motion_In := X_MC_IN,
 		  	Motion_Out => X_MC_OUT,
 			bHomingInput := bXHomingSwitch,
-			bLimitSwitch := bXLimitSwitch,
+			bPositiveLimitSwitch := bXLimitSwitch,
 			bHomeExecute := bHomeX,
 										);
                                         
@@ -91,7 +91,7 @@ X2_Motion(
 		  	Motion_In := X2_MC_IN,
 		  	Motion_Out => X2_MC_OUT,
 			bHomingInput := bX2HomingSwitch,
-			bLimitSwitch := bXLimitSwitch,
+			bPositiveLimitSwitch := bXLimitSwitch,
 			bHomeExecute := bHomeX2
 										);
 						
@@ -102,7 +102,7 @@ Y_Motion(
 		  	Motion_In := Y_MC_IN,
 		  	Motion_Out => Y_MC_OUT,
 			bHomingInput := bYHomingSwitch,
-			bLimitSwitch := bYLimitSwitch,
+			bPositiveLimitSwitch := bYLimitSwitch,
 			bHomeExecute := bHomeY
 										);
 							
@@ -469,7 +469,7 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="988" Count="50" />
+      <LineId Id="1115" Count="50" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">

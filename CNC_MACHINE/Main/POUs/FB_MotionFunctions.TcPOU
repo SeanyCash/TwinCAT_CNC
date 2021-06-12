@@ -12,11 +12,11 @@ END_VAR
 
 VAR_INPUT
 	
-Motion_In			: ST_Motion_Inputs;
-bHomingInput		: BOOL;
-bLimitSwitch		: BOOL;
-bHomeExecute		: BOOL;
-bGearingEnabled     : BOOL;		
+Motion_In			        : ST_Motion_Inputs;
+bHomingInput		        : BOOL;
+bPositiveLimitSwitch		: BOOL;
+bHomeExecute		        : BOOL;
+bGearingEnabled             : BOOL;		
 
 END_VAR
 
@@ -143,7 +143,7 @@ END_VAR
         <ST><![CDATA[mcPowerStepper(
 	Axis:= Ref, 
 	Enable:= bAxisEnable, 
-	Enable_Positive:= TRUE,// NOT bLimitSwitch, 
+	Enable_Positive:= NOT bPositiveLimitSwitch,
 	Enable_Negative:= TRUE, //NOT bHomingInput, 
 	Override:= bOverride, 
 	DestallParams:= Motion_In.bDestallParameters, 
