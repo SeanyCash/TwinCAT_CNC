@@ -11,7 +11,7 @@
     <HmiVerboseLevel>2</HmiVerboseLevel>
     <HmiVersion>1.0.0.0</HmiVersion>
     <Name>CNC</Name>
-    <HmiCommunicationRouterPort>10102</HmiCommunicationRouterPort>
+    <HmiCommunicationRouterPort>10103</HmiCommunicationRouterPort>
     <HmiFrameworkVersion>Latest</HmiFrameworkVersion>
     <HmiCommunicationServerPort>3000</HmiCommunicationServerPort>
     <HmiInitial>1.10.1336.404</HmiInitial>
@@ -372,7 +372,8 @@
     <TcHmiReference Include="0fa87e6c-8e1c-49ea-a968-f8a36d8c5858">
       <Type>SrvRefExt</Type>
       <RelativePath>.hmipkgs\0fa87e6c-8e1c-49ea-a968-f8a36d8c5858\Content\TcHmiOpcUa.dll</RelativePath>
-      <Domain></Domain>
+      <Domain>
+      </Domain>
     </TcHmiReference>
   </ItemGroup>
 </Project>

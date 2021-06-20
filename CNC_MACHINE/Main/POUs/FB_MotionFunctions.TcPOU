@@ -57,7 +57,9 @@ END_VAR
 
 VAR
 
-END_VAR]]></Declaration>
+END_VAR
+
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[
 IF bGearingEnabled THEN
@@ -73,7 +75,7 @@ mcGearIn(
 	Jerk:= , 
 	BufferMode:= , 
 	Options:= , 
-	InGear=> , 
+	InGear=> Motion_Out.bGearInDone , 
 	Busy=> , 
 	Active=> , 
 	CommandAborted=> , 

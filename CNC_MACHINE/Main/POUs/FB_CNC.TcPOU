@@ -51,10 +51,14 @@ VAR
 	bYLimitSwitch		: BOOL;
 	
 	
-	bHomeX		: BOOL;
-	bHomeX2		: BOOL;
-	bHomeY		: BOOL;
-	bHomeZ		: BOOL;
+	bHomeX		    : BOOL;
+	bHomeX2		    : BOOL;
+	bHomeY		    : BOOL;
+	bHomeZ		    : BOOL;
+    bGearInTrigger  : BOOL;
+    rGearInTrigger  : R_TRIG;
+    rtrigAxisNotGeared  : R_TRIG;
+
 	
 // Program Call Variables	
 	
@@ -70,6 +74,22 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Motion Calls
+
+rtrigAxisNotGeared(CLK := X_MC_OUT.bPowerStatus AND NOT X_MC_OUT.bGearInDone);
+
+rGearInTrigger(CLK:= bGearInTrigger);
+bGearInExecute:= rGearInTrigger.Q;
+
+IF rtrigAxisNotGeared.Q THEN
+    
+    bGearInTrigger := TRUE;
+    
+ELSE 
+    
+    bGearInTrigger := FALSE;
+
+END_IF
+
 
 X_Motion( 
 			Ref:= X_Ref,
@@ -469,7 +489,19 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="1115" Count="50" />
+      <LineId Id="1115" Count="0" />
+      <LineId Id="1334" Count="1" />
+      <LineId Id="1264" Count="0" />
+      <LineId Id="1262" Count="0" />
+      <LineId Id="1234" Count="1" />
+      <LineId Id="1233" Count="0" />
+      <LineId Id="1256" Count="0" />
+      <LineId Id="1248" Count="0" />
+      <LineId Id="1258" Count="3" />
+      <LineId Id="1238" Count="0" />
+      <LineId Id="1237" Count="0" />
+      <LineId Id="1232" Count="0" />
+      <LineId Id="1116" Count="49" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">
