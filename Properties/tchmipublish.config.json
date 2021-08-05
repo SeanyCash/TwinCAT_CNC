@@ -1,1 +1,30 @@
-﻿[]
+﻿[
+  {
+    "isNew": false,
+    "profileName": "CNC",
+    "publishMode": "TcHmi",
+    "targetDirectory": "",
+    "server": "",
+    "sitePath": "",
+    "destinationUrl": "",
+    "passiveMode": true,
+    "savePassword": true,
+    "deleteAllFilesBeforePublish": false,
+    "deleteExtensionDataBeforePublish": false,
+    "abortOnErrors": true,
+    "userName": "",
+    "encryptedPassword": "",
+    "tcHmiServerHost": "",
+    "tcHmiServerPort": "1020",
+    "socketTimeout": "45",
+    "clientCertificateCN": "",
+    "tcHmiUseTLS": true,
+    "useClientCertificate": false,
+    "tcHmiServerUserName": "__SystemAdministrator",
+    "encryptedTcHmiServerPassword": "",
+    "tcHmiDestinationUrl": "http://:1020",
+    "publishConfiguration": "remote",
+    "tcHmiSavePassword": true,
+    "tcHmiIgnoreCertificateErrors": true
+  }
+]

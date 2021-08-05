@@ -24,7 +24,46 @@
     "DEFAULTTIMEFORMATLOCALE": "client",
     "DEFAULTTIMEZONE": "client",
     "DEFAULTUSERGROUP": "__SystemUsers",
-    "DEFINITIONS": {},
+    "DEFINITIONS": {
+        "PLC1.E_Programs": {
+            "allOf": [
+                {
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "options": [
+                        {
+                            "label": "eNull",
+                            "value": 0
+                        },
+                        {
+                            "label": "eHomeAll",
+                            "value": 1
+                        },
+                        {
+                            "label": "eHomeX",
+                            "value": 2
+                        },
+                        {
+                            "label": "eHomeY",
+                            "value": 3
+                        },
+                        {
+                            "label": "eHomeZ",
+                            "value": 4
+                        }
+                    ]
+                },
+                {
+                    "$ref": "tchmi:general#/definitions/INT16"
+                }
+            ]
+        }
+    },
     "DEFLATECOMPRESSIONLEVEL": 5,
     "DISCOVERY": 2,
     "ENDPOINTS": [
@@ -1725,6 +1764,36 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.bAxisReset": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::bAxisReset",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.bStopExecute": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::bStopExecute",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.fbCNC.ProgramCall": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::fbCNC::ProgramCall",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.E_Programs"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.fbCNC.X2_MC_OUT.bAxisHomed": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -1842,6 +1911,26 @@
             "MAPPING": "PLC1::GVL::fbCNC::Z_Ref::NcToPlc::ActPos",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.fbCNC.nHomeAllSeq": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::fbCNC::nHomeAllSeq",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.fbCNC.sCurrentProgram": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::fbCNC::sCurrentProgram",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/STRING(80)"
             },
             "USEMAPPING": true
         },

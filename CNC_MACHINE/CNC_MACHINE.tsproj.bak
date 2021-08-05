@@ -1704,6 +1704,31 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
+			<Name GUID="{85E5F182-994B-D58F-D73E-E06C3608A833}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_PcComInData</Name>
+			<BitSize>528</BitSize>
+			<SubItem>
+				<Name>SerStatus</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>D</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>64</Elements>
+				</ArrayInfo>
+				<BitSize>512</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<Properties>
+				<Property>
+					<Name>hide</Name>
+				</Property>
+			</Properties>
+		</DataType>
+		<DataType>
 			<Name GUID="{CBC83B73-B816-4597-A9E5-2B03263CA131}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_AXIS_REF_STATE</Name>
 			<BitSize>32</BitSize>
 			<SubItem>
@@ -2230,31 +2255,6 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{85E5F182-994B-D58F-D73E-E06C3608A833}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_PcComInData</Name>
-			<BitSize>528</BitSize>
-			<SubItem>
-				<Name>SerStatus</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>D</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<ArrayInfo>
-					<LBound>0</LBound>
-					<Elements>64</Elements>
-				</ArrayInfo>
-				<BitSize>512</BitSize>
-				<BitOffs>16</BitOffs>
-			</SubItem>
-			<Properties>
-				<Property>
-					<Name>hide</Name>
-				</Property>
-			</Properties>
-		</DataType>
-		<DataType>
 			<Name GUID="{817F87BD-54FA-7383-92CB-61C84BBDADE4}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_PcComOutData</Name>
 			<BitSize>528</BitSize>
 			<SubItem>
@@ -2370,9 +2370,9 @@ External Setpoint Generation:
 						<Velo RefSearch="10" RefSync="10" SlowManual="50" FastManual="180" Fast="150" Maximum="245"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="1">
-						<EncPara ScaleFactorNumerator="0.001948153955" Inverse="true">
-							<Inc RefSearchInverse="true" RefSyncInverse="false" RefSoftSyncMask="#x0000ffff"/>
+					<Encoder Name="Enc" EncType="4">
+						<EncPara ScaleFactorNumerator="0.001948153955" Inverse="true" MaxCount="#x0000ffff">
+							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="2" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2533,9 +2533,9 @@ External Setpoint Generation:
 						<Velo RefSearch="10" RefSync="10" SlowManual="50" Fast="150" Maximum="245"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="1">
-						<EncPara ScaleFactorNumerator="0.001948153955">
-							<Inc RefSearchInverse="true" RefSyncInverse="false" RefSoftSyncMask="#x0000ffff"/>
+					<Encoder Name="Enc" EncType="4">
+						<EncPara ScaleFactorNumerator="0.001948153955" MaxCount="#x0000ffff">
+							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="2" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2694,15 +2694,15 @@ External Setpoint Generation:
 				<Axis Id="3" CreateSymbols="true" AxisType="1">
 					<Name>Y</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="600" Deceleration="600" Jerk="13668.7"/>
+						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="3131.68824781605" Deceleration="3131.68824781605" Jerk="372374.583311683"/>
 						<Velo RefSearch="10" RefSync="10" FastManual="200" Fast="180" Maximum="600"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="1">
-						<EncPara ScaleFactorNumerator="0.001948153955">
+					<Encoder Name="Enc" EncType="4">
+						<EncPara ScaleFactorNumerator="0.001948153955" MaxCount="#x0000ffff">
 							<SoftEndMinControl Range="-0.5"/>
-							<SoftEndMaxControl Range="1254"/>
-							<Inc RefSearchInverse="true" RefSyncInverse="false" RefSoftSyncMask="#x0000ffff"/>
+							<SoftEndMaxControl Enable="true" Range="1285"/>
+							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="2" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2837,7 +2837,7 @@ External Setpoint Generation:
 					<Controller Name="Ctrl" CtrType="2">
 						<CtrPara PriorControlFactor="1">
 							<PosDiffControl Enable="false"/>
-							<PID PosExtKp="1"/>
+							<PID PosKp="10" PosExtKp="1"/>
 							<Observer BandWidth="20"/>
 						</CtrPara>
 					</Controller>
@@ -2861,15 +2861,15 @@ External Setpoint Generation:
 				<Axis Id="4" CreateSymbols="true" AxisType="1">
 					<Name>Z</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="50" DecelerationMaximum="50" Acceleration="50" Deceleration="50" Jerk="5202.02"/>
+						<Dynamic AccelerationMaximum="50" DecelerationMaximum="50" Acceleration="505" Deceleration="505" Jerk="255025"/>
 						<Velo RefSearch="1" RefSync="1" SlowManual="30" FastManual="80" Fast="10" Maximum="100"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="1">
-						<EncPara ScaleFactorNumerator="0.00078125" Inverse="true">
+					<Encoder Name="Enc" EncType="4">
+						<EncPara ScaleFactorNumerator="0.00078125" Inverse="true" MaxCount="#x0000ffff">
 							<SoftEndMinControl Range="-212.7"/>
 							<SoftEndMaxControl Range="0.3"/>
-							<Inc RefSoftSyncMask="#x0000ffff"/>
+							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -3099,6 +3099,10 @@ External Setpoint Generation:
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
+							<Name>GVL.fbModbus.ModbusMaster.InData</Name>
+							<Type GUID="{85E5F182-994B-D58F-D73E-E06C3608A833}" Namespace="Tc2_ModbusRTU">MB_PcComInData</Type>
+						</Var>
+						<Var>
 							<Name>GVL.fbCNC.X_Ref.NcToPlc</Name>
 							<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
@@ -3138,13 +3142,13 @@ External Setpoint Generation:
 							<Name>GVL.fbCNC.i_bZHomingSwitch</Name>
 							<Type>BOOL</Type>
 						</Var>
-						<Var>
-							<Name>GVL.fbModbus.ModbusMaster.InData</Name>
-							<Type GUID="{85E5F182-994B-D58F-D73E-E06C3608A833}" Namespace="Tc2_ModbusRTU">MB_PcComInData</Type>
-						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL.fbModbus.ModbusMaster.OutData</Name>
+							<Type GUID="{817F87BD-54FA-7383-92CB-61C84BBDADE4}" Namespace="Tc2_ModbusRTU">MB_PcComOutData</Type>
+						</Var>
 						<Var>
 							<Name>GVL.fbCNC.X_Ref.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
@@ -3160,10 +3164,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbModbus.ModbusMaster.OutData</Name>
-							<Type GUID="{817F87BD-54FA-7383-92CB-61C84BBDADE4}" Namespace="Tc2_ModbusRTU">MB_PcComOutData</Type>
 						</Var>
 					</Vars>
 					<TaskPouOids>
@@ -3884,7 +3884,7 @@ External Setpoint Generation:
 								<Entry Name="Status__Ready" Index="#x6010" Sub="#x02">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Warning" Index="#x6010" Sub="#x03">
+								<Entry Name="Status__Warning" Index="#x6010" Sub="#x03" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Status__Error" Index="#x6010" Sub="#x04">

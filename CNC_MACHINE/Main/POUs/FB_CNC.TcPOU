@@ -68,6 +68,7 @@ VAR
 	nHomeZSeq	: INT;
 	
 	ProgramCall	: E_Programs;
+    sCurrentProgram : STRING;
 	
 
 END_VAR
@@ -440,6 +441,10 @@ nHomeXSeq:=0;
 nHomeYSeq:=0;
 nHomeZSeq:=0;
 bProgramDone:= FALSE;
+bHomeY:=FALSE;
+bHomeX:=FALSE;
+bHomeX2:=FALSE;
+bHomeZ:=FALSE;
 //bAxisEnable:= FALSE;
 
 /////////////////////////////////]]></ST>
@@ -451,11 +456,15 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF bProgramDone THEN
+        <ST><![CDATA[// Display Enum as string for HMI Display
+sCurrentProgram:=TO_STRING(ProgramCall);
+
+IF bProgramDone THEN
 	
 	ProgramCall := eNull;
 
 END_IF
+
 
 CASE ProgramCall OF	
 	
@@ -609,12 +618,17 @@ END_CASE
       <LineId Id="5" Count="2" />
       <LineId Id="9" Count="0" />
       <LineId Id="11" Count="0" />
+      <LineId Id="24" Count="3" />
       <LineId Id="15" Count="0" />
       <LineId Id="20" Count="0" />
       <LineId Id="19" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_ProgramLoader">
-      <LineId Id="200" Count="33" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="241" Count="1" />
+      <LineId Id="200" Count="4" />
+      <LineId Id="240" Count="0" />
+      <LineId Id="205" Count="28" />
       <LineId Id="48" Count="0" />
     </LineIds>
   </POU>
