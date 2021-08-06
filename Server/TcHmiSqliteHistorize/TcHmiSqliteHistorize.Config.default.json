@@ -1,0 +1,9 @@
+{
+    "commitInterval": "PT10S",
+    "enableBackup": false,
+    "historizedSymbolList": {},
+    "inMemory": false,
+    "maxBackups": 1,
+    "mode": 3,
+    "vacuumOnStartup": false
+}

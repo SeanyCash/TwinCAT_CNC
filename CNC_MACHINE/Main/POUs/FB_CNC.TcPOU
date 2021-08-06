@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC
 VAR_INPUT
@@ -58,6 +58,7 @@ VAR
     bGearInTrigger  : BOOL;
     rGearInTrigger  : R_TRIG;
     rtrigAxisNotGeared  : R_TRIG;
+	bAllAxesReady	: BOOL;
 
 	
 // Program Call Variables	
@@ -74,7 +75,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Motion Calls
+      <ST><![CDATA[// Trigger Axis Gearing
 
 rtrigAxisNotGeared(CLK := X_MC_OUT.bPowerStatus AND NOT X_MC_OUT.bGearInDone);
 
@@ -91,6 +92,8 @@ ELSE
 
 END_IF
 
+
+// Motion Calls
 
 X_Motion( 
 			Ref:= X_Ref,
@@ -136,7 +139,12 @@ Z_Motion(
 			bHomingInput := bZHomingSwitch,
 			bHomeExecute := bHomeZ
 										);
-										
+
+// All Axes Ready Bit
+
+bAllAxesReady:= X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus AND Y_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
+
+// Method Calls
 
 M_ProgramLoader();
 M_NCI();
@@ -510,7 +518,13 @@ END_CASE
       <LineId Id="1238" Count="0" />
       <LineId Id="1237" Count="0" />
       <LineId Id="1232" Count="0" />
-      <LineId Id="1116" Count="49" />
+      <LineId Id="1407" Count="1" />
+      <LineId Id="1116" Count="44" />
+      <LineId Id="1412" Count="1" />
+      <LineId Id="1415" Count="0" />
+      <LineId Id="1414" Count="0" />
+      <LineId Id="1417" Count="1" />
+      <LineId Id="1162" Count="3" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">

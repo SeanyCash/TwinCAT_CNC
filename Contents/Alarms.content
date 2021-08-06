@@ -1,6 +1,6 @@
-﻿<div id="Alarms" data-tchmi-type="tchmi-content" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="1900" data-tchmi-height="798">
+﻿<div id="Alarms" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="1900" data-tchmi-height="798">
 
-<div id="TcHmiEventGrid" data-tchmi-type="tchmi-event-grid" data-tchmi-height="659" data-tchmi-height-unit="px" data-tchmi-left="140" data-tchmi-left-unit="px" data-tchmi-show-menu-bar="True" data-tchmi-top="33" data-tchmi-top-unit="px" data-tchmi-width="1602" data-tchmi-width-unit="px">
+<div id="TcHmiEventGrid" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEventGrid" data-tchmi-height="659" data-tchmi-height-unit="px" data-tchmi-left="140" data-tchmi-left-unit="px" data-tchmi-show-menu-bar="True" data-tchmi-top="33" data-tchmi-top-unit="px" data-tchmi-width="1602" data-tchmi-width-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-filter" type="application/json">
 [
   {

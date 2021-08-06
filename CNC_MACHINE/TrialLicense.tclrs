@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
-		<SystemId>{3566A293-9AEC-271C-1F5E-37F83ADF4E40}</SystemId>
-		<IssueTime>2021-07-04T14:08:00</IssueTime>
-		<ExpireTime>2021-07-12T00:00:00</ExpireTime>
-		<LicenseKey>2eb302b03a90d960bd897c7a13cc144b5f8028734f4ca008711ebe5ff3f575e8f616672f800769d070942a41b369ebc3011517b478415ec560d831d8fe368303543d1f1278dc693fa5c7f8b2bdb06d997da3eb2a3326572f024b6d712ec50299121d566181ee5fdb92102972a6f965cde4241f7b43dc94bfa7a31df554b7a120e9504a2b4978bb6beea0810f8d6bd4725bfae51765de255582f28d94ce8c3fdac526a0d974d4d054047143b592524893af91606f680de90d98f974233cc2449ed4d30b5c8daa902b380eb45febaba79c9dde67478905d68aba69ff7bba38bf5355b3ce29dd2327026d5f378db69cc6f17d08d4a1501c1a684b291657e702d7df</LicenseKey>
+		<SystemId>{DA99C4F3-3971-1295-F947-521AD9A40CFD}</SystemId>
+		<IssueTime>2021-08-06T14:57:00</IssueTime>
+		<ExpireTime>2021-08-14T00:00:00</ExpireTime>
+		<LicenseKey>26707638eb58ecd027eeaa66eef315baeb3f436a4205d3fb1e5f847ed22b55d11617b8c1f9a3061642eb7be4385592bce923463e49df84e42ac6dfbd13f7a79badde51ba2589637495356fd9d656cc346b2899d05b8e242d13a138ef119e5eb606a193b2b5980cdd933110826131ad97ab80e2aa239b71116987864fca93fcac80637b30087ddc7cd0243d28153a4e8b37a848c957754a17a22b52725830152e2b56207d8bf4632d2448ce742c981de3e9daa0c9535d0a3ca102844998b7700e8ce5b0864cbe153cec81001e4dffe052a75889951c52ce8cb4f75216a2a711ac077c5c5f8686afe44b20c2530c5362cd2fe6fe88b91e643c33b06acae229f077</LicenseKey>
 		<License>
 			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
 			<Name>TC3 ADS</Name>
@@ -39,11 +39,6 @@
 			<LicenseId>{A1AF8A04-C08D-4853-A5A0-0E6C3A278A8C}</LicenseId>
 			<Name>TC3 Modbus-RTU</Name>
 			<OrderNo>TF6255</OrderNo>
-		</License>
-		<License>
-			<LicenseId>{BCA6EE0A-9CE1-4D3F-98CA-413ABC0D94FD}</LicenseId>
-			<Name>TC3 Serial-Communication</Name>
-			<OrderNo>TF6340</OrderNo>
 		</License>
 	</LicenseInfo>
 </TcLicenseInfo>

@@ -1,13 +1,13 @@
 ﻿{
   "$schema": "C:/TwinCAT/Functions/TE2000-HMI-Engineering/Infrastructure/TcHmiFramework/Latest/Schema/TchmiConfig.Schema.json",
-  "basePath": "./Libraries",
-  "locale": "client",
+  "basePath": "./framework",
   "scaleMode": "None",
   "startupView": "Desktop.view",
-  "loginPage": null,
+  "loginPage": "",
   "tcHmiServer": {
     "websocketIntervalTime": 500,
     "websocketTimeout": 10000,
+    "websocketSystemTimeout": 0,
     "websocketSubscriptionMode": "Change"
   },
   "activeTheme": "Base",
@@ -22,6 +22,11 @@
         {
           "name": "Themes/Base/Style.css",
           "description": "",
+          "type": "Stylesheet"
+        },
+        {
+          "name": "Themes/Base/BaseStyle.css",
+          "description": "Theme Stylesheet",
           "type": "Stylesheet"
         }
       ],
@@ -39,29 +44,35 @@
   "content": [
     {
       "url": "Contents/Alarms.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     },
     {
       "url": "Contents/Main.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     },
     {
       "url": "Contents/MetricUnits.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     },
     {
       "url": "Contents/StandardUnits.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     },
     {
       "url": "Contents/Status.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     }
   ],
   "views": [
     {
       "url": "Desktop.view",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     }
   ],
   "userFunctions": [],
@@ -87,10 +98,37 @@
     "de-DE": "Localization\\de-DE.localization",
     "en-US": "Localization\\en-US.localization"
   },
+  "languageFallback": "",
+  "disableLoadingOptimization": false,
   "creatorSettings": {
     "viewport": {
       "defaultWidth": 1024,
       "defaultHeight": 768
     }
-  }
+  },
+  "binding": {
+    "symbolError": "Ignore"
+  },
+  "packages": [
+    {
+      "name": "Beckhoff.TwinCAT.HMI.Controls",
+      "basePath": "/Beckhoff.TwinCAT.HMI.Controls"
+    },
+    {
+      "name": "Beckhoff.TwinCAT.HMI.Framework",
+      "basePath": "/framework"
+    },
+    {
+      "name": "Beckhoff.TwinCAT.HMI.Functions",
+      "basePath": "/Beckhoff.TwinCAT.HMI.Functions"
+    }
+  ],
+  "keyboardLayouts": [
+    {
+      "url": "KeyboardLayouts/German - compact.keyboard.json"
+    },
+    {
+      "url": "KeyboardLayouts/US - compact.keyboard.json"
+    }
+  ]
 }
