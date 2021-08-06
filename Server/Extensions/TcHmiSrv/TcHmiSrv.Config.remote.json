@@ -1,8 +1,0 @@
-{
-    "CERTIFICATEEXPIRATION": "P365D",
-    "REQUIREAUTH": 2,
-    "VIRTUALDIRECTORIES": {
-        "/": "www",
-        "/Libraries/Controls/Custom/TcHmiOpcUa": "www\\.hmipkgs\\0fa87e6c-8e1c-49ea-a968-f8a36d8c5858\\Content"
-    }
-}
