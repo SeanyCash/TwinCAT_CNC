@@ -212,6 +212,7 @@
     <Folder Include="Imports" />
     <Folder Include="Imports\Images" />
     <Folder Include="Imports\Videos" />
+    <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
     <Folder Include="Contents" />
     <Folder Include="Server\ADS" />
@@ -489,10 +490,8 @@
       <SubType>Content</SubType>
       <Visible>true</Visible>
     </Content>
+    <Folder Include="Themes\Base\Images\" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
-  <PropertyGroup>
-    <DataForMigration>W3sibGVnYWN5UHJvamVjdCI6IjBmYTg3ZTZjLThlMWMtNDllYS1hOTY4LWY4YTM2ZDhjNTg1OCIsInRhcmdldEluY2x1ZGUiOiIuaG1pcGtnc1xcMGZhODdlNmMtOGUxYy00OWVhLWE5NjgtZjhhMzZkOGM1ODU4XFxDb250ZW50XFxUY0htaU9wY1VhLmRsbCIsInRhcmdldE5hbWUiOiJUY0htaU9wY1VhIn1d</DataForMigration>
-  </PropertyGroup>
 </Project>
