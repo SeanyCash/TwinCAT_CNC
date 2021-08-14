@@ -3210,7 +3210,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Channel Id="2" ChannelType="2" InterpreterType="1" LoadBufSize="65536" AxesColumns="#x3f">
+				<Channel Id="2" ChannelType="2" InterpreterType="2" LoadBufSize="655360" AxesColumns="#x3f">
 					<Name>NC Channel</Name>
 					<Vars VarGrpType="1">
 						<Name>Inputs</Name>
