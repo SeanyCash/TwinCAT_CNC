@@ -192,7 +192,9 @@ mcBuildGroup(
 	tTimeOut:= , 
 	bBusy=> , 
 	bErr=> , 
-	nErrId=> );]]></ST>
+	nErrId=> );
+	
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Outputs" Id="{bfb1dda8-5611-458d-bc52-800eff2f8798}">
@@ -540,6 +542,7 @@ END_CASE
       <LineId Id="20" Count="1" />
       <LineId Id="6" Count="13" />
       <LineId Id="5" Count="0" />
+      <LineId Id="25" Count="1" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Outputs">
       <LineId Id="15" Count="0" />
