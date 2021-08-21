@@ -111,6 +111,12 @@
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <Target Name="Clean" DependsOnTargets="BaseClean" />
   <ItemGroup>
+    <Content Include="Contents\Diagnostics.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Contents\Offsets.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="KeyboardLayouts\German - compact.keyboard.json" />
     <Content Include="KeyboardLayouts\US - compact.keyboard.json" />
     <Content Include="packages.config" />
