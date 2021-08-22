@@ -111,10 +111,13 @@
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <Target Name="Clean" DependsOnTargets="BaseClean" />
   <ItemGroup>
-    <Content Include="Contents\Diagnostics.content">
+    <Content Include="Contents\Status.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Offsets.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\machineoverviewB&amp;W.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="KeyboardLayouts\German - compact.keyboard.json" />
@@ -251,9 +254,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\StandardUnits.content">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Contents\Status.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\MetricUnits.content">

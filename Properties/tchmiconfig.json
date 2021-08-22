@@ -48,11 +48,6 @@
       "keepAlive": false
     },
     {
-      "url": "Contents/Diagnostics.content",
-      "preload": false,
-      "keepAlive": false
-    },
-    {
       "url": "Contents/Main.content",
       "preload": false,
       "keepAlive": false
