@@ -2455,7 +2455,7 @@ External Setpoint Generation:
 			</Properties>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000002}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000002}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BIT</Name>
 			<BitSize>2</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -2464,7 +2464,7 @@ External Setpoint Generation:
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
 			<BitSize>1</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -2473,7 +2473,7 @@ External Setpoint Generation:
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000004}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000004}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BIT</Name>
 			<BitSize>4</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -2547,7 +2547,7 @@ External Setpoint Generation:
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
 						<EncPara ScaleFactorNumerator="0.001948153955" Inverse="true" MaxCount="#x0000ffff">
-							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="1" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2712,7 +2712,7 @@ External Setpoint Generation:
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
 						<EncPara ScaleFactorNumerator="0.001948153955" MaxCount="#x0000ffff">
-							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="1" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2873,7 +2873,7 @@ External Setpoint Generation:
 				<Axis Id="3" CreateSymbols="true" AxisType="1">
 					<Name>Y</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="1304.87" Deceleration="1304.87" Jerk="155156"/>
+						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="600" Deceleration="600" Jerk="637562"/>
 						<Velo RefSearch="10" RefSync="10" FastManual="200" Fast="180" Maximum="250"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
@@ -2881,7 +2881,7 @@ External Setpoint Generation:
 						<EncPara ScaleFactorNumerator="0.001948153955" MaxCount="#x0000ffff">
 							<SoftEndMinControl Range="-0.5"/>
 							<SoftEndMaxControl Enable="true" Range="1285"/>
-							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="1" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -3042,7 +3042,7 @@ External Setpoint Generation:
 				<Axis Id="4" CreateSymbols="true" AxisType="1">
 					<Name>Z</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="50" DecelerationMaximum="50" Acceleration="505" Deceleration="505" Jerk="255025"/>
+						<Dynamic AccelerationMaximum="50" DecelerationMaximum="50" Acceleration="50" Deceleration="50" Jerk="255025"/>
 						<Velo RefSearch="1" RefSync="1" SlowManual="30" FastManual="80" Fast="10" Maximum="100"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
@@ -3050,7 +3050,7 @@ External Setpoint Generation:
 						<EncPara ScaleFactorNumerator="0.00078125" Inverse="true" MaxCount="#x0000ffff">
 							<SoftEndMinControl Range="-212.7"/>
 							<SoftEndMaxControl Range="0.3"/>
-							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+							<Inc RefMode="1" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -3368,7 +3368,7 @@ External Setpoint Generation:
 			<PlcAuxTask Affinity="#x00000002"/>
 		</Plc>
 		<Io>
-			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="10.89.0.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="2">
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="10.89.0.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="2">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -4522,6 +4522,8 @@ External Setpoint Generation:
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500841000403}" Id="#x02030030"/>
+		<MappingInfo Identifier="{00000000-0010-0304-3000-040310000403}" Id="#x02030010"/>
 		<MappingInfo Identifier="{05000010-2001-0850-3000-040300205008}" Id="#x02030020" Watchdog="14000000040000000400000004000000"/>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^X">
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^X (EL7041-1000)">
