@@ -3207,7 +3207,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Channel Id="2" ChannelType="2" InterpreterType="2" LoadBufSize="655360" AxesColumns="#x3f">
+				<Channel Id="2" ChannelType="2" InterpreterType="2" LoadBufSize="665600" AxesColumns="#x3f">
 					<Name>NC Channel</Name>
 					<Vars VarGrpType="1">
 						<Name>Inputs</Name>
@@ -3264,7 +3264,7 @@ External Setpoint Generation:
 							<Kinematic/>
 						</Parameter>
 					</Group>
-					<Interpreter ProgName="C:\Users\User\Desktop\NC Programs\FirstNciSample\TestIt.nc">
+					<Interpreter ProgName="C:\TwinCAT\Mc\Nci\first.nc">
 						<Name>Interpreter</Name>
 					</Interpreter>
 				</Channel>

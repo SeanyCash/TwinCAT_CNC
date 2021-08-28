@@ -7,8 +7,7 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	mcBuildGroup	: CfgBuildExt3DGroup;	
-
+    
 	X_Motion		: FB_MotionFunctions;
 	X2_Motion 		: FB_MotionFunctions;
 	Y_Motion		: FB_MotionFunctions;
@@ -70,6 +69,9 @@ VAR
 	
 	ProgramCall	: E_Programs;
     sCurrentProgram : STRING;
+    
+    fbSimpleNciSequence:	FB_SimpleNciSequence;
+	bExecSimpleNci:	BOOL	:= FALSE;
 	
 
 END_VAR
@@ -139,6 +141,17 @@ Z_Motion(
 			bHomingInput := bZHomingSwitch,
 			bHomeExecute := bHomeZ
 										);
+                                        
+fbSimpleNciSequence(
+	        bExecute:= bExecSimpleNci, 
+	        bBusy=> , 
+	        bError=> , 
+	        bDone=> , 
+	        stX:=X_Ref, 
+	        stY:=Y_Ref, 
+	        stZ:=Z_Ref, 
+	        stItpToPlc:=in_stItpToPlc , 
+	        stPlcToItp:= out_stPlcToItp);
 
 // All Axes Ready Bit
 
@@ -147,7 +160,6 @@ bAllAxesReady:= X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus AND Y_MC_OUT.bP
 // Method Calls
 
 M_ProgramLoader();
-M_NCI();
 M_Inputs();
 M_Outputs();]]></ST>
     </Implementation>
@@ -168,33 +180,6 @@ bZHomingSwitch	:= i_bZHomingSwitch;
 
 bXLimitSwitch	:= i_bXLimitSwitch;
 bYLimitSwitch	:= i_bYLimitSwitch;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_NCI" Id="{dc9731e6-e261-44f3-b6f6-41806c4884e1}">
-      <Declaration><![CDATA[METHOD M_NCI : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// bBuild3DGroup:= bFirstScan;
-
-mcBuildGroup(
-	bExecute:= bBuild3DGroup , 
-	nGroupId:= 5, 
-	nXAxisId:= 1, 
-	nYAxisId:= 3, 
-	nZAxisId:= 4, 
-	nQ1AxisId:= , 
-	nQ2AxisId:= , 
-	nQ3AxisId:= , 
-	nQ4AxisId:= , 
-	nQ5AxisId:= , 
-	tTimeOut:= , 
-	bBusy=> , 
-	bErr=> , 
-	nErrId=> );
-	
-]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Outputs" Id="{bfb1dda8-5611-458d-bc52-800eff2f8798}">
@@ -522,11 +507,15 @@ END_CASE
       <LineId Id="1232" Count="0" />
       <LineId Id="1407" Count="1" />
       <LineId Id="1116" Count="44" />
+      <LineId Id="1573" Count="0" />
+      <LineId Id="1575" Count="8" />
+      <LineId Id="1574" Count="0" />
       <LineId Id="1412" Count="1" />
       <LineId Id="1415" Count="0" />
       <LineId Id="1414" Count="0" />
       <LineId Id="1417" Count="1" />
-      <LineId Id="1162" Count="3" />
+      <LineId Id="1162" Count="1" />
+      <LineId Id="1165" Count="0" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">
@@ -537,12 +526,6 @@ END_CASE
       <LineId Id="14" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_NCI">
-      <LineId Id="20" Count="1" />
-      <LineId Id="6" Count="13" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="25" Count="1" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Outputs">
       <LineId Id="15" Count="0" />
