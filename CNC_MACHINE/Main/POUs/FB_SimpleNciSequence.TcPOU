@@ -9,6 +9,7 @@ VAR_OUTPUT
 	bBusy				: BOOL;
 	bError				: BOOL;
 	bDone				: BOOL;
+    sLoadedProgram      : STRING;
 END_VAR
 VAR_IN_OUT
 	stX					: AXIS_REF;
@@ -34,7 +35,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE nState OF
+      <ST><![CDATA[sLoadedProgram:=sPrgName;
+
+CASE nState OF
 0:
 	IF bExecute THEN
 		bBusy	:= TRUE;
@@ -124,7 +127,7 @@ END_VAR
 		nErrId=> );
 	IF NOT fbStartGCode.bBusy THEN
 		IF NOT fbStartGCode.bErr THEN
-			nState	:= 50;
+			//nState	:= 50;
 		ELSE	
 			(* add error handling *)
 			nErrorState	:= nState;
@@ -141,7 +144,7 @@ END_VAR
 	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
 	IF nInterpreterState <> Tc2_NCI.NCI_INTERPRETER_READY THEN
 		// nci is running
-		nState	:= 60;
+	//	nState	:= 60;
 	END_IF
 
 60:
@@ -208,6 +211,7 @@ fbConfirmHsk(
 	]]></ST>
     </Implementation>
     <LineIds Name="FB_SimpleNciSequence">
+      <LineId Id="207" Count="1" />
       <LineId Id="3" Count="170" />
       <LineId Id="2" Count="0" />
     </LineIds>

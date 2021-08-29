@@ -39,6 +39,8 @@ VAR
 	i_bYHomingSwitch		AT %I* : BOOL;
     i_bYLimitSwitch			AT %I* : BOOL;
 	i_bZHomingSwitch		AT %I* : BOOL;
+    in_stItpToPlc	AT %I*:	NcToPlc_NciChannel_Ref;
+	out_stPlcToItp	AT %Q*:	PLCTONC_NCICHANNEL_REF;
     
     
 	
@@ -71,7 +73,8 @@ VAR
     sCurrentProgram : STRING;
     
     fbSimpleNciSequence:	FB_SimpleNciSequence;
-	bExecSimpleNci:	BOOL	:= FALSE;
+	bExecuteNCI:	BOOL	:= FALSE;
+    fUserOverride:	LREAL	:= 100.0;
 	
 
 END_VAR
@@ -143,7 +146,7 @@ Z_Motion(
 										);
                                         
 fbSimpleNciSequence(
-	        bExecute:= bExecSimpleNci, 
+	        bExecute:= bExecuteNCI, 
 	        bBusy=> , 
 	        bError=> , 
 	        bDone=> , 
@@ -151,7 +154,10 @@ fbSimpleNciSequence(
 	        stY:=Y_Ref, 
 	        stZ:=Z_Ref, 
 	        stItpToPlc:=in_stItpToPlc , 
-	        stPlcToItp:= out_stPlcToItp);
+	        stPlcToItp:= out_stPlcToItp,
+            sLoadedProgram=>sCurrentProgram);
+            
+ItpSetOverridePercent(fOverridePercent:=fUserOverride , sPlcToNci:=out_stPlcToItp);
 
 // All Axes Ready Bit
 
@@ -451,9 +457,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Display Enum as string for HMI Display
-sCurrentProgram:=TO_STRING(ProgramCall);
-
+        <ST><![CDATA[
 IF bProgramDone THEN
 	
 	ProgramCall := eNull;
@@ -493,29 +497,7 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="1115" Count="0" />
-      <LineId Id="1334" Count="1" />
-      <LineId Id="1264" Count="0" />
-      <LineId Id="1262" Count="0" />
-      <LineId Id="1234" Count="1" />
-      <LineId Id="1233" Count="0" />
-      <LineId Id="1256" Count="0" />
-      <LineId Id="1248" Count="0" />
-      <LineId Id="1258" Count="3" />
-      <LineId Id="1238" Count="0" />
-      <LineId Id="1237" Count="0" />
-      <LineId Id="1232" Count="0" />
-      <LineId Id="1407" Count="1" />
-      <LineId Id="1116" Count="44" />
-      <LineId Id="1573" Count="0" />
-      <LineId Id="1575" Count="8" />
-      <LineId Id="1574" Count="0" />
-      <LineId Id="1412" Count="1" />
-      <LineId Id="1415" Count="0" />
-      <LineId Id="1414" Count="0" />
-      <LineId Id="1417" Count="1" />
-      <LineId Id="1162" Count="1" />
-      <LineId Id="1165" Count="0" />
+      <LineId Id="1741" Count="86" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">
@@ -624,8 +606,7 @@ END_CASE
       <LineId Id="19" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_ProgramLoader">
-      <LineId Id="243" Count="0" />
-      <LineId Id="241" Count="1" />
+      <LineId Id="242" Count="0" />
       <LineId Id="200" Count="4" />
       <LineId Id="240" Count="0" />
       <LineId Id="205" Count="28" />

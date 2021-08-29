@@ -2491,6 +2491,26 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.fbCNC.bAllAxesReady": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::fbCNC::bAllAxesReady",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.fbCNC.bExecuteNCI": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::fbCNC::bExecuteNCI",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.fbCNC.nHomeAllSeq": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
