@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_MotionFunctions" Id="{500ca146-bff1-4570-8da1-57ff34083845}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_MotionFunctions
 
@@ -68,8 +68,8 @@ mcGearIn(
 	Master:= Ref, 
 	Slave:= SlaveRef, 
 	Execute:= bGearInExecute, 
-	RatioNumerator:= , 
-	RatioDenominator:= , 
+	RatioNumerator:=1 , 
+	RatioDenominator:=1 , 
 	Acceleration:= , 
 	Deceleration:= , 
 	Jerk:= , 
@@ -86,7 +86,7 @@ mcGearOut(
 	Slave:= SlaveRef, 
 	Execute:= bGearOutExecute, 
 	Options:= , 
-	Done=> , 
+	Done=> Motion_Out.bGearOutDone, 
 	Busy=> , 
 	Error=> , 
 	ErrorID=> );   

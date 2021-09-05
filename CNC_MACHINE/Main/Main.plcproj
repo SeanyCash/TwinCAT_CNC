@@ -21,6 +21,12 @@
     <Compile Include="DUTs\E_Programs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\stHMI_In.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\stHMI_Out.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_Motion_Inputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -35,6 +41,9 @@
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_HMI.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_NCInfo.TcPOU">

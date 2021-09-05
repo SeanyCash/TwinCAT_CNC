@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <GVL Name="GVL" Id="{1cf9ca76-df72-4f66-8cff-9316cd7fcaa5}">
     <Declaration><![CDATA[
 VAR_GLOBAL
 
 fbCNC				: FB_CNC;
 fbModbus			: FB_ModbusRTU;
+fbHMI               : FB_HMI;
 
 	
 

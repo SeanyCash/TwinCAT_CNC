@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_HMI" Id="{74169dc0-8ac6-4a2f-90d1-a2b9ba1bf1ca}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_HMI
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+
+stHMI_In    : stHMI_In;
+stHMI_Out   : stHMI_Out;
+
+
+
+
+
+
+    
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[M_Inputs();
+M_Outputs();]]></ST>
+    </Implementation>
+    <Method Name="M_Inputs" Id="{14d1c6a3-722d-4790-a5a9-7e9d7bd7fdb8}">
+      <Declaration><![CDATA[METHOD M_Inputs : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Outputs" Id="{3525acce-6037-42c8-9504-c0bff51f5c6e}">
+      <Declaration><![CDATA[METHOD M_Outputs : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Limit and Homing Switch Mapping
+
+stHMI_Out.bX1HomeSwitch := fbCNC.bXHomingSwitch;	
+stHMI_Out.bX2HomeSwitch := fbCNC.bX2HomingSwitch;
+stHMI_Out.bXLimitSwitch := fbCNC.bXLimitSwitch;	
+stHMI_Out.bYHomeSwitch := fbCNC.bYHomingSwitch;
+stHMI_Out.bYLimitSwitch := fbCNC.bYLimitSwitch;	
+stHMI_Out.bZHomeSwitch  := fbCNC.bZHomingSwitch;	
+                           
+                         	
+                           	]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_HMI">
+      <LineId Id="9" Count="0" />
+      <LineId Id="39" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_HMI.M_Inputs">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_HMI.M_Outputs">
+      <LineId Id="14" Count="1" />
+      <LineId Id="5" Count="1" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="2" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

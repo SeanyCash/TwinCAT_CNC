@@ -66,7 +66,7 @@ CASE nState OF
 		nErrId=> );
 	IF NOT fbBuildGroup.bBusy THEN
 		IF NOT fbBuildGroup.bErr THEN
-			nState	:= 20;
+			nState	:= 15;
 		ELSE
 			(* add error handling *)
 			nErrorState	:= nState;
@@ -76,6 +76,18 @@ CASE nState OF
 		END_IF
 		fbBuildGroup(bExecute:=FALSE); 
 	END_IF
+    
+15:
+
+   IF NOT fbCNC.X_MC_OUT.bGearInDone THEN
+    bGearInExecute:=TRUE;
+    IF fbCNC.X_MC_OUT.bGearInDone THEN
+        nState:=20;
+	END_IF
+   ELSE
+    nState:=20;
+   END_IF
+     
 	
 20:
 	// load g-code file 
@@ -212,7 +224,16 @@ fbConfirmHsk(
     </Implementation>
     <LineIds Name="FB_SimpleNciSequence">
       <LineId Id="207" Count="1" />
-      <LineId Id="3" Count="170" />
+      <LineId Id="3" Count="38" />
+      <LineId Id="241" Count="1" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="249" Count="2" />
+      <LineId Id="253" Count="1" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="252" Count="0" />
+      <LineId Id="42" Count="131" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

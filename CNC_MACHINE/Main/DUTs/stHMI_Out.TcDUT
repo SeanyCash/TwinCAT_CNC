@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="stHMI_Out" Id="{9c8d509c-6bd1-4273-891d-e0c3f7471d5e}">
+    <Declaration><![CDATA[{TO_STRING}
+
+TYPE stHMI_Out :
+STRUCT
+    
+// Output Values/status to the HMI
+
+sCurrentProgramSelected     : STRING;
+fFeedRate                   : REAL;
+fRapidRate                  : REAL;
+
+// ====================== Status Screen=================================
+
+// Homing/Limit Switch Indicators
+
+bX1HomeSwitch       : BOOL;
+bX2HomeSwitch       : BOOL;
+bXLimitSwitch       : BOOL;
+bYHomeSwitch        : BOOL;
+bYLimitSwitch       : BOOL;
+bZHomeSwitch        : BOOL;
+
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

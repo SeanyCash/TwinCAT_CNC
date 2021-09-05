@@ -696,7 +696,7 @@
 ]</script>
 </div>
 
-<div id="AxisEnable_IndicatorY_Red" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="363" data-tchmi-left-unit="px" data-tchmi-top="126" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-zindex="20">
+<div id="AxisEnable_IndicatorY_Red" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="363" data-tchmi-left-unit="px" data-tchmi-top="126" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-zindex="20" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
 
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
@@ -1159,25 +1159,28 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
+
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
   {
-    "event": "AutoZero_PB_6.onStateChanged",
+    "event": "AutoZero_PB_6.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
         "symbolExpression": "%s%PLC1.GVL.fbCNC.ProgramCall%/s%",
-        "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
-          "value": "2"
+          "value": 2
         },
         "asyncWait": true
       }
     ]
   }
-]</script>
+]
+</script>
 </div>
 
 <div id="AutoZero_PB_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="144" data-tchmi-left-unit="px" data-tchmi-text="HOME Y" data-tchmi-top="126" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="12" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
@@ -1225,25 +1228,28 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
+
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
   {
-    "event": "AutoZero_PB_9.onStateChanged",
+    "event": "AutoZero_PB_9.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
         "symbolExpression": "%s%PLC1.GVL.fbCNC.ProgramCall%/s%",
-        "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
-          "value": "4"
+          "value": 4
         },
         "asyncWait": true
       }
     ]
   }
-]</script>
+]
+</script>
 </div>
 
 <div id="AutoZero_PB_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="168" data-tchmi-height-unit="px" data-tchmi-left="9" data-tchmi-left-unit="px" data-tchmi-text="HOME ALL AXES" data-tchmi-top="8" data-tchmi-top-unit="px" data-tchmi-width="125" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="12" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
@@ -1467,7 +1473,7 @@
   }
 ]</script>
 </div>
-<div id="ZPosition_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="23" data-tchmi-left-unit="px" data-tchmi-top="566" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-text="%s%PLC1.GVL.fbCNC.Z_Ref.NcToPlc.ActPos%/s%" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
+<div id="ZPosition_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="23" data-tchmi-left-unit="px" data-tchmi-top="566" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "color": "rgba(13, 0, 3, 1)"
@@ -1518,7 +1524,7 @@
   }
 ]</script>
 </div>
-<div id="ZPosition_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="213" data-tchmi-left-unit="px" data-tchmi-top="566" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-text="%s%PLC1.GVL.fbCNC.Z_Ref.NcToPlc.ActPos%/s%" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
+<div id="ZPosition_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="213" data-tchmi-left-unit="px" data-tchmi-top="566" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "color": "rgba(13, 0, 3, 1)"
@@ -1533,7 +1539,7 @@
 </div>
 <div id="TcHmiTextblock_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="27" data-tchmi-height-unit="px" data-tchmi-left="388" data-tchmi-left-unit="px" data-tchmi-text="JOG RATE" data-tchmi-top="521" data-tchmi-top-unit="px" data-tchmi-width="93" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="18" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="2">
 </div>
-<div id="ZPosition_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="213" data-tchmi-left-unit="px" data-tchmi-top="601" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-text="%s%PLC1.GVL.fbCNC.Z_Ref.NcToPlc.ActPos%/s%" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
+<div id="ZPosition_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="213" data-tchmi-left-unit="px" data-tchmi-top="601" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "color": "rgba(13, 0, 3, 1)"
@@ -1584,7 +1590,7 @@
   }
 ]</script>
 </div>
-<div id="ZPosition_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="402" data-tchmi-left-unit="px" data-tchmi-top="601" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-text="%s%PLC1.GVL.fbCNC.Z_Ref.NcToPlc.ActPos%/s%" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
+<div id="ZPosition_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="402" data-tchmi-left-unit="px" data-tchmi-top="601" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "color": "rgba(13, 0, 3, 1)"
@@ -1597,7 +1603,7 @@
 }
 </script>
 </div>
-<div id="ZPosition_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="402" data-tchmi-left-unit="px" data-tchmi-top="566" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-text="%s%PLC1.GVL.fbCNC.Z_Ref.NcToPlc.ActPos%/s%" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
+<div id="ZPosition_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="402" data-tchmi-left-unit="px" data-tchmi-top="566" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "color": "rgba(13, 0, 3, 1)"
@@ -1654,7 +1660,7 @@
   }
 ]</script>
 </div>
-<div id="ZPosition_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="589" data-tchmi-left-unit="px" data-tchmi-top="601" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-text="%s%PLC1.GVL.fbCNC.Z_Ref.NcToPlc.ActPos%/s%" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
+<div id="ZPosition_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="589" data-tchmi-left-unit="px" data-tchmi-top="601" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "color": "rgba(13, 0, 3, 1)"
@@ -1667,7 +1673,7 @@
 }
 </script>
 </div>
-<div id="ZPosition_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="589" data-tchmi-left-unit="px" data-tchmi-top="566" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-text="%s%PLC1.GVL.fbCNC.Z_Ref.NcToPlc.ActPos%/s%" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px">
+<div id="ZPosition_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="589" data-tchmi-left-unit="px" data-tchmi-top="566" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "color": "rgba(13, 0, 3, 1)"

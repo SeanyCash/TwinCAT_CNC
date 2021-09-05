@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_ModbusRTU" Id="{d33eb993-f1a5-484e-9d4d-ae7861108719}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ModbusRTU
 VAR_INPUT
@@ -61,8 +61,8 @@ rDriveTemp				: REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SpindleControlMapping();
-ModbusMapping();
+      <ST><![CDATA[M_SpindleControlMapping();
+M_ModbusMapping();
 
 // Read/Write Modbus commands through PC COM Serial Port
     ModbusMaster(
@@ -105,8 +105,8 @@ END_IF
 
 // insert text here]]></ST>
     </Implementation>
-    <Method Name="ModbusMapping" Id="{83d865f8-d7ae-49d7-a6f4-fcb7ec40a615}">
-      <Declaration><![CDATA[METHOD ModbusMapping : BOOL
+    <Method Name="M_ModbusMapping" Id="{83d865f8-d7ae-49d7-a6f4-fcb7ec40a615}">
+      <Declaration><![CDATA[METHOD M_ModbusMapping : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -154,8 +154,8 @@ stSpindleIO.DCBusVoltage		:= WORD_TO_REAL(nModbusRegister[23]);	//	: REAL;
 stSpindleIO.DriveTemp			:= WORD_TO_REAL(nModbusRegister[24]);	//	: REAL;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SpindleControlMapping" Id="{2f07773b-6003-410f-852f-7cd237e180e1}">
-      <Declaration><![CDATA[METHOD SpindleControlMapping : BOOL
+    <Method Name="M_SpindleControlMapping" Id="{2f07773b-6003-410f-852f-7cd237e180e1}">
+      <Declaration><![CDATA[METHOD M_SpindleControlMapping : BOOL
 VAR_INPUT
 
 END_VAR
@@ -219,11 +219,10 @@ rDriveTemp			:= stSpindleIO.DriveTemp;
       </Implementation>
     </Method>
     <LineIds Name="FB_ModbusRTU">
-      <LineId Id="763" Count="40" />
-      <LineId Id="862" Count="0" />
+      <LineId Id="963" Count="41" />
       <LineId Id="31" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ModbusRTU.ModbusMapping">
+    <LineIds Name="FB_ModbusRTU.M_ModbusMapping">
       <LineId Id="38" Count="1" />
       <LineId Id="6" Count="2" />
       <LineId Id="43" Count="0" />
@@ -248,7 +247,7 @@ rDriveTemp			:= stSpindleIO.DriveTemp;
       <LineId Id="11" Count="6" />
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ModbusRTU.SpindleControlMapping">
+    <LineIds Name="FB_ModbusRTU.M_SpindleControlMapping">
       <LineId Id="146" Count="1" />
       <LineId Id="76" Count="1" />
       <LineId Id="68" Count="1" />

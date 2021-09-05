@@ -25,7 +25,7 @@
     <HmiServerVersion>Latest</HmiServerVersion>
     <EnableTypeScript>true</EnableTypeScript>
     <HmiCommunicationServerAuthPort>13000</HmiCommunicationServerAuthPort>
-    <HmiServerNodeAdvancedView>False</HmiServerNodeAdvancedView>
+    <HmiServerNodeAdvancedView>True</HmiServerNodeAdvancedView>
   </PropertyGroup>
   <PropertyGroup>
     <TwinCATHmi_Tasks>$(TcHmiDirectory)\MSBuild\Beckhoff.TwinCAT.HMI.tasks</TwinCATHmi_Tasks>
@@ -146,12 +146,15 @@
     </Content>
     <Content Include="Server\TcHmiLua\TcHmiLua.Config.default.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Server\TcHmiLua\TcHmiLua.Config.remote.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Server\TcHmiLua\TcHmiLua.Storage.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Config.default.json">
       <SubType>Content</SubType>
@@ -173,12 +176,15 @@
     </Content>
     <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Config.default.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Config.remote.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Storage.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Server\TcHmiSrv\TcHmiSrv.Config.default.json">
       <SubType>Content</SubType>
@@ -191,12 +197,15 @@
     </Content>
     <Content Include="Server\TcHmiUserManagement\TcHmiUserManagement.Config.default.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Server\TcHmiUserManagement\TcHmiUserManagement.Config.remote.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Server\TcHmiUserManagement\TcHmiUserManagement.Storage.json">
       <SubType>Content</SubType>
+      <Visible>True</Visible>
     </Content>
     <Content Include="Themes\Base\BaseStyle.css">
       <Visible>true</Visible>
@@ -224,6 +233,7 @@
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
     <Folder Include="Contents" />
+    <Folder Include="Recipe Management" />
     <Folder Include="Server\ADS" />
     <Folder Include="Server\TcHmiEventLogger" />
     <Folder Include="Server\TcHmiLua" />
