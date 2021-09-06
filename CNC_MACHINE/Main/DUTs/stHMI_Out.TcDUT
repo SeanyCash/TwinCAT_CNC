@@ -12,6 +12,7 @@ sCurrentProgramSelected     : STRING;
 fFeedRate                   : REAL;
 fRapidRate                  : REAL;
 sInterpreterState           : STRING;
+fChannelOverrideSpeed       : REAL;
 
 // ====================== Status Screen=================================
 
@@ -23,6 +24,20 @@ bXLimitSwitch       : BOOL;
 bYHomeSwitch        : BOOL;
 bYLimitSwitch       : BOOL;
 bZHomeSwitch        : BOOL;
+
+// Axis Data
+
+fActPosX            : REAL;
+fActPosX2           : REAL;
+fActPosY            : REAL;
+fActPosZ            : REAL;
+
+// Axis Status
+
+bXAxisHomed         : BOOL;
+bX2AxisHomed        : BOOL;
+bYAxisHomed         : BOOL;
+bZAxisHomed         : BOOL;
 
 
 END_STRUCT

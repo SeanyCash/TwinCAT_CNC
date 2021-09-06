@@ -3,6 +3,7 @@
   <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC
 VAR_INPUT
+    fChannelOverride    : REAL;
 END_VAR
 VAR_OUTPUT
 END_VAR
@@ -79,7 +80,7 @@ VAR
     
     fbSimpleNciSequence:	FB_SimpleNciSequence;
 	bExecuteNCI:	BOOL	:= FALSE;
-    fUserOverride:	LREAL	:= 100.0;
+    
 	
 
 END_VAR
@@ -158,11 +159,10 @@ Z_Motion(
 			bHomingInput := bZHomingSwitch,
 			bHomeExecute := bHomeZ
 										);
-
-IF bAxisEnable THEN
                                         
 fbSimpleNciSequence(
-	        bExecute:= bExecuteNCI, 
+	        bExecute:= bExecuteNCI,
+            bStop:= bStopExecute, 
 	        bBusy=> , 
 	        bError=> , 
 	        bDone=> , 
@@ -172,10 +172,9 @@ fbSimpleNciSequence(
 	        stItpToPlc:=in_stItpToPlc , 
 	        stPlcToItp:= out_stPlcToItp,
             sLoadedProgram=>sCurrentProgram);
+
             
-END_IF
-            
-ItpSetOverridePercent(fOverridePercent:=fUserOverride , sPlcToNci:=out_stPlcToItp);
+ItpSetOverridePercent(fOverridePercent:=fChannelOverride , sPlcToNci:=out_stPlcToItp);
 
 fbHMI();
 fbNCInfo();
@@ -535,27 +534,7 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="1741" Count="4" />
-      <LineId Id="1908" Count="0" />
-      <LineId Id="1907" Count="0" />
-      <LineId Id="1746" Count="0" />
-      <LineId Id="1909" Count="0" />
-      <LineId Id="1747" Count="12" />
-      <LineId Id="2081" Count="0" />
-      <LineId Id="2079" Count="0" />
-      <LineId Id="2083" Count="2" />
-      <LineId Id="2082" Count="0" />
-      <LineId Id="1760" Count="44" />
-      <LineId Id="1991" Count="1" />
-      <LineId Id="1805" Count="11" />
-      <LineId Id="1993" Count="1" />
-      <LineId Id="1817" Count="1" />
-      <LineId Id="1906" Count="0" />
-      <LineId Id="1905" Count="0" />
-      <LineId Id="2078" Count="0" />
-      <LineId Id="1819" Count="3" />
-      <LineId Id="1995" Count="0" />
-      <LineId Id="1823" Count="4" />
+      <LineId Id="2171" Count="101" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">

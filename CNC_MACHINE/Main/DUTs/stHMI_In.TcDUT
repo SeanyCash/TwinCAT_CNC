@@ -14,6 +14,10 @@ bHomeZ          : BOOL;
 bZeroZ          : BOOL;
 bHomeAllAxes    : BOOL;
 
+// User Speed/Override Settings
+
+fChannelOverride            : REAL;
+
 END_STRUCT
 END_TYPE
 ]]></Declaration>

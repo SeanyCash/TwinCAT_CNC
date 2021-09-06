@@ -30,7 +30,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[// User Speed/Override Settings
+
+fbCNC.fChannelOverride := stHMI_In.fChannelOverride;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Outputs" Id="{3525acce-6037-42c8-9504-c0bff51f5c6e}">
@@ -51,6 +53,26 @@ stHMI_Out.bZHomeSwitch  := fbCNC.bZHomingSwitch;
 // Interpreter Channel State
 
 stHMI_Out.sInterpreterState := TO_STRING(fbNCInfo.eInterpreterState);
+
+// Channel Override Speed
+
+stHMI_Out.fChannelOverrideSpeed := fbCNC.fChannelOverride;
+
+// Axis Status
+
+stHMI_Out.bXAxisHomed:= fbCNC.X_Ref.Status.Homed;
+stHMI_Out.bX2AxisHomed:= fbCNC.X2_Ref.Status.Homed;
+stHMI_Out.bYAxisHomed:= fbCNC.Y_Ref.Status.Homed;
+stHMI_Out.bZAxisHomed:= fbCNC.Z_Ref.Status.Homed;
+
+// Position
+
+stHMI_Out.fActPosX := fbCNC.X_Ref.NcToPlc.ActPos;
+stHMI_Out.fActPosX2 := fbCNC.X2_Ref.NcToPlc.ActPos;
+stHMI_Out.fActPosY := fbCNC.Y_Ref.NcToPlc.ActPos;
+stHMI_Out.fActPosZ := fbCNC.Z_Ref.NcToPlc.ActPos;
+
+
                            
                          	
                            	]]></ST>
@@ -61,6 +83,7 @@ stHMI_Out.sInterpreterState := TO_STRING(fbNCInfo.eInterpreterState);
       <LineId Id="39" Count="0" />
     </LineIds>
     <LineIds Name="FB_HMI.M_Inputs">
+      <LineId Id="9" Count="1" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_HMI.M_Outputs">
@@ -74,6 +97,21 @@ stHMI_Out.sInterpreterState := TO_STRING(fbNCInfo.eInterpreterState);
       <LineId Id="21" Count="0" />
       <LineId Id="24" Count="0" />
       <LineId Id="23" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="36" Count="2" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="43" Count="2" />
+      <LineId Id="26" Count="1" />
       <LineId Id="11" Count="2" />
     </LineIds>
   </POU>

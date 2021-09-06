@@ -4,6 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_SimpleNciSequence
 VAR_INPUT
 	bExecute			: BOOL;
+    bStop               : BOOL;
 END_VAR
 VAR_OUTPUT
 	bBusy				: BOOL;
@@ -36,6 +37,8 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[sLoadedProgram:=sPrgName;
+
+fbStartGCode( bStop:=bStop, sNciToPlc:= stItpToPlc );
 
 CASE nState OF
 0:
@@ -225,7 +228,10 @@ fbConfirmHsk(
 	]]></ST>
     </Implementation>
     <LineIds Name="FB_SimpleNciSequence">
-      <LineId Id="207" Count="1" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="208" Count="0" />
       <LineId Id="3" Count="28" />
       <LineId Id="289" Count="0" />
       <LineId Id="32" Count="9" />
