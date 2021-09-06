@@ -79,9 +79,9 @@ CASE nState OF
     
 15:
 
-   IF NOT fbCNC.X_MC_OUT.bGearInDone THEN
+   IF NOT stX.Status.Coupled THEN
     bGearInExecute:=TRUE;
-    IF fbCNC.X_MC_OUT.bGearInDone THEN
+    IF fbCNC.X_MC_OUT.bGearInDone AND (fbCNC.X_Ref.NcToPlc.CoupleState = 1) THEN
         nState:=20;
 	END_IF
    ELSE

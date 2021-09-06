@@ -11,7 +11,7 @@ fbHMI               : FB_HMI;
 	
 
 bFirstScan			: BOOL := TRUE;
-bAxisEnable			: BOOL;
+bAxisEnable			: BOOL  :=FALSE;
 bStopExecute		: BOOL;
 bHaltExecute		: BOOL;
 bGearInExecute		: BOOL;

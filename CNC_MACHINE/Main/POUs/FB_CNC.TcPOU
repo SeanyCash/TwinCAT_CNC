@@ -60,6 +60,7 @@ VAR
     rGearInTrigger  : R_TRIG;
     rtrigAxisNotGeared  : R_TRIG;
 	bAllAxesReady	: BOOL;
+    bAllAxesHomed   : BOOL;
 
 	
 // Program Call Variables	
@@ -151,6 +152,8 @@ Z_Motion(
 			bHomingInput := bZHomingSwitch,
 			bHomeExecute := bHomeZ
 										);
+
+IF bAxisEnable THEN
                                         
 fbSimpleNciSequence(
 	        bExecute:= bExecuteNCI, 
@@ -164,6 +167,8 @@ fbSimpleNciSequence(
 	        stPlcToItp:= out_stPlcToItp,
             sLoadedProgram=>sCurrentProgram);
             
+END_IF
+            
 ItpSetOverridePercent(fOverridePercent:=fUserOverride , sPlcToNci:=out_stPlcToItp);
 
 fbHMI();
@@ -171,6 +176,7 @@ fbHMI();
 // All Axes Ready Bit
 
 bAllAxesReady:= X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus AND Y_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
+bAllAxesHomed:= X_MC_OUT.bAxisHomed AND X2_MC_OUT.bAxisHomed AND Y_MC_OUT.bAxisHomed AND Z_MC_OUT.bAxisHomed;
 
 // Method Calls
 
@@ -260,7 +266,10 @@ Init:
 		//bProgramDone := FALSE;
 		bAxisEnable:=TRUE;
         bGearInExecute := TRUE;
-		eHomeXSeq :=Power_On;	
+        IF X_MC_OUT.bGearInDone THEN     
+            eHomeXSeq :=Power_On;
+		END_IF
+			
 	
 Power_On:
 
@@ -524,10 +533,16 @@ END_CASE
       <LineId Id="1907" Count="0" />
       <LineId Id="1746" Count="0" />
       <LineId Id="1909" Count="0" />
-      <LineId Id="1747" Count="71" />
+      <LineId Id="1747" Count="57" />
+      <LineId Id="1991" Count="1" />
+      <LineId Id="1805" Count="11" />
+      <LineId Id="1993" Count="1" />
+      <LineId Id="1817" Count="1" />
       <LineId Id="1906" Count="0" />
       <LineId Id="1905" Count="0" />
-      <LineId Id="1819" Count="8" />
+      <LineId Id="1819" Count="3" />
+      <LineId Id="1995" Count="0" />
+      <LineId Id="1823" Count="4" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">
@@ -570,6 +585,9 @@ END_CASE
       <LineId Id="13" Count="0" />
       <LineId Id="63" Count="0" />
       <LineId Id="69" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="154" Count="0" />
       <LineId Id="15" Count="2" />
       <LineId Id="138" Count="0" />
       <LineId Id="18" Count="1" />

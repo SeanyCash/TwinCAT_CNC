@@ -6,7 +6,7 @@
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "event": "StartPB.onPressed",
+    "event": "StartPB.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -16,6 +16,22 @@
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/BOOL",
           "value": true
+        },
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "StartPB.onStateReleased",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.fbCNC.bExecuteNCI%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
         },
         "asyncWait": true
       }
