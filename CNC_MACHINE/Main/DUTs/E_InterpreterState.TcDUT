@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_InterpreterState" Id="{5c2001c6-56d3-4f0f-b46e-bdd9099bf890}">
+    <Declaration><![CDATA[{attribute 'qualified only'
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE E_InterpreterState :
+(
+	InitFailed := 0,
+    Idle := 1,
+    Ready := 2,
+    Started := 3,
+    Scanning := 4,
+    Running := 5,
+    StayRunning :=6,
+    WriteTable := 7,
+    SearchLine := 8,
+    End := 9,
+    SingleStep := 10,
+    Aborting := 11,
+    Aborted := 12,
+    Fault := 13,
+    Reset := 14,
+    Stop := 15,
+    WaitFunction := 16,
+    FlushBuffers := 17
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

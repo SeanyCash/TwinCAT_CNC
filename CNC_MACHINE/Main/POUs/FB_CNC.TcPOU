@@ -108,6 +108,12 @@ END_IF*)
 
 // Motion Calls
 
+X_Ref.ReadStatus();
+X2_Ref.ReadStatus();
+Y_Ref.ReadStatus();
+Z_Ref.ReadStatus();
+
+
 X_Motion( 
 			Ref:= X_Ref,
             bGearingEnabled := TRUE,
@@ -172,11 +178,12 @@ END_IF
 ItpSetOverridePercent(fOverridePercent:=fUserOverride , sPlcToNci:=out_stPlcToItp);
 
 fbHMI();
+fbNCInfo();
 
 // All Axes Ready Bit
 
 bAllAxesReady:= X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus AND Y_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
-bAllAxesHomed:= X_MC_OUT.bAxisHomed AND X2_MC_OUT.bAxisHomed AND Y_MC_OUT.bAxisHomed AND Z_MC_OUT.bAxisHomed;
+bAllAxesHomed:= X_Ref.Status.Homed AND X2_Ref.Status.Homed AND Y_Ref.Status.Homed AND Z_Ref.Status.Homed;
 
 // Method Calls
 
@@ -533,13 +540,19 @@ END_CASE
       <LineId Id="1907" Count="0" />
       <LineId Id="1746" Count="0" />
       <LineId Id="1909" Count="0" />
-      <LineId Id="1747" Count="57" />
+      <LineId Id="1747" Count="12" />
+      <LineId Id="2081" Count="0" />
+      <LineId Id="2079" Count="0" />
+      <LineId Id="2083" Count="2" />
+      <LineId Id="2082" Count="0" />
+      <LineId Id="1760" Count="44" />
       <LineId Id="1991" Count="1" />
       <LineId Id="1805" Count="11" />
       <LineId Id="1993" Count="1" />
       <LineId Id="1817" Count="1" />
       <LineId Id="1906" Count="0" />
       <LineId Id="1905" Count="0" />
+      <LineId Id="2078" Count="0" />
       <LineId Id="1819" Count="3" />
       <LineId Id="1995" Count="0" />
       <LineId Id="1823" Count="4" />

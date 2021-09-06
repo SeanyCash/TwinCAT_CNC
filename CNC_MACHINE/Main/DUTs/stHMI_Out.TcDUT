@@ -11,6 +11,7 @@ STRUCT
 sCurrentProgramSelected     : STRING;
 fFeedRate                   : REAL;
 fRapidRate                  : REAL;
+sInterpreterState           : STRING;
 
 // ====================== Status Screen=================================
 

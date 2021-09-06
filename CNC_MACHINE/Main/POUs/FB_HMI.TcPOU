@@ -47,6 +47,10 @@ stHMI_Out.bXLimitSwitch := fbCNC.bXLimitSwitch;
 stHMI_Out.bYHomeSwitch := fbCNC.bYHomingSwitch;
 stHMI_Out.bYLimitSwitch := fbCNC.bYLimitSwitch;	
 stHMI_Out.bZHomeSwitch  := fbCNC.bZHomingSwitch;	
+
+// Interpreter Channel State
+
+stHMI_Out.sInterpreterState := TO_STRING(fbNCInfo.eInterpreterState);
                            
                          	
                            	]]></ST>
@@ -66,6 +70,10 @@ stHMI_Out.bZHomeSwitch  := fbCNC.bZHomingSwitch;
       <LineId Id="7" Count="0" />
       <LineId Id="16" Count="0" />
       <LineId Id="8" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="23" Count="0" />
       <LineId Id="11" Count="2" />
     </LineIds>
   </POU>

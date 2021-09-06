@@ -2595,6 +2595,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.fbHMI.stHMI_Out.sInterpreterState": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::sInterpreterState",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/STRING(80)"
+            },
+            "USEMAPPING": true
+        },
         "RefreshDefinitions": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",

@@ -18,6 +18,9 @@
     <Compile Include="DUTs\E_HomeX.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\E_InterpreterState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\E_Programs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +28,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\stHMI_Out.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_Interpreter_Inputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_Interpreter_Outputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_Motion_Inputs.TcDUT">

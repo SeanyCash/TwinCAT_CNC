@@ -66,6 +66,7 @@ CASE nState OF
 		nErrId=> );
 	IF NOT fbBuildGroup.bBusy THEN
 		IF NOT fbBuildGroup.bErr THEN
+            bGearInExecute:=FALSE;
 			nState	:= 15;
 		ELSE
 			(* add error handling *)
@@ -77,14 +78,15 @@ CASE nState OF
 		fbBuildGroup(bExecute:=FALSE); 
 	END_IF
     
+    
 15:
 
-   IF NOT stX.Status.Coupled THEN
+   IF fbCNC.X_Ref.NcToPlc.CoupleState <> 1 THEN
     bGearInExecute:=TRUE;
     IF fbCNC.X_MC_OUT.bGearInDone AND (fbCNC.X_Ref.NcToPlc.CoupleState = 1) THEN
         nState:=20;
 	END_IF
-   ELSE
+   ELSIF fbCNC.X_Ref.NcToPlc.CoupleState = 1 THEN
     nState:=20;
    END_IF
      
@@ -224,7 +226,10 @@ fbConfirmHsk(
     </Implementation>
     <LineIds Name="FB_SimpleNciSequence">
       <LineId Id="207" Count="1" />
-      <LineId Id="3" Count="38" />
+      <LineId Id="3" Count="28" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="32" Count="9" />
+      <LineId Id="288" Count="0" />
       <LineId Id="241" Count="1" />
       <LineId Id="246" Count="0" />
       <LineId Id="244" Count="0" />
