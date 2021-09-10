@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <DUT Name="stHMI_Out" Id="{9c8d509c-6bd1-4273-891d-e0c3f7471d5e}">
+  <DUT Name="ST_HMI_Out" Id="{9c8d509c-6bd1-4273-891d-e0c3f7471d5e}">
     <Declaration><![CDATA[{TO_STRING}
 
-TYPE stHMI_Out :
+TYPE ST_HMI_Out :
 STRUCT
     
 // Output Values/status to the HMI
@@ -27,6 +27,8 @@ bZHomeSwitch        : BOOL;
 
 // Axis Data
 
+fActPos             : REAL;
+
 fActPosX            : REAL;
 fActPosX2           : REAL;
 fActPosY            : REAL;
@@ -34,6 +36,14 @@ fActPosZ            : REAL;
 
 // Axis Status
 
+stXAxisStatus        :ST_AxisStatus;
+stX2AxisStatus       :ST_AxisStatus;
+stYAxisStatus        :ST_AxisStatus;
+stZAxisStatus        :ST_AxisStatus;
+
+
+
+bAxisHomed          : BOOL;
 bXAxisHomed         : BOOL;
 bX2AxisHomed        : BOOL;
 bYAxisHomed         : BOOL;

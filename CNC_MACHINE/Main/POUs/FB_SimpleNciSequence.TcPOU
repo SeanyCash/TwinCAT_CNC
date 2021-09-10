@@ -5,6 +5,7 @@
 VAR_INPUT
 	bExecute			: BOOL;
     bStop               : BOOL;
+    sPrgName			: STRING(255);
 END_VAR
 VAR_OUTPUT
 	bBusy				: BOOL;
@@ -31,8 +32,6 @@ VAR
 	
 	nInterpreterState	: UDINT	:= 0;
 	bConfirmHsk			: BOOL	:= FALSE;
-	
-	sPrgName			: STRING(255) := 'first.nc';
 END_VAR
 ]]></Declaration>
     <Implementation>

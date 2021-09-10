@@ -30,6 +30,12 @@
         "PLC1.E_Programs": {
             "allOf": [
                 {
+                    "attributes": {
+                        "generate_implicit_init_function": "",
+                        "to_string": "",
+                        "to_string_function": "__TO_STRING__140",
+                        "to_wstring_function": "__TO_WSTRING__140"
+                    },
                     "enum": [
                         0,
                         1,
@@ -2335,18 +2341,6 @@
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbCNC.ProgramCall": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "HIDDEN": false,
-            "MAPPING": "PLC1::GVL::fbCNC::ProgramCall",
-            "OPTIONS": {},
-            "SCHEMA": {
-                "$ref": "tchmi:server#/definitions/PLC1.E_Programs"
-            },
-            "USEMAPPING": true
-        },
         "PLC1.GVL.fbCNC.X2_MC_OUT.bPowerStatus": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2499,173 +2493,83 @@
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbHMI.stHMI_In.fChannelOverride": {
+        "PLC1.GVL.stHMI_In.ProgramCall": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_In::fChannelOverride",
+            "MAPPING": "PLC1::GVL::stHMI_In::ProgramCall",
             "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/REAL"
+                "$ref": "tchmi:server#/definitions/PLC1.E_Programs"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbHMI.stHMI_Out.bX1HomeSwitch": {
+        "PLC1.GVL.stHMI_In.bTriggerProgramCall": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bX1HomeSwitch",
+            "MAPPING": "PLC1::GVL::stHMI_In::bTriggerProgramCall",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbHMI.stHMI_Out.bX2AxisHomed": {
+        "PLC1.GVL.stHMI_Out.bX1HomeSwitch": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bX2AxisHomed",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bX1HomeSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbHMI.stHMI_Out.bX2HomeSwitch": {
+        "PLC1.GVL.stHMI_Out.bX2HomeSwitch": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bX2HomeSwitch",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bX2HomeSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbHMI.stHMI_Out.bXAxisHomed": {
+        "PLC1.GVL.stHMI_Out.bXLimitSwitch": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bXAxisHomed",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bXLimitSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbHMI.stHMI_Out.bXLimitSwitch": {
+        "PLC1.GVL.stHMI_Out.bYHomeSwitch": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bXLimitSwitch",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bYHomeSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbHMI.stHMI_Out.bYAxisHomed": {
+        "PLC1.GVL.stHMI_Out.bYLimitSwitch": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bYAxisHomed",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bYLimitSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbHMI.stHMI_Out.bYHomeSwitch": {
+        "PLC1.GVL.stHMI_Out.bZHomeSwitch": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bYHomeSwitch",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bZHomeSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.bYLimitSwitch": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bYLimitSwitch",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.bZAxisHomed": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bZAxisHomed",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.bZHomeSwitch": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::bZHomeSwitch",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.fActPosX": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::fActPosX",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/REAL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.fActPosX2": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::fActPosX2",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/REAL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.fActPosY": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::fActPosY",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/REAL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.fActPosZ": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::fActPosZ",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/REAL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.fChannelOverrideSpeed": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::fChannelOverrideSpeed",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/REAL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbHMI.stHMI_Out.sInterpreterState": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbHMI::stHMI_Out::sInterpreterState",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/STRING(80)"
             },
             "USEMAPPING": true
         },

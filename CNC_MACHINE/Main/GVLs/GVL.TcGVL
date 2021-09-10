@@ -6,8 +6,9 @@ VAR_GLOBAL
 
 fbCNC				: FB_CNC;
 fbModbus			: FB_ModbusRTU;
-fbHMI               : FB_HMI;
 fbNCInfo            : FB_NCInfo;
+stHMI_In            : ST_HMI_In;
+stHMI_Out           : ST_HMI_Out;
 
 	
 

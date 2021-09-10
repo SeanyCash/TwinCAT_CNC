@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="ST_Motion_Outputs" Id="{d45432dd-9166-40cd-8f6e-bb88346a8049}">
     <Declaration><![CDATA[TYPE ST_Motion_Outputs :
 STRUCT

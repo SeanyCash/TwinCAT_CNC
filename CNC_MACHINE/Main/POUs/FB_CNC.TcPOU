@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC IMPLEMENTS I_HMI;
 VAR_INPUT
-    fChannelOverride    : REAL;
 END_VAR
 VAR_OUTPUT
 END_VAR
@@ -78,8 +77,11 @@ VAR
 	ProgramCall	: E_Programs;
     sCurrentProgram : STRING;
     
+    
     fbSimpleNciSequence:	FB_SimpleNciSequence;
 	bExecuteNCI:	BOOL	:= FALSE;
+    fChannelOverride        : REAL;
+    sPrgName                : STRING[255];
     
 	
 
@@ -113,6 +115,8 @@ X_Ref.ReadStatus();
 X2_Ref.ReadStatus();
 Y_Ref.ReadStatus();
 Z_Ref.ReadStatus();
+M_HMI_In();
+M_HMI_Out();
 
 
 X_Motion( 
@@ -162,7 +166,8 @@ Z_Motion(
                                         
 fbSimpleNciSequence(
 	        bExecute:= bExecuteNCI,
-            bStop:= bStopExecute, 
+            bStop:= bStopExecute,
+            sPrgName := sPrgName, 
 	        bBusy=> , 
 	        bError=> , 
 	        bDone=> , 
@@ -176,7 +181,6 @@ fbSimpleNciSequence(
             
 ItpSetOverridePercent(fOverridePercent:=fChannelOverride , sPlcToNci:=out_stPlcToItp);
 
-fbHMI();
 fbNCInfo();
 
 // All Axes Ready Bit
@@ -190,6 +194,74 @@ M_ProgramLoader();
 M_Inputs();
 M_Outputs();]]></ST>
     </Implementation>
+    <Method Name="M_HMI_In" Id="{d9c64941-408b-44a2-8a91-175c813c4e4d}">
+      <Declaration><![CDATA[METHOD M_HMI_In : BOOL
+
+VAR
+
+trigProgramCall : R_TRIG;
+
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Set NC Channel Override Speed
+fChannelOverride := stHMI_In.fChannelOverride;
+
+// NC Program Name
+sPrgName := stHMI_In.sPrgName;
+
+// Select Homing Various Programs
+
+trigProgramCall(CLK := stHMI_In.bTriggerProgramCall);
+
+IF trigProgramCall.Q THEN
+    
+    ProgramCall := stHMI_In.ProgramCall;    
+
+END_IF
+
+//bZeroX        
+//bZeroY           
+//bZeroZ      ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{579ae688-d5bb-4d46-9cff-7ebda2f9644e}">
+      <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Limit and Homing Switch Mapping
+
+stHMI_Out.bX1HomeSwitch := bXHomingSwitch;	
+stHMI_Out.bX2HomeSwitch := bX2HomingSwitch;
+stHMI_Out.bXLimitSwitch := bXLimitSwitch;	
+stHMI_Out.bYHomeSwitch := bYHomingSwitch;
+stHMI_Out.bYLimitSwitch := bYLimitSwitch;	
+stHMI_Out.bZHomeSwitch  := bZHomingSwitch;	
+
+// Interpreter Channel State
+
+stHMI_Out.sInterpreterState := TO_STRING(fbNCInfo.eInterpreterState);
+
+// Channel Override Speed
+
+stHMI_Out.fChannelOverrideSpeed := fChannelOverride;
+
+// Pass Axis Status to HMI
+
+stHMI_Out.stXAxisStatus := X_Ref.Status;
+stHMI_Out.stX2AxisStatus := X2_Ref.Status;
+stHMI_Out.stYAxisStatus := Y_Ref.Status;
+stHMI_Out.stZAxisStatus := Z_Ref.Status;
+
+
+
+
+
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Inputs" Id="{44930261-f7b3-46c2-ba50-0ddd8b114d05}">
       <Declaration><![CDATA[METHOD M_Inputs : BOOL
 VAR_INPUT
@@ -477,7 +549,7 @@ END_VAR
 eHomeXSeq:=Init;
 nHomeYSeq:=0;
 nHomeZSeq:=0;
-bProgramDone:= FALSE;
+//bProgramDone:= FALSE;
 bHomeY:=FALSE;
 bHomeX:=FALSE;
 bHomeX2:=FALSE;
@@ -534,8 +606,43 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="2171" Count="101" />
+      <LineId Id="2171" Count="26" />
+      <LineId Id="2368" Count="1" />
+      <LineId Id="2198" Count="49" />
+      <LineId Id="2357" Count="0" />
+      <LineId Id="2248" Count="11" />
+      <LineId Id="2261" Count="11" />
       <LineId Id="680" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_HMI_In">
+      <LineId Id="13" Count="0" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_HMI_Out">
+      <LineId Id="11" Count="15" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="42" Count="2" />
+      <LineId Id="32" Count="7" />
+      <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">
       <LineId Id="9" Count="1" />

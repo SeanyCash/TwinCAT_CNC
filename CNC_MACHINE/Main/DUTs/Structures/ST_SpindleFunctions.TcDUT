@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="ST_SpindleFunctions" Id="{5b975b4f-2b0f-41c4-8831-2699b2ae2e6f}">
     <Declaration><![CDATA[TYPE ST_SpindleFunctions :
 	

@@ -990,11 +990,38 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%PLC1.GVL.fbCNC.ProgramCall%/s%",
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": true
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.ProgramCall%/s%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
           "value": 2
+        },
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "AutoZero_PB_6.onStateReleased",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
         },
         "asyncWait": true
       }
@@ -1017,25 +1044,53 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
   {
     "event": "AutoZero_PB_8.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%PLC1.GVL.fbCNC.ProgramCall%/s%",
-        "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": true
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.ProgramCall%/s%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
-          "value": "3"
+          "value": 3
+        },
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "AutoZero_PB_8.onStateReleased",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
         },
         "asyncWait": true
       }
     ]
   }
-]</script>
+]
+</script>
 </div>
 
 <div id="AutoZero_PB_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="144" data-tchmi-left-unit="px" data-tchmi-text="HOME Z" data-tchmi-top="186" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="12" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
@@ -1059,11 +1114,38 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%PLC1.GVL.fbCNC.ProgramCall%/s%",
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": true
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.ProgramCall%/s%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
           "value": 4
+        },
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "AutoZero_PB_9.onStateReleased",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
         },
         "asyncWait": true
       }
@@ -1084,27 +1166,57 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
+
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
   {
-    "event": "AutoZero_PB_10.onPressed",
+    "event": "AutoZero_PB_10.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%PLC1.GVL.fbCNC.ProgramCall%/s%",
-        "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.ProgramCall%/s%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
-          "value": "1"
+          "value": 1
+        },
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "AutoZero_PB_10.onStateReleased",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
         },
         "asyncWait": true
       }
     ]
   }
-]</script>
-
-
+]
+</script>
 </div>
 
 <div id="AutoZero_PB_11" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="9" data-tchmi-left-unit="px" data-tchmi-text="WORK ZERO" data-tchmi-top="186" data-tchmi-top-unit="px" data-tchmi-width="125" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="12" data-tchmi-text-font-size="18" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px">

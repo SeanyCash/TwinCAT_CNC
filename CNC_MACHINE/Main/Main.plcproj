@@ -15,34 +15,37 @@
     <LibraryReferences>{eb1ff309-1ae0-44ea-9bed-a9b1b556f9e3}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DUTs\E_HomeX.TcDUT">
+    <Compile Include="DUTs\Enums\E_HomeX.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\E_InterpreterState.TcDUT">
+    <Compile Include="DUTs\Enums\E_InterpreterState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\E_Programs.TcDUT">
+    <Compile Include="DUTs\Enums\E_Programs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\stHMI_In.TcDUT">
+    <Compile Include="DUTs\Interfaces\I_HMI.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\stHMI_Out.TcDUT">
+    <Compile Include="DUTs\Structures\ST_HMI_In.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\ST_Interpreter_Inputs.TcDUT">
+    <Compile Include="DUTs\Structures\ST_HMI_Out.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\ST_Interpreter_Outputs.TcDUT">
+    <Compile Include="DUTs\Structures\ST_Interpreter_Inputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\ST_Motion_Inputs.TcDUT">
+    <Compile Include="DUTs\Structures\ST_Interpreter_Outputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\ST_Motion_Outputs.TcDUT">
+    <Compile Include="DUTs\Structures\ST_Motion_Inputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\ST_SpindleFunctions.TcDUT">
+    <Compile Include="DUTs\Structures\ST_Motion_Outputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Structures\ST_SpindleFunctions.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GVL.TcGVL">
@@ -50,9 +53,6 @@
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FB_HMI.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_NCInfo.TcPOU">
@@ -76,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\Interfaces" />
+    <Folder Include="DUTs\Enums" />
+    <Folder Include="DUTs\Structures" />
     <Folder Include="GVLs" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

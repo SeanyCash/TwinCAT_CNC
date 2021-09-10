@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_NCInfo" Id="{6fe8c517-a11f-4051-805e-a8cbcf1d6a34}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_NCInfo
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NCInfo IMPLEMENTS I_HMI;
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
@@ -23,8 +23,26 @@ eInterpreterState   : E_InterpreterState;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[M_InterpreterState();]]></ST>
+      <ST><![CDATA[M_InterpreterState();
+M_HMI_In();
+M_HMI_Out();]]></ST>
     </Implementation>
+    <Method Name="M_HMI_In" Id="{98c81108-8545-46e5-863b-c7e7d3e76574}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_In : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{0b67c50d-419e-4d52-8d07-01c5dec66d94}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
       <Declaration><![CDATA[METHOD M_InterpreterState : BOOL
 VAR_INPUT
@@ -101,6 +119,13 @@ END_VAR
     </Method>
     <LineIds Name="FB_NCInfo">
       <LineId Id="9" Count="0" />
+      <LineId Id="30" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_NCInfo.M_HMI_In">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCInfo.M_HMI_Out">
+      <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCInfo.M_InterpreterState">
       <LineId Id="7" Count="0" />

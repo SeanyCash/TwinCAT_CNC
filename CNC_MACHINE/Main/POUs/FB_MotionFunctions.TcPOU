@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_MotionFunctions" Id="{500ca146-bff1-4570-8da1-57ff34083845}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_MotionFunctions
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_MotionFunctions IMPLEMENTS I_HMI;
 
 VAR_IN_OUT
 
@@ -48,6 +48,8 @@ M_Stop();
 M_Halt();
 M_Home( );
 M_Gearing( );
+M_HMI_In();
+M_HMI_Out();
 ]]></ST>
     </Implementation>
     <Method Name="M_Gearing" Id="{7c95005e-3c30-49b2-be93-35e9b89aab5e}">
@@ -110,6 +112,31 @@ END_IF ]]></ST>
 	CommandAborted=> Motion_Out.bHaltAbort, 
 	Error=> Motion_Out.bHaltError, 
 	ErrorID=> Motion_Out.nHaltErrorID);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_In" Id="{6ee37aa5-65f9-44cc-b5cb-9a654bc701a6}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_In : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{efdc3eed-d083-47b6-87cc-982569171a8a}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Axis Status
+(*
+ST_HMI_Out.bXAxisHomed:= Ref.Status.Homed;
+ST_HMI_Out.bX2AxisHomed:= SlaveRef.Status.Homed;
+
+
+// Position
+
+ST_HMI_Out.fActPosX := Ref.NcToPlc.ActPos;
+ST_HMI_Out.fActPosX2 := SlaveRef.NcToPlc.ActPos;*)]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Home" Id="{1d749ffd-f5a6-45ff-a0e1-191b93a80305}">
@@ -180,6 +207,7 @@ END_VAR
     </Method>
     <LineIds Name="FB_MotionFunctions">
       <LineId Id="182" Count="4" />
+      <LineId Id="227" Count="1" />
       <LineId Id="126" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Gearing">
@@ -196,6 +224,21 @@ END_VAR
     <LineIds Name="FB_MotionFunctions.M_Halt">
       <LineId Id="6" Count="11" />
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_HMI_In">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_HMI_Out">
+      <LineId Id="4" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="14" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Home">
       <LineId Id="6" Count="12" />
