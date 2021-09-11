@@ -9,8 +9,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-fbCNC();
+      <ST><![CDATA[fbCNC();
 fbModbus();
 
 bFirstScan:=FALSE;
@@ -19,7 +18,6 @@ bFirstScan:=FALSE;
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="11" Count="0" />
       <LineId Id="2" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="13" Count="0" />

@@ -2523,6 +2523,46 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.bHold": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::bHold",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.bReset": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::bReset",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.bStart": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::bStart",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.bStop": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::bStop",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.bTriggerProgramCall": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2643,6 +2683,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.stX2Ref.Status.Homed": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stX2Ref::Status::Homed",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.stXRef.NcToPlc.ActPos": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2650,6 +2700,16 @@
             "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::NcToPlc::ActPos",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stXRef.Status.Homed": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::Status::Homed",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
@@ -2663,6 +2723,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.stYRef.Status.Homed": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stYRef::Status::Homed",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.stZRef.NcToPlc.ActPos": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2670,6 +2740,16 @@
             "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::NcToPlc::ActPos",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stZRef.Status.Homed": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::Status::Homed",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },

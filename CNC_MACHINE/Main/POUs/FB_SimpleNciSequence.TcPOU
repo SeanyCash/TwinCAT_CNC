@@ -84,15 +84,18 @@ CASE nState OF
 15:
 
    IF fbCNC.X_Ref.NcToPlc.CoupleState <> 1 THEN
-    bGearInExecute:=TRUE;
-    IF fbCNC.X_MC_OUT.bGearInDone AND (fbCNC.X_Ref.NcToPlc.CoupleState = 1) THEN
-        nState:=20;
-	END_IF
+    bGearInExecute:=FALSE;
+    nState:=16;
    ELSIF fbCNC.X_Ref.NcToPlc.CoupleState = 1 THEN
     nState:=20;
    END_IF
+   
+16:
+    bGearInExecute:=TRUE;
+    IF fbCNC.X_MC_OUT.bGearInDone AND (fbCNC.X_Ref.NcToPlc.CoupleState = 1) THEN
+        nState:=20;
+    END_IF
      
-	
 20:
 	// load g-code file 
 	// pls. ensure that first.nc is available in TwinCAT\MC\NCI-folder 
@@ -238,12 +241,16 @@ fbConfirmHsk(
       <LineId Id="241" Count="1" />
       <LineId Id="246" Count="0" />
       <LineId Id="244" Count="0" />
+      <LineId Id="325" Count="0" />
+      <LineId Id="328" Count="0" />
+      <LineId Id="332" Count="1" />
+      <LineId Id="331" Count="0" />
+      <LineId Id="329" Count="1" />
       <LineId Id="243" Count="0" />
-      <LineId Id="249" Count="2" />
-      <LineId Id="253" Count="1" />
+      <LineId Id="249" Count="1" />
       <LineId Id="245" Count="0" />
       <LineId Id="252" Count="0" />
-      <LineId Id="42" Count="131" />
+      <LineId Id="43" Count="130" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

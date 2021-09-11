@@ -102,13 +102,9 @@ bGearInExecute:= rGearInTrigger.Q;
 END_IF*)
 
 (*IF rtrigAxisNotGeared.Q THEN
-    
     bGearInTrigger := TRUE;
-    
 ELSE 
-    
     bGearInTrigger := FALSE;
-
 END_IF*)
 
 // Rising triggers for HMI control. Having issues calling directly in the Methods
@@ -226,8 +222,6 @@ END_IF
 
 // Trigger axis enable button toggle but don't allow it to overwrite the program controlled axis enable
 
-
-
 IF trigAxisEnable.Q THEN
     
     IF NOT bAxisEnable THEN
@@ -241,6 +235,11 @@ IF trigAxisEnable.Q THEN
     END_IF    
 
 END_IF
+
+// NCI Start/Stop
+
+bExecuteNCI := stHMI_In.bStart;
+bStopExecute := stHMI_In.bStop;
 
 //bZeroX        
 //bZeroY           
@@ -275,6 +274,8 @@ stHMI_Out.stXRef  := X_Ref;
 stHMI_Out.stX2Ref := X2_Ref;
 stHMI_Out.stYRef  := Y_Ref;
 stHMI_Out.stZRef  := Z_Ref;
+
+stHMI_Out.sCurrentProgramSelected := sCurrentProgram;
 
 
 
@@ -632,7 +633,11 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="2171" Count="18" />
+      <LineId Id="2171" Count="10" />
+      <LineId Id="2183" Count="0" />
+      <LineId Id="2185" Count="0" />
+      <LineId Id="2187" Count="0" />
+      <LineId Id="2189" Count="0" />
       <LineId Id="2463" Count="0" />
       <LineId Id="2456" Count="1" />
       <LineId Id="2190" Count="7" />
@@ -658,8 +663,6 @@ END_CASE
       <LineId Id="27" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="45" Count="1" />
-      <LineId Id="38" Count="0" />
-      <LineId Id="56" Count="0" />
       <LineId Id="40" Count="1" />
       <LineId Id="47" Count="1" />
       <LineId Id="42" Count="1" />
@@ -671,7 +674,11 @@ END_CASE
       <LineId Id="53" Count="0" />
       <LineId Id="44" Count="0" />
       <LineId Id="37" Count="0" />
+      <LineId Id="57" Count="0" />
       <LineId Id="20" Count="0" />
+      <LineId Id="59" Count="1" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="61" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="10" Count="0" />
       <LineId Id="12" Count="0" />
@@ -684,6 +691,8 @@ END_CASE
       <LineId Id="49" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="52" Count="2" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="55" Count="0" />
       <LineId Id="51" Count="0" />
       <LineId Id="50" Count="0" />
       <LineId Id="32" Count="7" />
