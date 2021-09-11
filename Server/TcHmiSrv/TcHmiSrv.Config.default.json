@@ -33,8 +33,8 @@
                     "attributes": {
                         "generate_implicit_init_function": "",
                         "to_string": "",
-                        "to_string_function": "__TO_STRING__140",
-                        "to_wstring_function": "__TO_WSTRING__140"
+                        "to_string_function": "__TO_STRING__143",
+                        "to_wstring_function": "__TO_WSTRING__143"
                     },
                     "enum": [
                         0,
@@ -2389,6 +2389,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.fbCNC.X_Motion.Motion_Out.bPowerStatus": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::fbCNC::X_Motion::Motion_Out::bPowerStatus",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.fbCNC.X_Ref.NcToPlc.ActPos": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2503,6 +2513,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.bAxisEnable": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::bAxisEnable",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.bTriggerProgramCall": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2510,6 +2530,16 @@
             "MAPPING": "PLC1::GVL::stHMI_In::bTriggerProgramCall",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.fChannelOverride": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::fChannelOverride",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
             },
             "USEMAPPING": true
         },
@@ -2570,6 +2600,76 @@
             "MAPPING": "PLC1::GVL::stHMI_Out::bZHomeSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.fChannelOverrideSpeed": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::fChannelOverrideSpeed",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.sCurrentProgramSelected": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::sCurrentProgramSelected",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/STRING(80)"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.sInterpreterState": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::sInterpreterState",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/STRING(80)"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stX2Ref.NcToPlc.ActPos": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stX2Ref::NcToPlc::ActPos",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stXRef.NcToPlc.ActPos": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::NcToPlc::ActPos",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stYRef.NcToPlc.ActPos": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stYRef::NcToPlc::ActPos",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stZRef.NcToPlc.ActPos": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::NcToPlc::ActPos",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
             },
             "USEMAPPING": true
         },

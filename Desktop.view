@@ -689,75 +689,77 @@
 </script>
 </div>
 
-<div id="AxisEnable_Toggle" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleButton" data-tchmi-height="100" data-tchmi-height-unit="px" data-tchmi-left="1041" data-tchmi-left-unit="px" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="175" data-tchmi-width-unit="px" data-tchmi-word-wrap="False" data-tchmi-text="AXIS ENABLE" data-tchmi-background-image="Imports/Images/1024px-Breezeicons-actions-22-step_object_CircularMotor.png" data-tchmi-background-image-width="85" data-tchmi-background-image-height="85" data-tchmi-icon-vertical-alignment="Center" data-tchmi-background-image-vertical-alignment="Bottom" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Top" data-tchmi-toggle-state="Normal" data-tchmi-text-font-size="20" data-tchmi-text-horizontal-alignment="Center" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px">
-
-
+<div id="TcHmiAdsState" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiAdsState" data-tchmi-ads-runtime="PLC1" data-tchmi-height="100" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-server-interval="500" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px">
+</div>
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="TcHmiTextblock_19" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="185" data-tchmi-left-unit="px" data-tchmi-text="NC Interpreter State:" data-tchmi-top="37" data-tchmi-top-unit="px" data-tchmi-width="329" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-text-font-size="28" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center">
+</div>
+<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="ZPosition_11" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="526" data-tchmi-left-unit="px" data-tchmi-top="37" data-tchmi-top-unit="px" data-tchmi-width="395" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-text="%s%PLC1.GVL.stHMI_Out.sInterpreterState%/s%">
 <script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
 {
-  "color": "rgba(13, 0, 3, 1)"
+  "color": "rgba(14, 15, 14, 1)"
+}
+</script>
+</div>
+<div id="TcHmiButton_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="100" data-tchmi-height-unit="px" data-tchmi-left="1041" data-tchmi-left-unit="px" data-tchmi-text="AXIS ENABLE" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="175" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="20" data-tchmi-zindex="1" data-tchmi-visibility="Visible" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image="Imports/Images/1024px-Breezeicons-actions-22-step_object_CircularMotor.png" data-tchmi-background-image-width="85" data-tchmi-background-image-height="85" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Top" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Bottom">
+
+
+
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "None",
+  "top": "Solid",
+  "bottom": "None"
 }
 </script>
 
-
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
 
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "event": "AxisEnable_Toggle.onStateChanged",
+    "event": "TcHmiButton_1.onStatePressed",
     "actions": [
       {
-        "objectType": "Condition",
+        "objectType": "WriteToSymbol",
         "active": true,
-        "asyncWait": true,
-        "parts": [
-          {
-            "if": [
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "symbolExpression": "%s%PLC1.GVL.bAxisEnable%/s%"
-                },
-                "compare2": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:general#/definitions/BOOL",
-                  "value": true
-                },
-                "compareOperator": "==",
-                "logic": null
-              }
-            ],
-            "then": [
-              {
-                "objectType": "WriteToSymbol",
-                "active": true,
-                "symbolExpression": "%s%PLC1.GVL.bAxisEnable%/s%",
-                "valueType": "tchmi:general#/definitions/BOOL",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:general#/definitions/BOOL",
-                  "value": false
-                },
-                "asyncWait": true
-              }
-            ]
-          },
-          {
-            "else": [
-              {
-                "objectType": "WriteToSymbol",
-                "active": true,
-                "symbolExpression": "%s%PLC1.GVL.bAxisEnable%/s%",
-                "valueType": "tchmi:general#/definitions/BOOL",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:general#/definitions/BOOL",
-                  "value": true
-                },
-                "asyncWait": true
-              }
-            ]
-          }
-        ]
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bAxisEnable%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": true
+        },
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "TcHmiButton_1.onStateReleased",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bAxisEnable%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
+        },
+        "asyncWait": true
       }
     ]
   },
@@ -789,11 +791,13 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_Toggle::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctrl%TcHmiButton_1::BackgroundColor%/ctrl%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
-                  "value": null
+                  "value": {
+                    "color": "rgba(0, 0, 0, 1)"
+                  }
                 },
                 "asyncWait": true
               }
@@ -804,12 +808,12 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_Toggle::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctrl%TcHmiButton_1::BackgroundColor%/ctrl%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
                   "value": {
-                    "color": "rgba(66, 217, 7, 1)"
+                    "color": "rgba(33, 234, 24, 1)"
                   }
                 },
                 "asyncWait": true
@@ -823,16 +827,10 @@
   }
 ]
 </script>
-</div>
 
-<div id="TcHmiAdsState" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiAdsState" data-tchmi-ads-runtime="PLC1" data-tchmi-height="100" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-server-interval="500" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px">
-</div>
-<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="TcHmiTextblock_19" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="185" data-tchmi-left-unit="px" data-tchmi-text="NC Interpreter State:" data-tchmi-top="37" data-tchmi-top-unit="px" data-tchmi-width="329" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-text-font-size="28" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center">
-</div>
-<div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="ZPosition_11" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="526" data-tchmi-left-unit="px" data-tchmi-top="37" data-tchmi-top-unit="px" data-tchmi-width="395" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="8" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-text="%s%PLC1.GVL.fbHMI.stHMI_Out.sInterpreterState%/s%">
 <script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
 {
-  "color": "rgba(14, 15, 14, 1)"
+  "color": "rgba(8, 8, 8, 1)"
 }
 </script>
 </div>

@@ -4,12 +4,22 @@
     <Declaration><![CDATA[TYPE ST_HMI_In :
 STRUCT
     
-// Input functions from the HMI
+//  Axis Input functions from the HMI
 
 bZeroX          : BOOL;
 bZeroY          : BOOL;
 bZeroZ          : BOOL;
 bZeroAllAxes    : BOOL;
+
+// Desktop View Header Panel Buttons
+
+bAxisEnable     : BOOL;
+bReset          : BOOL;
+bHold           : BOOL;
+bStop           : BOOL;
+bStart          : BOOL;
+
+// Homing Program Selection
 
 ProgramCall	: E_Programs;
 bTriggerProgramCall : BOOL;

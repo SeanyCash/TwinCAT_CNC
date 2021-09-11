@@ -61,6 +61,9 @@ VAR
     rtrigAxisNotGeared  : R_TRIG;
 	bAllAxesReady	: BOOL;
     bAllAxesHomed   : BOOL;
+    
+    trigProgramCall : R_TRIG;
+    trigAxisEnable : R_TRIG;
 
 	
 // Program Call Variables	
@@ -107,6 +110,9 @@ ELSE
     bGearInTrigger := FALSE;
 
 END_IF*)
+
+// Rising triggers for HMI control. Having issues calling directly in the Methods
+trigAxisEnable(CLK := stHMI_In.bAxisEnable);
 
 
 // Motion Calls
@@ -199,7 +205,7 @@ M_Outputs();]]></ST>
 
 VAR
 
-trigProgramCall : R_TRIG;
+
 
 END_VAR]]></Declaration>
       <Implementation>
@@ -212,10 +218,27 @@ sPrgName := stHMI_In.sPrgName;
 // Select Homing Various Programs
 
 trigProgramCall(CLK := stHMI_In.bTriggerProgramCall);
-
 IF trigProgramCall.Q THEN
     
     ProgramCall := stHMI_In.ProgramCall;    
+
+END_IF
+
+// Trigger axis enable button toggle but don't allow it to overwrite the program controlled axis enable
+
+
+
+IF trigAxisEnable.Q THEN
+    
+    IF NOT bAxisEnable THEN
+    
+    bAxisEnable := TRUE;
+
+    ELSIF bAxisEnable THEN
+
+    bAxisEnable := FALSE;
+
+    END_IF    
 
 END_IF
 
@@ -245,12 +268,15 @@ stHMI_Out.sInterpreterState := TO_STRING(fbNCInfo.eInterpreterState);
 
 stHMI_Out.fChannelOverrideSpeed := fChannelOverride;
 
-// Pass Axis Status to HMI
 
-stHMI_Out.stXAxisStatus := X_Ref.Status;
-stHMI_Out.stX2AxisStatus := X2_Ref.Status;
-stHMI_Out.stYAxisStatus := Y_Ref.Status;
-stHMI_Out.stZAxisStatus := Z_Ref.Status;
+// Pass Axis Ref info to HMI
+
+stHMI_Out.stXRef  := X_Ref;
+stHMI_Out.stX2Ref := X2_Ref;
+stHMI_Out.stYRef  := Y_Ref;
+stHMI_Out.stZRef  := Z_Ref;
+
+
 
 
 
@@ -606,7 +632,10 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="2171" Count="26" />
+      <LineId Id="2171" Count="18" />
+      <LineId Id="2463" Count="0" />
+      <LineId Id="2456" Count="1" />
+      <LineId Id="2190" Count="7" />
       <LineId Id="2368" Count="1" />
       <LineId Id="2198" Count="49" />
       <LineId Id="2357" Count="0" />
@@ -623,12 +652,25 @@ END_CASE
       <LineId Id="16" Count="0" />
       <LineId Id="15" Count="0" />
       <LineId Id="18" Count="0" />
-      <LineId Id="7" Count="0" />
       <LineId Id="29" Count="0" />
       <LineId Id="24" Count="1" />
       <LineId Id="28" Count="0" />
       <LineId Id="27" Count="0" />
       <LineId Id="26" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="40" Count="1" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="37" Count="0" />
       <LineId Id="20" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="10" Count="0" />
@@ -636,11 +678,14 @@ END_CASE
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_Out">
       <LineId Id="11" Count="15" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="42" Count="2" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="52" Count="2" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="50" Count="0" />
       <LineId Id="32" Count="7" />
       <LineId Id="10" Count="0" />
     </LineIds>

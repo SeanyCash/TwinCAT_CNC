@@ -34,21 +34,13 @@ fActPosX2           : REAL;
 fActPosY            : REAL;
 fActPosZ            : REAL;
 
-// Axis Status
 
-stXAxisStatus        :ST_AxisStatus;
-stX2AxisStatus       :ST_AxisStatus;
-stYAxisStatus        :ST_AxisStatus;
-stZAxisStatus        :ST_AxisStatus;
+// Axis Ref Variables to pass to HMI for status indication
 
-
-
-bAxisHomed          : BOOL;
-bXAxisHomed         : BOOL;
-bX2AxisHomed        : BOOL;
-bYAxisHomed         : BOOL;
-bZAxisHomed         : BOOL;
-
+stXRef               :Axis_Ref;
+stX2Ref              :Axis_Ref;
+stYRef               :Axis_Ref;
+stZRef               :Axis_Ref;
 
 END_STRUCT
 END_TYPE

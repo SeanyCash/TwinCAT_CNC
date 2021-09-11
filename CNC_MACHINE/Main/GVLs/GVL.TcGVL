@@ -4,13 +4,15 @@
     <Declaration><![CDATA[
 VAR_GLOBAL
 
+// Main FB Calls
 fbCNC				: FB_CNC;
 fbModbus			: FB_ModbusRTU;
 fbNCInfo            : FB_NCInfo;
+// Global HMI Data Structure....Better way to do this? Probably but screw it this makes the GVL/Project structure look clean.
 stHMI_In            : ST_HMI_In;
 stHMI_Out           : ST_HMI_Out;
 
-	
+// Global Axis Variables. Makes it easier to control these in any FB , instead of passing VAR_IN VAR_OUT. Maybe clean up and make more modular later	
 
 bFirstScan			: BOOL := TRUE;
 bAxisEnable			: BOOL  :=FALSE;
@@ -29,6 +31,8 @@ END_VAR
 
 
 VAR_GLOBAL CONSTANT 
+
+// Global Gantry Home Positions
 
 X_HOME_POSITION		: LREAL	:= 10.00;
 Y_HOME_POSITION		: LREAL := 10.00;
