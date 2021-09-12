@@ -146,7 +146,7 @@ CASE nState OF
 		nErrId=> );
 	IF NOT fbStartGCode.bBusy THEN
 		IF NOT fbStartGCode.bErr THEN
-			//nState	:= 50;
+			nState	:= 50;
 		ELSE	
 			(* add error handling *)
 			nErrorState	:= nState;
@@ -163,20 +163,30 @@ CASE nState OF
 	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
 	IF nInterpreterState <> Tc2_NCI.NCI_INTERPRETER_READY THEN
 		// nci is running
-	//	nState	:= 60;
+		nState	:= 60;
 	END_IF
 
 60:
 	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
 	IF	nInterpreterState = Tc2_NCI.NCI_INTERPRETER_READY THEN
 		// program has finished
-		nState	:= 70;
+		nState	:= 65;
 	ELSIF nInterpreterState = Tc2_NCI.NCI_INTERPRETER_ABORTED THEN
 		// a run-time error occured - this could be a lag error or something else... 
 		// add error handling
 		;
-	END_IF	
+	END_IF
+
+65:
+    bGearInExecute:=FALSE;
+    bGearOutExecute:=TRUE;
+    IF fbCNC.X_MC_OUT.bGearOutDone AND (fbCNC.X_Ref.NcToPlc.CoupleState = 0) THEN
+        bGearOutExecute:=FALSE;
+        nState:=70;
+    END_IF
+	
 70:
+    
 	// program has finished 
 	// now clear interpolation group 
 	fbClearGroup(
@@ -250,7 +260,18 @@ fbConfirmHsk(
       <LineId Id="249" Count="1" />
       <LineId Id="245" Count="0" />
       <LineId Id="252" Count="0" />
-      <LineId Id="43" Count="130" />
+      <LineId Id="43" Count="79" />
+      <LineId Id="368" Count="0" />
+      <LineId Id="370" Count="1" />
+      <LineId Id="374" Count="0" />
+      <LineId Id="372" Count="0" />
+      <LineId Id="375" Count="0" />
+      <LineId Id="373" Count="0" />
+      <LineId Id="369" Count="0" />
+      <LineId Id="367" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="366" Count="0" />
+      <LineId Id="124" Count="49" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

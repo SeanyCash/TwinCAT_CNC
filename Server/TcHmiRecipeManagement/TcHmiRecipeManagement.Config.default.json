@@ -1,4 +1,17 @@
 {
-    "recipeList": {},
-    "recipeTypeList": {}
+    "recipeList": {
+        "second.nc": {
+            "recipeTypeName": "NC Programs",
+            "values": {}
+        }
+    },
+    "recipeTypeList": {
+        "NC Programs": {
+            "members": {},
+            "options": {
+                "enabled": "None"
+            },
+            "recipeTypeNames": []
+        }
+    }
 }

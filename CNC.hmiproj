@@ -234,6 +234,7 @@
     <Folder Include="Localization" />
     <Folder Include="Contents" />
     <Folder Include="Recipe Management" />
+    <Folder Include="Recipe Management\Recipes" />
     <Folder Include="Server\ADS" />
     <Folder Include="Server\TcHmiEventLogger" />
     <Folder Include="Server\TcHmiLua" />
