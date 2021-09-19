@@ -42,7 +42,7 @@ VAR
     in_stItpToPlc	AT %I*:	NcToPlc_NciChannel_Ref;
 	out_stPlcToItp	AT %Q*:	PLCTONC_NCICHANNEL_REF;
     
-    
+   // Homing / Limit Proxes 
 	
 	bXHomingSwitch		: BOOL;
 	bX2HomingSwitch		: BOOL;
@@ -347,17 +347,17 @@ IF ProgramCall <> eNull THEN
     bX2NegativeLimit := FALSE;
     bYNegativeLimit  := FALSE;
     bZPositiveLimit  := FALSE;
-    bXStopTrigger(CLK:= FALSE);
-    bYStopTrigger(CLK:=FALSE);
-    bZStopTrigger(CLK:=FALSE);    
+    bXStopTrigger(CLK:= bXLimitSwitch);
+    bYStopTrigger(CLK:=bYLimitSwitch);
+    bZStopTrigger(CLK:= FALSE);    
 ELSE
     bXNegativeLimit := bXHomingSwitch;
     bX2NegativeLimit := bX2HomingSwitch;
     bYNegativeLimit := bYHomingSwitch;
     bZPositiveLimit := bZHomingSwitch;
     //Stop Triggers
-    bXStopTrigger(CLK:=bXNegativeLimit OR bX2NegativeLimit);
-    bYStopTrigger(CLK:=bYNegativeLimit);
+    bXStopTrigger(CLK:=bXNegativeLimit OR bX2NegativeLimit OR bXLimitSwitch);
+    bYStopTrigger(CLK:=bYNegativeLimit OR bYLimitSwitch);
     bZStopTrigger(CLK:=bZPositiveLimit);    
 END_IF
 
