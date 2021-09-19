@@ -15,8 +15,10 @@ VAR_INPUT
 Motion_In			        : ST_Motion_Inputs;
 bHomingInput		        : BOOL;
 bPositiveLimitSwitch		: BOOL;
+bNegativeLimitSwitch        : BOOL;
 bHomeExecute		        : BOOL;
-bGearingEnabled             : BOOL;		
+bGearingEnabled             : BOOL;
+bStopAxis                   : BOOL;		
 
 END_VAR
 
@@ -173,7 +175,7 @@ END_VAR
 	Axis:= Ref, 
 	Enable:= bAxisEnable, 
 	Enable_Positive:= NOT bPositiveLimitSwitch,
-	Enable_Negative:= TRUE, //NOT bHomingInput, 
+	Enable_Negative:= NOT bNegativeLimitSwitch, 
 	Override:= bOverride, 
 	DestallParams:= Motion_In.bDestallParameters, 
 	KL_Status:= Motion_In.nKL_Status, 
@@ -193,7 +195,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[mcStop(
 	Axis:= Ref, 
-	Execute:= bStopExecute, 
+	Execute:= bStopAxis, 
 	Deceleration:= Motion_In.bStopDecel, 
 	Jerk:= Motion_In.bStopJerk, 
 	Options:= Motion_In.stStopOptions, 

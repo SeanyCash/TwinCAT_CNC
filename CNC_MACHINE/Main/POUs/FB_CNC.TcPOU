@@ -50,6 +50,15 @@ VAR
 	bZHomingSwitch		: BOOL;
     bXLimitSwitch		: BOOL;
 	bYLimitSwitch		: BOOL;
+    bXNegativeLimit     : BOOL;
+    bX2NegativeLimit    : BOOL;
+    bYNegativeLimit     : BOOL;
+    bZPositiveLimit     : BOOL;
+    
+    // Limit Switch Stop Triggers (use to one shot a stop command when axis limit switch is triggered)
+    bXStopTrigger       : R_TRIG;
+    bYStopTrigger       : R_TRIG;
+    bZStopTrigger       : R_TRIG;
 	
 	
 	bHomeX		    : BOOL;
@@ -111,15 +120,23 @@ END_IF*)
 trigAxisEnable(CLK := stHMI_In.bAxisEnable);
 
 
-// Motion Calls
+// Call Axis Status Action
 
 X_Ref.ReadStatus();
 X2_Ref.ReadStatus();
 Y_Ref.ReadStatus();
 Z_Ref.ReadStatus();
+
+// Call HMI Interface Methods
+
 M_HMI_In();
 M_HMI_Out();
 
+// Call Limit Switch Logic
+
+M_LimitSwitchLogic();
+
+// Motion Calls
 
 X_Motion( 
 			Ref:= X_Ref,
@@ -127,8 +144,10 @@ X_Motion(
             SlaveRef:= X2_Ref,
 		  	Motion_In := X_MC_IN,
 		  	Motion_Out => X_MC_OUT,
+            bStopAxis := bStopExecute OR bXStopTrigger.Q,
 			bHomingInput := bXHomingSwitch,
 			bPositiveLimitSwitch := bXLimitSwitch,
+            bNegativeLimitSwitch := bXNegativeLimit OR bX2NegativeLimit,
 			bHomeExecute := bHomeX,
 										);
                                         
@@ -140,8 +159,10 @@ X2_Motion(
             SlaveRef:= X2_Ref,
 		  	Motion_In := X2_MC_IN,
 		  	Motion_Out => X2_MC_OUT,
+            bStopAxis := bStopExecute OR bXStopTrigger.Q,
 			bHomingInput := bX2HomingSwitch,
 			bPositiveLimitSwitch := bXLimitSwitch,
+            bNegativeLimitSwitch := bX2NegativeLimit OR bXNegativeLimit,
 			bHomeExecute := bHomeX2
 										);
 						
@@ -151,8 +172,10 @@ Y_Motion(
             SlaveRef:= Y_Ref,
 		  	Motion_In := Y_MC_IN,
 		  	Motion_Out => Y_MC_OUT,
+            bStopAxis := bStopExecute OR bYStopTrigger.Q,
 			bHomingInput := bYHomingSwitch,
 			bPositiveLimitSwitch := bYLimitSwitch,
+            bNegativeLimitSwitch := bYNegativeLimit,
 			bHomeExecute := bHomeY
 										);
 							
@@ -162,7 +185,10 @@ Z_Motion(
             SlaveRef:= Z_Ref,
 		  	Motion_In := Z_MC_IN,
 		  	Motion_Out => Z_MC_OUT ,
+            bStopAxis := bStopExecute OR bZStopTrigger.Q,
 			bHomingInput := bZHomingSwitch,
+            bPositiveLimitSwitch := bZPositiveLimit,
+            bNegativeLimitSwitch := FALSE,
 			bHomeExecute := bHomeZ
 										);
                                         
@@ -306,6 +332,36 @@ bZHomingSwitch	:= i_bZHomingSwitch;
 
 bXLimitSwitch	:= i_bXLimitSwitch;
 bYLimitSwitch	:= i_bYLimitSwitch;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_LimitSwitchLogic" Id="{d221ad2e-2e3c-403f-a0d1-ca7284c8dd6e}">
+      <Declaration><![CDATA[METHOD M_LimitSwitchLogic : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Limit Switch Logic // Ignore "Home sensors" while running home routines. otherwise use Homing sensors to trigger a limit switch stop
+
+IF ProgramCall <> eNull THEN    
+    bXNegativeLimit  := FALSE;
+    bX2NegativeLimit := FALSE;
+    bYNegativeLimit  := FALSE;
+    bZPositiveLimit  := FALSE;
+    bXStopTrigger(CLK:= FALSE);
+    bYStopTrigger(CLK:=FALSE);
+    bZStopTrigger(CLK:=FALSE);    
+ELSE
+    bXNegativeLimit := bXHomingSwitch;
+    bX2NegativeLimit := bX2HomingSwitch;
+    bYNegativeLimit := bYHomingSwitch;
+    bZPositiveLimit := bZHomingSwitch;
+    //Stop Triggers
+    bXStopTrigger(CLK:=bXNegativeLimit OR bX2NegativeLimit);
+    bYStopTrigger(CLK:=bYNegativeLimit);
+    bZStopTrigger(CLK:=bZPositiveLimit);    
+END_IF
+
+// Limit Switch Rising Edge trigger to trigger MC_Stop when first active]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Outputs" Id="{bfb1dda8-5611-458d-bc52-800eff2f8798}">
@@ -633,19 +689,24 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="2171" Count="10" />
-      <LineId Id="2183" Count="0" />
-      <LineId Id="2185" Count="0" />
-      <LineId Id="2187" Count="0" />
-      <LineId Id="2189" Count="0" />
-      <LineId Id="2463" Count="0" />
-      <LineId Id="2456" Count="1" />
-      <LineId Id="2190" Count="7" />
-      <LineId Id="2368" Count="1" />
-      <LineId Id="2198" Count="49" />
-      <LineId Id="2357" Count="0" />
-      <LineId Id="2248" Count="11" />
-      <LineId Id="2261" Count="11" />
+      <LineId Id="2653" Count="25" />
+      <LineId Id="2786" Count="1" />
+      <LineId Id="2785" Count="0" />
+      <LineId Id="2679" Count="1" />
+      <LineId Id="2789" Count="1" />
+      <LineId Id="2788" Count="0" />
+      <LineId Id="2762" Count="0" />
+      <LineId Id="2784" Count="0" />
+      <LineId Id="2783" Count="0" />
+      <LineId Id="2682" Count="6" />
+      <LineId Id="2791" Count="0" />
+      <LineId Id="2689" Count="13" />
+      <LineId Id="2793" Count="0" />
+      <LineId Id="2703" Count="11" />
+      <LineId Id="2794" Count="0" />
+      <LineId Id="2715" Count="11" />
+      <LineId Id="2795" Count="0" />
+      <LineId Id="2727" Count="33" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_In">
@@ -706,6 +767,18 @@ END_CASE
       <LineId Id="14" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_LimitSwitchLogic">
+      <LineId Id="16" Count="1" />
+      <LineId Id="6" Count="4" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="11" Count="4" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Outputs">
       <LineId Id="15" Count="0" />
