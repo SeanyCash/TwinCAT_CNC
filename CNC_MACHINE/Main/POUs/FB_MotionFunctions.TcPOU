@@ -18,7 +18,8 @@ bPositiveLimitSwitch		: BOOL;
 bNegativeLimitSwitch        : BOOL;
 bHomeExecute		        : BOOL;
 bGearingEnabled             : BOOL;
-bStopAxis                   : BOOL;		
+bStopAxis                   : BOOL;
+bResetAxis                  : BOOL;		
 
 END_VAR
 
@@ -41,11 +42,14 @@ mcGearIn        : MC_GearIn;
 
 mcGearOut       : MC_GearOut;
 
+mcReset         : MC_Reset;
+
 
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[M_PowerStepper();
+M_Reset();
 M_Stop();
 M_Halt();
 M_Home( );
@@ -187,6 +191,23 @@ END_VAR
 	StallError=> Motion_Out.bPowerStallError);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Reset" Id="{082eaae0-46b8-473f-a995-ea976ee380e9}">
+      <Declaration><![CDATA[METHOD M_Reset : BOOL
+VAR_INPUT
+END_VAR
+
+VAR
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcReset(
+	        Axis:= Ref, 
+	        Execute:= bResetAxis , 
+	        Done=> Motion_Out.bResetDone, 
+	        Busy=> Motion_Out.bResetBusy, 
+	        Error=> Motion_Out.bResetError, 
+	        ErrorID=> Motion_Out.nResetErrorID);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Stop" Id="{c1ce39fb-2615-4855-8be7-e49f38ce3586}">
       <Declaration><![CDATA[METHOD M_Stop : BOOL
 VAR_INPUT
@@ -208,7 +229,9 @@ END_VAR
       </Implementation>
     </Method>
     <LineIds Name="FB_MotionFunctions">
-      <LineId Id="182" Count="4" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="273" Count="0" />
+      <LineId Id="183" Count="3" />
       <LineId Id="227" Count="1" />
       <LineId Id="126" Count="0" />
     </LineIds>
@@ -249,6 +272,10 @@ END_VAR
     <LineIds Name="FB_MotionFunctions.M_PowerStepper">
       <LineId Id="7" Count="12" />
       <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_Reset">
+      <LineId Id="9" Count="5" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Stop">
       <LineId Id="6" Count="10" />

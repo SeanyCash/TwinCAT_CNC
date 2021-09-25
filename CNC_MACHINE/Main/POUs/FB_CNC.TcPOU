@@ -145,6 +145,7 @@ X_Motion(
 		  	Motion_In := X_MC_IN,
 		  	Motion_Out => X_MC_OUT,
             bStopAxis := bStopExecute OR bXStopTrigger.Q,
+            bResetAxis := bAxisReset,
 			bHomingInput := bXHomingSwitch,
 			bPositiveLimitSwitch := bXLimitSwitch,
             bNegativeLimitSwitch := bXNegativeLimit OR bX2NegativeLimit,
@@ -160,6 +161,7 @@ X2_Motion(
 		  	Motion_In := X2_MC_IN,
 		  	Motion_Out => X2_MC_OUT,
             bStopAxis := bStopExecute OR bXStopTrigger.Q,
+            bResetAxis := bAxisReset,
 			bHomingInput := bX2HomingSwitch,
 			bPositiveLimitSwitch := bXLimitSwitch,
             bNegativeLimitSwitch := bX2NegativeLimit OR bXNegativeLimit,
@@ -173,6 +175,7 @@ Y_Motion(
 		  	Motion_In := Y_MC_IN,
 		  	Motion_Out => Y_MC_OUT,
             bStopAxis := bStopExecute OR bYStopTrigger.Q,
+            bResetAxis := bAxisReset,
 			bHomingInput := bYHomingSwitch,
 			bPositiveLimitSwitch := bYLimitSwitch,
             bNegativeLimitSwitch := bYNegativeLimit,
@@ -186,6 +189,7 @@ Z_Motion(
 		  	Motion_In := Z_MC_IN,
 		  	Motion_Out => Z_MC_OUT ,
             bStopAxis := bStopExecute OR bZStopTrigger.Q,
+            bResetAxis := bAxisReset,
 			bHomingInput := bZHomingSwitch,
             bPositiveLimitSwitch := bZPositiveLimit,
             bNegativeLimitSwitch := FALSE,
@@ -266,6 +270,10 @@ END_IF
 
 bExecuteNCI := stHMI_In.bStart;
 bStopExecute := stHMI_In.bStop;
+
+// Axis Reset
+
+bAxisReset := stHMI_In.bReset;
 
 //bZeroX        
 //bZeroY           
@@ -700,12 +708,16 @@ END_CASE
       <LineId Id="2783" Count="0" />
       <LineId Id="2682" Count="6" />
       <LineId Id="2791" Count="0" />
+      <LineId Id="2896" Count="0" />
       <LineId Id="2689" Count="13" />
       <LineId Id="2793" Count="0" />
+      <LineId Id="2893" Count="0" />
       <LineId Id="2703" Count="11" />
       <LineId Id="2794" Count="0" />
+      <LineId Id="2894" Count="0" />
       <LineId Id="2715" Count="11" />
       <LineId Id="2795" Count="0" />
+      <LineId Id="2895" Count="0" />
       <LineId Id="2727" Count="33" />
       <LineId Id="680" Count="0" />
     </LineIds>
@@ -739,6 +751,10 @@ END_CASE
       <LineId Id="20" Count="0" />
       <LineId Id="59" Count="1" />
       <LineId Id="58" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="70" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="10" Count="0" />
