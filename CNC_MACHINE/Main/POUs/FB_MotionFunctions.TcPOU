@@ -88,7 +88,7 @@ mcGearIn(
 	Active=> , 
 	CommandAborted=> , 
 	Error=> , 
-	ErrorID=> );
+	ErrorID=> Motion_Out.nGearErrorID);
     
 mcGearOut(
 	Slave:= SlaveRef, 
@@ -97,7 +97,7 @@ mcGearOut(
 	Done=> Motion_Out.bGearOutDone, 
 	Busy=> , 
 	Error=> , 
-	ErrorID=> );   
+	ErrorID=> Motion_Out.nGearErrorID);   
 
 END_IF ]]></ST>
       </Implementation>

@@ -38,6 +38,9 @@ END_VAR
       <ST><![CDATA[sLoadedProgram:=sPrgName;
 
 fbStartGCode( bStop:=bStop, sNciToPlc:= stItpToPlc );
+IF bStop THEN 
+    nState :=0;
+END_IF
 
 CASE nState OF
 0:
@@ -172,9 +175,7 @@ CASE nState OF
 		// program has finished
 		nState	:= 65;
 	ELSIF nInterpreterState = Tc2_NCI.NCI_INTERPRETER_ABORTED THEN
-		// a run-time error occured - this could be a lag error or something else... 
-		// add error handling
-		;
+		nState := 0;
 	END_IF
 
 65:
@@ -223,7 +224,7 @@ CASE nState OF
 END_CASE
 
 // handling of m-functions is done outside statemachine
-// all m-functions are directly confiremd. In a real application we have of course to consider the m-function numbers to turn on/off certain functions in the machine.
+// all m-functions are directly confirmed
 IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmHsk.bBusy THEN
 	bConfirmHsk	:= TRUE;
 ELSE	
@@ -243,6 +244,7 @@ fbConfirmHsk(
       <LineId Id="207" Count="0" />
       <LineId Id="291" Count="0" />
       <LineId Id="290" Count="0" />
+      <LineId Id="409" Count="2" />
       <LineId Id="208" Count="0" />
       <LineId Id="3" Count="28" />
       <LineId Id="289" Count="0" />
@@ -260,7 +262,8 @@ fbConfirmHsk(
       <LineId Id="249" Count="1" />
       <LineId Id="245" Count="0" />
       <LineId Id="252" Count="0" />
-      <LineId Id="43" Count="79" />
+      <LineId Id="43" Count="76" />
+      <LineId Id="122" Count="0" />
       <LineId Id="368" Count="0" />
       <LineId Id="370" Count="1" />
       <LineId Id="374" Count="0" />

@@ -49,6 +49,7 @@ nResetErrorID       : UDINT;
 // MC Gear
 bGearInDone		    : BOOL;
 bGearOutDone        : BOOL;
+nGearErrorID        : UDINT;
 
 
 END_STRUCT
