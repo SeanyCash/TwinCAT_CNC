@@ -117,7 +117,25 @@
     <Content Include="Contents\Offsets.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Imports\Images\icons_down_pressed.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\icons_left_pressed.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\icons_right_pressed.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\icons_up_pressed.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\icons_warning_active.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Imports\Images\machineoverviewB&amp;W.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\milling_angled2_pressed.svg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="KeyboardLayouts\German - compact.keyboard.json" />

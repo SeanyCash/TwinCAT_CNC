@@ -90,7 +90,7 @@ VAR
     sCurrentProgram : STRING;
     
     
-    fbSimpleNciSequence:	FB_SimpleNciSequence;
+    fbSimpleNciSequence:	FB_NciSequence;
 	bExecuteNCI:	BOOL	:= FALSE;
     fChannelOverride        : REAL;
     sPrgName                : STRING[255];
@@ -144,6 +144,9 @@ X_Motion(
             SlaveRef:= X2_Ref,
 		  	Motion_In := X_MC_IN,
 		  	Motion_Out => X_MC_OUT,
+            bJogEnable:= stHMI_In.bJogEnable,
+            bJogPositive := stHMI_In.bXJogPositive,
+            bJogNegative := stHMI_In.bXJogNegative,
             bStopAxis := bStopExecute OR bXStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bXHomingSwitch,
@@ -160,6 +163,9 @@ X2_Motion(
             SlaveRef:= X2_Ref,
 		  	Motion_In := X2_MC_IN,
 		  	Motion_Out => X2_MC_OUT,
+            bJogEnable:= stHMI_In.bJogEnable,
+            bJogPositive := stHMI_In.bXJogPositive,
+            bJogNegative := stHMI_In.bXJogNegative,
             bStopAxis := bStopExecute OR bXStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bX2HomingSwitch,
@@ -174,6 +180,9 @@ Y_Motion(
             SlaveRef:= Y_Ref,
 		  	Motion_In := Y_MC_IN,
 		  	Motion_Out => Y_MC_OUT,
+            bJogEnable:= stHMI_In.bJogEnable,
+            bJogPositive := stHMI_In.bYJogPositive,
+            bJogNegative := stHMI_In.bYJogNegative,
             bStopAxis := bStopExecute OR bYStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bYHomingSwitch,
@@ -188,6 +197,9 @@ Z_Motion(
             SlaveRef:= Z_Ref,
 		  	Motion_In := Z_MC_IN,
 		  	Motion_Out => Z_MC_OUT ,
+            bJogEnable:= stHMI_In.bJogEnable,
+            bJogPositive := stHMI_In.bZJogPositive,
+            bJogNegative := stHMI_In.bZJogNegative,
             bStopAxis := bStopExecute OR bZStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bZHomingSwitch,
@@ -195,6 +207,9 @@ Z_Motion(
             bNegativeLimitSwitch := FALSE,
 			bHomeExecute := bHomeZ
 										);
+
+
+
                                         
 fbSimpleNciSequence(
 	        bExecute:= bExecuteNCI,
@@ -275,9 +290,7 @@ bStopExecute := stHMI_In.bStop;
 
 bAxisReset := stHMI_In.bReset;
 
-//bZeroX        
-//bZeroY           
-//bZeroZ      ]]></ST>
+// Axis Jogging    ]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_HMI_Out" Id="{579ae688-d5bb-4d46-9cff-7ebda2f9644e}">
@@ -707,18 +720,30 @@ END_CASE
       <LineId Id="2784" Count="0" />
       <LineId Id="2783" Count="0" />
       <LineId Id="2682" Count="6" />
+      <LineId Id="3109" Count="0" />
+      <LineId Id="3101" Count="1" />
       <LineId Id="2791" Count="0" />
       <LineId Id="2896" Count="0" />
       <LineId Id="2689" Count="13" />
+      <LineId Id="3110" Count="0" />
+      <LineId Id="3103" Count="1" />
       <LineId Id="2793" Count="0" />
       <LineId Id="2893" Count="0" />
       <LineId Id="2703" Count="11" />
+      <LineId Id="3111" Count="0" />
+      <LineId Id="3105" Count="1" />
       <LineId Id="2794" Count="0" />
       <LineId Id="2894" Count="0" />
       <LineId Id="2715" Count="11" />
+      <LineId Id="3112" Count="0" />
+      <LineId Id="3107" Count="1" />
       <LineId Id="2795" Count="0" />
       <LineId Id="2895" Count="0" />
-      <LineId Id="2727" Count="33" />
+      <LineId Id="2727" Count="4" />
+      <LineId Id="3092" Count="0" />
+      <LineId Id="3094" Count="0" />
+      <LineId Id="3093" Count="0" />
+      <LineId Id="2732" Count="28" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_In">
@@ -756,8 +781,6 @@ END_CASE
       <LineId Id="71" Count="0" />
       <LineId Id="70" Count="0" />
       <LineId Id="61" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="10" Count="0" />
       <LineId Id="12" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_Out">

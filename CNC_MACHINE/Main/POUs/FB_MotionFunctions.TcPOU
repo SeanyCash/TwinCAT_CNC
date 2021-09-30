@@ -19,7 +19,10 @@ bNegativeLimitSwitch        : BOOL;
 bHomeExecute		        : BOOL;
 bGearingEnabled             : BOOL;
 bStopAxis                   : BOOL;
-bResetAxis                  : BOOL;		
+bResetAxis                  : BOOL;
+bJogEnable                  : BOOL;
+bJogPositive                : BOOL;
+bJogNegative                : BOOL;		
 
 END_VAR
 
@@ -44,6 +47,8 @@ mcGearOut       : MC_GearOut;
 
 mcReset         : MC_Reset;
 
+mcJog           : MC_Jog;
+
 
 END_VAR
 ]]></Declaration>
@@ -55,6 +60,7 @@ M_Halt();
 M_Home( );
 M_Gearing( );
 M_HMI_In();
+M_Jog();
 M_HMI_Out();
 ]]></ST>
     </Implementation>
@@ -168,6 +174,35 @@ END_VAR
 	ErrorID=> Motion_Out.bHomeErrorID);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Jog" Id="{0ffd9f33-8909-4c6d-aa47-c26c8d95be7b}">
+      <Declaration><![CDATA[METHOD M_Jog : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF bJogEnable THEN
+
+mcJog(
+	Axis:= Ref, 
+	JogForward:= bJogPositive, 
+	JogBackwards:= bJogNegative, 
+	Mode:= , 
+	Position:= , 
+	Velocity:= , 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+    
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_PowerStepper" Id="{6a7b06a9-fc89-4287-b1b8-f228a9ca92a7}">
       <Declaration><![CDATA[METHOD M_PowerStepper
 
@@ -232,7 +267,9 @@ END_VAR
       <LineId Id="182" Count="0" />
       <LineId Id="273" Count="0" />
       <LineId Id="183" Count="3" />
-      <LineId Id="227" Count="1" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="319" Count="0" />
+      <LineId Id="228" Count="0" />
       <LineId Id="126" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Gearing">
@@ -268,6 +305,13 @@ END_VAR
     <LineIds Name="FB_MotionFunctions.M_Home">
       <LineId Id="6" Count="12" />
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_Jog">
+      <LineId Id="23" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="24" Count="1" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_PowerStepper">
       <LineId Id="7" Count="12" />

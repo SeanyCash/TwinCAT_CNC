@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
-  <POU Name="FB_SimpleNciSequence" Id="{4f24b964-7729-4762-90ad-698d0a17343d}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimpleNciSequence
+  <POU Name="FB_NciSequence" Id="{4f24b964-7729-4762-90ad-698d0a17343d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NciSequence
 VAR_INPUT
 	bExecute			: BOOL;
     bStop               : BOOL;
@@ -240,7 +240,7 @@ fbConfirmHsk(
 	nErrId=> );
 	]]></ST>
     </Implementation>
-    <LineIds Name="FB_SimpleNciSequence">
+    <LineIds Name="FB_NciSequence">
       <LineId Id="207" Count="0" />
       <LineId Id="291" Count="0" />
       <LineId Id="290" Count="0" />

@@ -26,11 +26,21 @@ bTriggerProgramCall : BOOL;
 
 // User Speed/Override Settings
 
-fChannelOverride            : REAL;
+fChannelOverride            : REAL :=100.0;
 
 // User Program Select
 
 sPrgName         : STRING[255];
+
+// Axis Jog Buttons
+
+bJogEnable       : BOOL;
+bXJogPositive    : BOOL;
+bXJogNegative    : BOOL;
+bYJogPositive    : BOOL;
+bYJogNegative    : BOOL;
+bZJogPositive    : BOOL;
+bZJogNegative    : BOOL;
 
 END_STRUCT
 END_TYPE
