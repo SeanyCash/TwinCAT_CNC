@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>{4e98accd-6a9c-4fa0-9734-477ce91f3345}</ProjectGuid>
     <AssemblyName>YT Scope Project1</AssemblyName>
-    <Name>YT Scope Project1</Name>
+    <Name>Scope Diagnostics</Name>
     <RootNamespace>YT Scope Project1</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
