@@ -39,8 +39,8 @@ VAR
 	i_bYHomingSwitch		AT %I* : BOOL;
     i_bYLimitSwitch			AT %I* : BOOL;
 	i_bZHomingSwitch		AT %I* : BOOL;
-    in_stItpToPlc	AT %I*:	NcToPlc_NciChannel_Ref;
-	out_stPlcToItp	AT %Q*:	PLCTONC_NCICHANNEL_REF;
+    i_stItpToPlc	AT %I*:	NcToPlc_NciChannel_Ref;
+	q_stPlcToItp	AT %Q*:	PLCTONC_NCICHANNEL_REF;
     
    // Homing / Limit Proxes 
 	
@@ -145,6 +145,7 @@ X_Motion(
 		  	Motion_In := X_MC_IN,
 		  	Motion_Out => X_MC_OUT,
             bJogEnable:= stHMI_In.bJogEnable,
+            eJogMode:= stHMI_In.eJogMode,
             bJogPositive := stHMI_In.bXJogPositive,
             bJogNegative := stHMI_In.bXJogNegative,
             bStopAxis := bStopExecute OR bXStopTrigger.Q,
@@ -164,6 +165,7 @@ X2_Motion(
 		  	Motion_In := X2_MC_IN,
 		  	Motion_Out => X2_MC_OUT,
             bJogEnable:= stHMI_In.bJogEnable,
+            eJogMode:= stHMI_In.eJogMode,
             bJogPositive := stHMI_In.bXJogPositive,
             bJogNegative := stHMI_In.bXJogNegative,
             bStopAxis := bStopExecute OR bXStopTrigger.Q,
@@ -181,6 +183,7 @@ Y_Motion(
 		  	Motion_In := Y_MC_IN,
 		  	Motion_Out => Y_MC_OUT,
             bJogEnable:= stHMI_In.bJogEnable,
+            eJogMode:= stHMI_In.eJogMode,
             bJogPositive := stHMI_In.bYJogPositive,
             bJogNegative := stHMI_In.bYJogNegative,
             bStopAxis := bStopExecute OR bYStopTrigger.Q,
@@ -198,6 +201,7 @@ Z_Motion(
 		  	Motion_In := Z_MC_IN,
 		  	Motion_Out => Z_MC_OUT ,
             bJogEnable:= stHMI_In.bJogEnable,
+            eJogMode:= stHMI_In.eJogMode,
             bJogPositive := stHMI_In.bZJogPositive,
             bJogNegative := stHMI_In.bZJogNegative,
             bStopAxis := bStopExecute OR bZStopTrigger.Q,
@@ -221,12 +225,12 @@ fbSimpleNciSequence(
 	        stX:=X_Ref, 
 	        stY:=Y_Ref, 
 	        stZ:=Z_Ref, 
-	        stItpToPlc:=in_stItpToPlc , 
-	        stPlcToItp:= out_stPlcToItp,
+	        stItpToPlc:=i_stItpToPlc , 
+	        stPlcToItp:= q_stPlcToItp,
             sLoadedProgram=>sCurrentProgram);
 
             
-ItpSetOverridePercent(fOverridePercent:=fChannelOverride , sPlcToNci:=out_stPlcToItp);
+ItpSetOverridePercent(fOverridePercent:=fChannelOverride , sPlcToNci:=q_stPlcToItp);
 
 fbNCInfo();
 
@@ -710,40 +714,7 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="2653" Count="25" />
-      <LineId Id="2786" Count="1" />
-      <LineId Id="2785" Count="0" />
-      <LineId Id="2679" Count="1" />
-      <LineId Id="2789" Count="1" />
-      <LineId Id="2788" Count="0" />
-      <LineId Id="2762" Count="0" />
-      <LineId Id="2784" Count="0" />
-      <LineId Id="2783" Count="0" />
-      <LineId Id="2682" Count="6" />
-      <LineId Id="3109" Count="0" />
-      <LineId Id="3101" Count="1" />
-      <LineId Id="2791" Count="0" />
-      <LineId Id="2896" Count="0" />
-      <LineId Id="2689" Count="13" />
-      <LineId Id="3110" Count="0" />
-      <LineId Id="3103" Count="1" />
-      <LineId Id="2793" Count="0" />
-      <LineId Id="2893" Count="0" />
-      <LineId Id="2703" Count="11" />
-      <LineId Id="3111" Count="0" />
-      <LineId Id="3105" Count="1" />
-      <LineId Id="2794" Count="0" />
-      <LineId Id="2894" Count="0" />
-      <LineId Id="2715" Count="11" />
-      <LineId Id="3112" Count="0" />
-      <LineId Id="3107" Count="1" />
-      <LineId Id="2795" Count="0" />
-      <LineId Id="2895" Count="0" />
-      <LineId Id="2727" Count="4" />
-      <LineId Id="3092" Count="0" />
-      <LineId Id="3094" Count="0" />
-      <LineId Id="3093" Count="0" />
-      <LineId Id="2732" Count="28" />
+      <LineId Id="3551" Count="142" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_In">

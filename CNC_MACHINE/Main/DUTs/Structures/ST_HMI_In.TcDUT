@@ -41,6 +41,7 @@ bYJogPositive    : BOOL;
 bYJogNegative    : BOOL;
 bZJogPositive    : BOOL;
 bZJogNegative    : BOOL;
+eJogMode         : E_JogMode;
 
 END_STRUCT
 END_TYPE

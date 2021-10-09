@@ -2533,6 +2533,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.bJogEnable": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::bJogEnable",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.bReset": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2580,6 +2590,23 @@
             "MAPPING": "PLC1::GVL::stHMI_In::fChannelOverride",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.sPrgName": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::sPrgName",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "maxLength": 255
+                    },
+                    {
+                        "$ref": "tchmi:general#/definitions/String"
+                    }
+                ]
             },
             "USEMAPPING": true
         },

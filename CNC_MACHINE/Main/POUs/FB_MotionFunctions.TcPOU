@@ -22,7 +22,10 @@ bStopAxis                   : BOOL;
 bResetAxis                  : BOOL;
 bJogEnable                  : BOOL;
 bJogPositive                : BOOL;
-bJogNegative                : BOOL;		
+bJogNegative                : BOOL;
+eJogMode                    : E_JogMode;
+// Touch Probe Input  
+bTouchProbeTrigger          : TRIGGER_REF;		
 
 END_VAR
 
@@ -49,6 +52,8 @@ mcReset         : MC_Reset;
 
 mcJog           : MC_Jog;
 
+mcTouchProbe    : MC_TouchProbe;
+
 
 END_VAR
 ]]></Declaration>
@@ -60,7 +65,7 @@ M_Halt();
 M_Home( );
 M_Gearing( );
 M_HMI_In();
-M_Jog();
+//M_Jog();
 M_HMI_Out();
 ]]></ST>
     </Implementation>
@@ -187,7 +192,7 @@ mcJog(
 	Axis:= Ref, 
 	JogForward:= bJogPositive, 
 	JogBackwards:= bJogNegative, 
-	Mode:= , 
+	Mode:= eJogMode, 
 	Position:= , 
 	Velocity:= , 
 	Acceleration:= , 
@@ -263,6 +268,28 @@ END_VAR
 	ErrorID=> Motion_Out.nStopErrorID);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_TouchProbe" Id="{501d32c0-2672-4596-a933-cd18dea39564}">
+      <Declaration><![CDATA[METHOD M_TouchProbe : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcTouchProbe(
+	Axis:= Ref, 
+	TriggerInput:= bTouchProbeTrigger, 
+	Execute:= , 
+	WindowOnly:= , 
+	FirstPosition:= , 
+	LastPosition:= , 
+	Done=> , 
+	Busy=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> , 
+	RecordedPosition=> , 
+	RecordedData=> );]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_MotionFunctions">
       <LineId Id="182" Count="0" />
       <LineId Id="273" Count="0" />
@@ -323,6 +350,10 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Stop">
       <LineId Id="6" Count="10" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_TouchProbe">
+      <LineId Id="6" Count="12" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

@@ -50,7 +50,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Interpreter State mapped from fbCNC call
-eInterpreterState := fbCNC.in_stItpToPlc.ItpState;]]></ST>
+eInterpreterState := fbCNC.i_stItpToPlc.ItpState;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_NCFileInfo" Id="{b55ec5ca-99a1-4a79-94b9-b4f299483b66}">
