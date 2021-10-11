@@ -26,8 +26,6 @@ bProgramDone		: BOOL;
 bBuild3DGroup		: BOOL;
 bAxisReset          : BOOL;
 
-
-
 END_VAR
 
 
