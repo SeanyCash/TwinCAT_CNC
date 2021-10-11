@@ -111,6 +111,9 @@
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <Target Name="Clean" DependsOnTargets="BaseClean" />
   <ItemGroup>
+    <Content Include="Contents\Jog.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\Status.content">
       <SubType>Content</SubType>
     </Content>
