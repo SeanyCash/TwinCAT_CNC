@@ -15,7 +15,7 @@
     <LibraryReferences>{eb1ff309-1ae0-44ea-9bed-a9b1b556f9e3}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DUTs\Enums\E_HomeX.TcDUT">
+    <Compile Include="DUTs\Enums\E_HomeY.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Enums\E_InterpreterState.TcDUT">

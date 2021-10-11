@@ -86,16 +86,16 @@ CASE nState OF
     
 15:
 
-   IF fbCNC.X_Ref.NcToPlc.CoupleState <> 1 THEN
+   IF fbCNC.Y_Ref.NcToPlc.CoupleState <> 1 THEN
     bGearInExecute:=FALSE;
     nState:=16;
-   ELSIF fbCNC.X_Ref.NcToPlc.CoupleState = 1 THEN
+   ELSIF fbCNC.Y_Ref.NcToPlc.CoupleState = 1 THEN
     nState:=20;
    END_IF
    
 16:
     bGearInExecute:=TRUE;
-    IF fbCNC.X_MC_OUT.bGearInDone AND (fbCNC.X_Ref.NcToPlc.CoupleState = 1) THEN
+    IF fbCNC.Y_MC_OUT.bGearInDone AND (fbCNC.Y_Ref.NcToPlc.CoupleState = 1) THEN
         nState:=20;
     END_IF
      
@@ -181,7 +181,7 @@ CASE nState OF
 65:
     bGearInExecute:=FALSE;
     bGearOutExecute:=TRUE;
-    IF fbCNC.X_MC_OUT.bGearOutDone AND (fbCNC.X_Ref.NcToPlc.CoupleState = 0) THEN
+    IF fbCNC.Y_MC_OUT.bGearOutDone AND (fbCNC.Y_Ref.NcToPlc.CoupleState = 0) THEN
         bGearOutExecute:=FALSE;
         nState:=70;
     END_IF

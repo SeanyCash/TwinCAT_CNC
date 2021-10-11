@@ -18,28 +18,26 @@ fChannelOverrideSpeed       : REAL;
 
 // Homing/Limit Switch Indicators
 
-bX1HomeSwitch       : BOOL;
-bX2HomeSwitch       : BOOL;
-bXLimitSwitch       : BOOL;
-bYHomeSwitch        : BOOL;
+bY1HomeSwitch       : BOOL;
+bY2HomeSwitch       : BOOL;
 bYLimitSwitch       : BOOL;
+bXHomeSwitch        : BOOL;
+bXLimitSwitch       : BOOL;
 bZHomeSwitch        : BOOL;
 
 // Axis Data
 
-fActPos             : REAL;
-
-fActPosX            : REAL;
-fActPosX2           : REAL;
 fActPosY            : REAL;
+fActPosY2           : REAL;
+fActPosX            : REAL;
 fActPosZ            : REAL;
 
 
 // Axis Ref Variables to pass to HMI for status indication
 
-stXRef               :Axis_Ref;
-stX2Ref              :Axis_Ref;
 stYRef               :Axis_Ref;
+stY2Ref              :Axis_Ref;
+stXRef               :Axis_Ref;
 stZRef               :Axis_Ref;
 
 END_STRUCT

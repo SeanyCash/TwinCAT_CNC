@@ -8,62 +8,62 @@ VAR_OUTPUT
 END_VAR
 VAR
     
-	X_Motion		: FB_MotionFunctions;
-	X2_Motion 		: FB_MotionFunctions;
 	Y_Motion		: FB_MotionFunctions;
+	Y2_Motion 		: FB_MotionFunctions;
+	X_Motion		: FB_MotionFunctions;
 	Z_Motion		: FB_MotionFunctions;
     
-    eHomeXSeq       : E_HomeX;
+    eHomeYSeq       : E_HomeY;
 	
 	
-	X_MC_IN			: ST_Motion_Inputs;
-	X2_MC_IN		: ST_Motion_Inputs;
 	Y_MC_IN			: ST_Motion_Inputs;
+	Y2_MC_IN		: ST_Motion_Inputs;
+	X_MC_IN			: ST_Motion_Inputs;
 	Z_MC_IN			: ST_Motion_Inputs;
 	
-	X_MC_OUT		: ST_Motion_Outputs;
-	X2_MC_OUT		: ST_Motion_Outputs;
 	Y_MC_OUT		: ST_Motion_Outputs;
+	Y2_MC_OUT		: ST_Motion_Outputs;
+	X_MC_OUT		: ST_Motion_Outputs;
 	Z_MC_OUT		: ST_Motion_Outputs;
 	
 	
-	X_Ref	        : AXIS_REF;
-	X2_Ref	        : AXIS_REF;
 	Y_Ref	        : AXIS_REF;
+	Y2_Ref	        : AXIS_REF;
+	X_Ref	        : AXIS_REF;
 	Z_Ref	        : AXIS_REF;
 	
 	
-	i_bXHomingSwitch		AT %I* : BOOL;
-	i_bX2HomingSwitch		AT %I* : BOOL;
-    i_bXLimitSwitch			AT %I* : BOOL;
 	i_bYHomingSwitch		AT %I* : BOOL;
+	i_bY2HomingSwitch		AT %I* : BOOL;
     i_bYLimitSwitch			AT %I* : BOOL;
+	i_bXHomingSwitch		AT %I* : BOOL;
+    i_bXLimitSwitch			AT %I* : BOOL;
 	i_bZHomingSwitch		AT %I* : BOOL;
     i_stItpToPlc	AT %I*:	NcToPlc_NciChannel_Ref;
 	q_stPlcToItp	AT %Q*:	PLCTONC_NCICHANNEL_REF;
     
    // Homing / Limit Proxes 
 	
-	bXHomingSwitch		: BOOL;
-	bX2HomingSwitch		: BOOL;
 	bYHomingSwitch		: BOOL;
-	bZHomingSwitch		: BOOL;
-    bXLimitSwitch		: BOOL;
+	bY2HomingSwitch		: BOOL;
 	bYLimitSwitch		: BOOL;
+	bYNegativeLimit     : BOOL;
+    bY2NegativeLimit    : BOOL;
+	bXHomingSwitch		: BOOL;
+	bZHomingSwitch		: BOOL;
+	bXLimitSwitch		: BOOL; 
     bXNegativeLimit     : BOOL;
-    bX2NegativeLimit    : BOOL;
-    bYNegativeLimit     : BOOL;
     bZPositiveLimit     : BOOL;
     
     // Limit Switch Stop Triggers (use to one shot a stop command when axis limit switch is triggered)
-    bXStopTrigger       : R_TRIG;
     bYStopTrigger       : R_TRIG;
+    bXStopTrigger       : R_TRIG;
     bZStopTrigger       : R_TRIG;
 	
 	
-	bHomeX		    : BOOL;
-	bHomeX2		    : BOOL;
 	bHomeY		    : BOOL;
+	bHomeY2		    : BOOL;
+	bHomeX		    : BOOL;
 	bHomeZ		    : BOOL;
     bGearInTrigger  : BOOL;
     rGearInTrigger  : R_TRIG;
@@ -78,12 +78,12 @@ VAR
 // Program Call Variables	
 	
 	nHomeAllSeq	: INT;
-	nHomeXSeq	: INT;
 	nHomeYSeq	: INT;
+	nHomeXSeq	: INT;
 	nHomeZSeq	: INT;
     
-    bXHomeDone  : BOOL;
     bYHomeDone  : BOOL;
+    bXHomeDone  : BOOL;
     bZHomeDone  : BOOL;
 	
 	ProgramCall	: E_Programs;
@@ -102,7 +102,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[// Trigger Axis Gearing
 
-rtrigAxisNotGeared(CLK := X_MC_OUT.bPowerStatus AND NOT X_MC_OUT.bGearInDone);
+rtrigAxisNotGeared(CLK := Y_MC_OUT.bPowerStatus AND NOT Y_MC_OUT.bGearInDone);
 
 rGearInTrigger(CLK:= bGearInTrigger);
 
@@ -122,9 +122,9 @@ trigAxisEnable(CLK := stHMI_In.bAxisEnable);
 
 // Call Axis Status Action
 
-X_Ref.ReadStatus();
-X2_Ref.ReadStatus();
 Y_Ref.ReadStatus();
+Y2_Ref.ReadStatus();
+X_Ref.ReadStatus();
 Z_Ref.ReadStatus();
 
 // Call HMI Interface Methods
@@ -138,60 +138,60 @@ M_LimitSwitchLogic();
 
 // Motion Calls
 
-X_Motion( 
-			Ref:= X_Ref,
-            bGearingEnabled := TRUE,
-            SlaveRef:= X2_Ref,
-		  	Motion_In := X_MC_IN,
-		  	Motion_Out => X_MC_OUT,
-            bJogEnable:= stHMI_In.bJogEnable,
-            eJogMode:= stHMI_In.eJogMode,
-            bJogPositive := stHMI_In.bXJogPositive,
-            bJogNegative := stHMI_In.bXJogNegative,
-            bStopAxis := bStopExecute OR bXStopTrigger.Q,
-            bResetAxis := bAxisReset,
-			bHomingInput := bXHomingSwitch,
-			bPositiveLimitSwitch := bXLimitSwitch,
-            bNegativeLimitSwitch := bXNegativeLimit OR bX2NegativeLimit,
-			bHomeExecute := bHomeX,
-										);
-                                        
-
-							
-X2_Motion( 
-			Ref:= X2_Ref,
-            bGearingEnabled := TRUE,
-            SlaveRef:= X2_Ref,
-		  	Motion_In := X2_MC_IN,
-		  	Motion_Out => X2_MC_OUT,
-            bJogEnable:= stHMI_In.bJogEnable,
-            eJogMode:= stHMI_In.eJogMode,
-            bJogPositive := stHMI_In.bXJogPositive,
-            bJogNegative := stHMI_In.bXJogNegative,
-            bStopAxis := bStopExecute OR bXStopTrigger.Q,
-            bResetAxis := bAxisReset,
-			bHomingInput := bX2HomingSwitch,
-			bPositiveLimitSwitch := bXLimitSwitch,
-            bNegativeLimitSwitch := bX2NegativeLimit OR bXNegativeLimit,
-			bHomeExecute := bHomeX2
-										);
-						
 Y_Motion( 
 			Ref:= Y_Ref,
-            bGearingEnabled := FALSE,
-            SlaveRef:= Y_Ref,
+            bGearingEnabled := TRUE,
+            SlaveRef:= Y2_Ref,
 		  	Motion_In := Y_MC_IN,
 		  	Motion_Out => Y_MC_OUT,
             bJogEnable:= stHMI_In.bJogEnable,
             eJogMode:= stHMI_In.eJogMode,
-            bJogPositive := stHMI_In.bYJogPositive,
-            bJogNegative := stHMI_In.bYJogNegative,
+            bJogPositive := stHMI_In.bXJogPositive,
+            bJogNegative := stHMI_In.bXJogNegative,
             bStopAxis := bStopExecute OR bYStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bYHomingSwitch,
 			bPositiveLimitSwitch := bYLimitSwitch,
-            bNegativeLimitSwitch := bYNegativeLimit,
-			bHomeExecute := bHomeY
+            bNegativeLimitSwitch := bYNegativeLimit OR bY2NegativeLimit,
+			bHomeExecute := bHomeY,
+										);
+                                        
+
+							
+Y2_Motion( 
+			Ref:= Y2_Ref,
+            bGearingEnabled := TRUE,
+            SlaveRef:= Y2_Ref,
+		  	Motion_In := Y2_MC_IN,
+		  	Motion_Out => Y2_MC_OUT,
+            bJogEnable:= stHMI_In.bJogEnable,
+            eJogMode:= stHMI_In.eJogMode,
+            bJogPositive := stHMI_In.bXJogPositive,
+            bJogNegative := stHMI_In.bXJogNegative,
+            bStopAxis := bStopExecute OR bYStopTrigger.Q,
+            bResetAxis := bAxisReset,
+			bHomingInput := bY2HomingSwitch,
+			bPositiveLimitSwitch := bYLimitSwitch,
+            bNegativeLimitSwitch := bY2NegativeLimit OR bYNegativeLimit,
+			bHomeExecute := bHomeY2
+										);
+						
+X_Motion( 
+			Ref:= X_Ref,
+            bGearingEnabled := FALSE,
+            SlaveRef:= X_Ref,
+		  	Motion_In := X_MC_IN,
+		  	Motion_Out => X_MC_OUT,
+            bJogEnable:= stHMI_In.bJogEnable,
+            eJogMode:= stHMI_In.eJogMode,
+            bJogPositive := stHMI_In.bYJogPositive,
+            bJogNegative := stHMI_In.bYJogNegative,
+            bStopAxis := bStopExecute OR bXStopTrigger.Q,
+            bResetAxis := bAxisReset,
+			bHomingInput := bXHomingSwitch,
+			bPositiveLimitSwitch := bXLimitSwitch,
+            bNegativeLimitSwitch := bXNegativeLimit,
+			bHomeExecute := bHomeX
 										);
 							
 Z_Motion( 
@@ -236,8 +236,8 @@ fbNCInfo();
 
 // All Axes Ready Bit
 
-bAllAxesReady:= X_MC_OUT.bPowerStatus AND X2_MC_OUT.bPowerStatus AND Y_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
-bAllAxesHomed:= X_Ref.Status.Homed AND X2_Ref.Status.Homed AND Y_Ref.Status.Homed AND Z_Ref.Status.Homed;
+bAllAxesReady:= Y_MC_OUT.bPowerStatus AND Y2_MC_OUT.bPowerStatus AND X_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
+bAllAxesHomed:= Y_Ref.Status.Homed AND Y2_Ref.Status.Homed AND X_Ref.Status.Homed AND Z_Ref.Status.Homed;
 
 // Method Calls
 
@@ -303,11 +303,11 @@ bAxisReset := stHMI_In.bReset;
       <Implementation>
         <ST><![CDATA[// Limit and Homing Switch Mapping
 
-stHMI_Out.bX1HomeSwitch := bXHomingSwitch;	
-stHMI_Out.bX2HomeSwitch := bX2HomingSwitch;
-stHMI_Out.bXLimitSwitch := bXLimitSwitch;	
-stHMI_Out.bYHomeSwitch := bYHomingSwitch;
+stHMI_Out.bY1HomeSwitch := bYHomingSwitch;	
+stHMI_Out.bY2HomeSwitch := bY2HomingSwitch;
 stHMI_Out.bYLimitSwitch := bYLimitSwitch;	
+stHMI_Out.bXHomeSwitch := bXHomingSwitch;
+stHMI_Out.bXLimitSwitch := bXLimitSwitch;	
 stHMI_Out.bZHomeSwitch  := bZHomingSwitch;	
 
 // Interpreter Channel State
@@ -321,9 +321,9 @@ stHMI_Out.fChannelOverrideSpeed := fChannelOverride;
 
 // Pass Axis Ref info to HMI
 
-stHMI_Out.stXRef  := X_Ref;
-stHMI_Out.stX2Ref := X2_Ref;
 stHMI_Out.stYRef  := Y_Ref;
+stHMI_Out.stY2Ref := Y2_Ref;
+stHMI_Out.stXRef  := X_Ref;
 stHMI_Out.stZRef  := Z_Ref;
 
 //stHMI_Out.sCurrentProgramSelected := 
@@ -345,15 +345,15 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// Homing Switch Inputs
 
-bXHomingSwitch	:= i_bXHomingSwitch;	
-bX2HomingSwitch	:= i_bX2HomingSwitch;	
 bYHomingSwitch	:= i_bYHomingSwitch;	
+bY2HomingSwitch	:= i_bY2HomingSwitch;	
+bXHomingSwitch	:= i_bXHomingSwitch;	
 bZHomingSwitch	:= i_bZHomingSwitch;
 
 // Limit Switch Inputs
 
-bXLimitSwitch	:= i_bXLimitSwitch;
-bYLimitSwitch	:= i_bYLimitSwitch;]]></ST>
+bYLimitSwitch	:= i_bYLimitSwitch;
+bXLimitSwitch	:= i_bXLimitSwitch;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_LimitSwitchLogic" Id="{d221ad2e-2e3c-403f-a0d1-ca7284c8dd6e}">
@@ -365,21 +365,21 @@ END_VAR
         <ST><![CDATA[// Limit Switch Logic // Ignore "Home sensors" while running home routines. otherwise use Homing sensors to trigger a limit switch stop
 
 IF ProgramCall <> eNull THEN    
-    bXNegativeLimit  := FALSE;
-    bX2NegativeLimit := FALSE;
     bYNegativeLimit  := FALSE;
+    bY2NegativeLimit := FALSE;
+    bXNegativeLimit  := FALSE;
     bZPositiveLimit  := FALSE;
-    bXStopTrigger(CLK:= bXLimitSwitch);
-    bYStopTrigger(CLK:=bYLimitSwitch);
+    bYStopTrigger(CLK:= bYLimitSwitch);
+    bXStopTrigger(CLK:=bXLimitSwitch);
     bZStopTrigger(CLK:= FALSE);    
 ELSE
-    bXNegativeLimit := bXHomingSwitch;
-    bX2NegativeLimit := bX2HomingSwitch;
     bYNegativeLimit := bYHomingSwitch;
+    bY2NegativeLimit := bY2HomingSwitch;
+    bXNegativeLimit := bXHomingSwitch;
     bZPositiveLimit := bZHomingSwitch;
     //Stop Triggers
-    bXStopTrigger(CLK:=bXNegativeLimit OR bX2NegativeLimit OR bXLimitSwitch);
-    bYStopTrigger(CLK:=bYNegativeLimit OR bYLimitSwitch);
+    bYStopTrigger(CLK:=bYNegativeLimit OR bY2NegativeLimit OR bYLimitSwitch);
+    bXStopTrigger(CLK:=bXNegativeLimit OR bXLimitSwitch);
     bZStopTrigger(CLK:=bZPositiveLimit);    
 END_IF
 
@@ -401,21 +401,20 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-// Execute homing on all axes simultaneously
+        <ST><![CDATA[// Execute homing on all axes simultaneously
 // If there is an error during any Axis homing, continue with all other axes but return and error message of some sort i.e "X axis failed to Home" or something similar
 
 CASE nHomeAllSeq OF
 		 		
 0:
    M_PRG_HomeAll := FALSE;
-   bXHomeDone := M_PRG_HomeX();
-   IF bXHomeDone THEN
+   bYHomeDone := M_PRG_HomeY();
+   IF bYHomeDone THEN
      nHomeAllSeq:=10;
    END_IF
 10:
-   bYHomeDone := M_PRG_HomeY();
-   IF bYHomeDone THEN
+   bXHomeDone := M_PRG_HomeX();
+   IF bXHomeDone THEN
        nHomeAllSeq:=20;
    END_IF
 20:
@@ -424,13 +423,64 @@ CASE nHomeAllSeq OF
        nHomeAllSeq:=30;
    END_IF
 30:
-    M_PRG_HomeAll := bXHomeDone AND bYHomeDone AND bZHomeDone;  
+    M_PRG_HomeAll := bYHomeDone AND bXHomeDone AND bZHomeDone;  
 	
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PRG_HomeX" Id="{1d12177f-1165-4fe4-893e-75362f34ca0e}">
+    <Method Name="M_PRG_HomeX" Id="{0559bf4f-f4eb-40eb-a1a9-aef1d5d76984}">
       <Declaration><![CDATA[METHOD M_PRG_HomeX : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+
+CASE nHomeXSeq OF
+		 		
+
+	0:
+        M_PRG_HomeX := FALSE;
+		//bProgramDone := FALSE;
+		bAxisEnable:=TRUE;
+		nHomeXSeq :=10;	
+	
+	10:
+	
+		IF X_MC_OUT.bPowerStatus THEN
+			
+			bHomeX := TRUE;
+			nHomeXSeq:=20;
+		
+		ELSE
+
+			nHomeXSeq:=0;		
+		
+		END_IF
+	
+	20:
+		IF X_MC_OUT.bAxisHomed THEN
+			
+			bHomeX:= FALSE;
+			nHomeXSeq:=30;
+		
+		END_IF
+		
+	30:
+		
+		//bAxisEnable:=FALSE;
+		nHomeXSeq:=0;
+		//bProgramDone := TRUE;
+        M_PRG_HomeX := TRUE;
+
+
+
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_PRG_HomeY" Id="{1d12177f-1165-4fe4-893e-75362f34ca0e}">
+      <Declaration><![CDATA[METHOD M_PRG_HomeY : BOOL
 VAR_INPUT
 END_VAR
 
@@ -440,85 +490,85 @@ END_VAR]]></Declaration>
         <ST><![CDATA[
 
 
-CASE eHomeXSeq OF
+CASE eHomeYSeq OF
 		 		
 
 Init:
 
-        M_PRG_HomeX:= FALSE;
+        M_PRG_HomeY:= FALSE;
 		//bProgramDone := FALSE;
 		bAxisEnable:=TRUE;
         bGearInExecute := TRUE;
-        IF X_MC_OUT.bGearInDone THEN     
-            eHomeXSeq :=Power_On;
+        IF Y_MC_OUT.bGearInDone THEN     
+            eHomeYSeq :=Power_On;
 		END_IF
 			
 	
 Power_On:
 
 	    // Home Both Axes Together
-		IF X_MC_OUT.bPowerStatus THEN
+		IF Y_MC_OUT.bPowerStatus THEN
 			
-			bHomeX := TRUE;
-			eHomeXSeq:=Check_Homed;
+			bHomeY := TRUE;
+			eHomeYSeq:=Check_Homed;
 		
 		ELSE
 
-			eHomeXSeq:=Init;		
+			eHomeYSeq:=Init;		
 		
 		END_IF
 	
 Check_Homed:
 
-		IF X_MC_OUT.bAxisHomed THEN
+		IF Y_MC_OUT.bAxisHomed THEN
 			
-			bHomeX:= FALSE;
-			eHomeXSeq:=Home_X1;
+			bHomeY:= FALSE;
+			eHomeYSeq:=Home_Y1;
 		
 		END_IF
         
-Home_X1:
+Home_Y1:
         // Decouple Axes for individual Homing
         
-        //X1 Homing
+        //Y1 Homing
         bGearInExecute := FALSE;
         bGearOutExecute:= TRUE;
-        IF X_MC_OUT.bPowerStatus AND X_MC_OUT.bGearOutDone THEN
-			bHomeX := TRUE;
-			eHomeXSeq:=X1_Homed;
+        IF Y_MC_OUT.bPowerStatus AND Y_MC_OUT.bGearOutDone THEN
+			bHomeY := TRUE;
+			eHomeYSeq:=Y1_Homed;
         ELSE
             bAxisEnable:=TRUE;
             bAxisReset:=TRUE;
-            eHomeXSeq:=Home_X1;
+            eHomeYSeq:=Home_Y1;
         END_IF
         
-X1_Homed:
+Y1_Homed:
      
-        IF X_MC_OUT.bAxisHomed THEN
+        IF Y_MC_OUT.bAxisHomed THEN
 			
-			bHomeX:= FALSE;
-			eHomeXSeq:=Home_X2;
+			bHomeY:= FALSE;
+			eHomeYSeq:=Home_Y2;
 		
 		END_IF
 
-Home_X2:
-        // X2 Homing
-       IF X2_MC_OUT.bPowerStatus AND X2_MC_OUT.bGearOutDone THEN
+Home_Y2:
+        // Y2 Homing
+       IF Y2_MC_OUT.bPowerStatus AND Y2_MC_OUT.bGearOutDone THEN
 			
-			bHomeX2 := TRUE;
-			eHomeXSeq:=X2_Homed;
+			bHomeY2 := TRUE;
+			eHomeYSeq:=Y2_Homed;
         ELSE
             bAxisEnable:=TRUE;
             bAxisReset:=TRUE;
-            eHomeXSeq:=Home_X2;
+            eHomeYSeq:=Home_Y2;
         END_IF
         
-X2_Homed:
+Y2_Homed:
       
-        IF X2_MC_OUT.bAxisHomed THEN
+        IF Y2_MC_OUT.bAxisHomed THEN
 			
-			bHomeX2:= FALSE;
-			eHomeXSeq:=Gear_In;
+			bHomeY2:= FALSE;
+			eHomeYSeq:=Gear_In;
 		
 		END_IF
         
@@ -526,69 +576,18 @@ X2_Homed:
 Gear_In:
         bGearOutExecute:=FALSE;
         bGearInExecute:=TRUE;
-        IF X_MC_OUT.bGearInDone THEN
-            eHomeXSeq:=End_Sequence;      
+        IF Y_MC_OUT.bGearInDone THEN
+            eHomeYSeq:=End_Sequence;      
 		END_IF
         
         
 End_Sequence:
 		
 		//bAxisEnable:=FALSE;
-		eHomeXSeq:=Init;
+		eHomeYSeq:=Init;
 		//bProgramDone := TRUE;
-        M_PRG_HomeX:= TRUE;
+        M_PRG_HomeY:= TRUE;
         
-END_CASE]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_PRG_HomeY" Id="{0559bf4f-f4eb-40eb-a1a9-aef1d5d76984}">
-      <Declaration><![CDATA[METHOD M_PRG_HomeY : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[
-
-
-CASE nHomeYSeq OF
-		 		
-
-	0:
-        M_PRG_HomeY := FALSE;
-		//bProgramDone := FALSE;
-		bAxisEnable:=TRUE;
-		nHomeYSeq :=10;	
-	
-	10:
-	
-		IF Y_MC_OUT.bPowerStatus THEN
-			
-			bHomeY := TRUE;
-			nHomeYSeq:=20;
-		
-		ELSE
-
-			nHomeYSeq:=0;		
-		
-		END_IF
-	
-	20:
-		IF Y_MC_OUT.bAxisHomed THEN
-			
-			bHomeY:= FALSE;
-			nHomeYSeq:=30;
-		
-		END_IF
-		
-	30:
-		
-		//bAxisEnable:=FALSE;
-		nHomeYSeq:=0;
-		//bProgramDone := TRUE;
-        M_PRG_HomeY := TRUE;
-
-
-
 END_CASE]]></ST>
       </Implementation>
     </Method>
@@ -651,13 +650,13 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[nHomeAllSeq:=0;
-eHomeXSeq:=Init;
-nHomeYSeq:=0;
+eHomeYSeq:=Init;
+nHomeXSeq:=0;
 nHomeZSeq:=0;
 //bProgramDone:= FALSE;
-bHomeY:=FALSE;
 bHomeX:=FALSE;
-bHomeX2:=FALSE;
+bHomeY:=FALSE;
+bHomeY2:=FALSE;
 bHomeZ:=FALSE;
 //bAxisEnable:= FALSE;
 
@@ -690,15 +689,15 @@ CASE ProgramCall OF
 	    bProgramDone:=FALSE;
 		bProgramDone := M_PRG_HomeAll();
 	
-	eHomeX:
-	
-		bProgramDone:=FALSE;
-		bProgramDone := M_PRG_HomeX();
-	
 	eHomeY:
 	
 		bProgramDone:=FALSE;
-		bProgramDone := M_PRG_HomeY();	
+		bProgramDone := M_PRG_HomeY();
+	
+	eHomeX:
+	
+		bProgramDone:=FALSE;
+		bProgramDone := M_PRG_HomeX();	
 	
 	eHomeZ:
 	
@@ -711,7 +710,7 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="3551" Count="142" />
+      <LineId Id="12501" Count="142" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_In">
@@ -788,27 +787,20 @@ END_CASE
       <LineId Id="15" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeAll">
-      <LineId Id="61" Count="1" />
-      <LineId Id="122" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="145" Count="2" />
-      <LineId Id="143" Count="0" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="148" Count="2" />
-      <LineId Id="144" Count="0" />
-      <LineId Id="117" Count="0" />
-      <LineId Id="151" Count="2" />
-      <LineId Id="118" Count="0" />
-      <LineId Id="142" Count="0" />
-      <LineId Id="11" Count="0" />
+      <LineId Id="205" Count="23" />
       <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeX">
+      <LineId Id="6" Count="5" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="46" Count="28" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="42" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_PRG_HomeY">
       <LineId Id="6" Count="6" />
       <LineId Id="146" Count="0" />
       <LineId Id="137" Count="0" />
@@ -871,16 +863,6 @@ END_CASE
       <LineId Id="44" Count="0" />
       <LineId Id="145" Count="0" />
       <LineId Id="80" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_PRG_HomeY">
-      <LineId Id="6" Count="5" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="46" Count="28" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="42" Count="2" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeZ">

@@ -7,8 +7,8 @@ TYPE E_Programs :
 	
 	eNull		:=0,
 	eHomeAll	:=1,
-	eHomeX		:=2,
-	eHomeY		:=3,
+	eHomeY		:=2,
+	eHomeX		:=3,
 	eHomeZ		:=4
 	
 );
