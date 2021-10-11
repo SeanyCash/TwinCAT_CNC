@@ -8,6 +8,7 @@ VAR_GLOBAL
 fbCNC				: FB_CNC;
 fbModbus			: FB_ModbusRTU;
 fbNCInfo            : FB_NCInfo;
+
 // Global HMI Data Structure....Better way to do this? Probably but screw it this makes the GVL/Project structure look clean.
 stHMI_In            : ST_HMI_In;
 stHMI_Out           : ST_HMI_Out;

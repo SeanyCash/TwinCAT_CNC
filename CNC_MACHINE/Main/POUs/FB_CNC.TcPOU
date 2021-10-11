@@ -326,10 +326,7 @@ stHMI_Out.stX2Ref := X2_Ref;
 stHMI_Out.stYRef  := Y_Ref;
 stHMI_Out.stZRef  := Z_Ref;
 
-stHMI_Out.sCurrentProgramSelected := sCurrentProgram;
-
-
-
+//stHMI_Out.sCurrentProgramSelected := 
 
 
 
@@ -763,9 +760,6 @@ END_CASE
       <LineId Id="48" Count="0" />
       <LineId Id="52" Count="2" />
       <LineId Id="56" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="50" Count="0" />
       <LineId Id="32" Count="7" />
       <LineId Id="10" Count="0" />
     </LineIds>

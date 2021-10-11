@@ -8,12 +8,13 @@ VAR_OUTPUT
 END_VAR
 VAR
 	
-fbADSRead		: ADSREAD;
+fbADSRead		: ADSREADEX;
 fbADSWrite		: ADSWRITE;
 
 sReadNCLine		: STRING;
 sReadNCName		: STRING;
 sReadNCFileInfo	: STRING;
+arrUDINT        : ARRAY[0..100] OF UINT;
 
 //=====================Interpreter Channel Info ====================
 
@@ -24,8 +25,11 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[M_InterpreterState();
+M_NCName();
 M_HMI_In();
-M_HMI_Out();]]></ST>
+M_HMI_Out();
+
+]]></ST>
     </Implementation>
     <Method Name="M_HMI_In" Id="{98c81108-8545-46e5-863b-c7e7d3e76574}">
       <Declaration><![CDATA[{warning 'add method implementation '}
@@ -103,12 +107,12 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbADSRead(
-					NETID:=,
+					NETID:='',
 					PORT:=500,
-					IDXGRP:=2301,
-					IDXOFFS:=20000001,
-					LEN:=,
-					DESTADDR:=,
+					IDXGRP:= ,
+					IDXOFFS:=7,
+					LEN:=SIZEOF(arrUDINT),
+					DESTADDR:=ADR(arrUDINT),
 					READ:=,
 					TMOUT:=,
 					BUSY=>,
@@ -119,7 +123,10 @@ END_VAR
     </Method>
     <LineIds Name="FB_NCInfo">
       <LineId Id="9" Count="0" />
+      <LineId Id="52" Count="0" />
       <LineId Id="30" Count="1" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="55" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCInfo.M_HMI_In">
       <LineId Id="4" Count="0" />
