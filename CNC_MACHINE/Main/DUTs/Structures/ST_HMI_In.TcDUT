@@ -32,7 +32,7 @@ fChannelOverride            : REAL :=100.0;
 
 sPrgName         : STRING[255];
 
-// Axis Jog Buttons
+// Axis Jog Functions
 
 bJogEnable       : BOOL;
 bXJogPositive    : BOOL;
@@ -42,6 +42,9 @@ bYJogNegative    : BOOL;
 bZJogPositive    : BOOL;
 bZJogNegative    : BOOL;
 eJogMode         : E_JogMode;
+fJogPosition	 : LREAL;
+fJogVelocity	 : LREAL;
+
 
 END_STRUCT
 END_TYPE

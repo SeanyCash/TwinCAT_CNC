@@ -68,11 +68,6 @@
       "keepAlive": false
     },
     {
-      "url": "Contents/StandardUnits.content",
-      "preload": false,
-      "keepAlive": false
-    },
-    {
       "url": "Contents/Status.content",
       "preload": false,
       "keepAlive": false

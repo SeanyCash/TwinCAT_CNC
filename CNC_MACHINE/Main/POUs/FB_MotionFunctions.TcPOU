@@ -20,10 +20,15 @@ bHomeExecute		        : BOOL;
 bGearingEnabled             : BOOL;
 bStopAxis                   : BOOL;
 bResetAxis                  : BOOL;
+eHomingMode					: MC_HomingMode := MC_DefaultHoming;
+
+// Jog Functions
 bJogEnable                  : BOOL;
 bJogPositive                : BOOL;
 bJogNegative                : BOOL;
 eJogMode                    : E_JogMode;
+fJogPosition				: LREAL;
+fJogVelocity				: LREAL;
 // Touch Probe Input  
 bTouchProbeTrigger          : TRIGGER_REF;		
 
@@ -167,7 +172,7 @@ END_VAR
 	Axis:= Ref, 
 	Execute:= bHomeExecute, 
 	Position:= 0.00, 
-	HomingMode:= ,//MC_DefaultHoming, 
+	HomingMode:= eHomingMode,
 	BufferMode:= , 
 	Options:= , 
 	bCalibrationCam:= bHomingInput, 
@@ -290,6 +295,15 @@ END_VAR
 	RecordedData=> );]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_ZeroAxis" Id="{c0599624-7f49-4221-b579-aca0ff43944e}">
+      <Declaration><![CDATA[METHOD M_ZeroAxis : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_MotionFunctions">
       <LineId Id="182" Count="0" />
       <LineId Id="273" Count="0" />
@@ -354,6 +368,9 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_TouchProbe">
       <LineId Id="6" Count="12" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_ZeroAxis">
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

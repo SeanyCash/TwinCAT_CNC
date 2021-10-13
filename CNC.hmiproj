@@ -285,9 +285,6 @@
     <Content Include="Contents\Main.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\StandardUnits.content">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Contents\MetricUnits.content">
       <SubType>Content</SubType>
     </Content>

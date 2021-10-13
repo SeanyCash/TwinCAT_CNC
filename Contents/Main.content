@@ -2148,4 +2148,6 @@
 }
 </script>
 </div>
+<div id="GCodeRegionDisplay" data-tchmi-type="TcHmi.Controls.System.TcHmiRegion" data-tchmi-height="508" data-tchmi-height-unit="px" data-tchmi-left="834" data-tchmi-left-unit="px" data-tchmi-top="6" data-tchmi-top-unit="px" data-tchmi-width="1055" data-tchmi-width-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
+</div>
 </div>
