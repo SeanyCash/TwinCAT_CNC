@@ -68,6 +68,11 @@
       "keepAlive": false
     },
     {
+      "url": "Contents/PathVisualization.content",
+      "preload": false,
+      "keepAlive": false
+    },
+    {
       "url": "Contents/Status.content",
       "preload": false,
       "keepAlive": false

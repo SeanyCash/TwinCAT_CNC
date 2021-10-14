@@ -114,6 +114,9 @@
     <Content Include="Contents\Jog.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Contents\PathVisualization.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\Status.content">
       <SubType>Content</SubType>
     </Content>
@@ -254,6 +257,7 @@
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
     <Folder Include="Contents" />
+    <Folder Include="JavaScript" />
     <Folder Include="Recipe Management" />
     <Folder Include="Recipe Management\Recipes" />
     <Folder Include="Server\ADS" />
