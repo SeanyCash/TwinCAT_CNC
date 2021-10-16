@@ -513,8 +513,14 @@ Init:
         M_PRG_HomeY:= FALSE;
 		//bProgramDone := FALSE;
 		bAxisEnable:=TRUE;
+        bGearOutExecute:=FALSE;
+        bGearInExecute:=FALSE;
+        eHomeYSeq:=Gear_In;
+        
+Gear_In:        
+
         bGearInExecute := TRUE;
-        IF Y_MC_OUT.bGearInDone THEN     
+        IF Y_Ref.NcToPlc.CoupleState = 1 AND Y2_Ref.NcToPlc.CoupleState = 3 THEN     
             eHomeYSeq :=Power_On;
 		END_IF
 			
@@ -535,7 +541,7 @@ Power_On:
 	
 Check_Homed:
 
-		IF Y_MC_OUT.bAxisHomed THEN
+		IF Y_MC_OUT.bAxisHomed AND Y_Ref.Status.Homed THEN
 			
 			bHomeY:= FALSE;
 			eHomeYSeq:=Home_Y1;
@@ -548,7 +554,7 @@ Home_Y1:
         //Y1 Homing
         bGearInExecute := FALSE;
         bGearOutExecute:= TRUE;
-        IF Y_MC_OUT.bPowerStatus AND Y_MC_OUT.bGearOutDone THEN
+        IF Y_MC_OUT.bPowerStatus AND Y_Ref.NcToPlc.CoupleState = 0 THEN
 			bHomeY := TRUE;
 			eHomeYSeq:=Y1_Homed;
         ELSE
@@ -559,7 +565,7 @@ Home_Y1:
         
 Y1_Homed:
      
-        IF Y_MC_OUT.bAxisHomed THEN
+        IF Y_MC_OUT.bAxisHomed AND Y_Ref.Status.Homed THEN
 			
 			bHomeY:= FALSE;
 			eHomeYSeq:=Home_Y2;
@@ -568,7 +574,7 @@ Y1_Homed:
 
 Home_Y2:
         // Y2 Homing
-       IF Y2_MC_OUT.bPowerStatus AND Y2_MC_OUT.bGearOutDone THEN
+       IF Y2_MC_OUT.bPowerStatus AND Y2_Ref.NcToPlc.CoupleState = 0 THEN
 			
 			bHomeY2 := TRUE;
 			eHomeYSeq:=Y2_Homed;
@@ -580,18 +586,18 @@ Home_Y2:
         
 Y2_Homed:
       
-        IF Y2_MC_OUT.bAxisHomed THEN
+        IF Y2_MC_OUT.bAxisHomed AND Y2_Ref.Status.Homed THEN
 			
 			bHomeY2:= FALSE;
-			eHomeYSeq:=Gear_In;
+			eHomeYSeq:= Re_Gear;
 		
 		END_IF
         
 
-Gear_In:
+Re_Gear:
         bGearOutExecute:=FALSE;
         bGearInExecute:=TRUE;
-        IF Y_MC_OUT.bGearInDone THEN
+        IF Y_Ref.NcToPlc.CoupleState = 1 AND Y2_Ref.NcToPlc.CoupleState = 3 THEN
             eHomeYSeq:=End_Sequence;      
 		END_IF
         
@@ -841,6 +847,9 @@ END_CASE
       <LineId Id="137" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="63" Count="0" />
+      <LineId Id="161" Count="1" />
+      <LineId Id="165" Count="1" />
+      <LineId Id="163" Count="1" />
       <LineId Id="69" Count="0" />
       <LineId Id="152" Count="0" />
       <LineId Id="155" Count="0" />

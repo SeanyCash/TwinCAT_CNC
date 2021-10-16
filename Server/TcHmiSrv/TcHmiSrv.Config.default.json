@@ -53,11 +53,11 @@
                             "value": 1
                         },
                         {
-                            "label": "eHomeX",
+                            "label": "eHomeY",
                             "value": 2
                         },
                         {
-                            "label": "eHomeY",
+                            "label": "eHomeX",
                             "value": 3
                         },
                         {
@@ -2341,73 +2341,23 @@
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbCNC.X2_MC_OUT.bPowerStatus": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "HIDDEN": false,
-            "MAPPING": "PLC1::GVL::fbCNC::X2_MC_OUT::bPowerStatus",
-            "OPTIONS": {},
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbCNC.X2_Ref.NcToPlc.ActPos": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "HIDDEN": false,
-            "MAPPING": "PLC1::GVL::fbCNC::X2_Ref::NcToPlc::ActPos",
-            "OPTIONS": {},
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/LREAL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbCNC.X_MC_OUT.bAxisHomed": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "HIDDEN": false,
-            "MAPPING": "PLC1::GVL::fbCNC::X_MC_OUT::bAxisHomed",
-            "OPTIONS": {},
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
         "PLC1.GVL.fbCNC.X_MC_OUT.bPowerStatus": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::X_MC_OUT::bPowerStatus",
-            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbCNC.X_Motion.Motion_Out.bPowerStatus": {
+        "PLC1.GVL.fbCNC.Y2_MC_OUT.bPowerStatus": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbCNC::X_Motion::Motion_Out::bPowerStatus",
+            "MAPPING": "PLC1::GVL::fbCNC::Y2_MC_OUT::bPowerStatus",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbCNC.X_Ref.NcToPlc.ActPos": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "HIDDEN": false,
-            "MAPPING": "PLC1::GVL::fbCNC::X_Ref::NcToPlc::ActPos",
-            "OPTIONS": {},
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/LREAL"
             },
             "USEMAPPING": true
         },
@@ -2415,23 +2365,19 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::Y_MC_OUT::bPowerStatus",
-            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbCNC.Y_Ref.NcToPlc.ActPos": {
+        "PLC1.GVL.fbCNC.Y_Ref.Status.Homed": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "HIDDEN": false,
-            "MAPPING": "PLC1::GVL::fbCNC::Y_Ref::NcToPlc::ActPos",
-            "OPTIONS": {},
+            "MAPPING": "PLC1::GVL::fbCNC::Y_Ref::Status::Homed",
             "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/LREAL"
+                "$ref": "tchmi:general#/definitions/BOOL"
             },
             "USEMAPPING": true
         },
@@ -2439,23 +2385,9 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::Z_MC_OUT::bPowerStatus",
-            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.fbCNC.Z_Ref.NcToPlc.ActPos": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "HIDDEN": false,
-            "MAPPING": "PLC1::GVL::fbCNC::Z_Ref::NcToPlc::ActPos",
-            "OPTIONS": {},
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/LREAL"
             },
             "USEMAPPING": true
         },
@@ -2610,21 +2542,11 @@
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.stHMI_Out.bX1HomeSwitch": {
+        "PLC1.GVL.stHMI_Out.bXHomeSwitch": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::stHMI_Out::bX1HomeSwitch",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.stHMI_Out.bX2HomeSwitch": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::stHMI_Out::bX2HomeSwitch",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bXHomeSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -2640,11 +2562,21 @@
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.stHMI_Out.bYHomeSwitch": {
+        "PLC1.GVL.stHMI_Out.bY1HomeSwitch": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::stHMI_Out::bYHomeSwitch",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bY1HomeSwitch",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.bY2HomeSwitch": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::bY2HomeSwitch",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -2700,26 +2632,6 @@
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.stHMI_Out.stX2Ref.NcToPlc.ActPos": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::stHMI_Out::stX2Ref::NcToPlc::ActPos",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/LREAL"
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.GVL.stHMI_Out.stX2Ref.Status.Homed": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::stHMI_Out::stX2Ref::Status::Homed",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
         "PLC1.GVL.stHMI_Out.stXRef.NcToPlc.ActPos": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2735,6 +2647,26 @@
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::Status::Homed",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stY2Ref.NcToPlc.ActPos": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::NcToPlc::ActPos",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stY2Ref.Status.Homed": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::Status::Homed",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },

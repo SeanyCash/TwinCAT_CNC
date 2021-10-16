@@ -3,15 +3,16 @@
   <DUT Name="E_HomeY" Id="{7737f691-b37c-43b8-aec3-3723fe7e4366}">
     <Declaration><![CDATA[TYPE E_HomeY :
 (
-	Init := 0,
-    Power_On :=1,
-    Check_Homed :=2,
-    Home_Y1 :=3,
-    Y1_Homed :=4,
-    Home_Y2 :=5,
-    Y2_Homed :=6,
-    Gear_In :=7,
-    End_Sequence :=8
+	Init,
+    Gear_In,
+    Power_On,
+    Check_Homed,
+    Home_Y1,
+    Y1_Homed,
+    Home_Y2,
+    Y2_Homed,
+    Re_Gear,
+    End_Sequence
     
 );
 END_TYPE
