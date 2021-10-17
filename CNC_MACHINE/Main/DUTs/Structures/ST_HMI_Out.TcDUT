@@ -40,6 +40,9 @@ stY2Ref              :Axis_Ref;
 stXRef               :Axis_Ref;
 stZRef               :Axis_Ref;
 
+// Current Jog Mode
+sJogMode             : STRING;
+
 END_STRUCT
 END_TYPE
 ]]></Declaration>

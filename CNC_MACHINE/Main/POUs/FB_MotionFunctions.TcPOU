@@ -70,7 +70,7 @@ M_Halt();
 M_Home( );
 M_Gearing( );
 M_HMI_In();
-//M_Jog();
+M_Jog();
 M_HMI_Out();
 ]]></ST>
     </Implementation>
@@ -145,8 +145,7 @@ METHOD M_HMI_In : BOOL
       </Implementation>
     </Method>
     <Method Name="M_HMI_Out" Id="{efdc3eed-d083-47b6-87cc-982569171a8a}">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD M_HMI_Out : BOOL
+      <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Axis Status
@@ -158,7 +157,24 @@ ST_HMI_Out.bX2AxisHomed:= SlaveRef.Status.Homed;
 // Position
 
 ST_HMI_Out.fActPosX := Ref.NcToPlc.ActPos;
-ST_HMI_Out.fActPosX2 := SlaveRef.NcToPlc.ActPos;*)]]></ST>
+ST_HMI_Out.fActPosX2 := SlaveRef.NcToPlc.ActPos;*)
+
+// Jog Mode Display
+
+CASE eJogMode OF
+    
+    MC_JOGMODE_STANDARD_SLOW:
+        stHMI_Out.sJogMode:= 'Slow Jog'; 
+    MC_JOGMODE_STANDARD_FAST:
+       stHMI_Out.sJogMode:= 'Fast Jog';
+    MC_JOGMODE_CONTINOUS:
+        stHMI_Out.sJogMode:= 'Continuous Jog';
+    MC_JOGMODE_INCHING:
+        stHMI_Out.sJogMode:= 'Inching Jog';
+    MC_JOGMODE_INCHING_MODULO:
+        stHMI_Out.sJogMode:= 'Inching Modulo Jog';
+        
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Home" Id="{1d749ffd-f5a6-45ff-a0e1-191b93a80305}">
@@ -342,6 +358,20 @@ END_VAR
       <LineId Id="13" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="14" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="37" Count="3" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="24" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Home">
       <LineId Id="6" Count="12" />
