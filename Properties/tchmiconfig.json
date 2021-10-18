@@ -38,6 +38,41 @@
       "name": "Fonts/Fonts.css",
       "description": "",
       "type": "Stylesheet"
+    },
+    {
+      "name": "GCode Viewer Javascript/analyzer.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/gCodeReader.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/JavaScript1.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/renderer.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/renderer3d.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/ui.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/Worker.js",
+      "description": "",
+      "type": "JavaScript"
     }
   ],
   "userControls": [],

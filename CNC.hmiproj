@@ -144,6 +144,27 @@
     <Content Include="Imports\Images\milling_angled2_pressed.svg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="GCode Viewer Javascript\analyzer.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="GCode Viewer Javascript\gCodeReader.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="GCode Viewer Javascript\JavaScript1.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="GCode Viewer Javascript\renderer.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="GCode Viewer Javascript\renderer3d.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="GCode Viewer Javascript\ui.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="GCode Viewer Javascript\Worker.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="KeyboardLayouts\German - compact.keyboard.json" />
     <Content Include="KeyboardLayouts\US - compact.keyboard.json" />
     <Content Include="packages.config" />
@@ -257,7 +278,7 @@
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
     <Folder Include="Contents" />
-    <Folder Include="JavaScript" />
+    <Folder Include="GCode Viewer Javascript" />
     <Folder Include="Recipe Management" />
     <Folder Include="Recipe Management\Recipes" />
     <Folder Include="Server\ADS" />
