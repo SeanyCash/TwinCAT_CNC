@@ -7,7 +7,12 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-    
+	
+	// Event Logger Instances	
+	fbEventLogger	: FB_TcEventLogger;
+	fbAlarm			: FB_TcAlarm;
+	fbMessage		: FB_TcMessage;
+   // Motion Function Instances 
 	Y_Motion		: FB_MotionFunctions;
 	Y2_Motion 		: FB_MotionFunctions;
 	X_Motion		: FB_MotionFunctions;
@@ -455,6 +460,7 @@ CASE nHomeXSeq OF
 		 		
 
 	0:
+		fbMessage.CreateEx(TC_Events.CNC_Events.X_Home_Start, 0); // "X Homing Started"
 	    eHomingMode := MC_DefaultHoming;
         M_PRG_HomeX := FALSE;
 		//bProgramDone := FALSE;
@@ -509,6 +515,7 @@ CASE eHomeYSeq OF
 		 		
 
 Init:
+		fbMessage.CreateEx(TC_Events.CNC_Events.Y_Home_Start, 0);	// "Y Homing Started"
         eHomingMode := MC_DefaultHoming;
         M_PRG_HomeY:= FALSE;
 		//bProgramDone := FALSE;
@@ -625,6 +632,7 @@ CASE nHomeZSeq OF
 		 		
 
 	0:
+		fbMessage.CreateEx(TC_Events.CNC_Events.Z_Home_Start, 0); // "Z Homing Started"
 	    eHomingMode := MC_DefaultHoming;
         M_PRG_HomeZ := FALSE;
 		//bProgramDone := FALSE;
@@ -833,6 +841,7 @@ END_CASE
     <LineIds Name="FB_CNC.M_PRG_HomeX">
       <LineId Id="6" Count="5" />
       <LineId Id="45" Count="0" />
+      <LineId Id="87" Count="0" />
       <LineId Id="83" Count="0" />
       <LineId Id="78" Count="0" />
       <LineId Id="46" Count="28" />
@@ -843,6 +852,7 @@ END_CASE
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeY">
       <LineId Id="6" Count="6" />
+      <LineId Id="172" Count="0" />
       <LineId Id="146" Count="0" />
       <LineId Id="137" Count="0" />
       <LineId Id="13" Count="0" />
@@ -912,6 +922,7 @@ END_CASE
     <LineIds Name="FB_CNC.M_PRG_HomeZ">
       <LineId Id="6" Count="5" />
       <LineId Id="45" Count="0" />
+      <LineId Id="87" Count="0" />
       <LineId Id="83" Count="0" />
       <LineId Id="78" Count="0" />
       <LineId Id="46" Count="28" />
