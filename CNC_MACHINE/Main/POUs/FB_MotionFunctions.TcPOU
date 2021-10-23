@@ -59,11 +59,26 @@ mcJog           : MC_Jog;
 
 mcTouchProbe    : MC_TouchProbe;
 
+// Event Logger Instances	
+fbEventLogger	: FB_TcEventLogger;
+fbAlarm			: FB_TcAlarm;
+fbMessage		: FB_TcMessage;
+bSendEvent    : BOOL;
+bInitEvent    : BOOL;
 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[M_PowerStepper();
+      <ST><![CDATA[IF bInitEvent THEN
+    bInitEvent := FALSE; 
+    fbMessage.CreateEx(TC_Events.CNC_Events.X_Home_Start,0); 
+END_IF
+IF bSendEvent THEN 
+    bSendEvent := FALSE; 
+    fbMessage.Send(0); 
+END_IF
+
+M_PowerStepper();
 M_Reset();
 M_Stop();
 M_Halt();
@@ -321,6 +336,8 @@ END_VAR
       </Implementation>
     </Method>
     <LineIds Name="FB_MotionFunctions">
+      <LineId Id="391" Count="6" />
+      <LineId Id="386" Count="1" />
       <LineId Id="182" Count="0" />
       <LineId Id="273" Count="0" />
       <LineId Id="183" Count="3" />

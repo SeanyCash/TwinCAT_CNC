@@ -3,7 +3,7 @@
   <GVL Name="GVL" Id="{1cf9ca76-df72-4f66-8cff-9316cd7fcaa5}">
     <Declaration><![CDATA[
 VAR_GLOBAL
-
+    
 // Main FB Calls
 fbCNC				: FB_CNC;
 fbModbus			: FB_ModbusRTU;

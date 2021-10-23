@@ -8,10 +8,12 @@ VAR_OUTPUT
 END_VAR
 VAR
 	
-	// Event Logger Instances	
-	fbEventLogger	: FB_TcEventLogger;
-	fbAlarm			: FB_TcAlarm;
-	fbMessage		: FB_TcMessage;
+    // Event Logger Instances	
+    fbEventLogger	: FB_TcEventLogger;
+    fbAlarm			: FB_TcAlarm;
+    fbMessage		: FB_TcMessage;
+    bSendEvent    : BOOL;
+    bInitEvent    : BOOL;
    // Motion Function Instances 
 	Y_Motion		: FB_MotionFunctions;
 	Y2_Motion 		: FB_MotionFunctions;
@@ -106,7 +108,19 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Trigger Axis Gearing
+      <ST><![CDATA[
+IF bInitEvent THEN
+    bInitEvent := FALSE; 
+    fbMessage.CreateEx(TC_Events.CNC_Events.X_Home_Start,0); 
+END_IF
+IF bSendEvent THEN 
+    bSendEvent := FALSE; 
+    fbMessage.Send(0); 
+END_IF
+
+
+
+// Trigger Axis Gearing
 
 rtrigAxisNotGeared(CLK := Y_MC_OUT.bPowerStatus AND NOT Y_MC_OUT.bGearInDone);
 
@@ -740,23 +754,9 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="12501" Count="45" />
-      <LineId Id="12741" Count="1" />
-      <LineId Id="12547" Count="4" />
-      <LineId Id="12753" Count="0" />
-      <LineId Id="12552" Count="14" />
-      <LineId Id="12743" Count="1" />
-      <LineId Id="12567" Count="4" />
-      <LineId Id="12752" Count="0" />
-      <LineId Id="12572" Count="12" />
-      <LineId Id="12745" Count="1" />
-      <LineId Id="12585" Count="4" />
-      <LineId Id="12751" Count="0" />
-      <LineId Id="12590" Count="12" />
-      <LineId Id="12747" Count="1" />
-      <LineId Id="12603" Count="4" />
-      <LineId Id="12749" Count="0" />
-      <LineId Id="12608" Count="35" />
+      <LineId Id="13077" Count="0" />
+      <LineId Id="13237" Count="6" />
+      <LineId Id="13078" Count="158" />
       <LineId Id="680" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_In">
