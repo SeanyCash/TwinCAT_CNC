@@ -179,15 +179,15 @@ ST_HMI_Out.fActPosX2 := SlaveRef.NcToPlc.ActPos;*)
 CASE eJogMode OF
     
     MC_JOGMODE_STANDARD_SLOW:
-        stHMI_Out.sJogMode:= 'Slow Jog'; 
+        stHMI_Out.sJogMode:= 'SLOW JOG'; 
     MC_JOGMODE_STANDARD_FAST:
-       stHMI_Out.sJogMode:= 'Fast Jog';
+       stHMI_Out.sJogMode:= 'FAST JOG';
     MC_JOGMODE_CONTINOUS:
-        stHMI_Out.sJogMode:= 'Continuous Jog';
+        stHMI_Out.sJogMode:= 'CONTINUOUS JOG';
     MC_JOGMODE_INCHING:
-        stHMI_Out.sJogMode:= 'Inching Jog';
+        stHMI_Out.sJogMode:= 'INCHING JOG';
     MC_JOGMODE_INCHING_MODULO:
-        stHMI_Out.sJogMode:= 'Inching Modulo Jog';
+        stHMI_Out.sJogMode:= 'INCHING MODULO JOG';
         
 END_CASE]]></ST>
       </Implementation>

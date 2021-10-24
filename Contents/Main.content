@@ -2003,7 +2003,7 @@
 ]
 </script>
 </div>
-<div id="TcHmiTextblockCallPage_Main_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="24" data-tchmi-height-unit="px" data-tchmi-left="955" data-tchmi-left-unit="px" data-tchmi-text="JOGGING" data-tchmi-top="520" data-tchmi-top-unit="px" data-tchmi-width="80" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="1" data-tchmi-text-font-size="14" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-creator-locked="True">
+<div id="TcHmiTextblockCallPage_Jog" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="24" data-tchmi-height-unit="px" data-tchmi-left="955" data-tchmi-left-unit="px" data-tchmi-text="JOGGING" data-tchmi-top="520" data-tchmi-top-unit="px" data-tchmi-width="80" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="1" data-tchmi-text-font-size="14" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-creator-locked="True">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
   "angle": 0.0,
@@ -2023,7 +2023,7 @@
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "event": "TcHmiTextblockCallPage_Main_1.onPressed",
+    "event": "TcHmiTextblockCallPage_Jog.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -2061,7 +2061,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Main_1::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Jog::BackgroundColor%/ctrl%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2078,7 +2078,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Main_1::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Jog::BackgroundColor%/ctrl%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2094,7 +2094,7 @@
     ]
   },
   {
-    "event": "TcHmiTextblockCallPage_Main_1.onMouseLeave",
+    "event": "%ctrl%Jog_Region::TargetContent%/ctrl%",
     "actions": [
       {
         "objectType": "Condition",
@@ -2105,7 +2105,7 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
+                  "valueType": "tchmi:framework#/definitions/ContentPath",
                   "symbolExpression": "%ctrl%Jog_Region::TargetContent%/ctrl%"
                 },
                 "compare2": {
@@ -2113,7 +2113,7 @@
                   "valueType": "tchmi:framework#/definitions/ContentPath",
                   "value": "Contents/Jog.content"
                 },
-                "compareOperator": "!=",
+                "compareOperator": "==",
                 "logic": null
               }
             ],
@@ -2121,7 +2121,24 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Main_1::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Jog::BackgroundColor%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Color",
+                  "value": {
+                    "color": "rgba(210, 177, 91, 1)"
+                  }
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Jog::BackgroundColor%/ctrl%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2130,29 +2147,8 @@
                 "asyncWait": true
               }
             ]
-          },
-          {
-            "else": []
           }
         ],
-        "asyncWait": true
-      }
-    ]
-  },
-  {
-    "event": "TcHmiTextblockCallPage_Main_1.onInitialized",
-    "actions": [
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Main_1::BackgroundColor%/ctrl%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:framework#/definitions/Color",
-          "value": {
-            "color": "rgba(210, 177, 91, 1)"
-          }
-        },
         "asyncWait": true
       }
     ]
@@ -2186,7 +2182,7 @@
 {
   "left": 1,
   "right": 1,
-  "top": 0,
+  "top": 1,
   "bottom": 0,
   "leftUnit": "px",
   "rightUnit": "px",

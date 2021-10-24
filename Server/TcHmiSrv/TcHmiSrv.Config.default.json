@@ -2780,6 +2780,35 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.stXRef.NcToPlc.ActVelo": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::NcToPlc::ActVelo",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stXRef.Status.ErrorID": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::Status::ErrorID",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UDINT"
+                    },
+                    {
+                        "attributes": {
+                            "displaymode": "hex"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.stXRef.Status.Homed": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2797,6 +2826,35 @@
             "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::NcToPlc::ActPos",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stY2Ref.NcToPlc.ActVelo": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::NcToPlc::ActVelo",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stY2Ref.Status.ErrorID": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::Status::ErrorID",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UDINT"
+                    },
+                    {
+                        "attributes": {
+                            "displaymode": "hex"
+                        }
+                    }
+                ]
             },
             "USEMAPPING": true
         },
@@ -2820,6 +2878,35 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.stYRef.NcToPlc.ActVelo": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stYRef::NcToPlc::ActVelo",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stYRef.Status.ErrorID": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stYRef::Status::ErrorID",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UDINT"
+                    },
+                    {
+                        "attributes": {
+                            "displaymode": "hex"
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.stYRef.Status.Homed": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2837,6 +2924,35 @@
             "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::NcToPlc::ActPos",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stZRef.NcToPlc.ActVelo": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::NcToPlc::ActVelo",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stZRef.Status.ErrorID": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::Status::ErrorID",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/UDINT"
+                    },
+                    {
+                        "attributes": {
+                            "displaymode": "hex"
+                        }
+                    }
+                ]
             },
             "USEMAPPING": true
         },

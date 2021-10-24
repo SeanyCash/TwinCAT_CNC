@@ -38,13 +38,19 @@
     "columnName": "type"
   },
   {
-    "columnName": "severity"
+    "columnName": "severity",
+    "width": 5,
+    "widthUnit": "%"
   },
   {
-    "columnName": "timeAndDateRaised"
+    "columnName": "timeAndDateRaised",
+    "width": 20,
+    "widthUnit": "%"
   },
   {
-    "columnName": "text"
+    "columnName": "text",
+    "width": 72,
+    "widthUnit": "%"
   }
 ]
 </script>
