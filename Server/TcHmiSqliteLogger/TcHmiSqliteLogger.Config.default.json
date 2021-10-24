@@ -1,0 +1,7 @@
+{
+    "DEFAULT_LIST_LIMIT": 1000,
+    "MAXENTRIES": 100000,
+    "MAXENTRYLENGTH": 1024,
+    "MODE": 1,
+    "VACUUM_ON_STARTUP": false
+}

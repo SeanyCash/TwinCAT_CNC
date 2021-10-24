@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_Motion_Outputs" Id="{d45432dd-9166-40cd-8f6e-bb88346a8049}">
+    <Declaration><![CDATA[TYPE ST_Motion_Outputs :
+STRUCT
+	
+// MC_PowerStepper
+	
+bPowerStatus		: BOOL;
+bPowerError			: BOOL;
+nPowerErrorID		: UDINT;
+bPowerStalled		: BOOL;
+bPowerStallError	: BOOL;
+
+// MC_Stop
+
+bStopDone			: BOOL;
+bStopBusy			: BOOL;
+bStopActive			: BOOL;
+bStopAbort			: BOOL;
+bStopError			: BOOL;
+nStopErrorID		: UDINT;
+
+// MC_Halt
+
+bHaltDone			: BOOL;
+bHaltBusy			: BOOL;
+bHaltActive			: BOOL;
+bHaltAbort			: BOOL;
+bHaltError			: BOOL;
+nHaltErrorID		: UDINT;
+
+// MC_Home
+
+bAxisHomed			: BOOL;
+bHomeBusy			: BOOL;
+bHomeActive			: BOOL;
+bHomeAborted		: BOOL;
+bHomeError			: BOOL;
+bHomeErrorID		: UDINT;
+
+// MC_Reset
+
+bResetDone          : BOOL;
+bResetBusy          : BOOL;
+bResetError         : BOOL;
+nResetErrorID       : UDINT;
+
+// MC Gear
+bGearInDone		    : BOOL;
+bGearOutDone        : BOOL;
+nGearErrorID        : UDINT;
+
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

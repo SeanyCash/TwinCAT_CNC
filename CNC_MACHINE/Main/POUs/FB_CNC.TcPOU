@@ -1,130 +1,226 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC IMPLEMENTS I_HMI;
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	mcBuildGroup	: CfgBuildExt3DGroup;	
-
-	X_Motion		: FB_MotionFunctions;
-	X2_Motion 		: FB_MotionFunctions;
+	
+    // Event Logger Instances	
+    fbEventLogger	: FB_TcEventLogger;
+    fbAlarm			: FB_TcAlarm;
+    fbMessage		: FB_TcMessage;
+    bSendEvent    : BOOL;
+    bInitEvent    : BOOL;
+   // Motion Function Instances 
 	Y_Motion		: FB_MotionFunctions;
+	Y2_Motion 		: FB_MotionFunctions;
+	X_Motion		: FB_MotionFunctions;
 	Z_Motion		: FB_MotionFunctions;
     
-    eHomeXSeq       : E_HomeX;
+    eHomeYSeq       : E_HomeY;
 	
 	
-	X_MC_IN			: ST_Motion_Inputs;
-	X2_MC_IN		: ST_Motion_Inputs;
 	Y_MC_IN			: ST_Motion_Inputs;
+	Y2_MC_IN		: ST_Motion_Inputs;
+	X_MC_IN			: ST_Motion_Inputs;
 	Z_MC_IN			: ST_Motion_Inputs;
 	
-	X_MC_OUT		: ST_Motion_Outputs;
-	X2_MC_OUT		: ST_Motion_Outputs;
 	Y_MC_OUT		: ST_Motion_Outputs;
+	Y2_MC_OUT		: ST_Motion_Outputs;
+	X_MC_OUT		: ST_Motion_Outputs;
 	Z_MC_OUT		: ST_Motion_Outputs;
 	
 	
-	X_Ref	        : AXIS_REF;
-	X2_Ref	        : AXIS_REF;
 	Y_Ref	        : AXIS_REF;
+	Y2_Ref	        : AXIS_REF;
+	X_Ref	        : AXIS_REF;
 	Z_Ref	        : AXIS_REF;
 	
 	
-	i_bXHomingSwitch		AT %I* : BOOL;
-	i_bX2HomingSwitch		AT %I* : BOOL;
-    i_bXLimitSwitch			AT %I* : BOOL;
 	i_bYHomingSwitch		AT %I* : BOOL;
+	i_bY2HomingSwitch		AT %I* : BOOL;
     i_bYLimitSwitch			AT %I* : BOOL;
+	i_bXHomingSwitch		AT %I* : BOOL;
+    i_bXLimitSwitch			AT %I* : BOOL;
 	i_bZHomingSwitch		AT %I* : BOOL;
+    i_stItpToPlc	AT %I*:	NcToPlc_NciChannel_Ref;
+	q_stPlcToItp	AT %Q*:	PLCTONC_NCICHANNEL_REF;
     
-    
+   // Homing / Limit Proxes 
 	
-	bXHomingSwitch		: BOOL;
-	bX2HomingSwitch		: BOOL;
 	bYHomingSwitch		: BOOL;
-	bZHomingSwitch		: BOOL;
-    bXLimitSwitch		: BOOL;
+	bY2HomingSwitch		: BOOL;
 	bYLimitSwitch		: BOOL;
+	bYNegativeLimit     : BOOL;
+    bY2NegativeLimit    : BOOL;
+	bXHomingSwitch		: BOOL;
+	bZHomingSwitch		: BOOL;
+	bXLimitSwitch		: BOOL; 
+    bXNegativeLimit     : BOOL;
+    bZPositiveLimit     : BOOL;
+    
+    // Limit Switch Stop Triggers (use to one shot a stop command when axis limit switch is triggered)
+    bYStopTrigger       : R_TRIG;
+    bXStopTrigger       : R_TRIG;
+    bZStopTrigger       : R_TRIG;
 	
 	
-	bHomeX		    : BOOL;
-	bHomeX2		    : BOOL;
 	bHomeY		    : BOOL;
+	bHomeY2		    : BOOL;
+	bHomeX		    : BOOL;
 	bHomeZ		    : BOOL;
+	eHomingMode		: MC_HomingMode;
     bGearInTrigger  : BOOL;
     rGearInTrigger  : R_TRIG;
     rtrigAxisNotGeared  : R_TRIG;
+	bAllAxesReady	: BOOL;
+    bAllAxesHomed   : BOOL;
+    
+    trigProgramCall : R_TRIG;
+    trigAxisEnable : R_TRIG;
 
 	
 // Program Call Variables	
 	
 	nHomeAllSeq	: INT;
-	nHomeXSeq	: INT;
 	nHomeYSeq	: INT;
+	nHomeXSeq	: INT;
 	nHomeZSeq	: INT;
+    
+    bYHomeDone  : BOOL;
+    bXHomeDone  : BOOL;
+    bZHomeDone  : BOOL;
 	
 	ProgramCall	: E_Programs;
     sCurrentProgram : STRING;
+    
+    
+    fbSimpleNciSequence:	FB_NciSequence;
+	bExecuteNCI:	BOOL	:= FALSE;
+    fChannelOverride        : REAL;
+    sPrgName                : STRING[255];
+    
 	
 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Motion Calls
-
-rtrigAxisNotGeared(CLK := X_MC_OUT.bPowerStatus AND NOT X_MC_OUT.bGearInDone);
-
-rGearInTrigger(CLK:= bGearInTrigger);
-bGearInExecute:= rGearInTrigger.Q;
-
-IF rtrigAxisNotGeared.Q THEN
-    
-    bGearInTrigger := TRUE;
-    
-ELSE 
-    
-    bGearInTrigger := FALSE;
-
+      <ST><![CDATA[
+IF bInitEvent THEN
+    bInitEvent := FALSE; 
+    fbMessage.CreateEx(TC_Events.CNC_Events.X_Home_Start,0); 
+END_IF
+IF bSendEvent THEN 
+    bSendEvent := FALSE; 
+    fbMessage.Send(0); 
 END_IF
 
 
-X_Motion( 
-			Ref:= X_Ref,
+
+// Trigger Axis Gearing
+
+rtrigAxisNotGeared(CLK := Y_MC_OUT.bPowerStatus AND NOT Y_MC_OUT.bGearInDone);
+
+rGearInTrigger(CLK:= bGearInTrigger);
+
+(*IF ProgramCall <> (eHomeX OR eHomeAll) THEN
+bGearInExecute:= rGearInTrigger.Q;
+END_IF*)
+
+(*IF rtrigAxisNotGeared.Q THEN
+    bGearInTrigger := TRUE;
+ELSE 
+    bGearInTrigger := FALSE;
+END_IF*)
+
+// Rising triggers for HMI control. Having issues calling directly in the Methods
+trigAxisEnable(CLK := stHMI_In.bAxisEnable);
+
+
+// Call Axis Status Action
+
+Y_Ref.ReadStatus();
+Y2_Ref.ReadStatus();
+X_Ref.ReadStatus();
+Z_Ref.ReadStatus();
+
+// Call HMI Interface Methods
+
+M_HMI_In();
+M_HMI_Out();
+
+// Call Limit Switch Logic
+
+M_LimitSwitchLogic();
+
+// Motion Calls
+
+Y_Motion( 
+			Ref:= Y_Ref,
             bGearingEnabled := TRUE,
-            SlaveRef:= X2_Ref,
-		  	Motion_In := X_MC_IN,
-		  	Motion_Out => X_MC_OUT,
-			bHomingInput := bXHomingSwitch,
-			bPositiveLimitSwitch := bXLimitSwitch,
-			bHomeExecute := bHomeX,
+            SlaveRef:= Y2_Ref,
+		  	Motion_In := Y_MC_IN,
+		  	Motion_Out => Y_MC_OUT,
+            bJogEnable:= stHMI_In.bJogEnable AND Y_Ref.NcToPlc.CoupleState = 1,
+            eJogMode:= stHMI_In.eJogMode,
+			fJogPosition:= stHMI_In.fJogPosition,
+			fJogVelocity:= stHMI_In.fJogVelocity,
+            bJogPositive := stHMI_In.bYJogPositive,
+            bJogNegative := stHMI_In.bYJogNegative,
+            bStopAxis := bStopExecute OR bYStopTrigger.Q,
+            bResetAxis := bAxisReset,
+			bHomingInput := bYHomingSwitch,
+			eHomingMode := eHomingMode,
+			bPositiveLimitSwitch := bYLimitSwitch,
+            bNegativeLimitSwitch := bYNegativeLimit OR bY2NegativeLimit,
+			bHomeExecute := bHomeY,
 										);
                                         
 
 							
-X2_Motion( 
-			Ref:= X2_Ref,
-            bGearingEnabled := FALSE,
-            SlaveRef:= X2_Ref,
-		  	Motion_In := X2_MC_IN,
-		  	Motion_Out => X2_MC_OUT,
-			bHomingInput := bX2HomingSwitch,
-			bPositiveLimitSwitch := bXLimitSwitch,
-			bHomeExecute := bHomeX2
+Y2_Motion( 
+			Ref:= Y2_Ref,
+            bGearingEnabled := TRUE,
+            SlaveRef:= Y2_Ref,
+		  	Motion_In := Y2_MC_IN,
+		  	Motion_Out => Y2_MC_OUT,
+            bJogEnable:= stHMI_In.bJogEnable AND Y2_Ref.NcToPlc.CoupleState = 3,
+            eJogMode:= stHMI_In.eJogMode,
+			fJogPosition:= stHMI_In.fJogPosition,
+			fJogVelocity:= stHMI_In.fJogVelocity,
+            bJogPositive := stHMI_In.bYJogPositive,
+            bJogNegative := stHMI_In.bYJogNegative,
+            bStopAxis := bStopExecute OR bYStopTrigger.Q,
+            bResetAxis := bAxisReset,
+			bHomingInput := bY2HomingSwitch,
+			eHomingMode := eHomingMode,
+			bPositiveLimitSwitch := bYLimitSwitch,
+            bNegativeLimitSwitch := bY2NegativeLimit OR bYNegativeLimit,
+			bHomeExecute := bHomeY2
 										);
 						
-Y_Motion( 
-			Ref:= Y_Ref,
+X_Motion( 
+			Ref:= X_Ref,
             bGearingEnabled := FALSE,
-            SlaveRef:= Y_Ref,
-		  	Motion_In := Y_MC_IN,
-		  	Motion_Out => Y_MC_OUT,
-			bHomingInput := bYHomingSwitch,
-			bPositiveLimitSwitch := bYLimitSwitch,
-			bHomeExecute := bHomeY
+            SlaveRef:= X_Ref,
+		  	Motion_In := X_MC_IN,
+		  	Motion_Out => X_MC_OUT,
+            bJogEnable:= stHMI_In.bJogEnable,
+            eJogMode:= stHMI_In.eJogMode,
+			fJogPosition:= stHMI_In.fJogPosition,
+			fJogVelocity:= stHMI_In.fJogVelocity,
+            bJogPositive := stHMI_In.bXJogPositive,
+            bJogNegative := stHMI_In.bXJogNegative,
+            bStopAxis := bStopExecute OR bXStopTrigger.Q,
+            bResetAxis := bAxisReset,
+			bHomingInput := bXHomingSwitch,
+			eHomingMode := eHomingMode,
+			bPositiveLimitSwitch := bXLimitSwitch,
+            bNegativeLimitSwitch := bXNegativeLimit,
+			bHomeExecute := bHomeX
 										);
 							
 Z_Motion( 
@@ -133,16 +229,146 @@ Z_Motion(
             SlaveRef:= Z_Ref,
 		  	Motion_In := Z_MC_IN,
 		  	Motion_Out => Z_MC_OUT ,
+            bJogEnable:= stHMI_In.bJogEnable,
+            eJogMode:= stHMI_In.eJogMode,
+			fJogPosition:= stHMI_In.fJogPosition,
+			fJogVelocity:= stHMI_In.fJogVelocity,
+            bJogPositive := stHMI_In.bZJogPositive,
+            bJogNegative := stHMI_In.bZJogNegative,
+            bStopAxis := bStopExecute OR bZStopTrigger.Q,
+            bResetAxis := bAxisReset,
 			bHomingInput := bZHomingSwitch,
+			eHomingMode := eHomingMode,
+            bPositiveLimitSwitch := bZPositiveLimit,
+            bNegativeLimitSwitch := FALSE,
 			bHomeExecute := bHomeZ
 										);
-										
+
+
+
+                                        
+fbSimpleNciSequence(
+	        bExecute:= bExecuteNCI,
+            bStop:= bStopExecute,
+            sPrgName := sPrgName, 
+	        bBusy=> , 
+	        bError=> , 
+	        bDone=> , 
+	        stX:=X_Ref, 
+	        stY:=Y_Ref, 
+	        stZ:=Z_Ref, 
+	        stItpToPlc:=i_stItpToPlc , 
+	        stPlcToItp:= q_stPlcToItp,
+            sLoadedProgram=>sCurrentProgram);
+
+            
+ItpSetOverridePercent(fOverridePercent:=fChannelOverride , sPlcToNci:=q_stPlcToItp);
+
+fbNCInfo();
+
+// All Axes Ready Bit
+
+bAllAxesReady:= Y_MC_OUT.bPowerStatus AND Y2_MC_OUT.bPowerStatus AND X_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
+bAllAxesHomed:= Y_Ref.Status.Homed AND Y2_Ref.Status.Homed AND X_Ref.Status.Homed AND Z_Ref.Status.Homed;
+
+// Method Calls
 
 M_ProgramLoader();
-M_NCI();
 M_Inputs();
 M_Outputs();]]></ST>
     </Implementation>
+    <Method Name="M_HMI_In" Id="{d9c64941-408b-44a2-8a91-175c813c4e4d}">
+      <Declaration><![CDATA[METHOD M_HMI_In : BOOL
+
+VAR
+
+
+
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Set NC Channel Override Speed
+fChannelOverride := stHMI_In.fChannelOverride;
+
+// NC Program Name
+sPrgName := stHMI_In.sPrgName;
+
+// Select Homing Various Programs
+
+trigProgramCall(CLK := stHMI_In.bTriggerProgramCall);
+IF trigProgramCall.Q THEN
+    
+    ProgramCall := stHMI_In.ProgramCall;    
+
+END_IF
+
+// Trigger axis enable button toggle but don't allow it to overwrite the program controlled axis enable
+
+IF trigAxisEnable.Q THEN
+    
+    IF NOT bAxisEnable THEN
+    
+    bAxisEnable := TRUE;
+
+    ELSIF bAxisEnable THEN
+
+    bAxisEnable := FALSE;
+
+    END_IF    
+
+END_IF
+
+// NCI Start/Stop
+
+bExecuteNCI := stHMI_In.bStart;
+bStopExecute := stHMI_In.bStop;
+
+// Axis Reset
+
+bAxisReset := stHMI_In.bReset;
+
+// Axis Jogging    ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{579ae688-d5bb-4d46-9cff-7ebda2f9644e}">
+      <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Limit and Homing Switch Mapping
+
+stHMI_Out.bY1HomeSwitch := bYHomingSwitch;	
+stHMI_Out.bY2HomeSwitch := bY2HomingSwitch;
+stHMI_Out.bYLimitSwitch := bYLimitSwitch;	
+stHMI_Out.bXHomeSwitch := bXHomingSwitch;
+stHMI_Out.bXLimitSwitch := bXLimitSwitch;	
+stHMI_Out.bZHomeSwitch  := bZHomingSwitch;	
+
+// Interpreter Channel State
+
+stHMI_Out.sInterpreterState := TO_STRING(fbNCInfo.eInterpreterState);
+
+// Channel Override Speed
+
+stHMI_Out.fChannelOverrideSpeed := fChannelOverride;
+
+
+// Pass Axis Ref info to HMI
+
+stHMI_Out.stYRef  := Y_Ref;
+stHMI_Out.stY2Ref := Y2_Ref;
+stHMI_Out.stXRef  := X_Ref;
+stHMI_Out.stZRef  := Z_Ref;
+
+//stHMI_Out.sCurrentProgramSelected := 
+
+
+
+
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Inputs" Id="{44930261-f7b3-46c2-ba50-0ddd8b114d05}">
       <Declaration><![CDATA[METHOD M_Inputs : BOOL
 VAR_INPUT
@@ -151,40 +377,45 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// Homing Switch Inputs
 
-bXHomingSwitch	:= i_bXHomingSwitch;	
-bX2HomingSwitch	:= i_bX2HomingSwitch;	
 bYHomingSwitch	:= i_bYHomingSwitch;	
+bY2HomingSwitch	:= i_bY2HomingSwitch;	
+bXHomingSwitch	:= i_bXHomingSwitch;	
 bZHomingSwitch	:= i_bZHomingSwitch;
 
 // Limit Switch Inputs
 
-bXLimitSwitch	:= i_bXLimitSwitch;
-bYLimitSwitch	:= i_bYLimitSwitch;]]></ST>
+bYLimitSwitch	:= i_bYLimitSwitch;
+bXLimitSwitch	:= i_bXLimitSwitch;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_NCI" Id="{dc9731e6-e261-44f3-b6f6-41806c4884e1}">
-      <Declaration><![CDATA[METHOD M_NCI : BOOL
+    <Method Name="M_LimitSwitchLogic" Id="{d221ad2e-2e3c-403f-a0d1-ca7284c8dd6e}">
+      <Declaration><![CDATA[METHOD M_LimitSwitchLogic : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// bBuild3DGroup:= bFirstScan;
+        <ST><![CDATA[// Limit Switch Logic // Ignore "Home sensors" while running home routines. otherwise use Homing sensors to trigger a limit switch stop
 
-mcBuildGroup(
-	bExecute:= bBuild3DGroup , 
-	nGroupId:= 5, 
-	nXAxisId:= 1, 
-	nYAxisId:= 3, 
-	nZAxisId:= 4, 
-	nQ1AxisId:= , 
-	nQ2AxisId:= , 
-	nQ3AxisId:= , 
-	nQ4AxisId:= , 
-	nQ5AxisId:= , 
-	tTimeOut:= , 
-	bBusy=> , 
-	bErr=> , 
-	nErrId=> );]]></ST>
+IF ProgramCall <> eNull THEN    
+    bYNegativeLimit  := FALSE;
+    bY2NegativeLimit := FALSE;
+    bXNegativeLimit  := FALSE;
+    bZPositiveLimit  := FALSE;
+    bYStopTrigger(CLK:= bYLimitSwitch);
+    bXStopTrigger(CLK:=bXLimitSwitch);
+    bZStopTrigger(CLK:= FALSE);    
+ELSE
+    bYNegativeLimit := bYHomingSwitch;
+    bY2NegativeLimit := bY2HomingSwitch;
+    bXNegativeLimit := bXHomingSwitch;
+    bZPositiveLimit := bZHomingSwitch;
+    //Stop Triggers
+    bYStopTrigger(CLK:=bYNegativeLimit OR bY2NegativeLimit OR bYLimitSwitch);
+    bXStopTrigger(CLK:=bXNegativeLimit OR bXLimitSwitch);
+    bZStopTrigger(CLK:=bZPositiveLimit);    
+END_IF
+
+// Limit Switch Rising Edge trigger to trigger MC_Stop when first active]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Outputs" Id="{bfb1dda8-5611-458d-bc52-800eff2f8798}">
@@ -200,53 +431,58 @@ END_VAR
       <Declaration><![CDATA[METHOD M_PRG_HomeAll : BOOL
 VAR_INPUT
 END_VAR
-
-VAR
-
-END_VAR]]></Declaration>
+]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-// Execute homing on all axes simultaneously
+        <ST><![CDATA[// Execute homing on all axes simultaneously
 // If there is an error during any Axis homing, continue with all other axes but return and error message of some sort i.e "X axis failed to Home" or something similar
 
 CASE nHomeAllSeq OF
 		 		
 0:
-    M_PRG_HomeX();
-    M_PRG_HomeY();
-    M_PRG_HomeZ();
-        
-    IF X_MC_OUT.bAxisHomed AND X2_MC_OUT.bAxisHomed AND Y_MC_OUT.bAxisHomed AND Z_MC_OUT.bAxisHomed THEN
-        bProgramDone:=TRUE;
-	END_IF
+   eHomingMode := MC_DefaultHoming;
+   M_PRG_HomeAll := FALSE;
+   bYHomeDone := M_PRG_HomeY();
+   IF bYHomeDone THEN
+     nHomeAllSeq:=10;
+   END_IF
+10:
+   bXHomeDone := M_PRG_HomeX();
+   IF bXHomeDone THEN
+       nHomeAllSeq:=20;
+   END_IF
+20:
+   bZHomeDone := M_PRG_HomeZ();
+   IF bZHomeDone THEN
+       nHomeAllSeq:=30;
+   END_IF
+30:
+    M_PRG_HomeAll := bYHomeDone AND bXHomeDone AND bZHomeDone;  
 	
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PRG_HomeX" Id="{1d12177f-1165-4fe4-893e-75362f34ca0e}">
+    <Method Name="M_PRG_HomeX" Id="{0559bf4f-f4eb-40eb-a1a9-aef1d5d76984}">
       <Declaration><![CDATA[METHOD M_PRG_HomeX : BOOL
 VAR_INPUT
 END_VAR
-
-VAR
-END_VAR]]></Declaration>
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[
 
 
-CASE eHomeXSeq OF
+CASE nHomeXSeq OF
 		 		
 
-Init:
-
-		bProgramDone := FALSE;
+	0:
+		fbMessage.CreateEx(TC_Events.CNC_Events.X_Home_Start, 0); // "X Homing Started"
+	    eHomingMode := MC_DefaultHoming;
+        M_PRG_HomeX := FALSE;
+		//bProgramDone := FALSE;
 		bAxisEnable:=TRUE;
-        bGearInExecute := TRUE;
 		nHomeXSeq :=10;	
 	
-Power_On:
-
-	    // Home Both Axes Together
+	10:
+	
 		IF X_MC_OUT.bPowerStatus THEN
 			
 			bHomeX := TRUE;
@@ -258,125 +494,142 @@ Power_On:
 		
 		END_IF
 	
-Check_Homed:
-
+	20:
 		IF X_MC_OUT.bAxisHomed THEN
 			
 			bHomeX:= FALSE;
 			nHomeXSeq:=30;
 		
 		END_IF
+		
+	30:
+		
+		//bAxisEnable:=FALSE;
+		nHomeXSeq:=0;
+		//bProgramDone := TRUE;
+        M_PRG_HomeX := TRUE;
+
+
+
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_PRG_HomeY" Id="{1d12177f-1165-4fe4-893e-75362f34ca0e}">
+      <Declaration><![CDATA[METHOD M_PRG_HomeY : BOOL
+VAR_INPUT
+END_VAR
+
+VAR
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+
+CASE eHomeYSeq OF
+		 		
+
+Init:
+		fbMessage.CreateEx(TC_Events.CNC_Events.Y_Home_Start, 0);	// "Y Homing Started"
+        eHomingMode := MC_DefaultHoming;
+        M_PRG_HomeY:= FALSE;
+		//bProgramDone := FALSE;
+		bAxisEnable:=TRUE;
+        bGearOutExecute:=FALSE;
+        bGearInExecute:=FALSE;
+        eHomeYSeq:=Gear_In;
         
-Home_X1:
+Gear_In:        
+
+        bGearInExecute := TRUE;
+        IF Y_Ref.NcToPlc.CoupleState = 1 AND Y2_Ref.NcToPlc.CoupleState = 3 THEN     
+            eHomeYSeq :=Power_On;
+		END_IF
+			
+	
+Power_On:
+
+	    // Home Both Axes Together
+		IF Y_MC_OUT.bPowerStatus THEN
+			
+			bHomeY := TRUE;
+			eHomeYSeq:=Check_Homed;
+		
+		ELSE
+
+			eHomeYSeq:=Init;		
+		
+		END_IF
+	
+Check_Homed:
+
+		IF Y_MC_OUT.bAxisHomed AND Y_Ref.Status.Homed THEN
+			
+			bHomeY:= FALSE;
+			eHomeYSeq:=Home_Y1;
+		
+		END_IF
+        
+Home_Y1:
         // Decouple Axes for individual Homing
         
-        //X1 Homing
+        //Y1 Homing
         bGearInExecute := FALSE;
         bGearOutExecute:= TRUE;
-        IF X_MC_OUT.bPowerStatus THEN
-			bHomeX := TRUE;
-			nHomeXSeq:=40;
+        IF Y_MC_OUT.bPowerStatus AND Y_Ref.NcToPlc.CoupleState = 0 THEN
+			bHomeY := TRUE;
+			eHomeYSeq:=Y1_Homed;
         ELSE
             bAxisEnable:=TRUE;
             bAxisReset:=TRUE;
-            nHomeXSeq:=30;
+            eHomeYSeq:=Home_Y1;
         END_IF
         
-X1_Homed:
+Y1_Homed:
      
-        IF X_MC_OUT.bAxisHomed THEN
+        IF Y_MC_OUT.bAxisHomed AND Y_Ref.Status.Homed THEN
 			
-			bHomeX:= FALSE;
-			nHomeXSeq:=50;
+			bHomeY:= FALSE;
+			eHomeYSeq:=Home_Y2;
 		
 		END_IF
 
-Home_X2:
-        // X2 Homing
-       IF X2_MC_OUT.bPowerStatus THEN
+Home_Y2:
+        // Y2 Homing
+       IF Y2_MC_OUT.bPowerStatus AND Y2_Ref.NcToPlc.CoupleState = 0 THEN
 			
-			bHomeX2 := TRUE;
-			nHomeXSeq:=60;
+			bHomeY2 := TRUE;
+			eHomeYSeq:=Y2_Homed;
         ELSE
             bAxisEnable:=TRUE;
             bAxisReset:=TRUE;
-            nHomeXSeq:=50;
+            eHomeYSeq:=Home_Y2;
         END_IF
         
-X2_Homed:
+Y2_Homed:
       
-        IF X2_MC_OUT.bAxisHomed THEN
+        IF Y2_MC_OUT.bAxisHomed AND Y2_Ref.Status.Homed THEN
 			
-			bHomeX:= FALSE;
-			nHomeXSeq:=70;
+			bHomeY2:= FALSE;
+			eHomeYSeq:= Re_Gear;
 		
 		END_IF
         
 
-Gear_In:
+Re_Gear:
         bGearOutExecute:=FALSE;
         bGearInExecute:=TRUE;
-        IF X_MC_OUT.bGearInDone AND X2_MC_OUT.bGearInDone THEN
-            nHomeXSeq:=80;      
+        IF Y_Ref.NcToPlc.CoupleState = 1 AND Y2_Ref.NcToPlc.CoupleState = 3 THEN
+            eHomeYSeq:=End_Sequence;      
 		END_IF
         
         
 End_Sequence:
 		
-		bAxisEnable:=FALSE;
-		nHomeXSeq:=0;
-		bProgramDone := TRUE;
+		//bAxisEnable:=FALSE;
+		eHomeYSeq:=Init;
+		//bProgramDone := TRUE;
+        M_PRG_HomeY:= TRUE;
         
-END_CASE]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_PRG_HomeY" Id="{0559bf4f-f4eb-40eb-a1a9-aef1d5d76984}">
-      <Declaration><![CDATA[METHOD M_PRG_HomeY : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[
-
-
-CASE nHomeYSeq OF
-		 		
-
-	0:
-		bProgramDone := FALSE;
-		bAxisEnable:=TRUE;
-		nHomeYSeq :=10;	
-	
-	10:
-	
-		IF Y_MC_OUT.bPowerStatus THEN
-			
-			bHomeY := TRUE;
-			nHomeYSeq:=20;
-		
-		ELSE
-
-			nHomeYSeq:=0;		
-		
-		END_IF
-	
-	20:
-		IF Y_MC_OUT.bAxisHomed THEN
-			
-			bHomeY:= FALSE;
-			nHomeYSeq:=30;
-		
-		END_IF
-		
-	30:
-		
-		bAxisEnable:=FALSE;
-		nHomeYSeq:=0;
-		bProgramDone := TRUE;
-
-
-
-
 END_CASE]]></ST>
       </Implementation>
     </Method>
@@ -393,7 +646,10 @@ CASE nHomeZSeq OF
 		 		
 
 	0:
-		bProgramDone := FALSE;
+		fbMessage.CreateEx(TC_Events.CNC_Events.Z_Home_Start, 0); // "Z Homing Started"
+	    eHomingMode := MC_DefaultHoming;
+        M_PRG_HomeZ := FALSE;
+		//bProgramDone := FALSE;
 		bAxisEnable:=TRUE;
 		nHomeZSeq :=10;	
 	
@@ -420,9 +676,10 @@ CASE nHomeZSeq OF
 		
 	30:
 		
-		bAxisEnable:=FALSE;
+		//bAxisEnable:=FALSE;
 		nHomeZSeq:=0;
-		bProgramDone := TRUE;
+		//bProgramDone := TRUE;
+        M_PRG_HomeZ := TRUE;
 
 
 
@@ -437,13 +694,13 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[nHomeAllSeq:=0;
+eHomeYSeq:=Init;
 nHomeXSeq:=0;
-nHomeYSeq:=0;
 nHomeZSeq:=0;
-bProgramDone:= FALSE;
-bHomeY:=FALSE;
+//bProgramDone:= FALSE;
 bHomeX:=FALSE;
-bHomeX2:=FALSE;
+bHomeY:=FALSE;
+bHomeY2:=FALSE;
 bHomeZ:=FALSE;
 //bAxisEnable:= FALSE;
 
@@ -456,9 +713,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Display Enum as string for HMI Display
-sCurrentProgram:=TO_STRING(ProgramCall);
-
+        <ST><![CDATA[
 IF bProgramDone THEN
 	
 	ProgramCall := eNull;
@@ -470,27 +725,28 @@ CASE ProgramCall OF
 	
 	eNull:
 	
-		M_PRG_Null();
+        bProgramDone:=FALSE;
+	    bProgramDone :=	M_PRG_Null();
 
 	eHomeAll:
-	
-		bProgramDone:=FALSE;
-		M_PRG_HomeAll();
-	
-	eHomeX:
-	
-		bProgramDone:=FALSE;
-		M_PRG_HomeX();
+    
+	    bProgramDone:=FALSE;
+		bProgramDone := M_PRG_HomeAll();
 	
 	eHomeY:
 	
 		bProgramDone:=FALSE;
-		M_PRG_HomeY();	
+		bProgramDone := M_PRG_HomeY();
+	
+	eHomeX:
+	
+		bProgramDone:=FALSE;
+		bProgramDone := M_PRG_HomeX();	
 	
 	eHomeZ:
 	
 		bProgramDone:=FALSE;
-		M_PRG_HomeZ();
+		bProgramDone := M_PRG_HomeZ();
 
 END_CASE
 
@@ -498,20 +754,59 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="1115" Count="0" />
-      <LineId Id="1334" Count="1" />
-      <LineId Id="1264" Count="0" />
-      <LineId Id="1262" Count="0" />
-      <LineId Id="1234" Count="1" />
-      <LineId Id="1233" Count="0" />
-      <LineId Id="1256" Count="0" />
-      <LineId Id="1248" Count="0" />
-      <LineId Id="1258" Count="3" />
-      <LineId Id="1238" Count="0" />
-      <LineId Id="1237" Count="0" />
-      <LineId Id="1232" Count="0" />
-      <LineId Id="1116" Count="49" />
+      <LineId Id="13077" Count="0" />
+      <LineId Id="13237" Count="6" />
+      <LineId Id="13078" Count="158" />
       <LineId Id="680" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_HMI_In">
+      <LineId Id="13" Count="0" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="40" Count="1" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="59" Count="1" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_HMI_Out">
+      <LineId Id="11" Count="15" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="52" Count="2" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="32" Count="7" />
+      <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Inputs">
       <LineId Id="9" Count="1" />
@@ -522,32 +817,53 @@ END_CASE
       <LineId Id="13" Count="0" />
       <LineId Id="15" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CNC.M_NCI">
-      <LineId Id="20" Count="1" />
-      <LineId Id="6" Count="13" />
+    <LineIds Name="FB_CNC.M_LimitSwitchLogic">
+      <LineId Id="16" Count="1" />
+      <LineId Id="6" Count="4" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="11" Count="4" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="26" Count="1" />
       <LineId Id="5" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Outputs">
       <LineId Id="15" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeAll">
-      <LineId Id="61" Count="1" />
-      <LineId Id="122" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="116" Count="5" />
-      <LineId Id="11" Count="0" />
+      <LineId Id="205" Count="5" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="211" Count="17" />
       <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeX">
+      <LineId Id="6" Count="5" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="46" Count="28" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="42" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_PRG_HomeY">
       <LineId Id="6" Count="6" />
+      <LineId Id="172" Count="0" />
+      <LineId Id="146" Count="0" />
       <LineId Id="137" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="63" Count="0" />
+      <LineId Id="161" Count="1" />
+      <LineId Id="165" Count="1" />
+      <LineId Id="163" Count="1" />
       <LineId Id="69" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="154" Count="0" />
       <LineId Id="15" Count="2" />
       <LineId Id="138" Count="0" />
       <LineId Id="18" Count="1" />
@@ -599,19 +915,20 @@ END_CASE
       <LineId Id="123" Count="1" />
       <LineId Id="81" Count="3" />
       <LineId Id="44" Count="0" />
+      <LineId Id="145" Count="0" />
       <LineId Id="80" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_PRG_HomeY">
-      <LineId Id="6" Count="5" />
-      <LineId Id="45" Count="29" />
-      <LineId Id="40" Count="4" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeZ">
       <LineId Id="6" Count="5" />
-      <LineId Id="45" Count="29" />
-      <LineId Id="40" Count="4" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="46" Count="28" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="41" Count="3" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_Null">
@@ -624,11 +941,15 @@ END_CASE
       <LineId Id="19" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_ProgramLoader">
-      <LineId Id="243" Count="0" />
-      <LineId Id="241" Count="1" />
+      <LineId Id="242" Count="0" />
       <LineId Id="200" Count="4" />
       <LineId Id="240" Count="0" />
-      <LineId Id="205" Count="28" />
+      <LineId Id="205" Count="4" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="210" Count="2" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="213" Count="0" />
+      <LineId Id="215" Count="18" />
       <LineId Id="48" Count="0" />
     </LineIds>
   </POU>

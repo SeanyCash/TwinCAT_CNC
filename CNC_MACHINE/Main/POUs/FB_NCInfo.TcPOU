@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_NCInfo" Id="{6fe8c517-a11f-4051-805e-a8cbcf1d6a34}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NCInfo IMPLEMENTS I_HMI;
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	
+fbADSRead		: ADSREADEX;
+fbADSWrite		: ADSWRITE;
+
+sReadNCLine		: STRING;
+sReadNCName		: STRING;
+sReadNCFileInfo	: STRING;
+arrUDINT        : ARRAY[0..100] OF UINT;
+
+//=====================Interpreter Channel Info ====================
+
+eInterpreterState   : E_InterpreterState;
+
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[M_InterpreterState();
+M_NCName();
+M_HMI_In();
+M_HMI_Out();
+
+]]></ST>
+    </Implementation>
+    <Method Name="M_HMI_In" Id="{98c81108-8545-46e5-863b-c7e7d3e76574}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_In : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{0b67c50d-419e-4d52-8d07-01c5dec66d94}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
+      <Declaration><![CDATA[METHOD M_InterpreterState : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Interpreter State mapped from fbCNC call
+eInterpreterState := fbCNC.i_stItpToPlc.ItpState;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_NCFileInfo" Id="{b55ec5ca-99a1-4a79-94b9-b4f299483b66}">
+      <Declaration><![CDATA[METHOD M_NCFileInfo : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbADSRead(
+					NETID:=,
+					PORT:=500,
+					IDXGRP:=8449,
+					IDXOFFS:=7,
+					LEN:=,
+					DESTADDR:=,
+					READ:=,
+					TMOUT:=,
+					BUSY=>,
+					ERR=>,
+					ERRID=>
+		 						);						
+								]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_NCLine" Id="{7b737864-7f89-45b9-8635-b6cfe3b92a12}">
+      <Declaration><![CDATA[METHOD M_NCLine : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbADSRead(
+					NETID:=,
+					PORT:=500,
+					IDXGRP:=2301,
+					IDXOFFS:=20000001,
+					LEN:=,
+					DESTADDR:=,
+					READ:=,
+					TMOUT:=,
+					BUSY=>,
+					ERR=>,
+					ERRID=>
+		 						);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_NCName" Id="{2579f1bc-bd44-45c1-9788-bb6e35380df4}">
+      <Declaration><![CDATA[METHOD M_NCName : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbADSRead(
+					NETID:='',
+					PORT:=500,
+					IDXGRP:= ,
+					IDXOFFS:=7,
+					LEN:=SIZEOF(arrUDINT),
+					DESTADDR:=ADR(arrUDINT),
+					READ:=,
+					TMOUT:=,
+					BUSY=>,
+					ERR=>,
+					ERRID=>
+		 						);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_NCInfo">
+      <LineId Id="9" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="30" Count="1" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="55" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCInfo.M_HMI_In">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCInfo.M_HMI_Out">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCInfo.M_InterpreterState">
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCInfo.M_NCFileInfo">
+      <LineId Id="5" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="6" Count="10" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCInfo.M_NCLine">
+      <LineId Id="6" Count="11" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCInfo.M_NCName">
+      <LineId Id="6" Count="11" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

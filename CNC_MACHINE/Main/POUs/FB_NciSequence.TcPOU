@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_NciSequence" Id="{4f24b964-7729-4762-90ad-698d0a17343d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NciSequence
+VAR_INPUT
+	bExecute			: BOOL;
+    bStop               : BOOL;
+    sPrgName			: STRING(255);
+END_VAR
+VAR_OUTPUT
+	bBusy				: BOOL;
+	bError				: BOOL;
+	bDone				: BOOL;
+    sLoadedProgram      : STRING;
+END_VAR
+VAR_IN_OUT
+	stX					: AXIS_REF;
+	stY					: AXIS_REF;
+	stZ					: AXIS_REF;
+	stItpToPlc			: NCTOPLC_NCICHANNEL_REF;
+	stPlcToItp			: PLCTONC_NCICHANNEL_REF;
+END_VAR
+VAR
+	nState				: UDINT	:= 0;
+	nErrorState			: UDINT;
+	
+	fbBuildGroup		: CfgBuildExt3DGroup;
+	fbLoadGCode			: ItpLoadProgEx;
+	fbStartGCode		: ItpStartStopEx;
+	fbClearGroup		: CfgReconfigGroup;
+	fbConfirmHsk		: ItpConfirmHsk;
+	
+	nInterpreterState	: UDINT	:= 0;
+	bConfirmHsk			: BOOL	:= FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[sLoadedProgram:=sPrgName;
+
+fbStartGCode( bStop:=bStop, sNciToPlc:= stItpToPlc );
+IF bStop THEN 
+    nState :=0;
+END_IF
+
+CASE nState OF
+0:
+	IF bExecute THEN
+		bBusy	:= TRUE;
+		bDone	:= FALSE;
+		bError	:= FALSE;
+		nErrorState	:= nState;
+		nState	:= 10;
+	END_IF	
+5:
+
+	fbClearGroup(
+		bExecute:=TRUE, 
+		nGroupId:=ItpGetGroupId(sNciToPlc:=stItpToPlc) , 
+		tTimeOut:= , 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbClearGroup.bBusy THEN
+		IF NOT fbClearGroup.bErr THEN
+			nState	:= 80;
+		ELSE
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;				
+		END_IF
+		fbClearGroup(bExecute:=FALSE); 
+	END_IF
+	
+10:
+	// first build interpolation group 
+	fbBuildGroup(
+		bExecute:=TRUE, 
+		nGroupId:=ItpGetGroupId(sNciToPlc:=stItpToPlc) , 
+		nXAxisId:=stX.NcToPlc.AxisId, 
+		nYAxisId:=stY.NcToPlc.AxisId, 
+		nZAxisId:=stZ.NcToPlc.AxisId, 
+		nQ1AxisId:= 0, 
+		nQ2AxisId:= 0, 
+		nQ3AxisId:= 0, 
+		nQ4AxisId:= 0, 
+		nQ5AxisId:= 0, 
+		tTimeOut:= , 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbBuildGroup.bBusy THEN
+		IF NOT fbBuildGroup.bErr THEN
+            bGearInExecute:=FALSE;
+			nState	:= 15;
+		ELSE
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;
+		END_IF
+		fbBuildGroup(bExecute:=FALSE); 
+	END_IF
+    
+    
+15:
+
+   IF fbCNC.Y_Ref.NcToPlc.CoupleState <> 1 THEN
+    bGearInExecute:=FALSE;
+    nState:=16;
+   ELSIF fbCNC.Y_Ref.NcToPlc.CoupleState = 1 THEN
+    nState:=20;
+   END_IF
+   
+16:
+    bGearInExecute:=TRUE;
+    IF fbCNC.Y_MC_OUT.bGearInDone AND (fbCNC.Y_Ref.NcToPlc.CoupleState = 1) THEN
+        nState:=20;
+    END_IF
+     
+20:
+	// load g-code file 
+	// pls. ensure that first.nc is available in TwinCAT\MC\NCI-folder 
+	fbLoadGCode(
+		sNciToPlc:=stItpToPlc, 
+		bExecute:=TRUE, 
+		sPrg:= sPrgName, 
+		nLength:= INT_TO_UDINT(LEN(sPrgName)), 
+		tTimeOut:= , 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbLoadGCode.bBusy THEN
+		IF NOT fbLoadGCode.bErr THEN
+			nState	:= 30;
+		ELSE
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;				
+		END_IF
+		fbLoadGCode(sNciToPlc:=stItpToPlc, bExecute:=FALSE); 
+	END_IF
+	
+30:
+	// we have to check the status of the interpreter. It has to be in ready state, in case of loading the program successfully.
+	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
+	IF nInterpreterState = Tc2_NCI.NCI_INTERPRETER_READY THEN
+		nState	:= 40;
+	ELSE
+		(* add error handling *)
+		nErrorState	:= nState;
+		bBusy	:= FALSE;
+		bError	:= TRUE;
+		nState	:= 9999;				
+	END_IF
+	
+40:
+	// start g-code file
+	fbStartGCode(
+		bStart:=TRUE, 
+		bStop:=FALSE, 
+		tTimeOut:= , 
+		sNciToPlc:= stItpToPlc, 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbStartGCode.bBusy THEN
+		IF NOT fbStartGCode.bErr THEN
+			nState	:= 50;
+		ELSE	
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;				
+		END_IF
+		fbStartGCode( bStart:=FALSE, sNciToPlc:= stItpToPlc ); 
+	END_IF
+	
+50:
+	// check state, again - we are at least not in ready state for several ticks
+	// this is to ensure that we don't indicate program has finished, before we have started 
+	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
+	IF nInterpreterState <> Tc2_NCI.NCI_INTERPRETER_READY THEN
+		// nci is running
+		nState	:= 60;
+	END_IF
+
+60:
+	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
+	IF	nInterpreterState = Tc2_NCI.NCI_INTERPRETER_READY THEN
+		// program has finished
+		nState	:= 65;
+	ELSIF nInterpreterState = Tc2_NCI.NCI_INTERPRETER_ABORTED THEN
+		nState := 0;
+	END_IF
+
+65:
+    bGearInExecute:=FALSE;
+    bGearOutExecute:=TRUE;
+    IF fbCNC.Y_MC_OUT.bGearOutDone AND (fbCNC.Y_Ref.NcToPlc.CoupleState = 0) THEN
+        bGearOutExecute:=FALSE;
+        nState:=70;
+    END_IF
+	
+70:
+    
+	// program has finished 
+	// now clear interpolation group 
+	fbClearGroup(
+		bExecute:=TRUE, 
+		nGroupId:=ItpGetGroupId(sNciToPlc:=stItpToPlc) , 
+		tTimeOut:= , 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbClearGroup.bBusy THEN
+		IF NOT fbClearGroup.bErr THEN
+			nState	:= 80;
+		ELSE
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;				
+		END_IF
+		fbClearGroup(bExecute:=FALSE); 
+	END_IF
+80:
+	bDone	:= TRUE;
+	bBusy	:= FALSE;
+	IF NOT bExecute THEN
+		nState	:= 0;
+	END_IF
+9999:
+	// error state 
+	IF NOT bExecute THEN
+		nState	:= 0;
+		bError	:= FALSE;
+	END_IF
+END_CASE
+
+// handling of m-functions is done outside statemachine
+// all m-functions are directly confirmed
+IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmHsk.bBusy THEN
+	bConfirmHsk	:= TRUE;
+ELSE	
+	bConfirmHsk	:= FALSE;
+END_IF	
+
+fbConfirmHsk(
+	bExecute:=bConfirmHsk , 
+	sNciToPlc:=stItpToPlc , 
+	sPlcToNci:=stPlcToItp , 
+	bBusy=> , 
+	bErr=> , 
+	nErrId=> );
+	]]></ST>
+    </Implementation>
+    <LineIds Name="FB_NciSequence">
+      <LineId Id="207" Count="0" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="409" Count="2" />
+      <LineId Id="208" Count="0" />
+      <LineId Id="3" Count="8" />
+      <LineId Id="444" Count="0" />
+      <LineId Id="446" Count="18" />
+      <LineId Id="445" Count="0" />
+      <LineId Id="12" Count="19" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="32" Count="9" />
+      <LineId Id="288" Count="0" />
+      <LineId Id="241" Count="1" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="325" Count="0" />
+      <LineId Id="328" Count="0" />
+      <LineId Id="332" Count="1" />
+      <LineId Id="331" Count="0" />
+      <LineId Id="329" Count="1" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="249" Count="1" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="252" Count="0" />
+      <LineId Id="43" Count="76" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="368" Count="0" />
+      <LineId Id="370" Count="1" />
+      <LineId Id="374" Count="0" />
+      <LineId Id="372" Count="0" />
+      <LineId Id="375" Count="0" />
+      <LineId Id="373" Count="0" />
+      <LineId Id="369" Count="0" />
+      <LineId Id="367" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="366" Count="0" />
+      <LineId Id="124" Count="49" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

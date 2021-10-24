@@ -1,13 +1,13 @@
 ﻿{
-  "$schema": "C:/TwinCAT/Functions/TE2000-HMI-Engineering/Infrastructure/TcHmiFramework/Latest/Schema/TchmiConfig.Schema.json",
-  "basePath": "./Libraries",
-  "locale": "client",
+  "$schema": "../Packages/Beckhoff.TwinCAT.HMI.Framework.12.748.0/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
+  "basePath": "./framework",
   "scaleMode": "None",
   "startupView": "Desktop.view",
-  "loginPage": null,
+  "loginPage": "",
   "tcHmiServer": {
     "websocketIntervalTime": 500,
     "websocketTimeout": 10000,
+    "websocketSystemTimeout": 0,
     "websocketSubscriptionMode": "Change"
   },
   "activeTheme": "Base",
@@ -23,6 +23,11 @@
           "name": "Themes/Base/Style.css",
           "description": "",
           "type": "Stylesheet"
+        },
+        {
+          "name": "Themes/Base/BaseStyle.css",
+          "description": "Theme Stylesheet",
+          "type": "Stylesheet"
         }
       ],
       "replacesThemeForControls": []
@@ -33,35 +38,86 @@
       "name": "Fonts/Fonts.css",
       "description": "",
       "type": "Stylesheet"
+    },
+    {
+      "name": "GCode Viewer Javascript/analyzer.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/gCodeReader.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/JavaScript1.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/renderer.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/renderer3d.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/ui.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "GCode Viewer Javascript/Worker.js",
+      "description": "",
+      "type": "JavaScript"
     }
   ],
   "userControls": [],
   "content": [
     {
       "url": "Contents/Alarms.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
+    },
+    {
+      "url": "Contents/Jog.content",
+      "preload": false,
+      "keepAlive": false
     },
     {
       "url": "Contents/Main.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     },
     {
       "url": "Contents/MetricUnits.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     },
     {
-      "url": "Contents/StandardUnits.content",
-      "preload": false
+      "url": "Contents/Offsets.content",
+      "preload": false,
+      "keepAlive": false
+    },
+    {
+      "url": "Contents/PathVisualization.content",
+      "preload": false,
+      "keepAlive": false
     },
     {
       "url": "Contents/Status.content",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     }
   ],
   "views": [
     {
       "url": "Desktop.view",
-      "preload": false
+      "preload": false,
+      "keepAlive": false
     }
   ],
   "userFunctions": [],
@@ -87,10 +143,29 @@
     "de-DE": "Localization\\de-DE.localization",
     "en-US": "Localization\\en-US.localization"
   },
+  "languageFallback": "",
+  "disableLoadingOptimization": false,
   "creatorSettings": {
     "viewport": {
       "defaultWidth": 1024,
       "defaultHeight": 768
     }
-  }
+  },
+  "binding": {
+    "symbolError": "Ignore"
+  },
+  "packages": [
+    {
+      "name": "Beckhoff.TwinCAT.HMI.Controls",
+      "basePath": "/Beckhoff.TwinCAT.HMI.Controls"
+    },
+    {
+      "name": "Beckhoff.TwinCAT.HMI.Framework",
+      "basePath": "/framework"
+    },
+    {
+      "name": "Beckhoff.TwinCAT.HMI.Functions",
+      "basePath": "/Beckhoff.TwinCAT.HMI.Functions"
+    }
+  ]
 }

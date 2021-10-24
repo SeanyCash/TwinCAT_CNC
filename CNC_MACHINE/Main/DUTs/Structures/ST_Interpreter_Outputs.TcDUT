@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_Interpreter_Outputs" Id="{53aa438c-9f81-4673-aff5-a9f24820b539}">
+    <Declaration><![CDATA[TYPE ST_Interpreter_Outputs :
+STRUCT
+    
+nInterpreterState   : UINT;
+
+
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

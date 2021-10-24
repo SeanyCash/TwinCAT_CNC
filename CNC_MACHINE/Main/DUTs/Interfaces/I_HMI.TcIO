@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="I_HMI" Id="{72d1c876-57ca-4ad5-9118-25cfd7cae312}">
+    <Declaration><![CDATA[INTERFACE I_HMI
+]]></Declaration>
+    <Method Name="M_HMI_In" Id="{515073c4-dc44-4bb9-9401-2a5ffd3eb4fc}">
+      <Declaration><![CDATA[METHOD M_HMI_In : BOOL;
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{7e8e84c5-2d63-42d2-b1eb-c64996cced03}">
+      <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_HMI_In" Id="{00e1f3e5-dcaa-4395-83d0-f9d2a4f4c93d}">
+    <Declaration><![CDATA[TYPE ST_HMI_In :
+STRUCT
+    
+//  Axis Input functions from the HMI
+
+bZeroX          : BOOL;
+bZeroY          : BOOL;
+bZeroZ          : BOOL;
+bZeroAllAxes    : BOOL;
+
+// Desktop View Header Panel Buttons
+
+bAxisEnable     : BOOL;
+bReset          : BOOL;
+bHold           : BOOL;
+bStop           : BOOL;
+bStart          : BOOL;
+
+// Homing Program Selection
+
+ProgramCall	: E_Programs;
+bTriggerProgramCall : BOOL;
+
+// User Speed/Override Settings
+
+fChannelOverride            : REAL :=100.0;
+
+// User Program Select
+
+sPrgName         : STRING[255];
+
+// Axis Jog Functions
+
+bJogEnable       : BOOL;
+bXJogPositive    : BOOL;
+bXJogNegative    : BOOL;
+bYJogPositive    : BOOL;
+bYJogNegative    : BOOL;
+bZJogPositive    : BOOL;
+bZJogNegative    : BOOL;
+eJogMode         : E_JogMode;
+fJogPosition	 : LREAL;
+fJogVelocity	 : LREAL;
+
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

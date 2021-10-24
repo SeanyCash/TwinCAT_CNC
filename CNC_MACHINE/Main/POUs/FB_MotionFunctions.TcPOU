@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_MotionFunctions" Id="{500ca146-bff1-4570-8da1-57ff34083845}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_MotionFunctions
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_MotionFunctions IMPLEMENTS I_HMI;
 
 VAR_IN_OUT
 
@@ -15,8 +15,22 @@ VAR_INPUT
 Motion_In			        : ST_Motion_Inputs;
 bHomingInput		        : BOOL;
 bPositiveLimitSwitch		: BOOL;
+bNegativeLimitSwitch        : BOOL;
 bHomeExecute		        : BOOL;
-bGearingEnabled             : BOOL;		
+bGearingEnabled             : BOOL;
+bStopAxis                   : BOOL;
+bResetAxis                  : BOOL;
+eHomingMode					: MC_HomingMode := MC_DefaultHoming;
+
+// Jog Functions
+bJogEnable                  : BOOL;
+bJogPositive                : BOOL;
+bJogNegative                : BOOL;
+eJogMode                    : E_JogMode;
+fJogPosition				: LREAL;
+fJogVelocity				: LREAL;
+// Touch Probe Input  
+bTouchProbeTrigger          : TRIGGER_REF;		
 
 END_VAR
 
@@ -39,15 +53,40 @@ mcGearIn        : MC_GearIn;
 
 mcGearOut       : MC_GearOut;
 
+mcReset         : MC_Reset;
+
+mcJog           : MC_Jog;
+
+mcTouchProbe    : MC_TouchProbe;
+
+// Event Logger Instances	
+fbEventLogger	: FB_TcEventLogger;
+fbAlarm			: FB_TcAlarm;
+fbMessage		: FB_TcMessage;
+bSendEvent    : BOOL;
+bInitEvent    : BOOL;
 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[M_PowerStepper();
+      <ST><![CDATA[IF bInitEvent THEN
+    bInitEvent := FALSE; 
+    fbMessage.CreateEx(TC_Events.CNC_Events.X_Home_Start,0); 
+END_IF
+IF bSendEvent THEN 
+    bSendEvent := FALSE; 
+    fbMessage.Send(0); 
+END_IF
+
+M_PowerStepper();
+M_Reset();
 M_Stop();
 M_Halt();
 M_Home( );
 M_Gearing( );
+M_HMI_In();
+M_Jog();
+M_HMI_Out();
 ]]></ST>
     </Implementation>
     <Method Name="M_Gearing" Id="{7c95005e-3c30-49b2-be93-35e9b89aab5e}">
@@ -68,8 +107,8 @@ mcGearIn(
 	Master:= Ref, 
 	Slave:= SlaveRef, 
 	Execute:= bGearInExecute, 
-	RatioNumerator:= , 
-	RatioDenominator:= , 
+	RatioNumerator:=1 , 
+	RatioDenominator:=1 , 
 	Acceleration:= , 
 	Deceleration:= , 
 	Jerk:= , 
@@ -80,16 +119,16 @@ mcGearIn(
 	Active=> , 
 	CommandAborted=> , 
 	Error=> , 
-	ErrorID=> );
+	ErrorID=> Motion_Out.nGearErrorID);
     
 mcGearOut(
 	Slave:= SlaveRef, 
 	Execute:= bGearOutExecute, 
 	Options:= , 
-	Done=> , 
+	Done=> Motion_Out.bGearOutDone, 
 	Busy=> , 
 	Error=> , 
-	ErrorID=> );   
+	ErrorID=> Motion_Out.nGearErrorID);   
 
 END_IF ]]></ST>
       </Implementation>
@@ -112,6 +151,47 @@ END_IF ]]></ST>
 	ErrorID=> Motion_Out.nHaltErrorID);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_HMI_In" Id="{6ee37aa5-65f9-44cc-b5cb-9a654bc701a6}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_In : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{efdc3eed-d083-47b6-87cc-982569171a8a}">
+      <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Axis Status
+(*
+ST_HMI_Out.bXAxisHomed:= Ref.Status.Homed;
+ST_HMI_Out.bX2AxisHomed:= SlaveRef.Status.Homed;
+
+
+// Position
+
+ST_HMI_Out.fActPosX := Ref.NcToPlc.ActPos;
+ST_HMI_Out.fActPosX2 := SlaveRef.NcToPlc.ActPos;*)
+
+// Jog Mode Display
+
+CASE eJogMode OF
+    
+    MC_JOGMODE_STANDARD_SLOW:
+        stHMI_Out.sJogMode:= 'SLOW JOG'; 
+    MC_JOGMODE_STANDARD_FAST:
+       stHMI_Out.sJogMode:= 'FAST JOG';
+    MC_JOGMODE_CONTINOUS:
+        stHMI_Out.sJogMode:= 'CONTINUOUS JOG';
+    MC_JOGMODE_INCHING:
+        stHMI_Out.sJogMode:= 'INCHING JOG';
+    MC_JOGMODE_INCHING_MODULO:
+        stHMI_Out.sJogMode:= 'INCHING MODULO JOG';
+        
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Home" Id="{1d749ffd-f5a6-45ff-a0e1-191b93a80305}">
       <Declaration><![CDATA[METHOD M_Home : BOOL
 VAR_INPUT
@@ -123,7 +203,7 @@ END_VAR
 	Axis:= Ref, 
 	Execute:= bHomeExecute, 
 	Position:= 0.00, 
-	HomingMode:= MC_DefaultHoming, 
+	HomingMode:= eHomingMode,
 	BufferMode:= , 
 	Options:= , 
 	bCalibrationCam:= bHomingInput, 
@@ -133,6 +213,35 @@ END_VAR
 	CommandAborted=> Motion_Out.bHomeAborted, 
 	Error=> Motion_Out.bHomeError, 
 	ErrorID=> Motion_Out.bHomeErrorID);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Jog" Id="{0ffd9f33-8909-4c6d-aa47-c26c8d95be7b}">
+      <Declaration><![CDATA[METHOD M_Jog : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF bJogEnable THEN
+
+mcJog(
+	Axis:= Ref, 
+	JogForward:= bJogPositive, 
+	JogBackwards:= bJogNegative, 
+	Mode:= eJogMode, 
+	Position:= fJogPosition, 
+	Velocity:= fJogVelocity, 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+    
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_PowerStepper" Id="{6a7b06a9-fc89-4287-b1b8-f228a9ca92a7}">
@@ -146,7 +255,7 @@ END_VAR
 	Axis:= Ref, 
 	Enable:= bAxisEnable, 
 	Enable_Positive:= NOT bPositiveLimitSwitch,
-	Enable_Negative:= TRUE, //NOT bHomingInput, 
+	Enable_Negative:= NOT bNegativeLimitSwitch, 
 	Override:= bOverride, 
 	DestallParams:= Motion_In.bDestallParameters, 
 	KL_Status:= Motion_In.nKL_Status, 
@@ -158,6 +267,23 @@ END_VAR
 	StallError=> Motion_Out.bPowerStallError);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Reset" Id="{082eaae0-46b8-473f-a995-ea976ee380e9}">
+      <Declaration><![CDATA[METHOD M_Reset : BOOL
+VAR_INPUT
+END_VAR
+
+VAR
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcReset(
+	        Axis:= Ref, 
+	        Execute:= bResetAxis , 
+	        Done=> Motion_Out.bResetDone, 
+	        Busy=> Motion_Out.bResetBusy, 
+	        Error=> Motion_Out.bResetError, 
+	        ErrorID=> Motion_Out.nResetErrorID);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Stop" Id="{c1ce39fb-2615-4855-8be7-e49f38ce3586}">
       <Declaration><![CDATA[METHOD M_Stop : BOOL
 VAR_INPUT
@@ -166,7 +292,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[mcStop(
 	Axis:= Ref, 
-	Execute:= bStopExecute, 
+	Execute:= bStopAxis, 
 	Deceleration:= Motion_In.bStopDecel, 
 	Jerk:= Motion_In.bStopJerk, 
 	Options:= Motion_In.stStopOptions, 
@@ -178,8 +304,46 @@ END_VAR
 	ErrorID=> Motion_Out.nStopErrorID);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_TouchProbe" Id="{501d32c0-2672-4596-a933-cd18dea39564}">
+      <Declaration><![CDATA[METHOD M_TouchProbe : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcTouchProbe(
+	Axis:= Ref, 
+	TriggerInput:= bTouchProbeTrigger, 
+	Execute:= , 
+	WindowOnly:= , 
+	FirstPosition:= , 
+	LastPosition:= , 
+	Done=> , 
+	Busy=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> , 
+	RecordedPosition=> , 
+	RecordedData=> );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ZeroAxis" Id="{c0599624-7f49-4221-b579-aca0ff43944e}">
+      <Declaration><![CDATA[METHOD M_ZeroAxis : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_MotionFunctions">
-      <LineId Id="182" Count="4" />
+      <LineId Id="391" Count="6" />
+      <LineId Id="386" Count="1" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="273" Count="0" />
+      <LineId Id="183" Count="3" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="319" Count="0" />
+      <LineId Id="228" Count="0" />
       <LineId Id="126" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Gearing">
@@ -197,16 +361,63 @@ END_VAR
       <LineId Id="6" Count="11" />
       <LineId Id="5" Count="0" />
     </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_HMI_In">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_HMI_Out">
+      <LineId Id="4" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="37" Count="3" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Home">
       <LineId Id="6" Count="12" />
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_Jog">
+      <LineId Id="23" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="24" Count="1" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_PowerStepper">
       <LineId Id="7" Count="12" />
       <LineId Id="6" Count="0" />
     </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_Reset">
+      <LineId Id="9" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Stop">
       <LineId Id="6" Count="10" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_TouchProbe">
+      <LineId Id="6" Count="12" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_ZeroAxis">
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

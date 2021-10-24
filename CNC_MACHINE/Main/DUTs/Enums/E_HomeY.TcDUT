@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_HomeY" Id="{7737f691-b37c-43b8-aec3-3723fe7e4366}">
+    <Declaration><![CDATA[TYPE E_HomeY :
+(
+	Init,
+    Gear_In,
+    Power_On,
+    Check_Homed,
+    Home_Y1,
+    Y1_Homed,
+    Home_Y2,
+    Y2_Homed,
+    Re_Gear,
+    End_Sequence
+    
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
