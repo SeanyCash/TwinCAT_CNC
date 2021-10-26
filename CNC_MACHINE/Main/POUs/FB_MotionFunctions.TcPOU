@@ -163,17 +163,7 @@ METHOD M_HMI_In : BOOL
       <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Axis Status
-(*
-ST_HMI_Out.bXAxisHomed:= Ref.Status.Homed;
-ST_HMI_Out.bX2AxisHomed:= SlaveRef.Status.Homed;
-
-
-// Position
-
-ST_HMI_Out.fActPosX := Ref.NcToPlc.ActPos;
-ST_HMI_Out.fActPosX2 := SlaveRef.NcToPlc.ActPos;*)
-
+        <ST><![CDATA[
 // Jog Mode Display
 
 CASE eJogMode OF
@@ -365,16 +355,6 @@ END_VAR
       <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_HMI_Out">
-      <LineId Id="4" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="14" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="22" Count="0" />
