@@ -3323,7 +3323,7 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL.fbCNC.i_stItpToPlc</Name>
+							<Name>GVL.fbCNC.fbNCI.i_stItpToPlc</Name>
 							<Type GUID="{56354211-98EF-4057-9322-975DEAD0E29D}" Namespace="MC">NCTOPLC_NCICHANNEL_REF</Type>
 						</Var>
 						<Var>
@@ -3331,11 +3331,11 @@ External Setpoint Generation:
 							<Type GUID="{85E5F182-994B-D58F-D73E-E06C3608A833}" Namespace="Tc2_ModbusRTU">MB_PcComInData</Type>
 						</Var>
 						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
+							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
 							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
+							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
 							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
@@ -3362,12 +3362,12 @@ External Setpoint Generation:
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.fbCNC.q_stPlcToItp</Name>
-							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
-						</Var>
-						<Var>
 							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
+							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
 						</Var>
 						<Var>
 							<Name>GVL.fbModbus.ModbusMaster.OutData</Name>
@@ -3390,6 +3390,18 @@ External Setpoint Generation:
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 					</Vars>
+					<UnrestoredVarLinks ImportTime="2021-10-28T06:25:25">
+						<OwnerA Name="InputDst" Prefix="TIPC^Main^Main Instance" Type="1">
+							<OwnerB Name="TINC^NC-Task 1 SAF^NC Channel">
+								<Link VarA="GVL.fbCNC.i_stItpToPlc" TypeA="MC.NCTOPLC_NCICHANNEL_REF" InOutA="0" GuidA="{56354211-98EF-4057-9322-975DEAD0E29D}" VarB="Outputs^ToPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="OutputSrc" Prefix="TIPC^Main^Main Instance" Type="2">
+							<OwnerB Name="TINC^NC-Task 1 SAF^NC Channel">
+								<Link VarA="GVL.fbCNC.q_stPlcToItp" TypeA="MC.PLCTONC_NCICHANNEL_REF" InOutA="1" GuidA="{48415C2A-E750-483B-A619-8655B2BEA4B8}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>
@@ -4857,10 +4869,6 @@ External Setpoint Generation:
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Z">
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.Z_Ref.NcToPlc" VarB="Outputs^ToPlc"/>
 				<Link VarA="PlcTask Outputs^GVL.fbCNC.Z_Ref.PlcToNc" VarB="Inputs^FromPlc"/>
-			</OwnerB>
-			<OwnerB Name="TINC^NC-Task 1 SAF^NC Channel">
-				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_stItpToPlc" VarB="Outputs^ToPlc"/>
-				<Link VarA="PlcTask Outputs^GVL.fbCNC.q_stPlcToItp" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

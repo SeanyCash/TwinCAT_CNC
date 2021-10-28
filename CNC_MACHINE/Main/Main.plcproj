@@ -55,16 +55,13 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_NCInfo.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\FB_CNC.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_ModbusRTU.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_NciSequence.TcPOU">
+    <Compile Include="POUs\FB_NCI.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">

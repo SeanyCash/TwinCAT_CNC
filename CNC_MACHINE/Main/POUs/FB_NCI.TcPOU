@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_NCI" Id="{4f24b964-7729-4762-90ad-698d0a17343d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NCI IMPLEMENTS I_HMI;
+VAR_INPUT
+	bExecute			: BOOL;
+    bStop               : BOOL;
+    sPrgName			: STRING(255);
+	bExecuteZeroShift	: BOOL;
+	
+END_VAR
+VAR_OUTPUT
+	bBusy				: BOOL;
+	bError				: BOOL;
+	bDone				: BOOL;
+    sLoadedProgram      : STRING;
+END_VAR
+VAR_IN_OUT
+	stX					: AXIS_REF;
+	stY					: AXIS_REF;
+	stZ					: AXIS_REF;
+
+END_VAR
+VAR
+	nState				: UDINT	:= 0;
+	nErrorState			: UDINT;
+	fChannelOverride    : REAL;
+	
+	fbBuildGroup		: CfgBuildExt3DGroup;
+	fbLoadGCode			: ItpLoadProgEx;
+	fbStartStopGCode	: ItpStartStopEx;
+	fbClearGroup		: CfgReconfigGroup;
+	fbConfirmHsk		: ItpConfirmHsk;
+	fbZeroShiftOffset	: ItpWriteZeroShiftEx;
+	nZeroShiftNumber	: UDINT := 54;
+	
+	nInterpreterState	: UDINT	:= 0;
+	bConfirmHsk			: BOOL	:= FALSE;
+	
+	fbADSRead		: ADSREADEX;
+	fbADSWrite		: ADSWRITE;
+
+	sReadNCLine		: STRING;
+	sReadNCName		: STRING;
+	sReadNCFileInfo	: STRING;
+	arrUDINT        : ARRAY[0..100] OF UINT;
+	NC_In			: ST_Interpreter_Inputs;
+	NC_Out			: ST_Interpreter_Outputs;
+
+//=====================Interpreter Channel Info ====================
+
+	eInterpreterState   : E_InterpreterState;
+	i_stItpToPlc	AT %I*:	NcToPlc_NciChannel_Ref;
+	q_stPlcToItp	AT %Q*:	PLCTONC_NCICHANNEL_REF;
+	stItpToPlc			: NCTOPLC_NCICHANNEL_REF;
+	stPlcToItp			: PLCTONC_NCICHANNEL_REF;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[M_InterpreterState();
+M_NCName();
+M_HMI_In();
+M_HMI_Out();
+M_StartStop();
+M_SetOverride();
+
+sLoadedProgram:=sPrgName;
+
+]]></ST>
+    </Implementation>
+    <Method Name="M_ExecuteProgram" Id="{f5d89ea2-b283-4fc0-aa63-1e3309b96a56}">
+      <Declaration><![CDATA[METHOD M_ExecuteProgram : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF bStop THEN 
+    nState :=0;
+END_IF
+
+CASE nState OF
+0:
+	IF bExecute THEN
+		bBusy	:= TRUE;
+		bDone	:= FALSE;
+		bError	:= FALSE;
+		nErrorState	:= nState;
+		nState	:= 10;
+	END_IF	
+5:
+
+	fbClearGroup(
+		bExecute:=TRUE, 
+		nGroupId:=ItpGetGroupId(sNciToPlc:=stItpToPlc) , 
+		tTimeOut:= , 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbClearGroup.bBusy THEN
+		IF NOT fbClearGroup.bErr THEN
+			nState	:= 80;
+		ELSE
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;				
+		END_IF
+		fbClearGroup(bExecute:=FALSE); 
+	END_IF
+	
+10:
+	// first build interpolation group 
+	fbBuildGroup(
+		bExecute:=TRUE, 
+		nGroupId:=ItpGetGroupId(sNciToPlc:=stItpToPlc) , 
+		nXAxisId:=stX.NcToPlc.AxisId, 
+		nYAxisId:=stY.NcToPlc.AxisId, 
+		nZAxisId:=stZ.NcToPlc.AxisId, 
+		nQ1AxisId:= 0, 
+		nQ2AxisId:= 0, 
+		nQ3AxisId:= 0, 
+		nQ4AxisId:= 0, 
+		nQ5AxisId:= 0, 
+		tTimeOut:= , 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbBuildGroup.bBusy THEN
+		IF NOT fbBuildGroup.bErr THEN
+            bGearInExecute:=FALSE;
+			nState	:= 15;
+		ELSE
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;
+		END_IF
+		fbBuildGroup(bExecute:=FALSE); 
+	END_IF
+    
+    
+15:
+
+   IF fbCNC.Y_Ref.NcToPlc.CoupleState <> 1 THEN
+    bGearInExecute:=FALSE;
+    nState:=16;
+   ELSIF fbCNC.Y_Ref.NcToPlc.CoupleState = 1 THEN
+    nState:=20;
+   END_IF
+   
+16:
+    bGearInExecute:=TRUE;
+    IF fbCNC.Y_MC_OUT.bGearInDone AND (fbCNC.Y_Ref.NcToPlc.CoupleState = 1) THEN
+        nState:=20;
+    END_IF
+     
+20:
+	// load g-code file 
+	fbLoadGCode(
+		sNciToPlc:=stItpToPlc, 
+		bExecute:=TRUE, 
+		sPrg:= sPrgName, 
+		nLength:= INT_TO_UDINT(LEN(sPrgName)), 
+		tTimeOut:= , 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbLoadGCode.bBusy THEN
+		IF NOT fbLoadGCode.bErr THEN
+			nState	:= 30;
+		ELSE
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;				
+		END_IF
+		fbLoadGCode(sNciToPlc:=stItpToPlc, bExecute:=FALSE); 
+	END_IF
+	
+30:
+	// we have to check the status of the interpreter. It has to be in ready state, in case of loading the program successfully.
+	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
+	IF nInterpreterState = Tc2_NCI.NCI_INTERPRETER_READY THEN
+		nState	:= 40;
+	ELSE
+		(* add error handling *)
+		nErrorState	:= nState;
+		bBusy	:= FALSE;
+		bError	:= TRUE;
+		nState	:= 9999;				
+	END_IF
+	
+40:
+	// start g-code file
+	fbStartStopGCode(
+		bStart:=TRUE, 
+		bStop:=FALSE, 
+		tTimeOut:= , 
+		sNciToPlc:= stItpToPlc, 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbStartStopGCode.bBusy THEN
+		IF NOT fbStartStopGCode.bErr THEN
+			nState	:= 50;
+		ELSE	
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;				
+		END_IF
+		fbStartStopGCode( bStart:=FALSE, sNciToPlc:= stItpToPlc ); 
+	END_IF
+	
+50:
+	// check state, again - we are at least not in ready state for several ticks
+	// this is to ensure that we don't indicate program has finished, before we have started 
+	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
+	IF nInterpreterState <> Tc2_NCI.NCI_INTERPRETER_READY THEN
+		// nci is running
+		nState	:= 60;
+	END_IF
+
+60:
+	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
+	IF	nInterpreterState = Tc2_NCI.NCI_INTERPRETER_READY THEN
+		// program has finished
+		nState	:= 65;
+	ELSIF nInterpreterState = Tc2_NCI.NCI_INTERPRETER_ABORTED THEN
+		nState := 0;
+	END_IF
+
+65:
+    bGearInExecute:=FALSE;
+    bGearOutExecute:=TRUE;
+    IF fbCNC.Y_MC_OUT.bGearOutDone AND (fbCNC.Y_Ref.NcToPlc.CoupleState = 0) THEN
+        bGearOutExecute:=FALSE;
+        nState:=70;
+    END_IF
+	
+70:
+    
+	// program has finished 
+	// now clear interpolation group 
+	fbClearGroup(
+		bExecute:=TRUE, 
+		nGroupId:=ItpGetGroupId(sNciToPlc:=stItpToPlc) , 
+		tTimeOut:= , 
+		bBusy=> , 
+		bErr=> , 
+		nErrId=> );
+	IF NOT fbClearGroup.bBusy THEN
+		IF NOT fbClearGroup.bErr THEN
+			nState	:= 80;
+		ELSE
+			(* add error handling *)
+			nErrorState	:= nState;
+			bBusy	:= FALSE;
+			bError	:= TRUE;
+			nState	:= 9999;				
+		END_IF
+		fbClearGroup(bExecute:=FALSE); 
+	END_IF
+80:
+	bDone	:= TRUE;
+	bBusy	:= FALSE;
+	IF NOT bExecute THEN
+		nState	:= 0;
+	END_IF
+9999:
+	// error state 
+	IF NOT bExecute THEN
+		nState	:= 0;
+		bError	:= FALSE;
+	END_IF
+END_CASE
+
+// handling of m-functions is done outside statemachine
+// all m-functions are directly confirmed
+IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmHsk.bBusy THEN
+	bConfirmHsk	:= TRUE;
+ELSE	
+	bConfirmHsk	:= FALSE;
+END_IF	
+
+fbConfirmHsk(
+	bExecute:=bConfirmHsk , 
+	sNciToPlc:=stItpToPlc , 
+	sPlcToNci:=stPlcToItp , 
+	bBusy=> , 
+	bErr=> , 
+	nErrId=> );
+	]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_In" Id="{9f4f47f9-fd80-4bd7-98c1-19ae73c5acf0}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_In : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Set NC Channel Override Speed
+fChannelOverride := stHMI_In.fChannelOverride;
+
+// NC Program Name
+sPrgName := stHMI_In.sPrgName;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{c9b11abe-3756-440a-87f2-c576c5174866}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Interpreter Channel State
+
+stHMI_Out.sInterpreterState := TO_STRING(eInterpreterState);
+
+// Channel Override Speed
+
+stHMI_Out.fChannelOverrideSpeed := fChannelOverride;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
+      <Declaration><![CDATA[METHOD M_InterpreterState : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Interpreter State mapped from fbCNC call
+eInterpreterState := i_stItpToPlc.ItpState;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_NCFileInfo" Id="{b55ec5ca-99a1-4a79-94b9-b4f299483b66}">
+      <Declaration><![CDATA[METHOD M_NCFileInfo : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbADSRead(
+					NETID:=,
+					PORT:=500,
+					IDXGRP:=8449,
+					IDXOFFS:=7,
+					LEN:=,
+					DESTADDR:=,
+					READ:=,
+					TMOUT:=,
+					BUSY=>,
+					ERR=>,
+					ERRID=>
+		 						);						
+								]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_NCLine" Id="{7b737864-7f89-45b9-8635-b6cfe3b92a12}">
+      <Declaration><![CDATA[METHOD M_NCLine : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbADSRead(
+					NETID:=,
+					PORT:=500,
+					IDXGRP:=2301,
+					IDXOFFS:=20000001,
+					LEN:=,
+					DESTADDR:=,
+					READ:=,
+					TMOUT:=,
+					BUSY=>,
+					ERR=>,
+					ERRID=>
+		 						);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_NCName" Id="{2579f1bc-bd44-45c1-9788-bb6e35380df4}">
+      <Declaration><![CDATA[METHOD M_NCName : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbADSRead(
+					NETID:='',
+					PORT:=500,
+					IDXGRP:= ,
+					IDXOFFS:=7,
+					LEN:=SIZEOF(arrUDINT),
+					DESTADDR:=ADR(arrUDINT),
+					READ:=,
+					TMOUT:=,
+					BUSY=>,
+					ERR=>,
+					ERRID=>
+		 						);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SetOverride" Id="{6d44a2c7-8e8d-49f2-9eee-f598e4c03a01}">
+      <Declaration><![CDATA[METHOD M_SetOverride : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ItpSetOverridePercent(fOverridePercent:=fChannelOverride , sPlcToNci:=q_stPlcToItp);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_StartStop" Id="{b54daf30-43fd-4356-b2ab-51de72eb9059}">
+      <Declaration><![CDATA[METHOD M_StartStop : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbStartStopGCode( bStop:=bStop, sNciToPlc:= stItpToPlc );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ZeroShiftOffset" Id="{2a915930-d001-41c5-9e1b-3c451820ac54}">
+      <Declaration><![CDATA[METHOD M_ZeroShiftOffset : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbZeroShiftOffset(
+	bExecute:= bExecuteZeroShift, 
+	nZsNo:= nZeroShiftNumber, 
+	tTimeOut:= , 
+	sNciToPlc:= stItpToPlc, 
+	sZeroShiftDesc:= NC_In.ZeroShiftDesc, 
+	bBusy=> , 
+	bErr=> , 
+	nErrId=> );
+	
+	]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_NCI">
+      <LineId Id="520" Count="2" />
+      <LineId Id="518" Count="0" />
+      <LineId Id="524" Count="0" />
+      <LineId Id="574" Count="0" />
+      <LineId Id="519" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="290" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_ExecuteProgram">
+      <LineId Id="8" Count="84" />
+      <LineId Id="94" Count="135" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_HMI_In">
+      <LineId Id="5" Count="3" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_HMI_Out">
+      <LineId Id="5" Count="5" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_InterpreterState">
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_NCFileInfo">
+      <LineId Id="5" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="6" Count="10" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_NCLine">
+      <LineId Id="6" Count="11" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_NCName">
+      <LineId Id="6" Count="11" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_SetOverride">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_StartStop">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_ZeroShiftOffset">
+      <LineId Id="6" Count="7" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="14" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

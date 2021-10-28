@@ -3,6 +3,9 @@
   <DUT Name="ST_Interpreter_Inputs" Id="{1c6ac9c5-002b-452e-aa05-6d7a79acb638}">
     <Declaration><![CDATA[TYPE ST_Interpreter_Inputs :
 STRUCT
+	
+ZeroShiftDesc	: ZeroShiftDesc;
+
 END_STRUCT
 END_TYPE
 ]]></Declaration>
