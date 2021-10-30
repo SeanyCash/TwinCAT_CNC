@@ -45,6 +45,10 @@ eJogMode         : E_JogMode;
 fJogPosition	 : LREAL;
 fJogVelocity	 : LREAL;
 
+// NCI Functions
+
+bExecuteZeroShift : BOOL;
+
 
 END_STRUCT
 END_TYPE

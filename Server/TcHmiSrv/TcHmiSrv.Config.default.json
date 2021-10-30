@@ -2439,16 +2439,6 @@
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.fbCNC.bExecuteNCI": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::fbCNC::bExecuteNCI",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
         "PLC1.GVL.fbCNC.nHomeAllSeq": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2488,6 +2478,16 @@
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "MAPPING": "PLC1::GVL::stHMI_In::bAxisEnable",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.bExecuteZeroShift": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::bExecuteZeroShift",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },

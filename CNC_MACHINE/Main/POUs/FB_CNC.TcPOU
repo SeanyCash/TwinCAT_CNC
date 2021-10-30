@@ -98,6 +98,7 @@ VAR
     
     fbNCI:	FB_NCI;
 	bExecuteNCProgram:	BOOL	:= FALSE;
+    bExecuteZeroShift:  BOOL    := FALSE;
     sPrgName                : STRING[255];
     
 	
@@ -245,6 +246,7 @@ Z_Motion(
                                         
 fbNCI(
 	        bExecute:= bExecuteNCProgram,
+            bExecuteZeroShift:= bExecuteZeroShift,
             bStop:= bStopExecute,
             sPrgName := sPrgName, 
 	        bBusy=> , 
@@ -302,10 +304,11 @@ IF trigAxisEnable.Q THEN
 
 END_IF
 
-// NCI Start/Stop
+// NCI Functions
 
 bExecuteNCProgram := stHMI_In.bStart;
 bStopExecute := stHMI_In.bStop;
+bExecuteZeroShift := stHMI_In.bExecuteZeroShift;
 
 // Axis Reset
 
@@ -731,7 +734,9 @@ END_CASE
       </Implementation>
     </Method>
     <LineIds Name="FB_CNC">
-      <LineId Id="13935" Count="147" />
+      <LineId Id="13935" Count="139" />
+      <LineId Id="14201" Count="0" />
+      <LineId Id="14075" Count="7" />
       <LineId Id="14085" Count="0" />
       <LineId Id="14089" Count="9" />
       <LineId Id="680" Count="0" />
@@ -762,6 +767,7 @@ END_CASE
       <LineId Id="20" Count="0" />
       <LineId Id="59" Count="1" />
       <LineId Id="58" Count="0" />
+      <LineId Id="78" Count="0" />
       <LineId Id="69" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="71" Count="0" />

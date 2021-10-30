@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <TcEventSources Version="2">
 	<Source>
-		<GUID>{23EE8831-77FB-48C3-88B2-54A1413AEC13}</GUID>
+		<GUID>{AC1249EC-7A00-4AA4-851B-9BA1B619868E}</GUID>
 		<Name LcId="1033">CNC Events</Name>
 		<Event>
 			<Id>1</Id>
@@ -25,6 +25,30 @@
 			<Detail>
 				<Name>Comment</Name>
 				<Text LcId="1033">Starting Y Home Sequence</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>4</Id>
+			<Message LcId="1033">NC Execute Failed</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">NC Program Failed to Execute. Check Execute Program Method</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>5</Id>
+			<Message LcId="1033">NC Program Started</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">NC Program Started</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>6</Id>
+			<Message LcId="1033">NC Program Finished</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">NC Program Completed</Text>
 			</Detail>
 		</Event>
 	</Source>

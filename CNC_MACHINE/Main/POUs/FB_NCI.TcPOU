@@ -26,13 +26,14 @@ VAR
 	nErrorState			: UDINT;
 	fChannelOverride    : REAL;
 	
-	fbBuildGroup		: CfgBuildExt3DGroup;
-	fbLoadGCode			: ItpLoadProgEx;
-	fbStartStopGCode	: ItpStartStopEx;
-	fbClearGroup		: CfgReconfigGroup;
-	fbConfirmHsk		: ItpConfirmHsk;
-	fbZeroShiftOffset	: ItpWriteZeroShiftEx;
-	nZeroShiftNumber	: UDINT := 54;
+	fbBuildGroup		    : CfgBuildExt3DGroup;
+	fbLoadGCode			    : ItpLoadProgEx;
+	fbStartStopGCode	    : ItpStartStopEx;
+	fbClearGroup		    : CfgReconfigGroup;
+	fbConfirmHsk		    : ItpConfirmHsk;
+	fbZeroShiftOffset	    : ItpWriteZeroShiftEx;
+    fbReadZeroShiftOffset   : ItpReadZeroShiftEx;
+	nZeroShiftNumber	    : UDINT := 54;
 	
 	nInterpreterState	: UDINT	:= 0;
 	bConfirmHsk			: BOOL	:= FALSE;
@@ -54,6 +55,11 @@ VAR
 	q_stPlcToItp	AT %Q*:	PLCTONC_NCICHANNEL_REF;
 	stItpToPlc			: NCTOPLC_NCICHANNEL_REF;
 	stPlcToItp			: PLCTONC_NCICHANNEL_REF;
+    
+    fbAlarm			: FB_TcAlarm;
+    fbMessage		: FB_TcMessage;
+    bSendEvent    : BOOL;
+    bInitEvent    : BOOL;
 	
 END_VAR
 ]]></Declaration>
@@ -64,9 +70,17 @@ M_HMI_In();
 M_HMI_Out();
 M_StartStop();
 M_SetOverride();
+M_ExecuteProgram();
+M_ZeroShiftOffset();
 
-sLoadedProgram:=sPrgName;
+stItpToPlc := i_stItpToPlc;
+//stPlcToItp := q_stPlcToItp;
 
+IF bExecuteZeroShift THEN
+    NC_In.ZeroShiftDesc.fShiftX := stX.NcToPlc.ActPos;
+    NC_In.ZeroShiftDesc.fShiftY := stY.NcToPlc.ActPos;
+    NC_In.ZeroShiftDesc.fShiftZ := stZ.NcToPlc.ActPos;
+END_IF;
 ]]></ST>
     </Implementation>
     <Method Name="M_ExecuteProgram" Id="{f5d89ea2-b283-4fc0-aa63-1e3309b96a56}">
@@ -87,7 +101,9 @@ CASE nState OF
 		bDone	:= FALSE;
 		bError	:= FALSE;
 		nErrorState	:= nState;
-		nState	:= 10;
+		nState	:= 5;
+        fbMessage.CreateEx(TC_Events.CNC_Events.NC_Execute_Started,0); 
+        fbMessage.Send(0); 
 	END_IF	
 5:
 
@@ -100,7 +116,7 @@ CASE nState OF
 		nErrId=> );
 	IF NOT fbClearGroup.bBusy THEN
 		IF NOT fbClearGroup.bErr THEN
-			nState	:= 80;
+			nState	:= 10;
 		ELSE
 			(* add error handling *)
 			nErrorState	:= nState;
@@ -271,13 +287,17 @@ CASE nState OF
 	bDone	:= TRUE;
 	bBusy	:= FALSE;
 	IF NOT bExecute THEN
+        fbMessage.CreateEx(TC_Events.CNC_Events.NC_Execute_Finished,0); 
+        fbMessage.Send(0); 
 		nState	:= 0;
 	END_IF
 9999:
 	// error state 
 	IF NOT bExecute THEN
-		nState	:= 0;
-		bError	:= FALSE;
+        fbMessage.CreateEx(TC_Events.CNC_Events.NC_Execute_Failed,0); 
+        fbMessage.Send(0); 
+	    nState	:= 0;
+	    bError	:= FALSE;
 	END_IF
 END_CASE
 
@@ -384,7 +404,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbADSRead(
+        <ST><![CDATA[sLoadedProgram:=sPrgName;
+
+fbADSRead(
 					NETID:='',
 					PORT:=500,
 					IDXGRP:= ,
@@ -433,7 +455,15 @@ END_VAR
 	bErr=> , 
 	nErrId=> );
 	
-	]]></ST>
+fbReadZeroShiftOffset(
+	bExecute:= , 
+	nZsNo:= nZeroShiftNumber, 
+	tTimeOut:= , 
+	sNciToPlc:= stItpToPlc, 
+	sZeroShiftDesc:= NC_In.ZeroShiftDesc, 
+	bBusy=> , 
+	bErr=> , 
+	nErrId=> );	]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_NCI">
@@ -441,14 +471,28 @@ END_VAR
       <LineId Id="518" Count="0" />
       <LineId Id="524" Count="0" />
       <LineId Id="574" Count="0" />
-      <LineId Id="519" Count="0" />
+      <LineId Id="630" Count="0" />
+      <LineId Id="632" Count="0" />
+      <LineId Id="634" Count="0" />
+      <LineId Id="633" Count="0" />
+      <LineId Id="635" Count="0" />
+      <LineId Id="639" Count="0" />
       <LineId Id="207" Count="0" />
       <LineId Id="291" Count="0" />
+      <LineId Id="636" Count="1" />
+      <LineId Id="641" Count="0" />
       <LineId Id="290" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_ExecuteProgram">
-      <LineId Id="8" Count="84" />
-      <LineId Id="94" Count="135" />
+      <LineId Id="8" Count="12" />
+      <LineId Id="241" Count="1" />
+      <LineId Id="21" Count="71" />
+      <LineId Id="94" Count="110" />
+      <LineId Id="243" Count="1" />
+      <LineId Id="205" Count="4" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="240" Count="0" />
+      <LineId Id="210" Count="19" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_HMI_In">
@@ -474,6 +518,7 @@ END_VAR
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_NCName">
+      <LineId Id="21" Count="1" />
       <LineId Id="6" Count="11" />
       <LineId Id="5" Count="0" />
     </LineIds>
@@ -486,7 +531,9 @@ END_VAR
     <LineIds Name="FB_NCI.M_ZeroShiftOffset">
       <LineId Id="6" Count="7" />
       <LineId Id="5" Count="0" />
-      <LineId Id="14" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="19" Count="7" />
+      <LineId Id="15" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
