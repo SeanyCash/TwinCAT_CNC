@@ -14,6 +14,7 @@ bZeroAllAxes    : BOOL;
 // Desktop View Header Panel Buttons
 
 bAxisEnable     : BOOL;
+bSpindleEnable  : BOOL;
 bReset          : BOOL;
 bHold           : BOOL;
 bStop           : BOOL;

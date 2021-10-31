@@ -2463,16 +2463,6 @@
             },
             "USEMAPPING": true
         },
-        "PLC1.GVL.stHMI_In.ProgramCall": {
-            "ACCESS": 3,
-            "CUSTOMERDATA": "",
-            "DOMAIN": "ADS",
-            "MAPPING": "PLC1::GVL::stHMI_In::ProgramCall",
-            "SCHEMA": {
-                "$ref": "tchmi:server#/definitions/PLC1.E_Programs"
-            },
-            "USEMAPPING": true
-        },
         "PLC1.GVL.stHMI_In.bAxisEnable": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -2518,6 +2508,16 @@
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "MAPPING": "PLC1::GVL::stHMI_In::bReset",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.bSpindleEnable": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_In::bSpindleEnable",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
