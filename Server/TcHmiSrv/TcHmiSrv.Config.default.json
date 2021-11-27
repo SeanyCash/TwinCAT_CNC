@@ -145,7 +145,7 @@
         "TcHmiOpcUa": {
             "ENABLED": true,
             "NAME": "TcHmiOpcUa",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.OpcUa.12.748.0\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.OpcUa.12.752.0\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -159,7 +159,7 @@
         "TcHmiScope": {
             "ENABLED": true,
             "NAME": "TcHmiScope",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Scope.12.748.0\\runtimes\\win\\net472\\",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Scope.12.752.0\\runtimes\\win\\net472\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -197,7 +197,7 @@
         "TcHmiVision": {
             "ENABLED": true,
             "NAME": "TcHmiVision",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Vision.12.748.0\\runtimes\\win\\net472\\",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Vision.12.752.0\\runtimes\\win\\net472\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         }
@@ -3649,7 +3649,7 @@
         "TcHmiScope.ChangeChannelState": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "ChangeChannelState",
             "OPTIONS": {},
             "SCHEMA": {
@@ -3660,7 +3660,7 @@
                             "type": "string"
                         },
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "newState": {
@@ -3668,14 +3668,14 @@
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -3697,6 +3697,28 @@
             },
             "USEMAPPING": true
         },
+        "TcHmiScope.CheckIfSaveRecordIsAttached": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "CheckIfSaveRecordIsAttached",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "scopeConfigName": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "scopeConfigName"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
         "TcHmiScope.CloseConnection": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
@@ -3708,19 +3730,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -3752,7 +3774,7 @@
         "TcHmiScope.DeleteScopeServerRecords": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "DeleteScopeServerRecords",
             "OPTIONS": {},
             "SCHEMA": {
@@ -3786,19 +3808,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -3889,19 +3911,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -4063,19 +4085,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -4929,19 +4951,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -4996,19 +5018,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5061,19 +5083,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5135,7 +5157,7 @@
                             "type": "number"
                         },
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "mousePosition": {
@@ -5155,14 +5177,14 @@
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5249,19 +5271,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5284,7 +5306,7 @@
         "TcHmiScope.Goto": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "Goto",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5292,7 +5314,7 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "position": {
@@ -5301,14 +5323,14 @@
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5349,7 +5371,7 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         }
                     },
@@ -5372,19 +5394,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5415,7 +5437,7 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "pan": {
@@ -5467,14 +5489,14 @@
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5498,7 +5520,7 @@
         "TcHmiScope.Redo": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "Redo",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5506,19 +5528,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5541,7 +5563,7 @@
         "TcHmiScope.ResizeCharts": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "ResizeCharts",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5571,7 +5593,7 @@
                             "type": "array"
                         },
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "resizeOverview": {
@@ -5579,14 +5601,14 @@
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5610,7 +5632,7 @@
         "TcHmiScope.Scroll": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "Scroll",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5618,7 +5640,7 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "direction": {
@@ -5630,14 +5652,14 @@
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5661,7 +5683,7 @@
         "TcHmiScope.ScrollBig": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "ScrollBig",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5669,7 +5691,7 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "direction": {
@@ -5681,14 +5703,14 @@
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5726,19 +5748,19 @@
                             "type": "number"
                         },
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5763,7 +5785,7 @@
         "TcHmiScope.SetDisplayWidth": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "SetDisplayWidth",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5771,7 +5793,7 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "displayWidth": {
@@ -5780,14 +5802,14 @@
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5811,7 +5833,7 @@
         "TcHmiScope.SetOverviewMode": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "SetOverviewMode",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5819,19 +5841,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5866,19 +5888,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5912,7 +5934,7 @@
         "TcHmiScope.StartDisplay": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "StartDisplay",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5920,19 +5942,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5955,7 +5977,7 @@
         "TcHmiScope.StartRecord": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "StartRecord",
             "OPTIONS": {},
             "SCHEMA": {
@@ -5963,19 +5985,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -5998,7 +6020,7 @@
         "TcHmiScope.StopDisplay": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "StopDisplay",
             "OPTIONS": {},
             "SCHEMA": {
@@ -6006,19 +6028,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -6041,7 +6063,7 @@
         "TcHmiScope.StopRecord": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "StopRecord",
             "OPTIONS": {},
             "SCHEMA": {
@@ -6049,19 +6071,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -6084,7 +6106,7 @@
         "TcHmiScope.Undo": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "Undo",
             "OPTIONS": {},
             "SCHEMA": {
@@ -6092,19 +6114,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -6135,19 +6157,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -6214,19 +6236,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -6297,7 +6319,7 @@
         "TcHmiScope.ZoomOutMax": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "ZoomOutMax",
             "OPTIONS": {},
             "SCHEMA": {
@@ -6305,19 +6327,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -6340,7 +6362,7 @@
         "TcHmiScope.ZoomToDefault": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiScope",
-            "HIDDEN": false,
+            "HIDDEN": true,
             "MAPPING": "ZoomToDefault",
             "OPTIONS": {},
             "SCHEMA": {
@@ -6348,19 +6370,19 @@
                 "writeValue": {
                     "properties": {
                         "controlName": {
-                            "doc": "ScopeChart Name.",
+                            "description": "ScopeChart Name.",
                             "type": "string"
                         },
                         "scopeConfig": {
                             "additionalProperties": false,
-                            "doc": "Information for scope config.",
+                            "description": "Information for scope config.",
                             "properties": {
                                 "chart": {
-                                    "doc": "Chart name out of the scope config.",
+                                    "description": "Chart name out of the scope config.",
                                     "type": "string"
                                 },
                                 "name": {
-                                    "doc": "Name of the scope config.",
+                                    "description": "Name of the scope config.",
                                     "type": "string"
                                 }
                             },
@@ -6984,7 +7006,10 @@
             "MAPPING": "GetSchema",
             "OPTIONS": {},
             "SCHEMA": {
-                "function": true
+                "function": true,
+                "writeValue": {
+                    "type": "string"
+                }
             },
             "USEMAPPING": true
         },
@@ -7173,6 +7198,7 @@
                 "SetLocale": 3,
                 "SubscribeEvents": 3,
                 "TcHmiScope.ChangeChannelState": 3,
+                "TcHmiScope.CheckIfSaveRecordIsAttached": 3,
                 "TcHmiScope.CloseConnection": 3,
                 "TcHmiScope.DeleteScopeServerRecords": 3,
                 "TcHmiScope.DetachControl": 3,
@@ -7240,9 +7266,9 @@
         "/": "..\\..\\TwinCAT_CNC\\",
         "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.752.0\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.752.0\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.748.0\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.748.0\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.748.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.752.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.752.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.752.0\\runtimes\\native1.12-tchmi",
         "/bin": "..\\..\\TwinCAT_CNC\\bin\\",
         "/bin/framework": "..\\..\\TwinCAT_CNC\\bin\\framework",
         "/framework": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.752.0\\runtimes\\native1.12-tchmi"
