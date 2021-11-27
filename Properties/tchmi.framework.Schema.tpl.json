@@ -61,7 +61,7 @@
       },
       "type": "array",
       "items": {
-        "$ref": "tchmi:framework#/definitions/AccessConfig/definitions/access"
+        "$ref": "#/definitions/AccessConfig/definitions/access"
       }
     },
     "BorderRadius": {
@@ -146,28 +146,28 @@
       ],
       "properties": {
         "topLeft": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "topLeftUnit": {
-          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          "$ref": "#/definitions/MeasurementUnit"
         },
         "topRight": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "topRightUnit": {
-          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          "$ref": "#/definitions/MeasurementUnit"
         },
         "bottomRight": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "bottomRightUnit": {
-          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          "$ref": "#/definitions/MeasurementUnit"
         },
         "bottomLeft": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "bottomLeftUnit": {
-          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          "$ref": "#/definitions/MeasurementUnit"
         }
       },
       "required": [
@@ -193,16 +193,16 @@
       "type": "object",
       "properties": {
         "left": {
-          "$ref": "tchmi:framework#/definitions/BorderStyle/definitions/style"
+          "$ref": "#/definitions/BorderStyle/definitions/style"
         },
         "top": {
-          "$ref": "tchmi:framework#/definitions/BorderStyle/definitions/style"
+          "$ref": "#/definitions/BorderStyle/definitions/style"
         },
         "right": {
-          "$ref": "tchmi:framework#/definitions/BorderStyle/definitions/style"
+          "$ref": "#/definitions/BorderStyle/definitions/style"
         },
         "bottom": {
-          "$ref": "tchmi:framework#/definitions/BorderStyle/definitions/style"
+          "$ref": "#/definitions/BorderStyle/definitions/style"
         }
       },
       "required": [
@@ -217,28 +217,28 @@
       "type": "object",
       "properties": {
         "left": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "leftUnit": {
-          "$ref": "tchmi:framework#/definitions/PixelUnit"
+          "$ref": "#/definitions/PixelUnit"
         },
         "top": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "topUnit": {
-          "$ref": "tchmi:framework#/definitions/PixelUnit"
+          "$ref": "#/definitions/PixelUnit"
         },
         "right": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "rightUnit": {
-          "$ref": "tchmi:framework#/definitions/PixelUnit"
+          "$ref": "#/definitions/PixelUnit"
         },
         "bottom": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "bottomUnit": {
-          "$ref": "tchmi:framework#/definitions/PixelUnit"
+          "$ref": "#/definitions/PixelUnit"
         }
       },
       "required": [
@@ -352,34 +352,34 @@
         ],
         "properties": {
           "color": {
-            "$ref": "tchmi:framework#/definitions/SolidColor"
+            "$ref": "#/definitions/SolidColor"
           },
           "offsetX": {
-            "$ref": "tchmi:framework#/definitions/MeasurementValue"
+            "$ref": "#/definitions/MeasurementValue"
           },
           "offsetXUnit": {
-            "$ref": "tchmi:framework#/definitions/PixelUnit"
+            "$ref": "#/definitions/PixelUnit"
           },
           "offsetY": {
-            "$ref": "tchmi:framework#/definitions/MeasurementValue"
+            "$ref": "#/definitions/MeasurementValue"
           },
           "offsetYUnit": {
-            "$ref": "tchmi:framework#/definitions/PixelUnit"
+            "$ref": "#/definitions/PixelUnit"
           },
           "inset": {
             "type": "boolean"
           },
           "blur": {
-            "$ref": "tchmi:framework#/definitions/MeasurementValue"
+            "$ref": "#/definitions/MeasurementValue"
           },
           "blurUnit": {
-            "$ref": "tchmi:framework#/definitions/PixelUnit"
+            "$ref": "#/definitions/PixelUnit"
           },
           "spread": {
-            "$ref": "tchmi:framework#/definitions/MeasurementValue"
+            "$ref": "#/definitions/MeasurementValue"
           },
           "spreadUnit": {
-            "$ref": "tchmi:framework#/definitions/PixelUnit"
+            "$ref": "#/definitions/PixelUnit"
           }
         }
       },
@@ -396,10 +396,10 @@
     "Color": {
       "anyOf": [
         {
-          "$ref": "tchmi:framework#/definitions/SolidColor"
+          "$ref": "#/definitions/SolidColor"
         },
         {
-          "$ref": "tchmi:framework#/definitions/LinearGradientColor"
+          "$ref": "#/definitions/LinearGradientColor"
         },
         {
           "type": "null"
@@ -582,7 +582,7 @@
                   ]
                 },
                 "symbolExpression": {
-                  "$ref": "tchmi:framework#/definitions/Function/definitions/symbolExpression"
+                  "$ref": "#/definitions/Function/definitions/symbolExpression"
                 }
               },
               "required": [
@@ -659,7 +659,7 @@
         "fnParams": {
           "type": "array",
           "items": {
-            "$ref": "tchmi:framework#/definitions/Function/definitions/value"
+            "$ref": "#/definitions/Function/definitions/value"
           }
         }
       },
@@ -673,7 +673,7 @@
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "array",
       "items": {
-        "$ref": "tchmi:framework#/definitions/Function"
+        "$ref": "#/definitions/Function"
       }
     },
     "HorizontalAlignment": {
@@ -711,7 +711,7 @@
         "stopPoints": {
           "type": "array",
           "items": {
-            "$ref": "tchmi:framework#/definitions/StopPoint"
+            "$ref": "#/definitions/StopPoint"
           },
           "minItems": 2
         }
@@ -748,7 +748,6 @@
       "default": "px"
     },
     "MeasurementValue": {
-      "$schema": "http://json-schema.org/draft-04/schema",
       "type": "number"
     },
     "Padding": {
@@ -833,28 +832,28 @@
       ],
       "properties": {
         "left": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "leftUnit": {
-          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          "$ref": "#/definitions/MeasurementUnit"
         },
         "top": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "topUnit": {
-          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          "$ref": "#/definitions/MeasurementUnit"
         },
         "right": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "rightUnit": {
-          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          "$ref": "#/definitions/MeasurementUnit"
         },
         "bottom": {
-          "$ref": "tchmi:framework#/definitions/PositiveNumber"
+          "$ref": "#/definitions/PositiveNumber"
         },
         "bottomUnit": {
-          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          "$ref": "#/definitions/MeasurementUnit"
         }
       },
       "required": [
@@ -1298,22 +1297,22 @@
                   ]
                 },
                 "x": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "xUnit": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                  "$ref": "#/definitions/MeasurementUnit"
                 },
                 "y": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "yUnit": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                  "$ref": "#/definitions/MeasurementUnit"
                 },
                 "z": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "zUnit": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                  "$ref": "#/definitions/MeasurementUnit"
                 }
               },
               "required": [
@@ -1361,10 +1360,10 @@
                   ]
                 },
                 "angle": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "angleUnit": {
-                  "$ref": "tchmi:framework#/definitions/TransformList/definitions/angleUnit"
+                  "$ref": "#/definitions/TransformList/definitions/angleUnit"
                 },
                 "vector": {
                   "type": "object",
@@ -1475,16 +1474,16 @@
                   ]
                 },
                 "xAngle": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "xAngleUnit": {
-                  "$ref": "tchmi:framework#/definitions/TransformList/definitions/angleUnit"
+                  "$ref": "#/definitions/TransformList/definitions/angleUnit"
                 },
                 "yAngle": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "yAngleUnit": {
-                  "$ref": "tchmi:framework#/definitions/TransformList/definitions/angleUnit"
+                  "$ref": "#/definitions/TransformList/definitions/angleUnit"
                 }
               },
               "required": [
@@ -1570,22 +1569,22 @@
                   ]
                 },
                 "x": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "xUnit": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                  "$ref": "#/definitions/MeasurementUnit"
                 },
                 "y": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "yUnit": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                  "$ref": "#/definitions/MeasurementUnit"
                 },
                 "z": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "zUnit": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                  "$ref": "#/definitions/MeasurementUnit"
                 }
               },
               "required": [
@@ -1633,10 +1632,10 @@
                   ]
                 },
                 "distance": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                  "$ref": "#/definitions/MeasurementValue"
                 },
                 "distanceUnit": {
-                  "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                  "$ref": "#/definitions/MeasurementUnit"
                 },
                 "origin": {
                   "type": "object",
@@ -1682,16 +1681,16 @@
                   ],
                   "properties": {
                     "x": {
-                      "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                      "$ref": "#/definitions/MeasurementValue"
                     },
                     "xUnit": {
-                      "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                      "$ref": "#/definitions/MeasurementUnit"
                     },
                     "y": {
-                      "$ref": "tchmi:framework#/definitions/MeasurementValue"
+                      "$ref": "#/definitions/MeasurementValue"
                     },
                     "yUnit": {
-                      "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+                      "$ref": "#/definitions/MeasurementUnit"
                     }
                   }
                 }
@@ -1715,7 +1714,7 @@
       },
       "type": "array",
       "items": {
-        "$ref": "tchmi:framework#/definitions/TransformList/definitions/transform"
+        "$ref": "#/definitions/TransformList/definitions/transform"
       }
     },
     "Trigger": {
@@ -1742,12 +1741,12 @@
                         "type": "object",
                         "properties": {
                           "if": {
-                            "$ref": "tchmi:framework#/definitions/Trigger/definitions/expression"
+                            "$ref": "#/definitions/Trigger/definitions/expression"
                           },
                           "then": {
                             "type": "array",
                             "items": {
-                              "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                              "$ref": "#/definitions/Trigger/definitions/action"
                             }
                           },
                           "showThenActions": {
@@ -1760,12 +1759,12 @@
                         "type": "object",
                         "properties": {
                           "elseif": {
-                            "$ref": "tchmi:framework#/definitions/Trigger/definitions/expression"
+                            "$ref": "#/definitions/Trigger/definitions/expression"
                           },
                           "then": {
                             "type": "array",
                             "items": {
-                              "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                              "$ref": "#/definitions/Trigger/definitions/action"
                             }
                           },
                           "showThenActions": {
@@ -1780,7 +1779,7 @@
                           "else": {
                             "type": "array",
                             "items": {
-                              "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                              "$ref": "#/definitions/Trigger/definitions/action"
                             }
                           },
                           "showThenActions": {
@@ -1796,14 +1795,14 @@
                   "description": "Success callback action list.",
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "error": {
                   "description": "Error callback action list.",
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "active": {
@@ -1838,27 +1837,27 @@
                   ]
                 },
                 "compare": {
-                  "$ref": "tchmi:framework#/definitions/Trigger/definitions/value"
+                  "$ref": "#/definitions/Trigger/definitions/value"
                 },
                 "cases": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/vCase"
+                    "$ref": "#/definitions/Trigger/definitions/vCase"
                   }
                 },
                 "caseDefault": {
-                  "$ref": "tchmi:framework#/definitions/Trigger/definitions/dCase"
+                  "$ref": "#/definitions/Trigger/definitions/dCase"
                 },
                 "success": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "error": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "active": {
@@ -1894,21 +1893,21 @@
                   ]
                 },
                 "symbolExpression": {
-                  "$ref": "tchmi:framework#/definitions/Trigger/definitions/symbolExpression"
+                  "$ref": "#/definitions/Trigger/definitions/symbolExpression"
                 },
                 "value": {
-                  "$ref": "tchmi:framework#/definitions/Trigger/definitions/value"
+                  "$ref": "#/definitions/Trigger/definitions/value"
                 },
                 "success": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "error": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "active": {
@@ -1947,19 +1946,19 @@
                 "fnParams": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/value"
+                    "$ref": "#/definitions/Trigger/definitions/value"
                   }
                 },
                 "success": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "error": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "active": {
@@ -2014,14 +2013,14 @@
                 "success": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   },
                   "description": "Steps which will be called after call of ctx.success() with Asynchronous or last line with Synchronous."
                 },
                 "error": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   },
                   "description": "Steps which will be called after call of ctx.success() with Asynchronous or an exception with Synchronous."
                 },
@@ -2065,19 +2064,19 @@
                 "fnParams": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/value"
+                    "$ref": "#/definitions/Trigger/definitions/value"
                   }
                 },
                 "success": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "error": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "active": {
@@ -2120,19 +2119,19 @@
                 "fnParams": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/value"
+                    "$ref": "#/definitions/Trigger/definitions/value"
                   }
                 },
                 "success": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "error": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "active": {
@@ -2171,13 +2170,13 @@
                 "success": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "error": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "active": {
@@ -2211,18 +2210,18 @@
                   ]
                 },
                 "target": {
-                  "$ref": "tchmi:framework#/definitions/Trigger/definitions/comment"
+                  "$ref": "#/definitions/Trigger/definitions/comment"
                 },
                 "success": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "error": {
                   "type": "array",
                   "items": {
-                    "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                    "$ref": "#/definitions/Trigger/definitions/action"
                   }
                 },
                 "active": {
@@ -2297,7 +2296,7 @@
                   ]
                 },
                 "symbolExpression": {
-                  "$ref": "tchmi:framework#/definitions/Trigger/definitions/symbolExpression"
+                  "$ref": "#/definitions/Trigger/definitions/symbolExpression"
                 }
               },
               "required": [
@@ -2363,7 +2362,7 @@
                   ]
                 },
                 "attributeExpression": {
-                  "$ref": "tchmi:framework#/definitions/Trigger/definitions/controlAttributeSymbolExpression"
+                  "$ref": "#/definitions/Trigger/definitions/controlAttributeSymbolExpression"
                 }
               },
               "required": [
@@ -2377,10 +2376,10 @@
           "type": "object",
           "properties": {
             "compare1": {
-              "$ref": "tchmi:framework#/definitions/Trigger/definitions/value"
+              "$ref": "#/definitions/Trigger/definitions/value"
             },
             "compare2": {
-              "$ref": "tchmi:framework#/definitions/Trigger/definitions/value"
+              "$ref": "#/definitions/Trigger/definitions/value"
             },
             "compareOperator": {
               "type": "string",
@@ -2423,11 +2422,11 @@
             "actions": {
               "type": "array",
               "items": {
-                "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                "$ref": "#/definitions/Trigger/definitions/action"
               }
             },
             "caseValue": {
-              "$ref": "tchmi:framework#/definitions/Trigger/definitions/value"
+              "$ref": "#/definitions/Trigger/definitions/value"
             }
           },
           "required": [
@@ -2442,7 +2441,7 @@
             "actions": {
               "type": "array",
               "items": {
-                "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+                "$ref": "#/definitions/Trigger/definitions/action"
               }
             }
           },
@@ -2484,7 +2483,7 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "tchmi:framework#/definitions/Trigger/definitions/action"
+            "$ref": "#/definitions/Trigger/definitions/action"
           }
         }
       },
@@ -2498,7 +2497,7 @@
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "array",
       "items": {
-        "$ref": "tchmi:framework#/definitions/Trigger"
+        "$ref": "#/definitions/Trigger"
       },
       "minItems": 1
     },
@@ -2555,6 +2554,14 @@
         "Collapsed"
       ],
       "default": "Visible"
+    },
+    "EnumMapping": {
+      "type": "object",
+      "patternProperties": {
+        "^-?\\d+$": {
+          "type": "string"
+        }
+      }
     },
     "TcHmi.Controls.Beckhoff.TcHmiButton": {
       "$schema": "http://json-schema.org/draft-04/schema",
@@ -2974,7 +2981,7 @@
           "displayName": "Category",
           "category": "General",
           "displayPriority": 10,
-          "description": "An optional category which will be display on top of the element.",
+          "description": "An optional category which will be displayed above the item as a label (like <optgroup> in HTML).\nConsecutive items that have the exact same category will all be displayed under one category.\nHowever, if two items have the same category, but are not back to back, the category will be displayed twice to preserve the original item order.\nFor example items with categories [A, A, B, A] will create the category A with two entries, one category B with a single entry and after that again the category A with a single entry.",
           "defaultValue": null,
           "defaultValueInternal": null
         }
@@ -3281,7 +3288,16 @@
                   "TextBlock",
                   "CheckBox",
                   "Image",
-                  "ComboBox"
+                  "ComboBox",
+                  "NumericInput",
+                  "SpinboxInput",
+                  "PasswordInput",
+                  "Button",
+                  "ToggleButton",
+                  "ToggleSwitch",
+                  "RadioButton",
+                  "DateTimeInput",
+                  "TimespanInput"
                 ]
               },
               "width": {
@@ -3534,7 +3550,16 @@
                 "TextBlock",
                 "CheckBox",
                 "Image",
-                "ComboBox"
+                "ComboBox",
+                "NumericInput",
+                "SpinboxInput",
+                "PasswordInput",
+                "Button",
+                "ToggleButton",
+                "ToggleSwitch",
+                "RadioButton",
+                "DateTimeInput",
+                "TimespanInput"
               ]
             },
             "width": {
@@ -3727,11 +3752,194 @@
             ],
             "additionalProperties": false
           }
+        },
+        {
+          "type": "object",
+          "title": "Definition for a numeric input control",
+          "properties": {
+            "minValue": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "maxValue": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "decimalDigits": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "propertiesMeta": [
+            {
+              "name": "minValue",
+              "displayName": "Min Value",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The minimal value of the numeric input. No restrictions if it's unset.",
+              "defaultValue": 0,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "maxValue",
+              "displayName": "Max Value",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The maximal value of the numeric input. No restrictions if it's unset.",
+              "defaultValue": 100,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "decimalDigits",
+              "displayName": "Decimal Digits",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Number of displayed decimal digits. No restrictions if it's unset.",
+              "defaultValue": 0,
+              "defaultValueInternal": null
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "title": "Definition for a spinbox input control",
+          "properties": {
+            "minValue": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "maxValue": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "decimalDigits": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "step": {
+              "type": "number"
+            }
+          },
+          "propertiesMeta": [
+            {
+              "name": "step",
+              "displayName": "Step",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Defines in which step increasing/decreasing the value is possible. \nIf you define a decimal number here it is recommended to set the 'decimal digits' property too to have an effect.",
+              "defaultValue": 1,
+              "defaultValueInternal": 1
+            },
+            {
+              "name": "minValue",
+              "displayName": "Min Value",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The minimal value of the numeric input. No restrictions if it's unset.",
+              "defaultValue": 0,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "maxValue",
+              "displayName": "Max Value",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The maximal value of the numeric input. No restrictions if it's unset.",
+              "defaultValue": 100,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "decimalDigits",
+              "displayName": "Decimal Digits",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Number of displayed decimal digits. No restrictions if it's unset.",
+              "defaultValue": 0,
+              "defaultValueInternal": null
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "title": "Definition for a button control",
+          "properties": {
+            "text": {
+              "$ref": "tchmi:general#/definitions/String"
+            }
+          },
+          "propertiesMeta": [
+            {
+              "name": "text",
+              "displayName": "Text",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Defines the text of the button.",
+              "defaultValue": "",
+              "defaultValueInternal": null
+            }
+          ]
         }
       ]
     },
     "TcHmiDatagrid": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiDatagrid"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiDateTimeInput": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiDateTimeInput",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmiDateTimeInput": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiDateTimeInput"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiDateTimeInput.ButtonPosition": {
+      "title": "DateTimeInputButtonPosition",
+      "type": "string",
+      "enum": [
+        "Left",
+        "Right"
+      ],
+      "default": "Right"
     },
     "TcHmi.Controls.Beckhoff.TcHmiDateTimePicker": {
       "$schema": "http://json-schema.org/draft-04/schema",
@@ -3823,6 +4031,7 @@
                   "severity",
                   "type",
                   "alarmState",
+                  "confirmationState",
                   "domain",
                   "sourceDomain",
                   "name",
@@ -4888,6 +5097,25 @@
     "TcHmiTextbox": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTextbox"
     },
+    "TcHmi.Controls.Beckhoff.TcHmiTimespanInput": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiTimespanInput",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmiTimespanInput": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTimespanInput"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTimespanInput.ButtonPosition": {
+      "title": "DateTimeInputButtonPosition",
+      "type": "string",
+      "enum": [
+        "Left",
+        "Right"
+      ],
+      "default": "Right"
+    },
     "TcHmi.Controls.Beckhoff.TcHmiTimespanPicker": {
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "object",
@@ -5798,6 +6026,267 @@
     "TcHmiAdsState": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiAdsState"
     },
+    "TcHmi.Controls.Beckhoff.TcHmiAdsState.StateImages": {
+      "type": "object",
+      "title": "StateImages",
+      "description": "A structure defining an image for each state the control can have and the fallback image.",
+      "propertiesMeta": [
+        {
+          "name": "Fallback",
+          "displayName": "Fallback",
+          "category": "General",
+          "displayPriority": 1,
+          "description": "The Fallback Image if a state is not defined.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Invalid",
+          "displayName": "Invalid",
+          "category": "General",
+          "displayPriority": 2,
+          "description": "The Image for the State 'Invalid'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Idle",
+          "displayName": "Idle",
+          "category": "General",
+          "displayPriority": 3,
+          "description": "The Image for the State 'Idle'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Reset",
+          "displayName": "Reset",
+          "category": "General",
+          "displayPriority": 4,
+          "description": "The Image for the State 'Reset'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Init",
+          "displayName": "Init",
+          "category": "General",
+          "displayPriority": 5,
+          "description": "The Image for the State 'Init'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Start",
+          "displayName": "Start",
+          "category": "General",
+          "displayPriority": 6,
+          "description": "The Image for the State 'Start'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Run",
+          "displayName": "Run",
+          "category": "General",
+          "displayPriority": 7,
+          "description": "The Image for the State 'Run'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Stop",
+          "displayName": "Stop",
+          "category": "General",
+          "displayPriority": 8,
+          "description": "The Image for the State 'Stop'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "SaveCfg",
+          "displayName": "SaveCfg",
+          "category": "General",
+          "displayPriority": 9,
+          "description": "The Image for the State 'SaveCfg'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "LoadCfg",
+          "displayName": "LoadCfg",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "The Image for the State 'LoadCfg'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "PowerFailure",
+          "displayName": "PowerFailure",
+          "category": "General",
+          "displayPriority": 11,
+          "description": "The Image for the State 'PowerFailure'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "PowerGood",
+          "displayName": "PowerGood",
+          "category": "General",
+          "displayPriority": 12,
+          "description": "The Image for the State 'PowerGood'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Error",
+          "displayName": "Error",
+          "category": "General",
+          "displayPriority": 13,
+          "description": "The Image for the State 'Error'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Shutdown",
+          "displayName": "Shutdown",
+          "category": "General",
+          "displayPriority": 14,
+          "description": "The Image for the State 'Shutdown'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Suspend",
+          "displayName": "Suspend",
+          "category": "General",
+          "displayPriority": 15,
+          "description": "The Image for the State 'Suspend'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Resume",
+          "displayName": "Resume",
+          "category": "General",
+          "displayPriority": 16,
+          "description": "The Image for the State 'Resume'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Config",
+          "displayName": "Config",
+          "category": "General",
+          "displayPriority": 17,
+          "description": "The Image for the State 'Config'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Reconfig",
+          "displayName": "Reconfig",
+          "category": "General",
+          "displayPriority": 18,
+          "description": "The Image for the State 'Reconfig'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Stopping",
+          "displayName": "Stopping",
+          "category": "General",
+          "displayPriority": 19,
+          "description": "The Image for the State 'Stopping'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Incompatible",
+          "displayName": "Incompatible",
+          "category": "General",
+          "displayPriority": 20,
+          "description": "The Image for the State 'Incompatible'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Exception",
+          "displayName": "Exception",
+          "category": "General",
+          "displayPriority": 21,
+          "description": "The Image for the State 'Exception'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        }
+      ],
+      "properties": {
+        "Fallback": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Invalid": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Idle": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Reset": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Init": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Start": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Run": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Stop": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "SaveCfg": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "LoadCfg": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "PowerFailure": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "PowerGood": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Error": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Shutdown": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Suspend": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Resume": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Config": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Reconfig": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Stopping": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Incompatible": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Exception": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        }
+      }
+    },
     "TcHmi.Controls.Beckhoff.TcHmiUserManagement": {
       "type": "object",
       "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
@@ -6239,7 +6728,7 @@
             "category": "Layout",
             "displayName": "Width",
             "displayPriority": 10,
-            "description": "Defines width of the column in the grid. Can be a pixel value (42px), percent value (42%), a grow factor (1) or 'auto' (equivalent to grow factor 1).\nThe grow factor determines how much the items will grow relative to the rest of the items when positive free space is distributed.",
+            "description": "Defines width of the column in the grid. Can be a pixel value (42px), percent value (42%) or a grow factor (1).\nThe grow factor determines how much the items will grow relative to the rest of the items when positive free space is distributed.",
             "defaultValue": null,
             "defaultValueInternal": 1
           },
@@ -6314,7 +6803,7 @@
               },
               {
                 "title": "Width",
-                "description": "Defines width of the column in the grid. Can be a pixel value (42px), percent value (42%), a grow factor (1) or 'auto' (equivalent to grow factor 1).\nThe grow factor determines how much the items will grow relative to the rest of the items when positive free space is distributed.",
+                "description": "Defines width of the column in the grid. Can be a pixel value (42px), percent value (42%) or a grow factor (1).\nThe grow factor determines how much the items will grow relative to the rest of the items when positive free space is distributed.",
                 "default": 1,
                 "category": "Layout",
                 "displayPriority": 10
@@ -6457,7 +6946,7 @@
             "category": "Layout",
             "displayName": "Height",
             "displayPriority": 10,
-            "description": "Defines height of the cells of this row in the grid. Can be a pixel value (42px), percent value (42%), a grow factor (1) or 'auto' (equivalent to grow factor 1).\nThe grow factor determines how much the items will grow relative to the rest of the items when positive free space is distributed.",
+            "description": "Defines height of the cells of this row in the grid. Can be a pixel value (42px), percent value (42%) or a grow factor (1).\nThe grow factor determines how much the items will grow relative to the rest of the items when positive free space is distributed.",
             "defaultValue": null,
             "defaultValueInternal": 1
           },
@@ -6532,7 +7021,7 @@
               },
               {
                 "title": "Height",
-                "description": "Defines height of the cells of this row in the grid. Can be a pixel value (42px), percent value (42%), a grow factor (1) or 'auto' (equivalent to grow factor 1).\nThe grow factor determines how much the items will grow relative to the rest of the items when positive free space is distributed.",
+                "description": "Defines height of the cells of this row in the grid. Can be a pixel value (42px), percent value (42%) or a grow factor (1).\nThe grow factor determines how much the items will grow relative to the rest of the items when positive free space is distributed.",
                 "default": 1,
                 "category": "Layout",
                 "displayPriority": 10
@@ -6699,6 +7188,556 @@
     },
     "TcHmiUserControlHost": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiUserControlHost"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiPdfViewer": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiPdfViewer",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmiPdfViewer": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiPdfViewer"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiPdfViewer.PageMode": {
+      "type": "string",
+      "enum": [
+        "none",
+        "thumbs",
+        "bookmarks",
+        "attachments"
+      ]
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiNavigationBar",
+      "frameworkControlNamespace": "TcHmi.Controls.ResponsiveNavigation"
+    },
+    "TcHmiNavigationBar": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar"
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.Alignment": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "NavigationBarAlignment",
+      "type": "string",
+      "enum": [
+        "Top",
+        "Bottom"
+      ]
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.MenuItemList": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "MenuItemList",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "MenuItem",
+        "description": "One entry in the navigation bar",
+        "engineeringColumns": [
+          "name",
+          "page",
+          "parameter"
+        ],
+        "propertiesMeta": [
+          {
+            "name": "name",
+            "displayName": "Name",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Name of the menu entry",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "page",
+            "displayName": "Page",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Page that should be called if the entry was pressed",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "parameter",
+            "displayName": "Parameter",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Free selectable parameter that can be read if the onPageCalled event is called",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "subtitle",
+            "displayName": "Subtitle",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Subtitle that is shown in the optional drop-down navigation content",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "image",
+            "displayName": "Image",
+            "category": "Image",
+            "displayPriority": 10,
+            "description": "Optional image that is shown on the left side of the menu entry",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "imageWidth",
+            "displayName": "ImageWidth",
+            "category": "Image",
+            "displayPriority": 10,
+            "description": "Width of the image",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "imageWidthUnit",
+            "displayName": "ImageWidthUnit",
+            "refTo": "imageWidth",
+            "category": "Image",
+            "displayPriority": 10,
+            "description": "Width unit of the image",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "imageHeight",
+            "displayName": "ImageHeight",
+            "category": "Image",
+            "displayPriority": 10,
+            "description": "Height of the image",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "imageHeightUnit",
+            "displayName": "ImageHeightUnit",
+            "refTo": "imageHeight",
+            "category": "Image",
+            "displayPriority": 10,
+            "description": "Height unit of the image",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "children",
+            "displayName": "SubColumnEntries",
+            "category": "Children",
+            "displayPriority": 10,
+            "description": "Column entries for the optional drop-down content",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "accessRight",
+            "displayName": "AccessRights",
+            "category": "AccessRights",
+            "displayPriority": 10,
+            "description": "Access rights of the menu entry for user management",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          }
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "page": {
+            "$ref": "tchmi:framework#/definitions/ContentPath"
+          },
+          "parameter": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "image": {
+            "$ref": "tchmi:framework#/definitions/Path"
+          },
+          "imageWidth": {
+            "$ref": "tchmi:framework#/definitions/MeasurementValue"
+          },
+          "imageWidthUnit": {
+            "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          },
+          "imageHeight": {
+            "$ref": "tchmi:framework#/definitions/MeasurementValue"
+          },
+          "imageHeightUnit": {
+            "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          },
+          "children": {
+            "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.ColumItemList"
+          },
+          "accessRight": {
+            "$ref": "tchmi:framework#/definitions/AccessConfig"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.ColumItemList": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "ColumItemList",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "ColumnItem",
+        "description": "One column entry in the drop-down menu",
+        "engineeringColumns": [
+          "name"
+        ],
+        "propertiesMeta": [
+          {
+            "name": "name",
+            "displayName": "Name",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Name of the column",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "showColumnName",
+            "displayName": "ShowColumnName",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "If it is set, the name of the column is shown in the content in bold font.",
+            "defaultValue": true,
+            "defaultValueInternal": true
+          },
+          {
+            "name": "children",
+            "category": "Children",
+            "displayName": "SubPageEntries",
+            "displayPriority": 10,
+            "description": "Optional page entries for the column",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "accessRight",
+            "displayName": "AccessRight",
+            "category": "AccessRights",
+            "displayPriority": 10,
+            "description": "Access rights of the column entry for user management",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          }
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "showColumnName": {
+            "type": "boolean"
+          },
+          "children": {
+            "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.RowItemList"
+          },
+          "accessRight": {
+            "$ref": "tchmi:framework#/definitions/AccessConfig"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.RowItemList": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "RowItemList",
+      "type": "array",
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.RowItem"
+      }
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.RowItem": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "title": "RowItem",
+      "description": "Row entry in the current column",
+      "engineeringColumns": [
+        "name",
+        "page",
+        "parameter"
+      ],
+      "propertiesMeta": [
+        {
+          "name": "name",
+          "displayName": "Name",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "Name of the row item",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "page",
+          "displayName": "Page",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "Page that should be called if the entry was pressed",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "parameter",
+          "displayName": "Parameter",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "Free selectable parameter that can be read if the onPageCalled event is called",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "image",
+          "displayName": "Image",
+          "category": "Image",
+          "displayPriority": 10,
+          "description": "Optional image that is shown on the left side of the menu entry",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "imageWidth",
+          "displayName": "ImageWidth",
+          "category": "Image",
+          "displayPriority": 10,
+          "description": "Width of the image",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "imageWidthUnit",
+          "displayName": "ImageWidthUnit",
+          "refTo": "imageWidth",
+          "category": "Image",
+          "displayPriority": 10,
+          "description": "Width unit of the image",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "imageHeight",
+          "displayName": "ImageHeight",
+          "category": "Image",
+          "displayPriority": 10,
+          "description": "Height of the image",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "imageHeightUnit",
+          "displayName": "ImageHeightUnit",
+          "refTo": "imageHeight",
+          "category": "Image",
+          "displayPriority": 10,
+          "description": "Height unit of the image",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "children",
+          "displayName": "SubPageEntries",
+          "category": "Children",
+          "displayPriority": 10,
+          "description": "Optional sub-entries for the row item",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "accessRight",
+          "displayName": "AccessRights",
+          "category": "AccessRights",
+          "displayPriority": 10,
+          "description": "Access rights of the menu entry for user management",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "page": {
+          "$ref": "tchmi:framework#/definitions/ContentPath"
+        },
+        "parameter": {
+          "type": "string"
+        },
+        "image": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "imageWidth": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        },
+        "imageWidthUnit": {
+          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+        },
+        "imageHeight": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        },
+        "imageHeightUnit": {
+          "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+        },
+        "children": {
+          "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.RowItemList"
+        },
+        "accessRight": {
+          "$ref": "tchmi:framework#/definitions/AccessConfig"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.BreadCrumbControlSymbol": {
+      "allOf": [
+        {
+          "$ref": "tchmi:framework#/definitions/Symbol"
+        },
+        {
+          "frameworkSymbolSubType": {
+            "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiBreadcrumb"
+          }
+        }
+      ]
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.NavigationContentControlSymbol": {
+      "allOf": [
+        {
+          "$ref": "tchmi:framework#/definitions/Symbol"
+        },
+        {
+          "frameworkSymbolSubType": {
+            "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationContent"
+          }
+        }
+      ]
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationBar.TargetRegionControlSymbol": {
+      "allOf": [
+        {
+          "$ref": "tchmi:framework#/definitions/Symbol"
+        },
+        {
+          "frameworkSymbolSubType": {
+            "$ref": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiRegion"
+          }
+        }
+      ]
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationContent": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiNavigationContent",
+      "frameworkControlNamespace": "TcHmi.Controls.ResponsiveNavigation"
+    },
+    "TcHmiNavigationContent": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiNavigationContent"
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiBreadcrumb": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiBreadcrumb",
+      "frameworkControlNamespace": "TcHmi.Controls.ResponsiveNavigation"
+    },
+    "TcHmiBreadcrumb": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiBreadcrumb"
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiBreadcrumb.Path": {
+      "type": "array",
+      "items": [
+        {
+          "$ref": "tchmi:framework#/definitions/TcHmi.Controls.ResponsiveNavigation.TcHmiBreadcrumb.PathElement"
+        }
+      ]
+    },
+    "TcHmi.Controls.ResponsiveNavigation.TcHmiBreadcrumb.PathElement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string"
+        },
+        "page": {
+          "$ref": "tchmi:framework#/definitions/ContentPath"
+        },
+        "data": {
+          "type": "string"
+        },
+        "clickable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiScopeControl",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff.TcHmiScopeControl"
+    },
+    "TcHmiScopeControl": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.Config": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "title": "Definition for scope config",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "chart": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "chart"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.MouseMode": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "ScopeMouseMode",
+      "type": "string",
+      "enum": [
+        "ZoomX",
+        "ZoomXY",
+        "PanX",
+        "PanXY"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.ScrollDirection": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "ScopeScrollDirection",
+      "type": "string",
+      "enum": [
+        "Forward",
+        "Reverse"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.ChartColorSource": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "ScopeChartColorSource",
+      "type": "string",
+      "enum": [
+        "ScopeConfig",
+        "Theme"
+      ]
     },
     "TcHmi.Functions.Beckhoff.Increment.IncrementValueSymbol": {
       "allOf": [

@@ -1,0 +1,9 @@
+{
+    "TIMEOUT": "PT5S",
+    "scopeConfigs": {
+        "CNC": {
+            "CONFIG_FILE": ""
+        }
+    },
+    "scopeRecords": []
+}

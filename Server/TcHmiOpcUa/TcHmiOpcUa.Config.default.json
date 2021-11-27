@@ -1,0 +1,63 @@
+{
+    "advancedSettings": {
+        "basic": {
+            "arrayCloseReplacement": "_HMI_RESERVED_ARRAYCLOSE_",
+            "arrayOpenReplacement": "_HMI_RESERVED_ARRAYOPEN_",
+            "browseValueSubelements": false,
+            "definitionNameMode": 0,
+            "doublePointReplacement": "_HMI_RESERVED_DOUBLECOLON_",
+            "forbiddenReferenceNodes": {
+                "binaryNodes": [],
+                "guidNodes": [],
+                "integerNodes": [],
+                "stringNodes": []
+            },
+            "ignoreNodes": {
+                "binaryNodes": [],
+                "guidNodes": [],
+                "integerNodes": [],
+                "stringNodes": []
+            },
+            "startPoint": {
+                "binaryIdentifier": "",
+                "guidIdentifier": "",
+                "identifierType": 0,
+                "integerIdentifier": 85,
+                "namespaceIndex": 0,
+                "stringIdentifier": ""
+            }
+        }
+    },
+    "connectionSettings": {
+        "basic": {
+            "connectionTimeout": "PT0.5S",
+            "readTimeout": "PT10S",
+            "reconnectMode": 0,
+            "reconnectTries": 0
+        }
+    },
+    "namespaces": {
+        "basic": {
+            "advanced": "basic",
+            "connection": "basic",
+            "endpoint": "opc.tcp://127.0.0.1:4840",
+            "security": "basic"
+        }
+    },
+    "securitySettings": {
+        "basic": {
+            "acceptAllServerCertificates": true,
+            "acceptSelfSignedCertificates": true,
+            "authEnabled": false,
+            "certificateTrust": "",
+            "clientCertificate": "",
+            "clientPrivatekey": "",
+            "globalPassword": "",
+            "globalUser": "",
+            "policyMode": "http://opcfoundation.org/UA/SecurityPolicy#None",
+            "securityMode": 1,
+            "useGlobalUaUser": true,
+            "useHmiServerCertificate": false
+        }
+    }
+}

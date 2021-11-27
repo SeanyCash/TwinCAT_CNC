@@ -167,7 +167,9 @@
     </Content>
     <Content Include="KeyboardLayouts\German - compact.keyboard.json" />
     <Content Include="KeyboardLayouts\US - compact.keyboard.json" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="packages.xsd">
       <Visible>false</Visible>
     </Content>
@@ -201,6 +203,15 @@
       <SubType>Content</SubType>
       <Visible>True</Visible>
     </Content>
+    <Content Include="Server\TcHmiOpcUa\TcHmiOpcUa.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiOpcUa\TcHmiOpcUa.Config.remote.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiOpcUa\TcHmiOpcUa.Storage.json">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Config.default.json">
       <SubType>Content</SubType>
     </Content>
@@ -208,6 +219,15 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Storage.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiScope\TcHmiScope.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiScope\TcHmiScope.Config.remote.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiScope\TcHmiScope.Storage.json">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Server\TcHmiSqliteHistorize\TcHmiSqliteHistorize.Config.default.json">
@@ -252,6 +272,15 @@
       <SubType>Content</SubType>
       <Visible>True</Visible>
     </Content>
+    <Content Include="Server\TcHmiVision\TcHmiVision.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiVision\TcHmiVision.Config.remote.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiVision\TcHmiVision.Storage.json">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Themes\Base\BaseStyle.css">
       <Visible>true</Visible>
     </Content>
@@ -284,12 +313,15 @@
     <Folder Include="Server\ADS" />
     <Folder Include="Server\TcHmiEventLogger" />
     <Folder Include="Server\TcHmiLua" />
+    <Folder Include="Server\TcHmiOpcUa" />
     <Folder Include="Server\TcHmiRecipeManagement" />
+    <Folder Include="Server\TcHmiScope" />
     <Folder Include="Server\TcHmiSqliteHistorize" />
     <Folder Include="Server\TcHmiSqliteLogger" />
     <Folder Include="Server\TcHmiSrv" />
     <Folder Include="Server\TcHmiTextStorage" />
     <Folder Include="Server\TcHmiUserManagement" />
+    <Folder Include="Server\TcHmiVision" />
     <Folder Include="Themes" />
     <Folder Include="Themes\Base\" />
     <Folder Include="Fonts" />

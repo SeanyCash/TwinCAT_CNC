@@ -1,0 +1,10 @@
+{
+    "namespaces": {
+        "basic": {
+            "advanced": "basic",
+            "connection": "basic",
+            "endpoint": "opc.tcp://127.0.0.1:4840",
+            "security": "basic"
+        }
+    }
+}

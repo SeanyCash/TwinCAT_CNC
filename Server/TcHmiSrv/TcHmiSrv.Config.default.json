@@ -130,7 +130,7 @@
         "TcHmiEventLogger": {
             "ENABLED": true,
             "NAME": "TcHmiEventLogger",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.12.748.0\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.12.752.0\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -142,17 +142,31 @@
             "REQUIRED": true,
             "STARTUPTYPE": 1
         },
+        "TcHmiOpcUa": {
+            "ENABLED": true,
+            "NAME": "TcHmiOpcUa",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.OpcUa.12.748.0\\runtimes\\win-x64\\native\\",
+            "REQUIRED": false,
+            "STARTUPTYPE": 1
+        },
         "TcHmiRecipeManagement": {
             "ENABLED": true,
             "NAME": "TcHmiRecipeManagement",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.RecipeManagement.12.748.0\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.RecipeManagement.12.752.0\\runtimes\\win-x64\\native\\",
+            "REQUIRED": false,
+            "STARTUPTYPE": 1
+        },
+        "TcHmiScope": {
+            "ENABLED": true,
+            "NAME": "TcHmiScope",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Scope.12.748.0\\runtimes\\win\\net472\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
         "TcHmiSqliteHistorize": {
             "ENABLED": true,
             "NAME": "TcHmiSqliteHistorize",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.SqliteHistorize.12.748.0\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.SqliteHistorize.12.752.0\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -178,6 +192,13 @@
             "PATH": "TcHmiUserManagement\\",
             "PROCESSID": -1,
             "REQUIRED": true,
+            "STARTUPTYPE": 1
+        },
+        "TcHmiVision": {
+            "ENABLED": true,
+            "NAME": "TcHmiVision",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Vision.12.748.0\\runtimes\\win\\net472\\",
+            "REQUIRED": false,
             "STARTUPTYPE": 1
         }
     },
@@ -3392,6 +3413,11 @@
                                     "transient": true,
                                     "type": "array"
                                 },
+                                "list_symbols_state": {
+                                    "readOnly": true,
+                                    "transient": true,
+                                    "type": "string"
+                                },
                                 "name": {
                                     "readOnly": true,
                                     "transient": true,
@@ -3614,6 +3640,2740 @@
                     },
                     "required": [
                         "path"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.ChangeChannelState": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "ChangeChannelState",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "channelId": {
+                            "type": "string"
+                        },
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "newState": {
+                            "type": "boolean"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "channelId",
+                        "newState"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.CloseConnection": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "CloseConnection",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Config": {
+            "ACCESS": 0,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "Config",
+            "OPTIONS": {},
+            "SCHEMA": {},
+            "USEMAPPING": true
+        },
+        "TcHmiScope.DeleteScopeServerRecords": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "DeleteScopeServerRecords",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "amsNetId": {
+                            "type": "string"
+                        },
+                        "deleteAllScopeRecords": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "amsNetId",
+                        "deleteAllScopeRecords"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.DetachControl": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "DetachControl",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Diagnostics": {
+            "ACCESS": 1,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "Diagnostics",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "properties": {
+                    "scopeConfigs": {
+                        "additionalProperties": {
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "readOnly": true,
+                        "type": "object"
+                    }
+                },
+                "readOnly": true,
+                "transient": true,
+                "type": "object"
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.GetActualWindow": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "GetActualWindow",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "properties": {
+                    "displayWidth": {
+                        "format": "timespan",
+                        "type": "string"
+                    },
+                    "liveState": {
+                        "type": "boolean"
+                    },
+                    "redo": {
+                        "type": "boolean"
+                    },
+                    "scopeState": {
+                        "type": "string"
+                    },
+                    "undo": {
+                        "type": "boolean"
+                    },
+                    "xAxisEnd": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "xAxisStart": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "xAxisStart",
+                    "xAxisEnd",
+                    "displayWidth",
+                    "scopeState",
+                    "liveState",
+                    "undo",
+                    "redo"
+                ],
+                "type": "object",
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.GetData": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "GetData",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "properties": {
+                    "charts": {
+                        "items": {
+                            "properties": {
+                                "graphs": {
+                                    "additionalProperties": {
+                                        "properties": {
+                                            "axesData": {
+                                                "items": {
+                                                    "properties": {
+                                                        "x": {
+                                                            "format": "date-time",
+                                                            "type": "string"
+                                                        },
+                                                        "y": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "lineSeries": {
+                                                "items": {
+                                                    "properties": {
+                                                        "index": {
+                                                            "type": "number"
+                                                        },
+                                                        "lineStates": {
+                                                            "items": {
+                                                                "type": [
+                                                                    "number"
+                                                                ]
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "tooltipDelta": {
+                                                "type": "number"
+                                            },
+                                            "zeroPoint": {
+                                                "$ref": "#/definitions/position"
+                                            }
+                                        },
+                                        "required": [
+                                            "axesData",
+                                            "zeroPoint",
+                                            "tooltipDelta"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "graphs"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "overview": {
+                        "properties": {
+                            "graphs": {
+                                "additionalProperties": {
+                                    "properties": {
+                                        "axesData": {
+                                            "items": {
+                                                "properties": {
+                                                    "x": {
+                                                        "format": "date-time",
+                                                        "type": "string"
+                                                    },
+                                                    "y": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "lineSeries": {
+                                            "items": {
+                                                "properties": {
+                                                    "index": {
+                                                        "type": "number"
+                                                    },
+                                                    "lineStates": {
+                                                        "items": {
+                                                            "type": [
+                                                                "number"
+                                                            ]
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "tooltipDelta": {
+                                            "type": "number"
+                                        },
+                                        "zeroPoint": {
+                                            "$ref": "#/definitions/position"
+                                        }
+                                    },
+                                    "required": [
+                                        "axesData",
+                                        "zeroPoint",
+                                        "tooltipDelta"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "graphs"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "charts"
+                ],
+                "type": "object",
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.GetLayout": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "GetLayout",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "properties": {
+                    "backgroundColor": {
+                        "type": "string"
+                    },
+                    "chartType": {
+                        "type": "string"
+                    },
+                    "charts": {
+                        "items": {
+                            "properties": {
+                                "canvas": {
+                                    "properties": {
+                                        "backgroundColor": {
+                                            "type": "string"
+                                        },
+                                        "dimensions": {
+                                            "$ref": "#/definitions/dimensions"
+                                        },
+                                        "position": {
+                                            "$ref": "#/definitions/position"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "dimensions": {
+                                    "$ref": "#/definitions/dimensions"
+                                },
+                                "headline": {
+                                    "properties": {
+                                        "color": {
+                                            "type": "string"
+                                        },
+                                        "dimensions": {
+                                            "$ref": "#/definitions/dimensions"
+                                        },
+                                        "fontSize": {
+                                            "type": "number"
+                                        },
+                                        "label": {
+                                            "type": "string"
+                                        },
+                                        "position": {
+                                            "$ref": "#/definitions/position"
+                                        }
+                                    },
+                                    "required": [
+                                        "dimensions",
+                                        "position",
+                                        "label",
+                                        "color",
+                                        "fontSize"
+                                    ],
+                                    "type": "object"
+                                },
+                                "horizontalAxis": {
+                                    "items": {
+                                        "properties": {
+                                            "color": {
+                                                "type": "string"
+                                            },
+                                            "dimensions": {
+                                                "$ref": "#/definitions/dimensions"
+                                            },
+                                            "grid": {
+                                                "properties": {
+                                                    "color": {
+                                                        "type": "string"
+                                                    },
+                                                    "lineWidth": {
+                                                        "type": "number"
+                                                    },
+                                                    "ticks": {
+                                                        "type": "number"
+                                                    },
+                                                    "visible": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "visible",
+                                                    "ticks",
+                                                    "color",
+                                                    "lineWidth"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "headline": {
+                                                "properties": {
+                                                    "color": {
+                                                        "type": "string"
+                                                    },
+                                                    "dimensions": {
+                                                        "$ref": "#/definitions/dimensions"
+                                                    },
+                                                    "fontSize": {
+                                                        "type": "number"
+                                                    },
+                                                    "label": {
+                                                        "type": "string"
+                                                    },
+                                                    "position": {
+                                                        "$ref": "#/definitions/position"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "dimensions",
+                                                    "position",
+                                                    "label",
+                                                    "color",
+                                                    "fontSize"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "labels": {
+                                                "items": {
+                                                    "properties": {
+                                                        "color": {
+                                                            "type": "string"
+                                                        },
+                                                        "dimensions": {
+                                                            "$ref": "#/definitions/dimensions"
+                                                        },
+                                                        "fontSize": {
+                                                            "type": "number"
+                                                        },
+                                                        "label": {
+                                                            "type": "string"
+                                                        },
+                                                        "position": {
+                                                            "$ref": "#/definitions/position"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "dimensions",
+                                                        "position",
+                                                        "label",
+                                                        "color",
+                                                        "fontSize"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "lineWidth": {
+                                                "type": "number"
+                                            },
+                                            "position": {
+                                                "$ref": "#/definitions/position"
+                                            },
+                                            "subGrid": {
+                                                "properties": {
+                                                    "color": {
+                                                        "type": "string"
+                                                    },
+                                                    "lineWidth": {
+                                                        "type": "number"
+                                                    },
+                                                    "ticks": {
+                                                        "dimensions": {
+                                                            "$ref": "#/definitions/dimensions"
+                                                        },
+                                                        "position": {
+                                                            "$ref": "#/definitions/position"
+                                                        },
+                                                        "type": "number"
+                                                    },
+                                                    "visible": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "visible",
+                                                    "ticks",
+                                                    "color",
+                                                    "lineWidth"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "visible": {
+                                                "type": "boolean"
+                                            },
+                                            "visibleTicks": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "required": [
+                                            "visible",
+                                            "dimensions",
+                                            "position"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "position": {
+                                    "$ref": "#/definitions/position"
+                                },
+                                "preferredSize": {
+                                    "$ref": "#/definitions/dimensions"
+                                },
+                                "verticalAxis": {
+                                    "items": {
+                                        "properties": {
+                                            "color": {
+                                                "type": "string"
+                                            },
+                                            "dimensions": {
+                                                "$ref": "#/definitions/dimensions"
+                                            },
+                                            "grid": {
+                                                "properties": {
+                                                    "color": {
+                                                        "type": "string"
+                                                    },
+                                                    "lineWidth": {
+                                                        "type": "number"
+                                                    },
+                                                    "ticks": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "ticks",
+                                                    "color",
+                                                    "lineWidth"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "headline": {
+                                                "properties": {
+                                                    "color": {
+                                                        "type": "string"
+                                                    },
+                                                    "dimensions": {
+                                                        "$ref": "#/definitions/dimensions"
+                                                    },
+                                                    "fontSize": {
+                                                        "type": "number"
+                                                    },
+                                                    "label": {
+                                                        "type": "string"
+                                                    },
+                                                    "position": {
+                                                        "$ref": "#/definitions/position"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "dimensions",
+                                                    "position",
+                                                    "label",
+                                                    "color",
+                                                    "fontSize"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "labels": {
+                                                "items": {
+                                                    "properties": {
+                                                        "color": {
+                                                            "type": "string"
+                                                        },
+                                                        "dimensions": {
+                                                            "$ref": "#/definitions/dimensions"
+                                                        },
+                                                        "fontSize": {
+                                                            "type": "number"
+                                                        },
+                                                        "label": {
+                                                            "type": "string"
+                                                        },
+                                                        "position": {
+                                                            "$ref": "#/definitions/position"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "dimensions",
+                                                        "position",
+                                                        "label",
+                                                        "color",
+                                                        "fontSize"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "lineWidth": {
+                                                "type": "number"
+                                            },
+                                            "position": {
+                                                "$ref": "#/definitions/position"
+                                            },
+                                            "subGrid": {
+                                                "properties": {
+                                                    "color": {
+                                                        "type": "string"
+                                                    },
+                                                    "lineWidth": {
+                                                        "type": "number"
+                                                    },
+                                                    "ticks": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "ticks",
+                                                    "color",
+                                                    "lineWidth"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "visible": {
+                                                "type": "boolean"
+                                            },
+                                            "visibleTicks": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "required": [
+                                            "visible",
+                                            "dimensions",
+                                            "position"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "visible": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "required": [
+                                "visible",
+                                "dimensions",
+                                "preferredSize",
+                                "position"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "dimensions": {
+                        "$ref": "#/definitions/dimensions"
+                    },
+                    "foregroundColor": {
+                        "type": "string"
+                    },
+                    "gradientBackground": {
+                        "type": "boolean"
+                    },
+                    "gradientBackgroundColor": {
+                        "type": "string"
+                    },
+                    "graphs": {
+                        "items": {
+                            "properties": {
+                                "antialias": {
+                                    "type": "boolean"
+                                },
+                                "capColor": {
+                                    "type": "string"
+                                },
+                                "capSize": {
+                                    "type": "number"
+                                },
+                                "fillColor": {
+                                    "type": "string"
+                                },
+                                "fillMode": {
+                                    "type": "string"
+                                },
+                                "fillTransparency": {
+                                    "type": "number"
+                                },
+                                "graphName": {
+                                    "type": "string"
+                                },
+                                "graphType": {
+                                    "type": "string"
+                                },
+                                "lineColor": {
+                                    "type": "string"
+                                },
+                                "lineStyle": {
+                                    "type": "string"
+                                },
+                                "lineWidth": {
+                                    "type": "string"
+                                },
+                                "markColor": {
+                                    "type": "string"
+                                },
+                                "markStyle": {
+                                    "type": "string"
+                                },
+                                "markWidth": {
+                                    "type": "number"
+                                },
+                                "marks": {
+                                    "type": "boolean"
+                                },
+                                "showEndCap": {
+                                    "type": "boolean"
+                                },
+                                "showStartCap": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "required": [
+                                "graphName",
+                                "graphType",
+                                "marks",
+                                "lineColor",
+                                "lineWidth",
+                                "lineStyle",
+                                "markColor",
+                                "markWidth",
+                                "markStyle",
+                                "antialias"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "gridSize": {
+                        "properties": {
+                            "dimensions": {
+                                "$ref": "#/definitions/dimensions"
+                            },
+                            "position": {
+                                "$ref": "#/definitions/position"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "headline": {
+                        "properties": {
+                            "color": {
+                                "type": "string"
+                            },
+                            "dimensions": {
+                                "$ref": "#/definitions/dimensions"
+                            },
+                            "fontSize": {
+                                "type": "number"
+                            },
+                            "label": {
+                                "type": "string"
+                            },
+                            "position": {
+                                "$ref": "#/definitions/position"
+                            }
+                        },
+                        "required": [
+                            "dimensions",
+                            "position",
+                            "label",
+                            "color",
+                            "fontSize"
+                        ],
+                        "type": "object"
+                    },
+                    "overview": {
+                        "properties": {
+                            "canvas": {
+                                "properties": {
+                                    "backgroundColor": {
+                                        "type": "string"
+                                    },
+                                    "dimensions": {
+                                        "$ref": "#/definitions/dimensions"
+                                    },
+                                    "position": {
+                                        "$ref": "#/definitions/position"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "dimensions": {
+                                "$ref": "#/definitions/dimensions"
+                            },
+                            "graphs": {
+                                "items": {
+                                    "properties": {
+                                        "graphName": {
+                                            "type": "string"
+                                        },
+                                        "graphType": {
+                                            "type": "string"
+                                        },
+                                        "lineColor": {
+                                            "type": "string"
+                                        },
+                                        "lineWidth": {
+                                            "type": "string"
+                                        },
+                                        "markColor": {
+                                            "type": "string"
+                                        },
+                                        "markWidth": {
+                                            "type": "number"
+                                        },
+                                        "marks": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "graphType",
+                                        "marks",
+                                        "lineColor",
+                                        "lineWidth",
+                                        "lineStyle",
+                                        "markColor",
+                                        "markWidth",
+                                        "markStyle"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "horizontalAxis": {
+                                "items": {
+                                    "properties": {
+                                        "color": {
+                                            "type": "string"
+                                        },
+                                        "dimensions": {
+                                            "$ref": "#/definitions/dimensions"
+                                        },
+                                        "grid": {
+                                            "properties": {
+                                                "color": {
+                                                    "type": "string"
+                                                },
+                                                "lineWidth": {
+                                                    "type": "number"
+                                                },
+                                                "ticks": {
+                                                    "type": "number"
+                                                },
+                                                "visible": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "required": [
+                                                "visible",
+                                                "ticks",
+                                                "color",
+                                                "lineWidth"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "headline": {
+                                            "properties": {
+                                                "color": {
+                                                    "type": "string"
+                                                },
+                                                "dimensions": {
+                                                    "$ref": "#/definitions/dimensions"
+                                                },
+                                                "fontSize": {
+                                                    "type": "number"
+                                                },
+                                                "label": {
+                                                    "type": "string"
+                                                },
+                                                "position": {
+                                                    "$ref": "#/definitions/position"
+                                                }
+                                            },
+                                            "required": [
+                                                "dimensions",
+                                                "position",
+                                                "label",
+                                                "color",
+                                                "fontSize"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "labels": {
+                                            "items": {
+                                                "properties": {
+                                                    "color": {
+                                                        "type": "string"
+                                                    },
+                                                    "dimensions": {
+                                                        "$ref": "#/definitions/dimensions"
+                                                    },
+                                                    "fontSize": {
+                                                        "type": "number"
+                                                    },
+                                                    "label": {
+                                                        "type": "string"
+                                                    },
+                                                    "position": {
+                                                        "$ref": "#/definitions/position"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "dimensions",
+                                                    "position",
+                                                    "label",
+                                                    "color",
+                                                    "fontSize"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "lineWidth": {
+                                            "type": "number"
+                                        },
+                                        "position": {
+                                            "$ref": "#/definitions/position"
+                                        },
+                                        "subGrid": {
+                                            "properties": {
+                                                "color": {
+                                                    "type": "string"
+                                                },
+                                                "lineWidth": {
+                                                    "type": "number"
+                                                },
+                                                "ticks": {
+                                                    "dimensions": {
+                                                        "$ref": "#/definitions/dimensions"
+                                                    },
+                                                    "position": {
+                                                        "$ref": "#/definitions/position"
+                                                    },
+                                                    "type": "number"
+                                                },
+                                                "visible": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "required": [
+                                                "visible",
+                                                "ticks",
+                                                "color",
+                                                "lineWidth"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "visible": {
+                                            "type": "boolean"
+                                        },
+                                        "visibleTicks": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "visible",
+                                        "dimensions",
+                                        "position"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "position": {
+                                "$ref": "#/definitions/position"
+                            },
+                            "preferredSize": {
+                                "$ref": "#/definitions/dimensions"
+                            },
+                            "verticalAxis": {
+                                "items": {
+                                    "properties": {
+                                        "color": {
+                                            "type": "string"
+                                        },
+                                        "dimensions": {
+                                            "$ref": "#/definitions/dimensions"
+                                        },
+                                        "grid": {
+                                            "properties": {
+                                                "color": {
+                                                    "type": "string"
+                                                },
+                                                "lineWidth": {
+                                                    "type": "number"
+                                                },
+                                                "ticks": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "ticks",
+                                                "color",
+                                                "lineWidth"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "headline": {
+                                            "properties": {
+                                                "color": {
+                                                    "type": "string"
+                                                },
+                                                "dimensions": {
+                                                    "$ref": "#/definitions/dimensions"
+                                                },
+                                                "fontSize": {
+                                                    "type": "number"
+                                                },
+                                                "label": {
+                                                    "type": "string"
+                                                },
+                                                "position": {
+                                                    "$ref": "#/definitions/position"
+                                                }
+                                            },
+                                            "required": [
+                                                "dimensions",
+                                                "position",
+                                                "label",
+                                                "color",
+                                                "fontSize"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "labels": {
+                                            "items": {
+                                                "properties": {
+                                                    "color": {
+                                                        "type": "string"
+                                                    },
+                                                    "dimensions": {
+                                                        "$ref": "#/definitions/dimensions"
+                                                    },
+                                                    "fontSize": {
+                                                        "type": "number"
+                                                    },
+                                                    "label": {
+                                                        "type": "string"
+                                                    },
+                                                    "position": {
+                                                        "$ref": "#/definitions/position"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "dimensions",
+                                                    "position",
+                                                    "label",
+                                                    "color",
+                                                    "fontSize"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "lineWidth": {
+                                            "type": "number"
+                                        },
+                                        "position": {
+                                            "$ref": "#/definitions/position"
+                                        },
+                                        "subGrid": {
+                                            "properties": {
+                                                "color": {
+                                                    "type": "string"
+                                                },
+                                                "lineWidth": {
+                                                    "type": "number"
+                                                },
+                                                "ticks": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "ticks",
+                                                "color",
+                                                "lineWidth"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "visible": {
+                                            "type": "boolean"
+                                        },
+                                        "visibleTicks": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "visible",
+                                        "dimensions",
+                                        "position"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "visible": {
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "visible",
+                            "dimensions",
+                            "preferredSize",
+                            "position"
+                        ],
+                        "type": "object"
+                    },
+                    "position": {
+                        "$ref": "#/definitions/position"
+                    },
+                    "showTooltip": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "dimensions",
+                    "position",
+                    "gridSize",
+                    "backgroundColor",
+                    "foregroundColor",
+                    "showTooltip",
+                    "chartType",
+                    "overview",
+                    "charts",
+                    "graphs"
+                ],
+                "type": "object",
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.GetLegend": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "GetLegend",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "items": {
+                    "properties": {
+                        "color": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "text": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "text",
+                        "enabled",
+                        "color"
+                    ],
+                    "type": "object"
+                },
+                "type": "array",
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.GetMenubar": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "GetMenubar",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "properties": {
+                    "enabledButtons": {
+                        "type": "number"
+                    },
+                    "enabledTimeLabels": {
+                        "type": "number"
+                    },
+                    "visibleTimestrip": {
+                        "type": "boolean"
+                    },
+                    "visibleToolstrip": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "visibleToolstrip",
+                    "visibleTimestrip",
+                    "backgroundColor",
+                    "enabledButtons",
+                    "enabledTimeLabels"
+                ],
+                "type": "object",
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.GetTooltip": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "GetTooltip",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "properties": {
+                    "chartIndex": {
+                        "type": "number"
+                    },
+                    "displayText": {
+                        "type": "string"
+                    },
+                    "position": {
+                        "properties": {
+                            "x": {
+                                "type": "number"
+                            },
+                            "y": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "x",
+                            "y"
+                        ],
+                        "type": "object"
+                    },
+                    "timeoutMS": {
+                        "format": "timespan",
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "writeValue": {
+                    "properties": {
+                        "chartIndex": {
+                            "type": "number"
+                        },
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "mousePosition": {
+                            "properties": {
+                                "x": {
+                                    "type": "number"
+                                },
+                                "y": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "x",
+                                "y"
+                            ],
+                            "type": "object"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "chartIndex",
+                        "mousePosition"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.GetWindow": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "GetWindow",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "properties": {
+                    "displayWidth": {
+                        "format": "timespan",
+                        "type": "string"
+                    },
+                    "liveState": {
+                        "type": "boolean"
+                    },
+                    "overviewRect": {
+                        "dimensions": {
+                            "$ref": "#/definitions/dimensions"
+                        },
+                        "position": {
+                            "$ref": "#/definitions/position"
+                        }
+                    },
+                    "redo": {
+                        "type": "boolean"
+                    },
+                    "scopeState": {
+                        "type": "string"
+                    },
+                    "startDisplayTime": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "undo": {
+                        "type": "boolean"
+                    },
+                    "xAxisEnd": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "xAxisPosition": {
+                        "format": "timespan",
+                        "type": "string"
+                    },
+                    "xAxisStart": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "xAxisStart",
+                    "xAxisEnd",
+                    "xAxisPosition",
+                    "displayWidth",
+                    "startDisplayTime",
+                    "scopeState",
+                    "liveState",
+                    "undo",
+                    "redo"
+                ],
+                "type": "object",
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Goto": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "Goto",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "position": {
+                            "format": "timespan",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "position"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Init": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "Init",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "properties": {
+                    "socketId": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "socketId"
+                ],
+                "type": "object",
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "controlName"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.OpenConnection": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "OpenConnection",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Pan": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "Pan",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "pan": {
+                            "properties": {
+                                "chartIndex": {
+                                    "type": "number"
+                                },
+                                "endPoint": {
+                                    "properties": {
+                                        "x": {
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "mouseMode": {
+                                    "type": "string"
+                                },
+                                "startPoint": {
+                                    "properties": {
+                                        "x": {
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "chartIndex",
+                                "mouseMode",
+                                "startPoint",
+                                "endPoint"
+                            ],
+                            "type": "object"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "pan"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Redo": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "Redo",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.ResizeCharts": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "ResizeCharts",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "charts": {
+                            "items": {
+                                "properties": {
+                                    "chartIndex": {
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "type": "number"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "width",
+                                    "chartIndex",
+                                    "height"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "resizeOverview": {
+                            "type": "boolean"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "charts"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Scroll": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "Scroll",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "direction": {
+                            "enum": [
+                                "Forward",
+                                "Reverse"
+                            ],
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "direction"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.ScrollBig": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "ScrollBig",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "direction": {
+                            "enum": [
+                                "Forward",
+                                "Reverse"
+                            ],
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "direction"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.SetChartSize": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "SetChartSize",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "chartHeight": {
+                            "type": "number"
+                        },
+                        "chartWidth": {
+                            "type": "number"
+                        },
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "chartWidth",
+                        "chartHeight"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.SetDisplayWidth": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "SetDisplayWidth",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "displayWidth": {
+                            "format": "timespan",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "displayWidth"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.SetOverviewMode": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "SetOverviewMode",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        },
+                        "showOverview": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "showOverview"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.SetOverviewRect": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "SetOverviewRect",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        },
+                        "sizeChanged": {
+                            "changedAtBeginning": {
+                                "type": "boolean"
+                            },
+                            "width": {
+                                "type": "number"
+                            }
+                        },
+                        "xDirection": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.StartDisplay": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "StartDisplay",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.StartRecord": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "StartRecord",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.StopDisplay": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "StopDisplay",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.StopRecord": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "StopRecord",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Undo": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "Undo",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Wheel": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "Wheel",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        },
+                        "wheel": {
+                            "properties": {
+                                "chartIndex": {
+                                    "type": "number"
+                                },
+                                "delta": {
+                                    "type": "number"
+                                },
+                                "mouseMode": {
+                                    "type": "string"
+                                },
+                                "mousePosition": {
+                                    "properties": {
+                                        "x": {
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "chartIndex",
+                                "mouseMode",
+                                "delta",
+                                "mousePosition"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "wheel"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.Zoom": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": true,
+            "MAPPING": "Zoom",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        },
+                        "zoom": {
+                            "properties": {
+                                "chartIndex": {
+                                    "type": "number"
+                                },
+                                "endPoint": {
+                                    "properties": {
+                                        "x": {
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "mouseMode": {
+                                    "type": "string"
+                                },
+                                "startPoint": {
+                                    "properties": {
+                                        "x": {
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "chartIndex",
+                                "mouseMode",
+                                "startPoint",
+                                "endPoint"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig",
+                        "zoom"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.ZoomOutMax": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "ZoomOutMax",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiScope.ZoomToDefault": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiScope",
+            "HIDDEN": false,
+            "MAPPING": "ZoomToDefault",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "controlName": {
+                            "doc": "ScopeChart Name.",
+                            "type": "string"
+                        },
+                        "scopeConfig": {
+                            "additionalProperties": false,
+                            "doc": "Information for scope config.",
+                            "properties": {
+                                "chart": {
+                                    "doc": "Chart name out of the scope config.",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "doc": "Name of the scope config.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "chart"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "controlName",
+                        "scopeConfig"
                     ],
                     "type": "object"
                 }
@@ -4208,6 +6968,35 @@
             },
             "USEMAPPING": true
         },
+        "TcHmiVision.Config": {
+            "ACCESS": 0,
+            "DOMAIN": "TcHmiVision",
+            "HIDDEN": true,
+            "MAPPING": "Config",
+            "OPTIONS": {},
+            "SCHEMA": {},
+            "USEMAPPING": true
+        },
+        "TcHmiVision.GetSchema": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiVision",
+            "HIDDEN": true,
+            "MAPPING": "GetSchema",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiVision.ListSymbols": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiVision",
+            "HIDDEN": true,
+            "MAPPING": "ListSymbols",
+            "OPTIONS": {},
+            "SCHEMA": {},
+            "USEMAPPING": true
+        },
         "Unsubscribe": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -4328,7 +7117,10 @@
             "FILEACCESS": 3,
             "FILES": {},
             "SYMBOLACCESS": 3,
-            "SYMBOLS": {}
+            "SYMBOLS": {
+                "TcHmiScope.StartRecord": 3,
+                "TcHmiScope.StopRecord": 3
+            }
         },
         "__SystemGuests": {
             "ENABLED": true,
@@ -4380,6 +7172,36 @@
                 "Logout": 3,
                 "SetLocale": 3,
                 "SubscribeEvents": 3,
+                "TcHmiScope.ChangeChannelState": 3,
+                "TcHmiScope.CloseConnection": 3,
+                "TcHmiScope.DeleteScopeServerRecords": 3,
+                "TcHmiScope.DetachControl": 3,
+                "TcHmiScope.GetActualWindow": 3,
+                "TcHmiScope.GetData": 3,
+                "TcHmiScope.GetLayout": 3,
+                "TcHmiScope.GetLegend": 3,
+                "TcHmiScope.GetMenubar": 3,
+                "TcHmiScope.GetTooltip": 3,
+                "TcHmiScope.GetWindow": 3,
+                "TcHmiScope.Goto": 3,
+                "TcHmiScope.Init": 3,
+                "TcHmiScope.OpenConnection": 3,
+                "TcHmiScope.Pan": 3,
+                "TcHmiScope.Redo": 3,
+                "TcHmiScope.ResizeCharts": 3,
+                "TcHmiScope.Scroll": 3,
+                "TcHmiScope.ScrollBig": 3,
+                "TcHmiScope.SetChartSize": 3,
+                "TcHmiScope.SetDisplayWidth": 3,
+                "TcHmiScope.SetOverviewMode": 3,
+                "TcHmiScope.SetOverviewRect": 3,
+                "TcHmiScope.StartDisplay": 3,
+                "TcHmiScope.StopDisplay": 3,
+                "TcHmiScope.Undo": 3,
+                "TcHmiScope.Wheel": 3,
+                "TcHmiScope.Zoom": 3,
+                "TcHmiScope.ZoomOutMax": 3,
+                "TcHmiScope.ZoomToDefault": 3,
                 "TcHmiSqliteHistorize.GetTrendLineData": 3,
                 "TcHmiSqliteHistorize.GetTrendLineWindow": 3,
                 "TcHmiSqliteHistorize.HistorizeData": 3,
@@ -4416,10 +7238,13 @@
     "VIDEOSEGMENTSIZE": 1048576,
     "VIRTUALDIRECTORIES": {
         "/": "..\\..\\TwinCAT_CNC\\",
-        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.748.0\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.748.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.752.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.752.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.748.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.748.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.748.0\\runtimes\\native1.12-tchmi",
         "/bin": "..\\..\\TwinCAT_CNC\\bin\\",
         "/bin/framework": "..\\..\\TwinCAT_CNC\\bin\\framework",
-        "/framework": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.748.0\\runtimes\\native1.12-tchmi"
+        "/framework": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.752.0\\runtimes\\native1.12-tchmi"
     }
 }
