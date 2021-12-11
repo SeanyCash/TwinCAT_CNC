@@ -203,15 +203,6 @@
       <SubType>Content</SubType>
       <Visible>True</Visible>
     </Content>
-    <Content Include="Server\TcHmiOpcUa\TcHmiOpcUa.Config.default.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiOpcUa\TcHmiOpcUa.Config.remote.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiOpcUa\TcHmiOpcUa.Storage.json">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Config.default.json">
       <SubType>Content</SubType>
     </Content>
@@ -228,15 +219,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Server\TcHmiScope\TcHmiScope.Storage.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiSqliteHistorize\TcHmiSqliteHistorize.Config.default.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiSqliteHistorize\TcHmiSqliteHistorize.Config.remote.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiSqliteHistorize\TcHmiSqliteHistorize.Storage.json">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Config.default.json">
@@ -313,7 +295,6 @@
     <Folder Include="Server\ADS" />
     <Folder Include="Server\TcHmiEventLogger" />
     <Folder Include="Server\TcHmiLua" />
-    <Folder Include="Server\TcHmiOpcUa" />
     <Folder Include="Server\TcHmiRecipeManagement" />
     <Folder Include="Server\TcHmiScope" />
     <Folder Include="Server\TcHmiSqliteHistorize" />

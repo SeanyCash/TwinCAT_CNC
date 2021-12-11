@@ -3421,7 +3421,7 @@ External Setpoint Generation:
 			<PlcAuxTask Affinity="#x00000002"/>
 		</Plc>
 		<Io>
-			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="10.89.0.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="2">
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="10.89.0.1.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="2">
 				<Name>Device 2 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -3432,9 +3432,6 @@ External Setpoint Generation:
 				</AddressInfo>
 				<Image Id="1" ImageFlags="#x00000030" AddrType="9" ImageType="3">
 					<Name>Image</Name>
-				</Image>
-				<Image Id="4" AddrType="10" ImageType="3">
-					<Name>Image-2</Name>
 				</Image>
 				<Box Id="1" BoxType="9099">
 					<Name>Term 1 (EK1100)</Name>
@@ -4535,7 +4532,7 @@ External Setpoint Generation:
 						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x01000009"/>
 					</Box>
 				</Box>
-				<Box Id="14" BoxType="9099">
+				<Box Id="14" Disabled="true" BoxType="9099">
 					<Name>Prox Block (EP1008-0022)</Name>
 					<ImageId>1004</ImageId>
 					<EtherCAT SlaveType="1" PdiType="#x0304" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f04052" RevisionNo="#x00110016" RepeatSupport="true" PortPhys="17" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EP1008-0022 8 Ch. Dig. Input 24V, 3ms, M12" Desc="EP1008-0022" PortABoxInfo="#x02000001">
