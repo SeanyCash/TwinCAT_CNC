@@ -2,7 +2,7 @@
     "TIMEOUT": "PT5S",
     "scopeConfigs": {
         "CNC": {
-            "AUTOSTART_RECORD": true,
+            "AUTOSTART_RECORD": false,
             "CONFIG_FILE": ""
         }
     },

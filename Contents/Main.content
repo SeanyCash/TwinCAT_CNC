@@ -1432,22 +1432,22 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.ProgramCall%/s%",
         "value": {
           "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/BOOL",
-          "value": true
+          "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
+          "value": 1
         },
         "asyncWait": true
       },
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%PLC1.GVL.stHMI_In.ProgramCall%/s%",
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bTriggerProgramCall%/s%",
         "value": {
           "objectType": "StaticValue",
-          "valueType": "tchmi:server#/definitions/PLC1.E_Programs",
-          "value": 1
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": true
         },
         "asyncWait": true
       }

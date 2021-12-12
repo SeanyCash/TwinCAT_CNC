@@ -2981,7 +2981,7 @@
           "displayName": "Category",
           "category": "General",
           "displayPriority": 10,
-          "description": "An optional category which will be display on top of the element.",
+          "description": "An optional category which will be displayed above the item as a label (like <optgroup> in HTML).\nConsecutive items that have the exact same category will all be displayed under one category.\nHowever, if two items have the same category, but are not back to back, the category will be displayed twice to preserve the original item order.\nFor example items with categories [A, A, B, A] will create the category A with two entries, one category B with a single entry and after that again the category A with a single entry.",
           "defaultValue": null,
           "defaultValueInternal": null
         }
@@ -3288,7 +3288,16 @@
                   "TextBlock",
                   "CheckBox",
                   "Image",
-                  "ComboBox"
+                  "ComboBox",
+                  "NumericInput",
+                  "SpinboxInput",
+                  "PasswordInput",
+                  "Button",
+                  "ToggleButton",
+                  "ToggleSwitch",
+                  "RadioButton",
+                  "DateTimeInput",
+                  "TimespanInput"
                 ]
               },
               "width": {
@@ -3541,7 +3550,16 @@
                 "TextBlock",
                 "CheckBox",
                 "Image",
-                "ComboBox"
+                "ComboBox",
+                "NumericInput",
+                "SpinboxInput",
+                "PasswordInput",
+                "Button",
+                "ToggleButton",
+                "ToggleSwitch",
+                "RadioButton",
+                "DateTimeInput",
+                "TimespanInput"
               ]
             },
             "width": {
@@ -3734,11 +3752,194 @@
             ],
             "additionalProperties": false
           }
+        },
+        {
+          "type": "object",
+          "title": "Definition for a numeric input control",
+          "properties": {
+            "minValue": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "maxValue": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "decimalDigits": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "propertiesMeta": [
+            {
+              "name": "minValue",
+              "displayName": "Min Value",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The minimal value of the numeric input. No restrictions if it's unset.",
+              "defaultValue": 0,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "maxValue",
+              "displayName": "Max Value",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The maximal value of the numeric input. No restrictions if it's unset.",
+              "defaultValue": 100,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "decimalDigits",
+              "displayName": "Decimal Digits",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Number of displayed decimal digits. No restrictions if it's unset.",
+              "defaultValue": 0,
+              "defaultValueInternal": null
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "title": "Definition for a spinbox input control",
+          "properties": {
+            "minValue": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "maxValue": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "decimalDigits": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "step": {
+              "type": "number"
+            }
+          },
+          "propertiesMeta": [
+            {
+              "name": "step",
+              "displayName": "Step",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Defines in which step increasing/decreasing the value is possible. \nIf you define a decimal number here it is recommended to set the 'decimal digits' property too to have an effect.",
+              "defaultValue": 1,
+              "defaultValueInternal": 1
+            },
+            {
+              "name": "minValue",
+              "displayName": "Min Value",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The minimal value of the numeric input. No restrictions if it's unset.",
+              "defaultValue": 0,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "maxValue",
+              "displayName": "Max Value",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The maximal value of the numeric input. No restrictions if it's unset.",
+              "defaultValue": 100,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "decimalDigits",
+              "displayName": "Decimal Digits",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Number of displayed decimal digits. No restrictions if it's unset.",
+              "defaultValue": 0,
+              "defaultValueInternal": null
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "title": "Definition for a button control",
+          "properties": {
+            "text": {
+              "$ref": "tchmi:general#/definitions/String"
+            }
+          },
+          "propertiesMeta": [
+            {
+              "name": "text",
+              "displayName": "Text",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Defines the text of the button.",
+              "defaultValue": "",
+              "defaultValueInternal": null
+            }
+          ]
         }
       ]
     },
     "TcHmiDatagrid": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiDatagrid"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiDateTimeInput": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiDateTimeInput",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmiDateTimeInput": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiDateTimeInput"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiDateTimeInput.ButtonPosition": {
+      "title": "DateTimeInputButtonPosition",
+      "type": "string",
+      "enum": [
+        "Left",
+        "Right"
+      ],
+      "default": "Right"
     },
     "TcHmi.Controls.Beckhoff.TcHmiDateTimePicker": {
       "$schema": "http://json-schema.org/draft-04/schema",
@@ -3830,6 +4031,7 @@
                   "severity",
                   "type",
                   "alarmState",
+                  "confirmationState",
                   "domain",
                   "sourceDomain",
                   "name",
@@ -4895,6 +5097,25 @@
     "TcHmiTextbox": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTextbox"
     },
+    "TcHmi.Controls.Beckhoff.TcHmiTimespanInput": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiTimespanInput",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmiTimespanInput": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTimespanInput"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTimespanInput.ButtonPosition": {
+      "title": "DateTimeInputButtonPosition",
+      "type": "string",
+      "enum": [
+        "Left",
+        "Right"
+      ],
+      "default": "Right"
+    },
     "TcHmi.Controls.Beckhoff.TcHmiTimespanPicker": {
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "object",
@@ -5804,6 +6025,267 @@
     },
     "TcHmiAdsState": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiAdsState"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiAdsState.StateImages": {
+      "type": "object",
+      "title": "StateImages",
+      "description": "A structure defining an image for each state the control can have and the fallback image.",
+      "propertiesMeta": [
+        {
+          "name": "Fallback",
+          "displayName": "Fallback",
+          "category": "General",
+          "displayPriority": 1,
+          "description": "The Fallback Image if a state is not defined.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Invalid",
+          "displayName": "Invalid",
+          "category": "General",
+          "displayPriority": 2,
+          "description": "The Image for the State 'Invalid'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Idle",
+          "displayName": "Idle",
+          "category": "General",
+          "displayPriority": 3,
+          "description": "The Image for the State 'Idle'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Reset",
+          "displayName": "Reset",
+          "category": "General",
+          "displayPriority": 4,
+          "description": "The Image for the State 'Reset'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Init",
+          "displayName": "Init",
+          "category": "General",
+          "displayPriority": 5,
+          "description": "The Image for the State 'Init'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Start",
+          "displayName": "Start",
+          "category": "General",
+          "displayPriority": 6,
+          "description": "The Image for the State 'Start'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Run",
+          "displayName": "Run",
+          "category": "General",
+          "displayPriority": 7,
+          "description": "The Image for the State 'Run'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Stop",
+          "displayName": "Stop",
+          "category": "General",
+          "displayPriority": 8,
+          "description": "The Image for the State 'Stop'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "SaveCfg",
+          "displayName": "SaveCfg",
+          "category": "General",
+          "displayPriority": 9,
+          "description": "The Image for the State 'SaveCfg'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "LoadCfg",
+          "displayName": "LoadCfg",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "The Image for the State 'LoadCfg'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "PowerFailure",
+          "displayName": "PowerFailure",
+          "category": "General",
+          "displayPriority": 11,
+          "description": "The Image for the State 'PowerFailure'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "PowerGood",
+          "displayName": "PowerGood",
+          "category": "General",
+          "displayPriority": 12,
+          "description": "The Image for the State 'PowerGood'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Error",
+          "displayName": "Error",
+          "category": "General",
+          "displayPriority": 13,
+          "description": "The Image for the State 'Error'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Shutdown",
+          "displayName": "Shutdown",
+          "category": "General",
+          "displayPriority": 14,
+          "description": "The Image for the State 'Shutdown'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Suspend",
+          "displayName": "Suspend",
+          "category": "General",
+          "displayPriority": 15,
+          "description": "The Image for the State 'Suspend'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Resume",
+          "displayName": "Resume",
+          "category": "General",
+          "displayPriority": 16,
+          "description": "The Image for the State 'Resume'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Config",
+          "displayName": "Config",
+          "category": "General",
+          "displayPriority": 17,
+          "description": "The Image for the State 'Config'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Reconfig",
+          "displayName": "Reconfig",
+          "category": "General",
+          "displayPriority": 18,
+          "description": "The Image for the State 'Reconfig'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Stopping",
+          "displayName": "Stopping",
+          "category": "General",
+          "displayPriority": 19,
+          "description": "The Image for the State 'Stopping'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Incompatible",
+          "displayName": "Incompatible",
+          "category": "General",
+          "displayPriority": 20,
+          "description": "The Image for the State 'Incompatible'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "Exception",
+          "displayName": "Exception",
+          "category": "General",
+          "displayPriority": 21,
+          "description": "The Image for the State 'Exception'.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        }
+      ],
+      "properties": {
+        "Fallback": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Invalid": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Idle": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Reset": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Init": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Start": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Run": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Stop": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "SaveCfg": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "LoadCfg": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "PowerFailure": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "PowerGood": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Error": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Shutdown": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Suspend": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Resume": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Config": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Reconfig": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Stopping": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Incompatible": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "Exception": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        }
+      }
     },
     "TcHmi.Controls.Beckhoff.TcHmiUserManagement": {
       "type": "object",

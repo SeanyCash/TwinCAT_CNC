@@ -1,5 +1,5 @@
 ﻿{
-  "$schema": "../Packages/Beckhoff.TwinCAT.HMI.Framework-12.752.0/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
+  "$schema": "./../Packages/Beckhoff.TwinCAT.HMI.Framework.12.752.0/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
   "basePath": "./framework",
   "scaleMode": "None",
   "startupView": "Desktop.view",
@@ -26,7 +26,7 @@
         },
         {
           "name": "Themes/Base/BaseStyle.css",
-          "description": "Theme Stylesheet",
+          "description": "",
           "type": "Stylesheet"
         }
       ],
@@ -80,44 +80,59 @@
     {
       "url": "Contents/Alarms.content",
       "preload": false,
-      "keepAlive": false
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     },
     {
       "url": "Contents/Jog.content",
       "preload": false,
-      "keepAlive": false
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     },
     {
       "url": "Contents/Main.content",
       "preload": false,
-      "keepAlive": false
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     },
     {
       "url": "Contents/MetricUnits.content",
       "preload": false,
-      "keepAlive": false
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     },
     {
       "url": "Contents/Offsets.content",
       "preload": false,
-      "keepAlive": false
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     },
     {
       "url": "Contents/PathVisualization.content",
       "preload": false,
-      "keepAlive": false
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     },
     {
       "url": "Contents/Status.content",
       "preload": false,
-      "keepAlive": false
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     }
   ],
   "views": [
     {
       "url": "Desktop.view",
       "preload": false,
-      "keepAlive": false
+      "keepAlive": false,
+      "preloadBindings": false
     }
   ],
   "userFunctions": [],
@@ -140,8 +155,8 @@
   "trigger": [],
   "actionTemplates": [],
   "languages": {
-    "de-DE": "Localization\\de-DE.localization",
-    "en-US": "Localization\\en-US.localization"
+    "de-DE": "Localization/de-DE.localization",
+    "en-US": "Localization/en-US.localization"
   },
   "languageFallback": "",
   "disableLoadingOptimization": false,
