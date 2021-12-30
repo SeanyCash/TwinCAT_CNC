@@ -189,10 +189,6 @@
     {
       "name": "Beckhoff.TwinCAT.HMI.ResponsiveNavigation",
       "basePath": "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation"
-    },
-    {
-      "name": "Beckhoff.TwinCAT.HMI.ScopeControl",
-      "basePath": "/Beckhoff.TwinCAT.HMI.ScopeControl"
     }
   ],
   "keyboardLayouts": [

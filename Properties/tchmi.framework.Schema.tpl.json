@@ -7683,62 +7683,6 @@
         "name"
       ]
     },
-    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl": {
-      "$schema": "http://json-schema.org/draft-04/schema",
-      "type": "object",
-      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
-      "frameworkControlType": "TcHmiScopeControl",
-      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff.TcHmiScopeControl"
-    },
-    "TcHmiScopeControl": {
-      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl"
-    },
-    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.Config": {
-      "$schema": "http://json-schema.org/draft-04/schema",
-      "type": "object",
-      "title": "Definition for scope config",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "chart": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "chart"
-      ]
-    },
-    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.MouseMode": {
-      "$schema": "http://json-schema.org/draft-04/schema",
-      "title": "ScopeMouseMode",
-      "type": "string",
-      "enum": [
-        "ZoomX",
-        "ZoomXY",
-        "PanX",
-        "PanXY"
-      ]
-    },
-    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.ScrollDirection": {
-      "$schema": "http://json-schema.org/draft-04/schema",
-      "title": "ScopeScrollDirection",
-      "type": "string",
-      "enum": [
-        "Forward",
-        "Reverse"
-      ]
-    },
-    "TcHmi.Controls.Beckhoff.TcHmiScopeControl.ChartColorSource": {
-      "$schema": "http://json-schema.org/draft-04/schema",
-      "title": "ScopeChartColorSource",
-      "type": "string",
-      "enum": [
-        "ScopeConfig",
-        "Theme"
-      ]
-    },
     "TcHmi.Functions.Beckhoff.Increment.IncrementValueSymbol": {
       "allOf": [
         {

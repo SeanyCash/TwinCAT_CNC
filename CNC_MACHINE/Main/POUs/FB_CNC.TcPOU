@@ -20,8 +20,8 @@ VAR
 	X_Motion		: FB_MotionFunctions;
 	Z_Motion		: FB_MotionFunctions;
     
-    eHomeYSeq       : E_HomeY;
-	
+    //eHomeYSeq       : E_HomeY;
+    eHomeYSeq :(INIT,GEAR_IN,POWER_ON,CHECK_HOMED,HOME_Y1,Y1_HOMED,HOME_Y2,Y2_HOMED,RE_GEAR,END);
 	
 	Y_MC_IN			: ST_Motion_Inputs;
 	Y2_MC_IN		: ST_Motion_Inputs;
@@ -500,6 +500,9 @@ VAR_INPUT
 END_VAR
 
 VAR
+    
+
+
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
@@ -508,7 +511,7 @@ END_VAR]]></Declaration>
 CASE eHomeYSeq OF
 		 		
 
-Init:
+INIT:
 		fbMessage.CreateEx(TC_Events.CNC_Events.Y_Home_Start, 0);	// "Y Homing Started"
         eHomingMode := MC_DefaultHoming;
         M_PRG_HomeY:= FALSE;
@@ -516,40 +519,40 @@ Init:
 		bAxisEnable:=TRUE;
         bGearOutExecute:=FALSE;
         bGearInExecute:=FALSE;
-        eHomeYSeq:=Gear_In;
+        eHomeYSeq:=GEAR_IN;
         
-Gear_In:        
+GEAR_IN:        
 
         bGearInExecute := TRUE;
         IF Y_Ref.NcToPlc.CoupleState = 1 AND Y2_Ref.NcToPlc.CoupleState = 3 THEN     
-            eHomeYSeq :=Power_On;
+            eHomeYSeq :=POWER_ON;
 		END_IF
 			
 	
-Power_On:
+POWER_ON:
 
 	    // Home Both Axes Together
 		IF Y_MC_OUT.bPowerStatus THEN
 			
 			bHomeY := TRUE;
-			eHomeYSeq:=Check_Homed;
+			eHomeYSeq:=CHECK_HOMED;
 		
 		ELSE
 
-			eHomeYSeq:=Init;		
+			eHomeYSeq:=INIT;		
 		
 		END_IF
 	
-Check_Homed:
+CHECK_HOMED:
 
 		IF Y_MC_OUT.bAxisHomed AND Y_Ref.Status.Homed THEN
 			
 			bHomeY:= FALSE;
-			eHomeYSeq:=Home_Y1;
+			eHomeYSeq:=HOME_Y1;
 		
 		END_IF
         
-Home_Y1:
+HOME_Y1:
         // Decouple Axes for individual Homing
         
         //Y1 Homing
@@ -557,56 +560,56 @@ Home_Y1:
         bGearOutExecute:= TRUE;
         IF Y_MC_OUT.bPowerStatus AND Y_Ref.NcToPlc.CoupleState = 0 THEN
 			bHomeY := TRUE;
-			eHomeYSeq:=Y1_Homed;
+			eHomeYSeq:=Y1_HOMED;
         ELSE
             bAxisEnable:=TRUE;
             bAxisReset:=TRUE;
-            eHomeYSeq:=Home_Y1;
+            eHomeYSeq:=HOME_Y1;
         END_IF
         
-Y1_Homed:
+Y1_HOMED:
      
         IF Y_MC_OUT.bAxisHomed AND Y_Ref.Status.Homed THEN
 			
 			bHomeY:= FALSE;
-			eHomeYSeq:=Home_Y2;
+			eHomeYSeq:=HOME_Y2;
 		
 		END_IF
 
-Home_Y2:
+HOME_Y2:
         // Y2 Homing
        IF Y2_MC_OUT.bPowerStatus AND Y2_Ref.NcToPlc.CoupleState = 0 THEN
 			
 			bHomeY2 := TRUE;
-			eHomeYSeq:=Y2_Homed;
+			eHomeYSeq:=Y2_HOMED;
         ELSE
             bAxisEnable:=TRUE;
             bAxisReset:=TRUE;
-            eHomeYSeq:=Home_Y2;
+            eHomeYSeq:=HOME_Y2;
         END_IF
         
-Y2_Homed:
+Y2_HOMED:
       
         IF Y2_MC_OUT.bAxisHomed AND Y2_Ref.Status.Homed THEN
 			
 			bHomeY2:= FALSE;
-			eHomeYSeq:= Re_Gear;
+			eHomeYSeq:= RE_GEAR;
 		
 		END_IF
         
 
-Re_Gear:
+RE_GEAR:
         bGearOutExecute:=FALSE;
         bGearInExecute:=TRUE;
         IF Y_Ref.NcToPlc.CoupleState = 1 AND Y2_Ref.NcToPlc.CoupleState = 3 THEN
-            eHomeYSeq:=End_Sequence;      
+            eHomeYSeq:=END;      
 		END_IF
         
         
-End_Sequence:
+END:
 		
 		//bAxisEnable:=FALSE;
-		eHomeYSeq:=Init;
+		eHomeYSeq:=INIT;
 		//bProgramDone := TRUE;
         M_PRG_HomeY:= TRUE;
         
@@ -674,7 +677,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[nHomeAllSeq:=0;
-eHomeYSeq:=Init;
+eHomeYSeq:=INIT;
 nHomeXSeq:=0;
 nHomeZSeq:=0;
 //bProgramDone:= FALSE;

@@ -6,9 +6,4 @@
     <Name>Scope Diagnostics</Name>
     <RootNamespace>YT Scope Project1</RootNamespace>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="Scope Project1.tcscopex">
-      <SubType>Content</SubType>
-    </Content>
-  </ItemGroup>
 </Project>
