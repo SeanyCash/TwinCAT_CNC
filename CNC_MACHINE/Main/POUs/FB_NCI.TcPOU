@@ -101,9 +101,16 @@ CASE nState OF
 		bDone	:= FALSE;
 		bError	:= FALSE;
 		nErrorState	:= nState;
-		nState	:= 5;
         fbMessage.CreateEx(TC_Events.CNC_Events.NC_Execute_Started,0); 
-        fbMessage.Send(0); 
+        fbMessage.Send(0);
+        fbClearGroup(bExecute:=FALSE); 
+        // Check for Y axis geared out before. Can cause problems re-starting a g code run
+        bGearOutExecute:=TRUE;
+        IF fbCNC.Y_MC_OUT.bGearOutDone THEN
+            bGearOutExecute:=FALSE;
+		    nState	:= 5;           
+        END_IF
+        
 	END_IF	
 5:
 
@@ -163,7 +170,9 @@ CASE nState OF
 
    IF fbCNC.Y_Ref.NcToPlc.CoupleState <> 1 THEN
     bGearInExecute:=FALSE;
+    IF NOT bGearInExecute THEN
     nState:=16;
+    END_IF
    ELSIF fbCNC.Y_Ref.NcToPlc.CoupleState = 1 THEN
     nState:=20;
    END_IF
@@ -295,7 +304,8 @@ CASE nState OF
 	// error state 
 	IF NOT bExecute THEN
         fbMessage.CreateEx(TC_Events.CNC_Events.NC_Execute_Failed,0); 
-        fbMessage.Send(0); 
+        fbMessage.Send(0);
+        bGearOutExecute:=TRUE; 
 	    nState	:= 0;
 	    bError	:= FALSE;
 	END_IF
@@ -484,14 +494,24 @@ fbReadZeroShiftOffset(
       <LineId Id="290" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_ExecuteProgram">
-      <LineId Id="8" Count="12" />
-      <LineId Id="241" Count="1" />
-      <LineId Id="21" Count="71" />
+      <LineId Id="8" Count="11" />
+      <LineId Id="253" Count="2" />
+      <LineId Id="258" Count="2" />
+      <LineId Id="263" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="264" Count="0" />
+      <LineId Id="241" Count="0" />
+      <LineId Id="21" Count="58" />
+      <LineId Id="248" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="81" Count="11" />
       <LineId Id="94" Count="110" />
       <LineId Id="243" Count="1" />
       <LineId Id="205" Count="4" />
       <LineId Id="236" Count="0" />
       <LineId Id="240" Count="0" />
+      <LineId Id="257" Count="0" />
       <LineId Id="210" Count="19" />
       <LineId Id="5" Count="0" />
     </LineIds>

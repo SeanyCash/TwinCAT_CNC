@@ -2541,12 +2541,14 @@ External Setpoint Generation:
 				<Axis Id="1" CreateSymbols="true" AxisType="1">
 					<Name>Y</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="1237.25" Deceleration="1237.25" Jerk="624811"/>
-						<Velo RefSearch="1" RefSync="1" SlowManual="50" FastManual="180" Fast="150" Maximum="245"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="494.9" Deceleration="494.9" Jerk="99969.7999999999"/>
+						<Velo RefSearch="1" RefSync="1" SlowManual="50" FastManual="180" Fast="125" Maximum="245"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
 						<EncPara ScaleFactorNumerator="0.001948153955" Inverse="true" MaxCount="#x0000ffff">
+							<SoftEndMinControl Enable="true" Range="-0.1"/>
+							<SoftEndMaxControl Enable="true" Range="2500"/>
 							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="1" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
@@ -2706,12 +2708,14 @@ External Setpoint Generation:
 				<Axis Id="2" CreateSymbols="true" AxisType="1">
 					<Name>Y²</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="1237.25" Deceleration="1237.25" Jerk="624811"/>
-						<Velo RefSearch="1" RefSync="1" SlowManual="50" Fast="150" Maximum="245"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="494.9" Deceleration="494.9" Jerk="99969.7999999999"/>
+						<Velo RefSearch="1" RefSync="1" SlowManual="50" Fast="125" Maximum="245"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
 						<EncPara ScaleFactorNumerator="0.001948153955" MaxCount="#x0000ffff">
+							<SoftEndMinControl Enable="true" Range="-0.1"/>
+							<SoftEndMaxControl Enable="true" Range="2500"/>
 							<Inc RefSearchInverse="true" RefSyncInverse="false" RefMode="1" RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
@@ -2873,8 +2877,8 @@ External Setpoint Generation:
 				<Axis Id="3" CreateSymbols="true" AxisType="1">
 					<Name>X</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="600" Deceleration="600" Jerk="637562"/>
-						<Velo RefSearch="10" RefSync="10" FastManual="200" Fast="180" Maximum="250"/>
+						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="604.634" Deceleration="604.634" Jerk="146233"/>
+						<Velo RefSearch="10" RefSync="10" FastManual="200" Fast="150" Maximum="250"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
@@ -3042,8 +3046,8 @@ External Setpoint Generation:
 				<Axis Id="4" CreateSymbols="true" AxisType="1">
 					<Name>Z</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="50.4879" Deceleration="504.878" Jerk="2549.03"/>
-						<Velo RefSearch="1" RefSync="1" SlowManual="30" FastManual="80" Fast="10" Maximum="100"/>
+						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="202" Deceleration="202" Jerk="40804"/>
+						<Velo RefSearch="1" RefSync="1" SlowManual="30" FastManual="80" Fast="80" Maximum="100"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
