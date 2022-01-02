@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_SpindleStatus" Id="{de8ea829-6307-4164-bf2e-df769d856e77}">
+    <Declaration><![CDATA[TYPE ST_SpindleStatus :
+STRUCT
+    
+// Invertek Optidrive E3 Modbus Register Mapping Status
+    
+nControlWord		: WORD; //Modbus RTU Register 1
+nSpeedRefSetpoint	: INT;  //Modbus RTU Register 2
+nRampControlTime    : UINT; //Modbus RTU Register 4
+nErrorCode			: BYTE; //Modbus RTU Register 6 Lower Byte
+nDriveStatus		: BYTE; //Modbus RTU Register 6 Upper Byte
+nOutputFreq			: INT;  //Modbus RTU Register 7
+nMotorCurrent		: UINT; //Modbus RTU Register 8
+nMotorTorque        : INT;  //Modbus RTU Register 9
+nMotorPower         : UINT; //Modbus RTU Register 10 
+nDigitalInputSts	: WORD; //Modbus RTU Register 11
+nDCBusVoltage		: UINT; //Modbus RTU Register 23
+nDrivePowerStageTemp: INT; //Modbus RTU Register 24
+nRelayOutputStatus  : WORD;//Modbus RTU Register 29
+nKWHourMeter        : UINT;//Modbus RTU Register 32
+nRuntimeHours       : UINT;//Modbus RTU Register 34
+nRuntimeMinutes     : UINT;//Modbus RTU Register 35
+nInternalDriveTemp  : INT; //Modbus RTU Register 39
+nOutputVoltage      : UINT;//Modbus RTU Register 43
+
+END_STRUCT
+
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

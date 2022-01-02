@@ -212,15 +212,6 @@
     <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Storage.json">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Server\TcHmiScope\TcHmiScope.Config.default.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiScope\TcHmiScope.Config.remote.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiScope\TcHmiScope.Storage.json">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Config.default.json">
       <SubType>Content</SubType>
       <Visible>True</Visible>
@@ -296,7 +287,6 @@
     <Folder Include="Server\TcHmiEventLogger" />
     <Folder Include="Server\TcHmiLua" />
     <Folder Include="Server\TcHmiRecipeManagement" />
-    <Folder Include="Server\TcHmiScope" />
     <Folder Include="Server\TcHmiSqliteHistorize" />
     <Folder Include="Server\TcHmiSqliteLogger" />
     <Folder Include="Server\TcHmiSrv" />

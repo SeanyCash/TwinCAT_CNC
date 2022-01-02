@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="ST_SpindleParameters" Id="{904f6f5b-ce80-4d8c-a494-929ac264aba0}">
+    <Declaration><![CDATA[TYPE ST_SpindleParameters :
+STRUCT
+    
+// Invertek Optidrive E3 Modbus Register Mapping Parameters
+
+    
+nMaxSpeedLimit		: UINT; //Modbus RTU Register 129
+nMinSpeedLimit	    : UINT; //Modbus RTU Register 130
+nAccelRampTime		: UINT; //Modbus RTU Register 131
+nDecelRampTime		: UINT; //Modbus RTU Register 132
+nStopMode			: UINT;  //Modbus RTU Register 133
+nMotorRatedVoltage	: UINT; //Modbus RTU Register 135
+nMotorRatedCurrent  : INT;  //Modbus RTU Register 136
+nMotorRatedFrequency: WORD; //Modbus RTU Register 137
+nMotorRatedSpeed    : WORD; //Modbus RTU Register 138
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -42,7 +42,13 @@
     <Compile Include="DUTs\Structures\ST_Motion_Outputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Structures\ST_SpindleFunctions.TcDUT">
+    <Compile Include="DUTs\Structures\ST_SpindleControl.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Structures\ST_SpindleParameters.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Structures\ST_SpindleStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GVL.TcGVL">

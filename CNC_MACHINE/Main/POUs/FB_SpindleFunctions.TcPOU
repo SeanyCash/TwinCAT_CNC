@@ -27,7 +27,8 @@ VAR
 
  //eWriteError    : MODBUS_ERRORS;
  
- stSpindleIO	: ST_SpindleFunctions;
+ stSpindleStatus	: ST_SpindleStatus;
+ stSpindleControl   : ST_SpindleControl;
 	
 // Drive Control Command
 
@@ -104,45 +105,43 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF bExecute THEN
 
-    stSpindleIO.ReadDriveControlCommand	:= nModbusRegister[1];
-    stSpindleIO.ReadSpeedRefSetpoint	:= WORD_TO_REAL(nModbusRegister[2]);
-    stSpindleIO.ReadAccel_Decel			:= WORD_TO_REAL(nModbusRegister[4]);
+    stSpindleStatus.nControlWord	    := nModbusRegister[1];
+    stSpindleStatus.nSpeedRefSetpoint	:= nModbusRegister[2];
+    stSpindleStatus.nRampControlTime	:= nModbusRegister[4];
 
 ELSIF bWriteExecute THEN
     
-    nModbusRegister[1]                  := stSpindleIO.SetDriveControlCommand;
-    nModbusRegister[2]                  :=  REAL_TO_WORD(stSpindleIO.SetSpeedRefSetpoint);
-    nModbusRegister[4]                  := REAL_TO_WORD(stSpindleIO.SetAccel_Decel);
+    nModbusRegister[1]                  := stSpindleControl.nControlWord;
+    nModbusRegister[2]                  := stSpindleControl.nSpeedRefSetpoint;
+    nModbusRegister[4]                  := stSpindleControl.nRampControlTime;
 
 END_IF
 
 
-stSpindleIO.ErrorCode.0			:=  nModbusRegister[6].0;
-stSpindleIO.ErrorCode.1			:=  nModbusRegister[6].1;
-stSpindleIO.ErrorCode.2			:=  nModbusRegister[6].2;
-stSpindleIO.ErrorCode.3			:=  nModbusRegister[6].3;
-stSpindleIO.ErrorCode.4			:=  nModbusRegister[6].4;
-stSpindleIO.ErrorCode.5			:=  nModbusRegister[6].5;
-stSpindleIO.ErrorCode.6			:=  nModbusRegister[6].6;
-stSpindleIO.ErrorCode.7			:=  nModbusRegister[6].7;	            //	: BYTE;
-
-stSpindleIO.DriveStatus.0		:= nModbusRegister[6].8; 	            //	: BYTE;
-stSpindleIO.DriveStatus.1		:= nModbusRegister[6].9; 	            //	: BYTE;
-stSpindleIO.DriveStatus.2		:= nModbusRegister[6].10; 	            //	: BYTE;
-stSpindleIO.DriveStatus.3		:= nModbusRegister[6].11; 	            //	: BYTE;
-stSpindleIO.DriveStatus.4		:= nModbusRegister[6].12; 	            //	: BYTE;
-stSpindleIO.DriveStatus.5		:= nModbusRegister[6].13; 	            //	: BYTE;
-stSpindleIO.DriveStatus.6		:= nModbusRegister[6].14; 	            //	: BYTE;
-stSpindleIO.DriveStatus.7		:= nModbusRegister[6].15; 	            //	: BYTE;
-
-stSpindleIO.OutputFreq			:= WORD_TO_REAL(nModbusRegister[7]);	//	: REAL;
-stSpindleIO.OutputCurrent		:= WORD_TO_REAL(nModbusRegister[8]);	//	: REAL;
-stSpindleIO.DigitalInputSts		:= nModbusRegister[11];	                //	: INT;
-stSpindleIO.AnalogIn1			:= nModbusRegister[20];	                //	: INT;
-stSpindleIO.AnalogIn2			:= nModbusRegister[21];	                //	: INT;
-stSpindleIO.SpeedRefValue		:= WORD_TO_REAL(nModbusRegister[22]);	//	: REAL;
-stSpindleIO.DCBusVoltage		:= WORD_TO_REAL(nModbusRegister[23]);	//	: REAL;
-stSpindleIO.DriveTemp			:= WORD_TO_REAL(nModbusRegister[24]);	//	: REAL;]]></ST>
+stSpindleStatus.nErrorCode.0			:=  nModbusRegister[6].0;
+stSpindleStatus.nErrorCode.1			:=  nModbusRegister[6].1;
+stSpindleStatus.nErrorCode.2			:=  nModbusRegister[6].2;
+stSpindleStatus.nErrorCode.3			:=  nModbusRegister[6].3;
+stSpindleStatus.nErrorCode.4			:=  nModbusRegister[6].4;
+stSpindleStatus.nErrorCode.5			:=  nModbusRegister[6].5;
+stSpindleStatus.nErrorCode.6			:=  nModbusRegister[6].6;
+stSpindleStatus.nErrorCode.7			:=  nModbusRegister[6].7;	       
+                                                                           
+stSpindleStatus.nDriveStatus.0		:= nModbusRegister[6].8; 	           
+stSpindleStatus.nDriveStatus.1		:= nModbusRegister[6].9; 	           
+stSpindleStatus.nDriveStatus.2		:= nModbusRegister[6].10; 	           
+stSpindleStatus.nDriveStatus.3		:= nModbusRegister[6].11; 	           
+stSpindleStatus.nDriveStatus.4		:= nModbusRegister[6].12; 	           
+stSpindleStatus.nDriveStatus.5		:= nModbusRegister[6].13; 	           
+stSpindleStatus.nDriveStatus.6		:= nModbusRegister[6].14; 	           
+stSpindleStatus.nDriveStatus.7		:= nModbusRegister[6].15; 	           
+                                                                           
+stSpindleStatus.nOutputFreq			:= nModbusRegister[7];                 
+stSpindleStatus.nMotorCurrent		:= nModbusRegister[8];	               
+stSpindleStatus.nDigitalInputSts	:= nModbusRegister[11];	                             
+stSpindleStatus.nSpeedRefSetpoint	:= nModbusRegister[22];
+stSpindleStatus.nDCBusVoltage		:= nModbusRegister[23];	
+stSpindleStatus.nDrivePowerStageTemp:= nModbusRegister[24];]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_ReadParameters" Id="{a233cd63-eba1-4191-8645-5e9df383ad75}">
@@ -187,11 +186,11 @@ END_VAR]]></Declaration>
 
 IF bStop THEN
 
-	stSpindleIO.ReadDriveControlCommand.0 := FALSE;
+	stSpindleControl.nControlWord.0 := FALSE;
 	
 ELSIF bRunEnable THEN
 		
-	stSpindleIO.ReadDriveControlCommand.0 := TRUE;
+	stSpindleControl.nControlWord.0 := TRUE;
 
 END_IF
 
@@ -199,41 +198,54 @@ END_IF
 
 IF bDecelRamp1 THEN
 	
-	stSpindleIO.ReadDriveControlCommand.1 := FALSE;
+	stSpindleControl.nControlWord.1 := FALSE;
 
 ELSIF bDecelRamp2 THEN
 	
-	stSpindleIO.ReadDriveControlCommand.1 := TRUE;
+	stSpindleControl.nControlWord.1 := TRUE;
 	
 END_IF;
 
 
-stSpindleIO.ReadDriveControlCommand.2 := bFaultReset;
-stSpindleIO.ReadDriveControlCommand.2 := bCoastStopRequest;
+stSpindleControl.nControlWord.2 := bFaultReset;
+stSpindleControl.nControlWord.2 := bCoastStopRequest;
 
-stSpindleIO.ReadSpeedRefSetpoint := rSpeedRefSetpoint;
-stSpindleIO.ReadAccel_Decel:= rAccel_Decel;
+//stSpindleControl.nSpeedRefSetpoint  := rSpeedRefSetpoint;
+//stSpindleControl.nRampControlTime   := rAccel_Decel;
 
 // Read Only Bits
 
-nErrorCode :=    stSpindleIO.ErrorCode;
-bDriveStopped	:= stSpindleIO.DriveStatus.0;
-bDriveRunning	:= stSpindleIO.DriveStatus.1;
-bDriveTripped	:= stSpindleIO.DriveStatus.2;
+nErrorCode      := stSpindleStatus.nErrorCode;
+bDriveStopped	:= stSpindleStatus.nDriveStatus.0;
+bDriveRunning	:= stSpindleStatus.nDriveStatus.1;
+bDriveTripped	:= stSpindleStatus.nDriveStatus.2;
 
-rOutputFrequency	:= stSpindleIO.OutputFreq;
-rOutputCurrent		:= stSpindleIO.OutputCurrent;
-nDigitalInputSts	:= stSpindleIO.DigitalInputSts;
-nAnalogInput1		:= stSpindleIO.AnalogIn1;
-nAnalogInput2		:= stSpindleIO.AnalogIn2;
-rSpeedRefValue		:= stSpindleIO.SpeedRefValue;
-rDCBusVoltage		:= stSpindleIO.DCBusVoltage;
-rDriveTemp			:= stSpindleIO.DriveTemp;
-
-
-
-
-]]></ST>
+rOutputFrequency	:= stSpindleStatus.nOutputFreq;
+rOutputCurrent		:= stSpindleStatus.nMotorCurrent;
+nDigitalInputSts	:= stSpindleStatus.nDigitalInputSts;
+rSpeedRefValue		:= stSpindleStatus.nSpeedRefSetpoint;
+rDCBusVoltage		:= stSpindleStatus.nDCBusVoltage;
+rDriveTemp			:= stSpindleStatus.nInternalDriveTemp;
+(*
+nControlWord		: WORD;
+nSpeedRefSetpoint	: INT; 
+nRampControlTime    : UINT;
+nErrorCode			: BYTE;
+nDriveStatus		: BYTE;
+nOutputFreq			: INT; 
+nMotorCurrent		: UINT;
+nMotorTorque        : INT; 
+nMotorPower         : UINT;
+nDigitalInputSts	: WORD;
+nDCBusVoltage		: UINT;
+nDrivePowerStageTemp: INT; 
+nRelayOutputStatus  : WORD;
+nKWHourMeter        : UINT;
+nRuntimeHours       : UINT;
+nRuntimeMinutes     : UINT;
+nInternalDriveTemp  : INT; 
+nOutputVoltage      : UINT;
+*)]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_WriteParameters" Id="{2cc1a04a-a448-4214-8312-bc9179b7e0fd}">
@@ -282,7 +294,8 @@ END_VAR
       <LineId Id="31" Count="2" />
       <LineId Id="36" Count="0" />
       <LineId Id="28" Count="0" />
-      <LineId Id="11" Count="6" />
+      <LineId Id="11" Count="2" />
+      <LineId Id="16" Count="1" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ReadParameters">
@@ -324,12 +337,14 @@ END_VAR
       <LineId Id="94" Count="0" />
       <LineId Id="93" Count="0" />
       <LineId Id="96" Count="1" />
-      <LineId Id="102" Count="4" />
+      <LineId Id="104" Count="2" />
       <LineId Id="95" Count="0" />
+      <LineId Id="154" Count="0" />
       <LineId Id="88" Count="0" />
       <LineId Id="87" Count="0" />
       <LineId Id="83" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="155" Count="13" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_WriteParameters">
       <LineId Id="6" Count="7" />
