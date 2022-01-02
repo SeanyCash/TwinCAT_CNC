@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<TcEventSources Version="2">
+	<Source>
+		<GUID>{AC1249EC-7A00-4AA4-851B-9BA1B619868E}</GUID>
+		<Name LcId="1033">CNC Events</Name>
+		<Event>
+			<Id>1</Id>
+			<Message LcId="1033">Z Home Start</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">Starting Z Homing Sequence</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>2</Id>
+			<Message LcId="1033">X Home Start</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">Starting X Home Sequence</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>3</Id>
+			<Message LcId="1033">Y Home Start</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">Starting Y Home Sequence</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>4</Id>
+			<Message LcId="1033">NC Execute Failed</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">NC Program Failed to Execute. Check Execute Program Method</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>5</Id>
+			<Message LcId="1033">NC Program Started</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">NC Program Started</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>6</Id>
+			<Message LcId="1033">NC Program Finished</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">NC Program Completed</Text>
+			</Detail>
+		</Event>
+	</Source>
+</TcEventSources>
