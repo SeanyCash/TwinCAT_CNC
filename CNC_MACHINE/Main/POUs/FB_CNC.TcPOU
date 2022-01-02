@@ -338,7 +338,7 @@ stHMI_Out.stY2Ref := Y2_Ref;
 stHMI_Out.stXRef  := X_Ref;
 stHMI_Out.stZRef  := Z_Ref;
 
-//stHMI_Out.sCurrentProgramSelected := 
+stHMI_Out.sCurrentProgramSelected := sCurrentProgram;
 
 
 
