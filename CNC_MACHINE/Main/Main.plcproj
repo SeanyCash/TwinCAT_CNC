@@ -3,16 +3,16 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{a83f7266-f27c-4708-8cdc-d6041cda01bd}</ProjectGuid>
+    <ProjectGuid>{82b3f0f6-4148-4c70-9643-05a9a9a5a00a}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <Name>Main</Name>
     <ProgramVersion>3.1.4022.7</ProgramVersion>
-    <Application>{0d615f6e-6b68-45e9-b673-d0ef04729328}</Application>
-    <TypeSystem>{eef80dfe-665c-408e-9d78-5820722aaee3}</TypeSystem>
-    <Implicit_Task_Info>{c511e857-8371-40f2-b972-714876d4206b}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{b72c7eba-e2ea-4397-bba2-a97a47c58ad9}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{a9ed9d72-2906-4925-80be-14622b640d01}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{eb1ff309-1ae0-44ea-9bed-a9b1b556f9e3}</LibraryReferences>
+    <Application>{fcb54084-2a31-4515-b2d5-e25357628211}</Application>
+    <TypeSystem>{9516fbfb-82b3-4cd1-9c33-8870e6ca45ea}</TypeSystem>
+    <Implicit_Task_Info>{4d39cf58-b591-4c3a-9e38-4f4dae4bb1b7}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{ba6d4376-eb26-46b1-ab9d-1e416bd69e75}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{03f4ee61-9c5b-4bbc-b728-b8c72616cd44}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{1d43f1db-bd98-421a-bb86-2337a1b8542c}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DUTs\Enums\E_InterpreterState.TcDUT">

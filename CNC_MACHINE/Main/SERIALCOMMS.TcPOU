@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="SERIALCOMMS" Id="{bde08e60-56d8-42a4-bd78-c5daeeb46c51}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM SERIALCOMMS
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[GVL.fbSpindle.M_SerialLineControl();]]></ST>
+    </Implementation>
+    <LineIds Name="SERIALCOMMS">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

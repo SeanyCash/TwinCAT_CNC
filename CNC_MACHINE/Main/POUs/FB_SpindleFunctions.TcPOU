@@ -14,12 +14,16 @@ END_VAR
 VAR
     
  ModbusMaster       : ModbusRtuMasterV2_PcCOM; 
- bExecute           : BOOL;
+ bReadExecute       : BOOL;
  bBusy              : BOOL;
  bError             : BOOL;
  nBytesRead         : UINT;
  nModbusRegister    : ARRAY [1..24] OF WORD;
  eError             : MODBUS_ERRORS;
+ //Input Array
+ nVFDInputs AT%IW0  : ARRAY[0..255] OF WORD;
+ //Output Array
+ nVFDOutputs AT%QW0 : ARRAY[0..255] OF WORD;
 
  bWriteExecute  : BOOL;
 (* bWriteBusy     : BOOL;
@@ -60,11 +64,44 @@ rDCBusVoltage			: REAL;
 rDriveTemp				: REAL;
 
 
+// Serial COM Port Status/Control Bit Mapping:
+
+(*
+Status Bit 0: TA: Transmit Accepted
+Bit 1: RR: Receive Request
+Bit 2: IA: Init Accepted
+Bit 3: BUF_F: Buffer overflow (possible data loss)
+Bits 4-12: nIn Number of data present in buffer
+*)
+(*Ctrl Bit 0: TR: Transmit Request
+Bit 1: RA: Receive Accepted
+Bit 2: IR: Init Request
+Bit 3: Unused
+Bits 4-12: nOut Number of data to be sent
+*)
+//Serial Status Bits
+nStatusWord             AT  %I* : UINT;
+bTransmitAccepted       : BOOL;
+bStatInitRequest        : BOOL;
+nStatNumDataBuffer      : BYTE;
+//Serial Control Bits
+nCtrlWord               AT  %Q* : UINT;
+bReceiveAccepted        : BOOL;
+bCtrlInitRequest        : BOOL;
+nCtrlNumDataBuffer      : BYTE;
+
+fbSerialLineControl     : SerialLineControl;
+TxComBuffer             : ComBuffer;
+RxComBuffer             : ComBuffer;
+
 END_VAR
+
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[M_SpindleControlMapping();
 M_ModbusMapping();
+M_ReadParameters();
+M_SerialLineControl();
 
 // Read/Write Modbus commands through PC COM Serial Port
 (*    ModbusMaster(
@@ -80,8 +117,8 @@ M_ModbusMapping();
                         ErrorId=> eError , 
                         cbRead=> nBytesRead);
 *)                        
-                     
-IF  bExecute THEN                          
+(*                     
+IF  bReadExecute THEN                          
                                                        
     ModbusMaster.ReadRegs();
   
@@ -92,10 +129,7 @@ IF bWriteExecute THEN
     ModbusMaster.WriteRegs();
   
 END_IF                  
-
-// insert text here
-
-]]></ST>
+*)]]></ST>
     </Implementation>
     <Method Name="M_ModbusMapping" Id="{83d865f8-d7ae-49d7-a6f4-fcb7ec40a615}">
       <Declaration><![CDATA[METHOD M_ModbusMapping : BOOL
@@ -103,7 +137,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF bExecute THEN
+        <ST><![CDATA[IF bReadExecute THEN
 
     stSpindleStatus.nControlWord	    := nModbusRegister[1];
     stSpindleStatus.nSpeedRefSetpoint	:= nModbusRegister[2];
@@ -151,24 +185,35 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ModbusMaster.ReadRegs(  
-                        UnitID:=,
-                        Quantity:=,
-                        MBAddr:=,
-                        cbLength:=,
-                        pMemoryAddr:=,
-                        Execute:=,
-                        Timeout:=,
+                        UnitID:=1,
+                        Quantity:=1,//Station Address (invertek Drive Address)
+                        MBAddr:=6,   // Invertek Register Index
+                        cbLength:= SIZEOF(nVFDInputs[1]), 
+                        pMemoryAddr:= ADR(nVFDInputs[1]),
+                        Execute:= bReadExecute,
+                        Timeout:= T#5S,
                                         );
                                         
-ModbusMaster.WriteSingleRegister(   
-                                    UnitID:=,
-                                    Quantity:=,
-                                    MBAddr:=,
-                                    cbLength:=,
-                                    pMemoryAddr:=,
-                                    Execute:=,
-                                    Timeout:=,
-                                                    );]]></ST>
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SerialLineControl" Id="{4775d0c6-34f6-4037-9ac7-88b5b4c316f9}">
+      <Declaration><![CDATA[METHOD M_SerialLineControl : BOOL
+VAR_INPUT
+END_VAR
+
+VAR
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbSerialLineControl(
+                    Mode:= SERIALLINEMODE_PC_COM_PORT, 
+                    pComIn:= ADR(ModbusMaster.InData), 
+                    pComOut:= ADR(ModbusMaster.OutData), 
+                    SizeComIn:= 64, 
+                    Error=> , 
+                    ErrorID=> , 
+                    TxBuffer:= TxComBuffer, 
+                    RxBuffer:= RxComBuffer);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_SpindleControlMapping" Id="{2f07773b-6003-410f-852f-7cd237e180e1}">
@@ -262,14 +307,24 @@ END_VAR
                            pMemoryAddr:=,
                            Execute:=,
                            Timeout:=,
-                                           );]]></ST>
+                                           );
+                                           
+ModbusMaster.WriteSingleRegister(   
+                                    UnitID:=,
+                                    Quantity:=,
+                                    MBAddr:=,
+                                    cbLength:=,
+                                    pMemoryAddr:=,
+                                    Execute:=,
+                                    Timeout:=,
+                                                    );                                           ]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_SpindleFunctions">
-      <LineId Id="963" Count="16" />
-      <LineId Id="992" Count="12" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="1082" Count="0" />
+      <LineId Id="1283" Count="1" />
+      <LineId Id="1315" Count="0" />
+      <LineId Id="1411" Count="0" />
+      <LineId Id="1285" Count="26" />
       <LineId Id="1065" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ModbusMapping">
@@ -299,7 +354,11 @@ END_VAR
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ReadParameters">
-      <LineId Id="6" Count="17" />
+      <LineId Id="6" Count="9" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SpindleFunctions.M_SerialLineControl">
+      <LineId Id="29" Count="7" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_SpindleControlMapping">
@@ -349,6 +408,9 @@ END_VAR
     <LineIds Name="FB_SpindleFunctions.M_WriteParameters">
       <LineId Id="6" Count="7" />
       <LineId Id="5" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="7" />
+      <LineId Id="18" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
