@@ -3289,7 +3289,7 @@ External Setpoint Generation:
 			</NC>
 		</Motion>
 		<Plc>
-			<Project GUID="{82B3F0F6-4148-4C70-9643-05A9A9A5A00A}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{BAEA0BE9-F1E8-4314-86B8-0F7DE89572E6}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Main\Main.tmc">
 					<Name>Main Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -3345,34 +3345,15 @@ External Setpoint Generation:
 							<Type GUID="{56354211-98EF-4057-9322-975DEAD0E29D}" Namespace="MC">NCTOPLC_NCICHANNEL_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.fbSpindle.ModbusMaster.InData</Name>
+							<Name>GVL.fbSpindle.fbModbusMaster.InData</Name>
 							<Type GUID="{85E5F182-994B-D58F-D73E-E06C3608A833}" Namespace="Tc2_ModbusRTU">MB_PcComInData</Type>
 						</Var>
 						<Var>
-							<Name>GVL.fbSpindle.nStatusWord</Name>
-							<Comment><![CDATA[ Serial COM Port Status/Control Bit Mapping:
-
-Status Bit 0: TA: Transmit Accepted
-Bit 1: RR: Receive Request
-Bit 2: IA: Init Accepted
-Bit 3: BUF_F: Buffer overflow (possible data loss)
-Bits 4-12: nIn Number of data present in buffer
-
-Ctrl Bit 0: TR: Transmit Request
-Bit 1: RA: Receive Accepted
-Bit 2: IR: Init Request
-Bit 3: Unused
-Bits 4-12: nOut Number of data to be sent
-
-Serial Status Bits]]></Comment>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
+							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
 							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
+							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
 							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
@@ -3404,21 +3385,16 @@ Serial Status Bits]]></Comment>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
 							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
 							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.fbSpindle.ModbusMaster.OutData</Name>
-							<Type GUID="{817F87BD-54FA-7383-92CB-61C84BBDADE4}" Namespace="Tc2_ModbusRTU">MB_PcComOutData</Type>
+							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.fbSpindle.nCtrlWord</Name>
-							<Comment><![CDATA[Serial Control Bits]]></Comment>
-							<Type>UINT</Type>
+							<Name>GVL.fbSpindle.fbModbusMaster.OutData</Name>
+							<Type GUID="{817F87BD-54FA-7383-92CB-61C84BBDADE4}" Namespace="Tc2_ModbusRTU">MB_PcComOutData</Type>
 						</Var>
 						<Var>
 							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
@@ -3446,6 +3422,146 @@ Serial Status Bits]]></Comment>
 						<OwnerA Name="OutputSrc" Prefix="TIPC^Main^Main Instance" Type="2">
 							<OwnerB Name="TINC^NC-Task 1 SAF^NC Channel">
 								<Link VarA="GVL.fbCNC.q_stPlcToItp" TypeA="MC.PLCTONC_NCICHANNEL_REF" InOutA="1" GuidA="{48415C2A-E750-483B-A619-8655B2BEA4B8}" VarB="Inputs^FromPlc" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2022-01-09T07:51:07">
+						<OwnerA Name="InputDst" Prefix="TIPC^Main^Main Instance" Type="1">
+							<OwnerB Name="TIID^Spindle Communication (COM Port)">
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data1" Size="8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data10" Size="8" OffsA="72" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data11" Size="8" OffsA="80" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data12" Size="8" OffsA="88" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data13" Size="8" OffsA="96" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data14" Size="8" OffsA="104" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data15" Size="8" OffsA="112" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data16" Size="8" OffsA="120" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data17" Size="8" OffsA="128" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data18" Size="8" OffsA="136" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data19" Size="8" OffsA="144" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data2" Size="8" OffsA="8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data20" Size="8" OffsA="152" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data21" Size="8" OffsA="160" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data22" Size="8" OffsA="168" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data23" Size="8" OffsA="176" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data24" Size="8" OffsA="184" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data25" Size="8" OffsA="192" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data26" Size="8" OffsA="200" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data27" Size="8" OffsA="208" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data28" Size="8" OffsA="216" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data29" Size="8" OffsA="224" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data3" Size="8" OffsA="16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data30" Size="8" OffsA="232" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data31" Size="8" OffsA="240" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data32" Size="8" OffsA="248" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data33" Size="8" OffsA="256" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data34" Size="8" OffsA="264" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data35" Size="8" OffsA="272" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data36" Size="8" OffsA="280" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data37" Size="8" OffsA="288" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data38" Size="8" OffsA="296" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data39" Size="8" OffsA="304" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data4" Size="8" OffsA="24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data40" Size="8" OffsA="312" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data41" Size="8" OffsA="320" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data42" Size="8" OffsA="328" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data43" Size="8" OffsA="336" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data44" Size="8" OffsA="344" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data45" Size="8" OffsA="352" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data46" Size="8" OffsA="360" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data47" Size="8" OffsA="368" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data48" Size="8" OffsA="376" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data49" Size="8" OffsA="384" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data5" Size="8" OffsA="32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data50" Size="8" OffsA="392" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data51" Size="8" OffsA="400" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data52" Size="8" OffsA="408" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data53" Size="8" OffsA="416" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data54" Size="8" OffsA="424" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data55" Size="8" OffsA="432" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data56" Size="8" OffsA="440" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data57" Size="8" OffsA="448" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data58" Size="8" OffsA="456" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data59" Size="8" OffsA="464" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data6" Size="8" OffsA="40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data60" Size="8" OffsA="472" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data61" Size="8" OffsA="480" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data62" Size="8" OffsA="488" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data63" Size="8" OffsA="496" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data64" Size="8" OffsA="504" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data7" Size="8" OffsA="48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data8" Size="8" OffsA="56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Inputs^Data9" Size="8" OffsA="64" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.InData^SerStatus" TypeA="WORD" InOutA="0" ParentTypeA="MB_PcComInData" GuidA="{18071995-0000-0000-0000-000000000004}" VarB="Inputs^Status" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="OutputSrc" Prefix="TIPC^Main^Main Instance" Type="2">
+							<OwnerB Name="TIID^Spindle Communication (COM Port)">
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data1" Size="8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data10" Size="8" OffsA="72" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data11" Size="8" OffsA="80" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data12" Size="8" OffsA="88" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data13" Size="8" OffsA="96" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data14" Size="8" OffsA="104" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data15" Size="8" OffsA="112" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data16" Size="8" OffsA="120" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data17" Size="8" OffsA="128" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data18" Size="8" OffsA="136" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data19" Size="8" OffsA="144" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data2" Size="8" OffsA="8" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data20" Size="8" OffsA="152" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data21" Size="8" OffsA="160" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data22" Size="8" OffsA="168" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data23" Size="8" OffsA="176" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data24" Size="8" OffsA="184" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data25" Size="8" OffsA="192" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data26" Size="8" OffsA="200" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data27" Size="8" OffsA="208" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data28" Size="8" OffsA="216" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data29" Size="8" OffsA="224" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data3" Size="8" OffsA="16" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data30" Size="8" OffsA="232" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data31" Size="8" OffsA="240" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data32" Size="8" OffsA="248" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data33" Size="8" OffsA="256" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data34" Size="8" OffsA="264" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data35" Size="8" OffsA="272" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data36" Size="8" OffsA="280" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data37" Size="8" OffsA="288" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data38" Size="8" OffsA="296" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data39" Size="8" OffsA="304" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data4" Size="8" OffsA="24" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data40" Size="8" OffsA="312" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data41" Size="8" OffsA="320" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data42" Size="8" OffsA="328" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data43" Size="8" OffsA="336" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data44" Size="8" OffsA="344" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data45" Size="8" OffsA="352" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data46" Size="8" OffsA="360" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data47" Size="8" OffsA="368" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data48" Size="8" OffsA="376" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data49" Size="8" OffsA="384" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data5" Size="8" OffsA="32" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data50" Size="8" OffsA="392" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data51" Size="8" OffsA="400" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data52" Size="8" OffsA="408" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data53" Size="8" OffsA="416" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data54" Size="8" OffsA="424" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data55" Size="8" OffsA="432" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data56" Size="8" OffsA="440" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data57" Size="8" OffsA="448" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data58" Size="8" OffsA="456" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data59" Size="8" OffsA="464" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data6" Size="8" OffsA="40" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data60" Size="8" OffsA="472" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data61" Size="8" OffsA="480" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data62" Size="8" OffsA="488" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data63" Size="8" OffsA="496" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data64" Size="8" OffsA="504" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data7" Size="8" OffsA="48" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data8" Size="8" OffsA="56" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^D" TypeA="ARRAY [0..63] OF BYTE" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{7B502F62-7120-36B6-6DB7-BF4F062C5B7D}" VarB="Outputs^Data9" Size="8" OffsA="64" RestoreInfo="ANotFound"/>
+								<Link VarA="GVL.fbSpindle.ModbusMaster.OutData^SerCtrl" TypeA="WORD" InOutA="1" ParentTypeA="MB_PcComOutData" GuidA="{18071995-0000-0000-0000-000000000004}" VarB="Outputs^Ctrl" RestoreInfo="ANotFound"/>
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
@@ -4646,7 +4762,7 @@ Serial Status Bits]]></Comment>
 				<Image Id="5" AddrType="1" ImageType="1">
 					<Name>Image</Name>
 				</Image>
-				<Serial Baud="115200" Port="744" StopBit="1" RsType="2" UPSDisableSysShutdown="true" WaitTimeToShutdown="60" DataSize="64" BufSize="4096" DataBit="8" FifoSize="16" ComPortNo="4" Timeout="300"/>
+				<Serial Baud="9600" Port="744" StopBit="1" RsType="2" UPSDisableSysShutdown="true" WaitTimeToShutdown="60" DataSize="64" BufSize="4096" DataBit="8" FifoSize="16" ComPortNo="4" Timeout="300"/>
 			</Device>
 		</Io>
 	</Project>
@@ -4833,136 +4949,136 @@ Serial Status Bits]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bZHomingSwitch" VarB="Z Homing Prox^Input"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Spindle Communication (COM Port)">
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data1"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data10" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data11" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data12" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data13" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data14" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data15" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data16" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data17" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data18" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data19" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data2" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data20" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data21" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data22" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data23" Size="8" OffsA="176"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data24" Size="8" OffsA="184"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data25" Size="8" OffsA="192"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data26" Size="8" OffsA="200"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data27" Size="8" OffsA="208"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data28" Size="8" OffsA="216"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data29" Size="8" OffsA="224"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data3" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data30" Size="8" OffsA="232"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data31" Size="8" OffsA="240"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data32" Size="8" OffsA="248"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data33" Size="8" OffsA="256"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data34" Size="8" OffsA="264"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data35" Size="8" OffsA="272"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data36" Size="8" OffsA="280"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data37" Size="8" OffsA="288"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data38" Size="8" OffsA="296"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data39" Size="8" OffsA="304"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data4" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data40" Size="8" OffsA="312"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data41" Size="8" OffsA="320"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data42" Size="8" OffsA="328"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data43" Size="8" OffsA="336"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data44" Size="8" OffsA="344"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data45" Size="8" OffsA="352"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data46" Size="8" OffsA="360"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data47" Size="8" OffsA="368"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data48" Size="8" OffsA="376"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data49" Size="8" OffsA="384"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data5" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data50" Size="8" OffsA="392"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data51" Size="8" OffsA="400"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data52" Size="8" OffsA="408"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data53" Size="8" OffsA="416"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data54" Size="8" OffsA="424"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data55" Size="8" OffsA="432"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data56" Size="8" OffsA="440"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data57" Size="8" OffsA="448"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data58" Size="8" OffsA="456"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data59" Size="8" OffsA="464"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data6" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data60" Size="8" OffsA="472"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data61" Size="8" OffsA="480"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data62" Size="8" OffsA="488"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data63" Size="8" OffsA="496"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data64" Size="8" OffsA="504"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data7" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data8" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.ModbusMaster.InData^D" VarB="Inputs^Data9" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.nStatusWord" VarB="Inputs^Status"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data1"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data10" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data11" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data12" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data13" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data14" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data15" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data16" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data17" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data18" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data19" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data2" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data20" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data21" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data22" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data23" Size="8" OffsA="176"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data24" Size="8" OffsA="184"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data25" Size="8" OffsA="192"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data26" Size="8" OffsA="200"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data27" Size="8" OffsA="208"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data28" Size="8" OffsA="216"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data29" Size="8" OffsA="224"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data3" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data30" Size="8" OffsA="232"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data31" Size="8" OffsA="240"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data32" Size="8" OffsA="248"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data33" Size="8" OffsA="256"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data34" Size="8" OffsA="264"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data35" Size="8" OffsA="272"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data36" Size="8" OffsA="280"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data37" Size="8" OffsA="288"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data38" Size="8" OffsA="296"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data39" Size="8" OffsA="304"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data4" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data40" Size="8" OffsA="312"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data41" Size="8" OffsA="320"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data42" Size="8" OffsA="328"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data43" Size="8" OffsA="336"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data44" Size="8" OffsA="344"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data45" Size="8" OffsA="352"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data46" Size="8" OffsA="360"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data47" Size="8" OffsA="368"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data48" Size="8" OffsA="376"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data49" Size="8" OffsA="384"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data5" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data50" Size="8" OffsA="392"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data51" Size="8" OffsA="400"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data52" Size="8" OffsA="408"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data53" Size="8" OffsA="416"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data54" Size="8" OffsA="424"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data55" Size="8" OffsA="432"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data56" Size="8" OffsA="440"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data57" Size="8" OffsA="448"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data58" Size="8" OffsA="456"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data59" Size="8" OffsA="464"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data6" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data60" Size="8" OffsA="472"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data61" Size="8" OffsA="480"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data62" Size="8" OffsA="488"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data63" Size="8" OffsA="496"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data64" Size="8" OffsA="504"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data7" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data8" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.ModbusMaster.OutData^D" VarB="Outputs^Data9" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.nCtrlWord" VarB="Outputs^Ctrl"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data1"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data10" Size="8" OffsA="72"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data11" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data12" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data13" Size="8" OffsA="96"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data14" Size="8" OffsA="104"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data15" Size="8" OffsA="112"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data16" Size="8" OffsA="120"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data17" Size="8" OffsA="128"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data18" Size="8" OffsA="136"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data19" Size="8" OffsA="144"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data2" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data20" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data21" Size="8" OffsA="160"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data22" Size="8" OffsA="168"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data23" Size="8" OffsA="176"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data24" Size="8" OffsA="184"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data25" Size="8" OffsA="192"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data26" Size="8" OffsA="200"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data27" Size="8" OffsA="208"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data28" Size="8" OffsA="216"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data29" Size="8" OffsA="224"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data3" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data30" Size="8" OffsA="232"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data31" Size="8" OffsA="240"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data32" Size="8" OffsA="248"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data33" Size="8" OffsA="256"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data34" Size="8" OffsA="264"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data35" Size="8" OffsA="272"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data36" Size="8" OffsA="280"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data37" Size="8" OffsA="288"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data38" Size="8" OffsA="296"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data39" Size="8" OffsA="304"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data4" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data40" Size="8" OffsA="312"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data41" Size="8" OffsA="320"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data42" Size="8" OffsA="328"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data43" Size="8" OffsA="336"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data44" Size="8" OffsA="344"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data45" Size="8" OffsA="352"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data46" Size="8" OffsA="360"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data47" Size="8" OffsA="368"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data48" Size="8" OffsA="376"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data49" Size="8" OffsA="384"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data5" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data50" Size="8" OffsA="392"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data51" Size="8" OffsA="400"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data52" Size="8" OffsA="408"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data53" Size="8" OffsA="416"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data54" Size="8" OffsA="424"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data55" Size="8" OffsA="432"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data56" Size="8" OffsA="440"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data57" Size="8" OffsA="448"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data58" Size="8" OffsA="456"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data59" Size="8" OffsA="464"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data6" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data60" Size="8" OffsA="472"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data61" Size="8" OffsA="480"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data62" Size="8" OffsA="488"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data63" Size="8" OffsA="496"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data64" Size="8" OffsA="504"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data7" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data8" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^D" VarB="Inputs^Data9" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMaster.InData^SerStatus" VarB="Inputs^Status"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data1"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data10" Size="8" OffsA="72"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data11" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data12" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data13" Size="8" OffsA="96"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data14" Size="8" OffsA="104"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data15" Size="8" OffsA="112"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data16" Size="8" OffsA="120"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data17" Size="8" OffsA="128"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data18" Size="8" OffsA="136"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data19" Size="8" OffsA="144"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data2" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data20" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data21" Size="8" OffsA="160"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data22" Size="8" OffsA="168"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data23" Size="8" OffsA="176"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data24" Size="8" OffsA="184"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data25" Size="8" OffsA="192"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data26" Size="8" OffsA="200"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data27" Size="8" OffsA="208"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data28" Size="8" OffsA="216"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data29" Size="8" OffsA="224"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data3" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data30" Size="8" OffsA="232"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data31" Size="8" OffsA="240"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data32" Size="8" OffsA="248"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data33" Size="8" OffsA="256"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data34" Size="8" OffsA="264"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data35" Size="8" OffsA="272"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data36" Size="8" OffsA="280"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data37" Size="8" OffsA="288"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data38" Size="8" OffsA="296"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data39" Size="8" OffsA="304"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data4" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data40" Size="8" OffsA="312"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data41" Size="8" OffsA="320"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data42" Size="8" OffsA="328"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data43" Size="8" OffsA="336"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data44" Size="8" OffsA="344"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data45" Size="8" OffsA="352"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data46" Size="8" OffsA="360"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data47" Size="8" OffsA="368"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data48" Size="8" OffsA="376"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data49" Size="8" OffsA="384"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data5" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data50" Size="8" OffsA="392"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data51" Size="8" OffsA="400"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data52" Size="8" OffsA="408"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data53" Size="8" OffsA="416"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data54" Size="8" OffsA="424"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data55" Size="8" OffsA="432"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data56" Size="8" OffsA="440"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data57" Size="8" OffsA="448"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data58" Size="8" OffsA="456"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data59" Size="8" OffsA="464"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data6" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data60" Size="8" OffsA="472"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data61" Size="8" OffsA="480"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data62" Size="8" OffsA="488"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data63" Size="8" OffsA="496"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data64" Size="8" OffsA="504"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data7" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data8" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^D" VarB="Outputs^Data9" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMaster.OutData^SerCtrl" VarB="Outputs^Ctrl"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^X">
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.X_Ref.NcToPlc" VarB="Outputs^ToPlc"/>
