@@ -21,7 +21,7 @@ VAR
 	Z_Motion		: FB_MotionFunctions;
     
     //eHomeYSeq       : E_HomeY;
-    eHomeYSeq :(INIT,GEAR_IN,POWER_ON,CHECK_HOMED,HOME_Y1,Y1_HOMED,HOME_Y2,Y2_HOMED,RE_GEAR,END);
+    eHomeYSeq :(INIT_HOME,GEAR_IN,POWER_ON,CHECK_HOMED,HOME_Y1,Y1_HOMED,HOME_Y2,Y2_HOMED,RE_GEAR,HOME_COMPLETE);
 	
 	Y_MC_IN			: ST_Motion_Inputs;
 	Y2_MC_IN		: ST_Motion_Inputs;
@@ -511,7 +511,7 @@ END_VAR]]></Declaration>
 CASE eHomeYSeq OF
 		 		
 
-INIT:
+INIT_HOME:
 		fbMessage.CreateEx(TC_Events.CNC_Events.Y_Home_Start, 0);	// "Y Homing Started"
         eHomingMode := MC_DefaultHoming;
         M_PRG_HomeY:= FALSE;
@@ -539,7 +539,7 @@ POWER_ON:
 		
 		ELSE
 
-			eHomeYSeq:=INIT;		
+			eHomeYSeq:=INIT_HOME;		
 		
 		END_IF
 	
@@ -606,10 +606,10 @@ RE_GEAR:
 		END_IF
         
         
-END:
+HOME_COMPLETE:
 		
 		//bAxisEnable:=FALSE;
-		eHomeYSeq:=INIT;
+		eHomeYSeq:=INIT_HOME;
 		//bProgramDone := TRUE;
         M_PRG_HomeY:= TRUE;
         
@@ -677,7 +677,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[nHomeAllSeq:=0;
-eHomeYSeq:=INIT;
+eHomeYSeq:=INIT_HOME;
 nHomeXSeq:=0;
 nHomeZSeq:=0;
 //bProgramDone:= FALSE;

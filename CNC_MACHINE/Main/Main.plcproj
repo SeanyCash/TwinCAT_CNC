@@ -104,10 +104,6 @@
       <DefaultResolution>Tc2_PlcInterpolation, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_PlcInterpolation</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Tc2_SerialCom">
-      <DefaultResolution>Tc2_SerialCom, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_SerialCom</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>

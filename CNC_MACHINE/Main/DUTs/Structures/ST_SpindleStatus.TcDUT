@@ -9,13 +9,17 @@ STRUCT
 nControlWord		: WORD; //Modbus RTU Register 1
 nSpeedRefSetpoint	: INT;  //Modbus RTU Register 2
 nRampControlTime    : UINT; //Modbus RTU Register 4
-nErrorCode			: BYTE; //Modbus RTU Register 6 Lower Byte
-nDriveStatus		: BYTE; //Modbus RTU Register 6 Upper Byte
+nErrorCode			: BYTE; //Modbus RTU Register 6 Upper Byte
+bDriveRunning       : BOOL; //Modbus RTU Register 6 Bit 0
+bDriveFault         : BOOL; //Modbus RTU Register 6 Bit 1
+bStandbyMode        : BOOL; //Modbus RTU Register 6 Bit 5
+bDriveReady         : BOOL; //Modbus RTU Register 6 Bit 6
 nOutputFreq			: INT;  //Modbus RTU Register 7
 nMotorCurrent		: UINT; //Modbus RTU Register 8
 nMotorTorque        : INT;  //Modbus RTU Register 9
 nMotorPower         : UINT; //Modbus RTU Register 10 
 nDigitalInputSts	: WORD; //Modbus RTU Register 11
+bDriveEnabled       : BOOL; //Modbus RTU Register 11 bit 
 nDCBusVoltage		: UINT; //Modbus RTU Register 23
 nDrivePowerStageTemp: INT; //Modbus RTU Register 24
 nRelayOutputStatus  : WORD;//Modbus RTU Register 29

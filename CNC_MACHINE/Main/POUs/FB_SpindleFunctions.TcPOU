@@ -13,11 +13,14 @@ VAR_OUTPUT
 END_VAR
 VAR
     
- fbModbusMaster       : ModbusRtuMasterV2_PcCOM;
- nModbusID            : BYTE    :=1;
- nModbusReadQty       : WORD :=24;
- nModbusReadAddr      : WORD;
- nModbusRead        : ARRAY [1..24] OF INT;
+ fbModbusMasterEL   : ModbusRtuMasterV2_KL6x22B;
+ nModbusID          : BYTE    :=1;
+ nModbusReadQty     : WORD :=24;
+ nModbusReadAddr    : WORD;
+ nModbusReadBlk1    : ARRAY [1..46] OF INT;
+ nModbusReadBlk2    : ARRAY [129..188] OF INT;
+ tReadTimer         : TON;
+ bReadTimerExecute  : BOOL;
  bReadExecute       : BOOL;
  bDiagExecute       : BOOL;
  eErrorID           : MODBUS_ERRORS;
@@ -74,34 +77,7 @@ rSpeedRefValue			: REAL;
 rDCBusVoltage			: REAL;
 rDriveTemp				: REAL;
 
-
-// Serial COM Port Status/Control Bit Mapping:
-
-(*
-Status Bit 0: TA: Transmit Accepted
-Bit 1: RR: Receive Request
-Bit 2: IA: Init Accepted
-Bit 3: BUF_F: Buffer overflow (possible data loss)
-Bits 4-12: nIn Number of data present in buffer
-*)
-(*Ctrl Bit 0: TR: Transmit Request
-Bit 1: RA: Receive Accepted
-Bit 2: IR: Init Request
-Bit 3: Unused
-Bits 4-12: nOut Number of data to be sent
-*)
-//Serial Status Bits
-bTransmitAccepted       : BOOL;
-bStatInitRequest        : BOOL;
-nStatNumDataBuffer      : BYTE;
-//Serial Control Bits
-bReceiveAccepted        : BOOL;
-bCtrlInitRequest        : BOOL;
-nCtrlNumDataBuffer      : BYTE;
-
-fbSerialLineControl     : SerialLineControl;
-TxComBuffer             : ComBuffer;
-RxComBuffer             : ComBuffer;
+eReadVFDParams          :(INIT_FIRST,READ_FIRST_BLOCK,INIT_SECOND,READ_SECOND_BLOCK,FINISH);
 
 END_VAR
 
@@ -109,21 +85,69 @@ END_VAR
     <Implementation>
       <ST><![CDATA[M_SpindleControlMapping();
 M_ModbusMapping();
-M_ReadParameters();
+//M_ReadParameters();
 
-fbModbusMaster.ReadRegs(  
-                        UnitID:=nModbusID,
-                        Quantity:=nModbusReadQty,
-                        MBAddr:=nModbusReadAddr,   // Invertek Register Index
-                        cbLength:= SIZEOF(nModbusRead), 
-                        pMemoryAddr:= ADR(nModbusRead),
-                        Execute:= bReadExecute,
-                        Timeout:= T#3S,
-                        Busy=> bReadBusy,
-                        Error=> bReadError,
-                        ErrorId=> eErrorID,
-                        cbRead=> nCbRead
-                                        );                                        
+
+tReadTimer(IN:=bReadTimerExecute,PT:=T#500MS,);
+
+CASE eReadVFDParams OF
+    
+    INIT_FIRST:
+        fbModbusMasterEL.ReadRegs(Execute:=FALSE);
+        bReadTimerExecute:=FALSE;
+        eReadVFDParams:=READ_FIRST_BLOCK;
+    
+    READ_FIRST_BLOCK:
+        bReadTimerExecute:=TRUE;
+        fbModbusMasterEL.ReadRegs(
+                                UnitID:= 1, 
+                                Quantity:= 45, 
+                                MBAddr:= 0, 
+                                cbLength:= SIZEOF(nModbusReadBlk1), 
+                                pMemoryAddr:= ADR(nModbusReadBlk1), 
+                                Execute:= TRUE, 
+                                Timeout:= T#400MS, 
+                                Busy=> bReadBusy, 
+                                Error=> bReadError, 
+                                ErrorId=> eErrorID, 
+                                cbRead=> nCbRead);
+         IF tReadTimer.Q AND NOT bReadError THEN
+         bReadExecute:=FALSE;                       
+         eReadVFDParams:=INIT_SECOND;
+         END_IF 
+         
+    INIT_SECOND:
+       bReadTimerExecute:=FALSE;
+       fbModbusMasterEL.ReadRegs(Execute:=FALSE);
+       eReadVFDParams:=READ_SECOND_BLOCK; 
+
+    READ_SECOND_BLOCK:
+        bReadTimerExecute:=TRUE; 
+        fbModbusMasterEL.ReadRegs(
+                                UnitID:= 1, 
+                                Quantity:= 59, 
+                                MBAddr:= 128, 
+                                cbLength:= SIZEOF(nModbusReadBlk2), 
+                                pMemoryAddr:= ADR(nModbusReadBlk2), 
+                                Execute:= TRUE, 
+                                Timeout:= T#400MS, 
+                                Busy=> bReadBusy, 
+                                Error=> bReadError, 
+                                ErrorId=> eErrorID, 
+                                cbRead=> nCbRead);
+                                
+         IF tReadTimer.Q AND NOT bReadError THEN                       
+         eReadVFDParams:=FINISH;
+         END_IF 
+    
+    FINISH:
+    bReadTimerExecute:=FALSE;
+    bReadExecute:=FALSE;     
+    eReadVFDParams:=INIT_FIRST;
+
+END_CASE
+
+                                       
 ]]></ST>
     </Implementation>
     <Method Name="M_ModbusMapping" Id="{83d865f8-d7ae-49d7-a6f4-fcb7ec40a615}">
@@ -132,49 +156,29 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[(*
-
-IF bReadExecute THEN
-
-    stSpindleStatus.nControlWord	    := nModbusRead[1];
-    stSpindleStatus.nSpeedRefSetpoint	:= nModbusRead[2];
-    stSpindleStatus.nRampControlTime	:= nModbusRead[4];
-
-ELSIF bWriteExecute THEN
-    
-    nModbusRead[1]                  := stSpindleControl.nControlWord;
-    nModbusRead[2]                  := stSpindleControl.nSpeedRefSetpoint;
-    nModbusRead[4]                  := stSpindleControl.nRampControlTime;
-
-END_IF
-
-
-stSpindleStatus.nErrorCode.0			:=  nModbusRead[6].0;
-stSpindleStatus.nErrorCode.1			:=  nModbusRead[6].1;
-stSpindleStatus.nErrorCode.2			:=  nModbusRead[6].2;
-stSpindleStatus.nErrorCode.3			:=  nModbusRead[6].3;
-stSpindleStatus.nErrorCode.4			:=  nModbusRead[6].4;
-stSpindleStatus.nErrorCode.5			:=  nModbusRead[6].5;
-stSpindleStatus.nErrorCode.6			:=  nModbusRead[6].6;
-stSpindleStatus.nErrorCode.7			:=  nModbusRead[6].7;	       
-                                                                           
-stSpindleStatus.nDriveStatus.0		:= nModbusRead[6].8; 	           
-stSpindleStatus.nDriveStatus.1		:= nModbusRead[6].9; 	           
-stSpindleStatus.nDriveStatus.2		:= nModbusRead[6].10; 	           
-stSpindleStatus.nDriveStatus.3		:= nModbusRead[6].11; 	           
-stSpindleStatus.nDriveStatus.4		:= nModbusRead[6].12; 	           
-stSpindleStatus.nDriveStatus.5		:= nModbusRead[6].13; 	           
-stSpindleStatus.nDriveStatus.6		:= nModbusRead[6].14; 	           
-stSpindleStatus.nDriveStatus.7		:= nModbusRead[6].15; 	           
-                                                                           
-stSpindleStatus.nOutputFreq			:= nModbusRead[7];                 
-stSpindleStatus.nMotorCurrent		:= nModbusRead[8];	               
-stSpindleStatus.nDigitalInputSts	:= nModbusRead[11];	                             
-stSpindleStatus.nSpeedRefSetpoint	:= nModbusRead[22];
-stSpindleStatus.nDCBusVoltage		:= nModbusRead[23];	
-stSpindleStatus.nDrivePowerStageTemp:= nModbusRead[24];
-
-*)]]></ST>
+        <ST><![CDATA[
+stSpindleStatus.nControlWord        := INT_TO_WORD(nModbusReadBlk1[1]);	   
+stSpindleStatus.nSpeedRefSetpoint	:= nModbusReadBlk1[2];
+stSpindleStatus.nRampControlTime    := INT_TO_UINT(nModbusReadBlk1[4]);
+stSpindleStatus.bDriveRunning       := nModbusReadBlk1[6].0;
+stSpindleStatus.bDriveFault         := nModbusReadBlk1[6].1;
+stSpindleStatus.bStandbyMode        := nModbusReadBlk1[6].5;
+stSpindleStatus.bDriveReady         := nModbusReadBlk1[6].6;                                  
+stSpindleStatus.nErrorCode			:= INT_TO_BYTE(SHR(nModbusReadBlk1[6],6)); 
+stSpindleStatus.nOutputFreq			:= nModbusReadBlk1[7];	
+stSpindleStatus.nMotorCurrent		:= INT_TO_UINT(nModbusReadBlk1[8]);  
+stSpindleStatus.nMotorTorque        := nModbusReadBlk1[9];  
+stSpindleStatus.nMotorPower         := INT_TO_UINT(nModbusReadBlk1[10]);  
+stSpindleStatus.nDigitalInputSts	:= INT_TO_WORD(nModbusReadBlk1[11]);
+stSpindleStatus.bDriveEnabled       := nModbusReadBlk1[11].0;	
+stSpindleStatus.nDCBusVoltage		:= INT_TO_UINT(nModbusReadBlk1[23]); 
+stSpindleStatus.nDrivePowerStageTemp:= nModbusReadBlk1[24];	
+stSpindleStatus.nRelayOutputStatus  := INT_TO_WORD(nModbusReadBlk1[29]);  
+stSpindleStatus.nKWHourMeter        := INT_TO_UINT(nModbusReadBlk1[32]);  
+stSpindleStatus.nRuntimeHours       := INT_TO_UINT(nModbusReadBlk1[34]);  
+stSpindleStatus.nRuntimeMinutes     := INT_TO_UINT(nModbusReadBlk1[35]);
+stSpindleStatus.nInternalDriveTemp  := nModbusReadBlk1[39];
+stSpindleStatus.nOutputVoltage      := INT_TO_UINT(nModbusReadBlk1[43]);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_ReadParameters" Id="{a233cd63-eba1-4191-8645-5e9df383ad75}">
@@ -183,28 +187,63 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-                                        
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_SerialLineControl" Id="{4775d0c6-34f6-4037-9ac7-88b5b4c316f9}">
-      <Declaration><![CDATA[METHOD M_SerialLineControl : BOOL
-VAR_INPUT
-END_VAR
+        <ST><![CDATA[(*CASE eReadVFDParams OF}
+    
+    INIT_FIRST:
+    
+        bReadExecute:=TRUE;
+        eReadVFDParams:=READ_FIRST_BLOCK;
+    
+    READ_FIRST_BLOCK:
+    
+        fbModbusMasterEL.ReadRegs(
+                                UnitID:= 1, 
+                                Quantity:= 46, 
+                                MBAddr:= 0, 
+                                cbLength:= SIZEOF(nModbusReadBlk1), 
+                                pMemoryAddr:= ADR(nModbusReadBlk1), 
+                                Execute:= bReadExecute, 
+                                Timeout:= T#3S, 
+                                Busy=> bReadBusy, 
+                                Error=> bReadError, 
+                                ErrorId=> eErrorID, 
+                                cbRead=> nCbRead);
+         IF nModbusReadBlk1[46] <> 0 THEN
+         bReadExecute:=FALSE;                       
+         eReadVFDParams:=READ_SECOND_BLOCK;
+         END_IF
+         
+    INIT_SECOND:
+    
+       bReadExecute:=TRUE;
+       eReadVFDParams:=READ_FIRST_BLOCK; 
 
-VAR
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[fbSerialLineControl(
-                    Mode:= SERIALLINEMODE_PC_COM_PORT, 
-                    pComIn:= ADR(fbModbusMaster.InData), 
-                    pComOut:= ADR(fbModbusMaster.OutData), 
-                    SizeComIn:= 64, 
-                    Error=> , 
-                    ErrorID=> , 
-                    TxBuffer:= TxComBuffer, 
-                    RxBuffer:= RxComBuffer);]]></ST>
+    READ_SECOND_BLOCK:
+        fbModbusMasterEL.ReadRegs(
+                                UnitID:= 1, 
+                                Quantity:= 59, 
+                                MBAddr:= 128, 
+                                cbLength:= SIZEOF(nModbusReadBlk2), 
+                                pMemoryAddr:= ADR(nModbusReadBlk2), 
+                                Execute:= bReadExecute, 
+                                Timeout:= T#3S, 
+                                Busy=> bReadBusy, 
+                                Error=> bReadError, 
+                                ErrorId=> eErrorID, 
+                                cbRead=> nCbRead);
+                                
+         IF nCbRead <> 0 THEN
+         bReadExecute:=FALSE;                       
+         eReadVFDParams:=END;
+         END_IF
+    
+    END:
+        
+    eReadVFDParams:=INIT_FIRST;
+
+END_CASE
+  *)                                      
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_SpindleControlMapping" Id="{2f07773b-6003-410f-852f-7cd237e180e1}">
@@ -251,11 +290,6 @@ stSpindleControl.nControlWord.2 := bCoastStopRequest;
 
 // Read Only Bits
 
-nErrorCode      := stSpindleStatus.nErrorCode;
-bDriveStopped	:= stSpindleStatus.nDriveStatus.0;
-bDriveRunning	:= stSpindleStatus.nDriveStatus.1;
-bDriveTripped	:= stSpindleStatus.nDriveStatus.2;
-
 rOutputFrequency	:= stSpindleStatus.nOutputFreq;
 rOutputCurrent		:= stSpindleStatus.nMotorCurrent;
 nDigitalInputSts	:= stSpindleStatus.nDigitalInputSts;
@@ -290,7 +324,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbModbusMaster.WriteRegs(   
+        <ST><![CDATA[fbModbusMasterEL.WriteRegs(   
                            UnitID:=,
                            Quantity:=,
                            MBAddr:=,
@@ -300,7 +334,7 @@ END_VAR
                            Timeout:=,
                                            );
                                            
-fbModbusMaster.WriteSingleRegister(   
+fbModbusMasterEL.WriteSingleRegister(   
                                     UnitID:=,
                                     Quantity:=,
                                     MBAddr:=,
@@ -312,49 +346,64 @@ fbModbusMaster.WriteSingleRegister(
       </Implementation>
     </Method>
     <LineIds Name="FB_SpindleFunctions">
-      <LineId Id="1283" Count="1" />
-      <LineId Id="1315" Count="0" />
-      <LineId Id="1520" Count="0" />
-      <LineId Id="1512" Count="7" />
-      <LineId Id="1526" Count="3" />
-      <LineId Id="1065" Count="0" />
+      <LineId Id="1740" Count="2" />
+      <LineId Id="1815" Count="0" />
+      <LineId Id="1814" Count="0" />
+      <LineId Id="1821" Count="0" />
+      <LineId Id="1743" Count="0" />
+      <LineId Id="1759" Count="2" />
+      <LineId Id="1763" Count="0" />
+      <LineId Id="1826" Count="0" />
+      <LineId Id="1764" Count="2" />
+      <LineId Id="1823" Count="0" />
+      <LineId Id="1768" Count="17" />
+      <LineId Id="1825" Count="0" />
+      <LineId Id="1787" Count="3" />
+      <LineId Id="1817" Count="0" />
+      <LineId Id="1791" Count="13" />
+      <LineId Id="1806" Count="4" />
+      <LineId Id="1819" Count="0" />
+      <LineId Id="1811" Count="1" />
+      <LineId Id="1755" Count="2" />
       <LineId Id="1542" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ModbusMapping">
-      <LineId Id="52" Count="1" />
-      <LineId Id="38" Count="1" />
+      <LineId Id="39" Count="0" />
       <LineId Id="6" Count="2" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="48" Count="0" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="21" Count="6" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="29" Count="1" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="31" Count="2" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="11" Count="2" />
-      <LineId Id="16" Count="1" />
+      <LineId Id="78" Count="2" />
+      <LineId Id="77" Count="0" />
       <LineId Id="5" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="54" Count="0" />
+      <LineId Id="62" Count="4" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="67" Count="7" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ReadParameters">
-      <LineId Id="14" Count="1" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_SpindleFunctions.M_SerialLineControl">
-      <LineId Id="29" Count="7" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="65" Count="1" />
+      <LineId Id="33" Count="1" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="40" Count="10" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="68" Count="1" />
+      <LineId Id="71" Count="1" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="73" Count="1" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="53" Count="10" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="79" Count="2" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="82" Count="1" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="15" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_SpindleControlMapping">
@@ -385,10 +434,6 @@ fbModbusMaster.WriteSingleRegister(
       <LineId Id="82" Count="0" />
       <LineId Id="145" Count="0" />
       <LineId Id="144" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="84" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="91" Count="1" />
       <LineId Id="94" Count="0" />
       <LineId Id="93" Count="0" />
       <LineId Id="96" Count="1" />
