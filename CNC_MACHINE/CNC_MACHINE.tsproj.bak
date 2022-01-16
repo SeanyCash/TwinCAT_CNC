@@ -1708,15 +1708,6 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{534C1D0D-EDD1-33FC-3528-68B3DA4642CA}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..255] OF WORD</Name>
-			<BitSize>4096</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000004}">WORD</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>256</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
 			<Name GUID="{CBC83B73-B816-4597-A9E5-2B03263CA131}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_AXIS_REF_STATE</Name>
 			<BitSize>32</BitSize>
 			<SubItem>
@@ -3297,31 +3288,6 @@ External Setpoint Generation:
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>FB_SpindleFunctions.nVFDInputs</Name>
-							<Comment><![CDATA[Input Array]]></Comment>
-							<Type GUID="{534C1D0D-EDD1-33FC-3528-68B3DA4642CA}">ARRAY [0..255] OF WORD</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stXRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stZRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbSpindle.fbModbusMasterEL.InData</Name>
-							<Type GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU">MB_KL6inData22B</Type>
-						</Var>
-						<Var>
 							<Name>GVL.fbCNC.Y_Ref.NcToPlc</Name>
 							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
@@ -3365,34 +3331,33 @@ External Setpoint Generation:
 							<Name>GVL.fbCNC.fbNCI.i_stItpToPlc</Name>
 							<Type GUID="{56354211-98EF-4057-9322-975DEAD0E29D}" Namespace="MC">NCTOPLC_NCICHANNEL_REF</Type>
 						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stXRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stZRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbSpindle.fbModbusMasterELRead.InData</Name>
+							<Type GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU">MB_KL6inData22B</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbSpindle.fbModbusMasterELWrite.InData</Name>
+							<Type GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU">MB_KL6inData22B</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>FB_SpindleFunctions.nVFDOutputs</Name>
-							<Comment><![CDATA[Output Array]]></Comment>
-							<Type GUID="{534C1D0D-EDD1-33FC-3528-68B3DA4642CA}">ARRAY [0..255] OF WORD</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stXRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stZRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbSpindle.fbModbusMasterEL.OutData</Name>
-							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
-						</Var>
 						<Var>
 							<Name>GVL.fbCNC.Y_Ref.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
@@ -3412,6 +3377,30 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
 							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stY2Ref.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stXRef.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stZRef.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbSpindle.fbModbusMasterELRead.OutData</Name>
+							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbSpindle.fbModbusMasterELWrite.OutData</Name>
+							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2021-10-28T06:25:25">
@@ -5490,7 +5479,7 @@ External Setpoint Generation:
 						</EtherCAT>
 					</Box>
 					<Box Id="7" BoxType="9099">
-						<Name>Term 7 (EL9011)</Name>
+						<Name>End Cap (EL9011)</Name>
 						<ImageId>1004</ImageId>
 						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x0100000f"/>
 					</Box>
@@ -5733,52 +5722,52 @@ External Setpoint Generation:
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bZHomingSwitch" VarB="Z Homing Prox^Input"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Serial Comms (EL6021)">
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterEL.InData^Status" VarB="COM TxPDO-Map Inputs^Status"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterEL.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 1" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 10" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 11" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 12" Size="8" OffsA="96"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 13" Size="8" OffsA="104"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 14" Size="8" OffsA="112"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 15" Size="8" OffsA="120"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 16" Size="8" OffsA="128"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 17" Size="8" OffsA="136"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 18" Size="8" OffsA="144"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 19" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 2" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 20" Size="8" OffsA="160"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 21" Size="8" OffsA="168"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 3" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 4" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 5" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 6" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 7" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 8" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^D" VarB="COM TxPDO-Map Inputs^Data In 9" Size="8" OffsA="72"/>
+				<Link VarA="PlcTask Inputs^GVL.fbSpindle.fbModbusMasterELRead.InData^Status" VarB="COM TxPDO-Map Inputs^Status"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^Ctrl" VarB="COM RxPDO-Map Outputs^Ctrl"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 0"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 1" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 10" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 11" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 12" Size="8" OffsA="96"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 13" Size="8" OffsA="104"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 14" Size="8" OffsA="112"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 15" Size="8" OffsA="120"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 16" Size="8" OffsA="128"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 17" Size="8" OffsA="136"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 18" Size="8" OffsA="144"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 19" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 2" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 20" Size="8" OffsA="160"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 21" Size="8" OffsA="168"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 3" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 4" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 5" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 6" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 7" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 8" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask Outputs^GVL.fbSpindle.fbModbusMasterELRead.OutData^D" VarB="COM RxPDO-Map Outputs^Data Out 9" Size="8" OffsA="72"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^X">
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.X_Ref.NcToPlc" VarB="Outputs^ToPlc"/>

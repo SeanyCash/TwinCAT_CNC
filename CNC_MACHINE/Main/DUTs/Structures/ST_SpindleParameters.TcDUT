@@ -11,11 +11,19 @@ nMaxSpeedLimit		: UINT; //Modbus RTU Register 129
 nMinSpeedLimit	    : UINT; //Modbus RTU Register 130
 nAccelRampTime		: UINT; //Modbus RTU Register 131
 nDecelRampTime		: UINT; //Modbus RTU Register 132
-nStopMode			: UINT;  //Modbus RTU Register 133
+nStopMode			: UINT; //Modbus RTU Register 133
 nMotorRatedVoltage	: UINT; //Modbus RTU Register 135
-nMotorRatedCurrent  : INT;  //Modbus RTU Register 136
-nMotorRatedFrequency: WORD; //Modbus RTU Register 137
-nMotorRatedSpeed    : WORD; //Modbus RTU Register 138
+nMotorRatedCurrent  : UINT; //Modbus RTU Register 136
+nMotorRatedFrequency: UINT; //Modbus RTU Register 137
+nMotorRatedSpeed    : UINT; //Modbus RTU Register 138
+nApplicationMode    : UINT; //Modbus RTU Register 141
+nRelayOutputFunction: UINT; //Modbus RTU Register 146
+nUserPGain          : UINT; //Modbus RTU Register 169
+nUserIConstant      : UINT; //Modbus RTU Register 170
+nMotorControlMode   : UINT; //Modbus RTU Register 179
+nMaximumCurrentLimit: UINT; //Modbus RTU Register 182
+
+
 
 END_STRUCT
 END_TYPE

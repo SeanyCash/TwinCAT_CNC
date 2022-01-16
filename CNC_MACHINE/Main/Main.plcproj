@@ -24,6 +24,9 @@
     <Compile Include="DUTs\Interfaces\I_HMI.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Structures\E_VFDErrors.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\Structures\ST_HMI_In.TcDUT">
       <SubType>Code</SubType>
     </Compile>

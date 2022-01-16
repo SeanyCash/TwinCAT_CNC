@@ -6,7 +6,10 @@ STRUCT
     
 // Invertek Optidrive E3 Modbus Register Mapping Control
     
-nControlWord		    : WORD; //Modbus RTU Register 1
+bRunEnable              : BOOL;
+bFastStopReq            : BOOL;
+bResetReq               : BOOL;
+bCoastStopRequest       : BOOL;
 nSpeedRefSetpoint   	: INT;  //Modbus RTU Register 2
 nRampControlTime		: UINT; //Modbus RTU Register 4
 

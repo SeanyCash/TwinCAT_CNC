@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <DUT Name="E_VFDErrors" Id="{75ccf220-f68d-4db4-8020-7db39c5d19cd}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+TYPE E_VFDErrors :
+(
+	NO_FAULT := 0,
+    BRAKE_CHANNEL_OVC   :=1,
+    BRAKE_RESISTOR_OVLD :=2,
+    INST_OUTPUT_OVC     :=3,
+    MOTOR_THERMAL_OVLD  :=4,
+    OVERVOLT_DC_BUS     :=6,
+    UNDERVOLT_DC_BUS    :=7,
+    HEATSINK_OVERTEMP   :=8,
+    UNDERTEMP           :=9,
+    FAC_DEFAULT_LOADED  :=10,
+    EXTERNAL_TRIP       :=11,
+    DC_BUS_RIPPLE_HIGH  :=13,
+    INPUT_PHASE_LOSS    :=14,
+    OUTPUT_OVC          :=15,
+    FAULTY_THERMISTOR   :=16,
+    IO_MEMORY_FAULT     :=17,
+    DSP_MEMORY_FAULT    :=19,
+    PTC_THERMISTOR_TRIP :=21,
+    DRIVE_TEMP_HIGH     :=23,
+    OUTPUT_FAULT        :=26,
+    AUTOTUNE_FAULT      :=41,
+    MODBUS_COMMS_FAULT  :=50
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
