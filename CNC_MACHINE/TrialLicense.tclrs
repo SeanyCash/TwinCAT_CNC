@@ -2,18 +2,23 @@
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
 		<SystemId>{3566A293-9AEC-271C-1F5E-37F83ADF4E40}</SystemId>
-		<IssueTime>2022-01-16T14:02:00</IssueTime>
-		<ExpireTime>2022-01-24T00:00:00</ExpireTime>
-		<LicenseKey>28c9af27505fbcc30a01d477a325300a177f166f6f2b16ad09cf07bfcb3f3f3f1145fd6cd55ccfe717d0d645b1af2e1c3b3070a3e996c1dbbd3818b4b78818ffac6165a404e8083fad66b4139bc3041f86adf66b3f5bae6699a5660373c475f765d9ae308d7a7083a2380faecb7294b2a841c1b7eda726f9b05416568c97245b0146d21f814a4c90626e88a5b25da78b5f0f05275016e2e7fd93cbf967f086d0f81b0cf26b5bcfdbc66a94d5cd042881477e6a2f65462f5f7c59e066bb86273def6bc9317218b4eca1016385e82a314b707e488f0dd38f4514e89b615512791eb927eb60d9be1ff93284ae083e826b22ac8a796a053073d15a64bea4224f8826</LicenseKey>
+		<IssueTime>2022-01-23T15:16:00</IssueTime>
+		<ExpireTime>2022-01-31T00:00:00</ExpireTime>
+		<LicenseKey>93989e75078e2e06a6eba841317caa33fe20f6910002ae23d53ee0c7033db758a71601466a79ebb25e5a81138542b26542f1fa664ad065271b71f7af5d03eebc41faa4c995ae80ee1d993de5c99e5a008ba4064c116a659a2cbd097c9072ff336407b2bab7709d81ef46d10ff3c314886e42f97e75a1c107c319f9cf92708c02ece34db8249202b422bb2476aa2e5a4c6eee1950cc1bc36eac63976f3abef76bd68dd6462c08a0dfa736904ee67ae3e13f53e4d728eb725ba77a81005c3b5274f1004d41d3b7472acb4fe73139596062c989e1063148eda12ca40d01f36ba0a79451206b50af517b4cab0f0d0449f1060012fbfc0aa4fad6c29ceb10e87ec979</LicenseKey>
+		<License>
+			<LicenseId>{777F1598-583B-4503-99BB-7C02E0ABD97E}</LicenseId>
+			<Name>TC3 Controller Toolbox</Name>
+			<OrderNo>TF4100</OrderNo>
+		</License>
 		<License>
 			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
 			<Name>TC3 ADS</Name>
 			<OrderNo>TC1000</OrderNo>
 		</License>
 		<License>
-			<LicenseId>{3FF18E97-7754-401B-93FB-70544DE28A13}</LicenseId>
-			<Name>TC3 IO</Name>
-			<OrderNo>TC1100</OrderNo>
+			<LicenseId>{A19036CF-A53B-4E3A-99FF-023EF5C4798B}</LicenseId>
+			<Name>TC3 NC PTP Axis</Name>
+			<Instances>10</Instances>
 		</License>
 		<License>
 			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
@@ -21,9 +26,9 @@
 			<OrderNo>TC1200</OrderNo>
 		</License>
 		<License>
-			<LicenseId>{A19036CF-A53B-4E3A-99FF-023EF5C4798B}</LicenseId>
-			<Name>TC3 NC PTP Axis</Name>
-			<Instances>10</Instances>
+			<LicenseId>{A1AF8A04-C08D-4853-A5A0-0E6C3A278A8C}</LicenseId>
+			<Name>TC3 Modbus-RTU</Name>
+			<OrderNo>TF6255</OrderNo>
 		</License>
 		<License>
 			<LicenseId>{520DE751-9DB6-47CB-8240-BD5C466E7E64}</LicenseId>
@@ -36,9 +41,9 @@
 			<OrderNo>TF5100</OrderNo>
 		</License>
 		<License>
-			<LicenseId>{A1AF8A04-C08D-4853-A5A0-0E6C3A278A8C}</LicenseId>
-			<Name>TC3 Modbus-RTU</Name>
-			<OrderNo>TF6255</OrderNo>
+			<LicenseId>{3FF18E97-7754-401B-93FB-70544DE28A13}</LicenseId>
+			<Name>TC3 IO</Name>
+			<OrderNo>TC1100</OrderNo>
 		</License>
 	</LicenseInfo>
 </TcLicenseInfo>

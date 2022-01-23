@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_NCI" Id="{4f24b964-7729-4762-90ad-698d0a17343d}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_NCI IMPLEMENTS I_HMI;
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_NCI IMPLEMENTS I_HMI; 
 VAR_INPUT
 	bExecute			: BOOL;
     bStop               : BOOL;
@@ -326,6 +326,7 @@ fbConfirmHsk(
 	bBusy=> , 
 	bErr=> , 
 	nErrId=> );
+    
 	]]></ST>
       </Implementation>
     </Method>
@@ -513,6 +514,7 @@ fbReadZeroShiftOffset(
       <LineId Id="240" Count="0" />
       <LineId Id="257" Count="0" />
       <LineId Id="210" Count="19" />
+      <LineId Id="268" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_HMI_In">

@@ -8,7 +8,9 @@
 VAR
     
  fbModbusMasterEL   : ModbusRtuMasterV2_KL6x22B;
- //fbModbusMasterELWrite  : ModbusRtuMasterV2_KL6x22B; 
+ fbSpeedRefScale    : FB_CTRL_SCALE;
+ stSpeedRefScaleParams            : ST_CTRL_SCALE_PARAMS;
+ fScaledSpeedRef    : LREAL;
  nModbusReadBlk1    : ARRAY [1..46] OF INT;
  nModbusReadBlk2    : ARRAY [129..188] OF INT;
  // Need to put into a modbus DUT
@@ -79,7 +81,7 @@ stSpindleStatus.bDriveRunning       := nModbusReadBlk1[6].0;
 stSpindleStatus.bDriveFault         := nModbusReadBlk1[6].1;
 stSpindleStatus.bStandbyMode        := nModbusReadBlk1[6].5;
 stSpindleStatus.bDriveReady         := nModbusReadBlk1[6].6;                                  
-stSpindleStatus.nErrorCode			:= INT_TO_BYTE(SHR(nModbusReadBlk1[6],7)); 
+stSpindleStatus.nErrorCode			:= INT_TO_BYTE(SHR(nModbusReadBlk1[6],8)); 
 stSpindleStatus.nOutputFreq			:= nModbusReadBlk1[7];	
 stSpindleStatus.nMotorCurrent		:= INT_TO_UINT(nModbusReadBlk1[8]);  
 stSpindleStatus.nMotorTorque        := nModbusReadBlk1[9];  
@@ -121,12 +123,28 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Map Spindle Control
+
+stSpeedRefScaleParams.fInMax:= 24000.0 ;
+stSpeedRefScaleParams.fInMin:=  0.0;
+stSpeedRefScaleParams.fOutMax:=  4000.0;
+stSpeedRefScaleParams.fOutMin:=  0.0;
+stSpeedRefScaleParams.tCtrlCycleTime:= T#2MS  ;
+stSpeedRefScaleParams.tTaskCycleTime:=  T#2MS ;
+
+fbSpeedRefScale(
+                fIn:=stSpindleControl.nSpeedRefSetpoint,
+                fOut=>fScaledSpeedRef,
+                eErrorId=>,
+                bError=>,
+                stParams:=stSpeedRefScaleParams,
+                                                    );
+                                                    
 nModbusWriteDriveCommand.0 :=stSpindleControl.bRunEnable;
 nModbusWriteDriveCommand.1 :=stSpindleControl.bFastStopReq;
 nModbusWriteDriveCommand.2 :=stSpindleControl.bResetReq;
 nModbusWriteDriveCommand.3 :=stSpindleControl.bCoastStopRequest;
 
-nModbusWriteDriveSetpoint  :=stSpindleControl.nSpeedRefSetpoint;
+nModbusWriteDriveSetpoint  :=LREAL_TO_INT(fScaledSpeedRef);
 
 nModbusWriteDriveAccel_Decel :=stSpindleControl.nRampControlTime;
 
@@ -139,7 +157,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT bWriteDriveSetpoint OR bWriteAccel_Decel OR bWriteDriveCommand THEN
+        <ST><![CDATA[
     CASE eReadVFDParamsSeq OF
         
         INIT_FIRST:
@@ -197,8 +215,7 @@ END_VAR
         bReadExecute:=FALSE;     
         eReadVFDParamsSeq:=INIT_FIRST;
     
-    END_CASE
-END_IF]]></ST>
+    END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_WriteParameters" Id="{2cc1a04a-a448-4214-8312-bc9179b7e0fd}">
@@ -223,7 +240,7 @@ ELSIF bWriteDriveSetpoint THEN
 fbModbusMasterEL.WriteSingleRegister(   
                                         UnitID:=1,
                                         Quantity:=1,
-                                        MBAddr:=4,
+                                        MBAddr:=1,
                                         cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
                                         pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
                                         Execute:=bWriteDriveSetpoint,
@@ -275,13 +292,19 @@ END_IF                                      ]]></ST>
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_OutputMapping">
       <LineId Id="5" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="35" Count="4" />
+      <LineId Id="25" Count="6" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="32" Count="0" />
       <LineId Id="8" Count="3" />
       <LineId Id="7" Count="0" />
       <LineId Id="6" Count="0" />
       <LineId Id="15" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="13" Count="0" />
-      <LineId Id="12" Count="0" />
+      <LineId Id="23" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ReadParameters">
       <LineId Id="87" Count="8" />
@@ -290,7 +313,6 @@ END_IF                                      ]]></ST>
       <LineId Id="145" Count="0" />
       <LineId Id="120" Count="22" />
       <LineId Id="5" Count="0" />
-      <LineId Id="143" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_WriteParameters">
       <LineId Id="17" Count="0" />
