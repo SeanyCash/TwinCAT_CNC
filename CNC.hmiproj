@@ -114,7 +114,13 @@
     <Content Include="Contents\Jog.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Contents\Overview.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\PathVisualization.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Contents\Spindle.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Status.content">

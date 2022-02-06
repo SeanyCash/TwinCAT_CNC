@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="ST_HMI_Out" Id="{9c8d509c-6bd1-4273-891d-e0c3f7471d5e}">
-    <Declaration><![CDATA[{TO_STRING}
-
-TYPE ST_HMI_Out :
+    <Declaration><![CDATA[TYPE ST_HMI_Out :
 STRUCT
     
 // Output Values/status to the HMI
@@ -43,8 +41,34 @@ stZRef               :Axis_Ref;
 // Current Jog Mode
 sJogMode             : STRING;
 
+// VFD/Spindle Information
+
+nSpeedRefSetpoint	: REAL; 
+nRampControlTime    : UINT;
+sErrorCode			: STRING;
+bDriveRunning       : BOOL;
+bDriveFault         : BOOL;
+bStandbyMode        : BOOL;
+bDriveReady         : BOOL;
+nOutputFreq			: REAL; 
+nMotorCurrent		: REAL;
+nMotorTorque        : REAL; 
+nMotorPower         : REAL;
+bDigitalInput1  	: BOOL;
+bDigitalInput2  	: BOOL;
+bDigitalInput3  	: BOOL;
+bDigitalInput4  	: BOOL;
+bDriveEnabled       : BOOL;
+nDCBusVoltage		: REAL;
+nDrivePowerStageTemp: REAL; 
+bRelayOutputStatus  : BOOL;
+nKWHourMeter        : REAL;
+nRuntimeHours       : UINT;
+nRuntimeMinutes     : UINT;
+nInternalDriveTemp  : REAL; 
+nOutputVoltage      : REAL;
+
 END_STRUCT
-END_TYPE
-]]></Declaration>
+END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

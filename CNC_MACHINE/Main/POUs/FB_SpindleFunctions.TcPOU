@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FB_SpindleFunctions" Id="{d33eb993-f1a5-484e-9d4d-ae7861108719}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_SpindleFunctions
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SpindleFunctions IMPLEMENTS I_HMI;
 
 // Spindle VFD control for Invertek Optidrive E3 (240V single phase input, 240V three phase output, 2.2KW) and GMT 400hz 2.2kw 3 HP Spindle using Modbus RTU
 
@@ -51,6 +51,8 @@ M_InputMapping();
 M_OutputMapping();
 M_DriveErrors();
 M_WriteParameters();
+M_HMI_In();
+M_HMI_Out();
 
 tReadTimer(IN:=bReadTimerExecute,PT:=T#500MS,);
 
@@ -65,6 +67,50 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[eVFDErrors:= stSpindleStatus.nErrorCode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_In" Id="{7023150e-5dba-40bd-b6bf-f2224d2f965b}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_In : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{7a175b83-8eaa-4aad-b855-25562de10eb8}">
+      <Declaration><![CDATA[
+METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Map VFD status information to HMI struct
+
+stHMI_Out.nSpeedRefSetpoint	    :=    stSpindleStatus.nSpeedRefSetpoint;	  
+stHMI_Out.nRampControlTime      :=    stSpindleStatus.nRampControlTime;    
+stHMI_Out.sErrorCode		    :=    TO_STRING(eVFDErrors);	 
+stHMI_Out.bDriveRunning         :=    stSpindleStatus.bDriveRunning; 
+stHMI_Out.bDriveFault           :=    stSpindleStatus.bDriveFault;   
+stHMI_Out.bStandbyMode          :=    stSpindleStatus.bStandbyMode;  
+stHMI_Out.bDriveReady           :=    stSpindleStatus.bDriveReady;   
+stHMI_Out.nOutputFreq		    :=    stSpindleStatus.nOutputFreq;	 
+stHMI_Out.nMotorCurrent		    :=    stSpindleStatus.nMotorCurrent;
+stHMI_Out.nMotorTorque          :=    stSpindleStatus.nMotorTorque; 
+stHMI_Out.nMotorPower           :=    stSpindleStatus.nMotorPower;  
+stHMI_Out.bDigitalInput1  	    :=    stSpindleStatus.nDigitalInputSts.0;
+stHMI_Out.bDigitalInput2  	    :=    stSpindleStatus.nDigitalInputSts.1;
+stHMI_Out.bDigitalInput3  	    :=    stSpindleStatus.nDigitalInputSts.2;    
+stHMI_Out.bDigitalInput4  	    :=    stSpindleStatus.nDigitalInputSts.3;
+stHMI_Out.bDriveEnabled         :=    stSpindleStatus.bDriveEnabled;       
+stHMI_Out.nDCBusVoltage		    :=    stSpindleStatus.nDCBusVoltage;		     
+stHMI_Out.nDrivePowerStageTemp  :=    stSpindleStatus.nDrivePowerStageTemp;
+stHMI_Out.bRelayOutputStatus    :=    stSpindleStatus.nRelayOutputStatus.0;   
+stHMI_Out.nKWHourMeter          :=    stSpindleStatus.nKWHourMeter;  
+stHMI_Out.nRuntimeHours         :=    stSpindleStatus.nRuntimeHours;
+stHMI_Out.nRuntimeMinutes       :=    stSpindleStatus.nRuntimeMinutes;
+stHMI_Out.nInternalDriveTemp    :=    stSpindleStatus.nInternalDriveTemp;  
+stHMI_Out.nOutputVoltage        :=    stSpindleStatus.nOutputVoltage;
+
+    
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InputMapping" Id="{83d865f8-d7ae-49d7-a6f4-fcb7ec40a615}">
@@ -266,6 +312,7 @@ END_IF                                      ]]></ST>
       <LineId Id="2093" Count="0" />
       <LineId Id="2136" Count="0" />
       <LineId Id="2096" Count="0" />
+      <LineId Id="2180" Count="1" />
       <LineId Id="2092" Count="0" />
       <LineId Id="2032" Count="0" />
       <LineId Id="2089" Count="2" />
@@ -273,6 +320,17 @@ END_IF                                      ]]></ST>
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_DriveErrors">
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SpindleFunctions.M_HMI_In">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SpindleFunctions.M_HMI_Out">
+      <LineId Id="26" Count="1" />
+      <LineId Id="4" Count="20" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="47" Count="2" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_InputMapping">
       <LineId Id="39" Count="0" />

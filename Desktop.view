@@ -194,6 +194,22 @@
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
+    "event": "StatusRegionMain.onInitialized",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%ctrl%StatusRegionMain::TargetContent%/ctrl%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:framework#/definitions/ContentPath",
+          "value": "Contents/Main.content"
+        },
+        "asyncWait": true
+      }
+    ]
+  },
+  {
     "event": "TcHmiRegionMain.onInitialized",
     "actions": [
       {
@@ -278,7 +294,7 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:framework#/definitions/ContentPath",
+                  "valueType": "tchmi:general#/definitions/String",
                   "symbolExpression": "%ctrl%TcHmiRegionMain::TargetContent%/ctrl%"
                 },
                 "compare2": {
@@ -426,7 +442,7 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:framework#/definitions/ContentPath",
+                  "valueType": "tchmi:general#/definitions/String",
                   "symbolExpression": "%ctrl%TcHmiRegionMain::TargetContent%/ctrl%"
                 },
                 "compare2": {
@@ -591,7 +607,7 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:framework#/definitions/ContentPath",
+                  "valueType": "tchmi:general#/definitions/String",
                   "symbolExpression": "%ctrl%TcHmiRegionMain::TargetContent%/ctrl%"
                 },
                 "compare2": {
@@ -925,7 +941,7 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%ctrl%TcHmiRegionMain::TargetContent%/ctrl%",
+        "symbolExpression": "%ctrl%StatusRegionMain::TargetContent%/ctrl%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
@@ -947,7 +963,7 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:framework#/definitions/ContentPath",
+                  "valueType": "tchmi:general#/definitions/String",
                   "symbolExpression": "%ctrl%TcHmiRegionMain::TargetContent%/ctrl%"
                 },
                 "compare2": {

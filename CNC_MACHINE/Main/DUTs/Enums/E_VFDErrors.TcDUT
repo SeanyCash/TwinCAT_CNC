@@ -2,6 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <DUT Name="E_VFDErrors" Id="{75ccf220-f68d-4db4-8020-7db39c5d19cd}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'to_string'}
 TYPE E_VFDErrors :
 (
 	NO_FAULT := 0,
