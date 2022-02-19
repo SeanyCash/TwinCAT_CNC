@@ -6,8 +6,6 @@ STRUCT
     
 nInterpreterState   : UINT;
 
-
-
 END_STRUCT
 END_TYPE
 ]]></Declaration>

@@ -331,20 +331,20 @@ fbConfirmHsk(
       </Implementation>
     </Method>
     <Method Name="M_HMI_In" Id="{9f4f47f9-fd80-4bd7-98c1-19ae73c5acf0}">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD M_HMI_In : BOOL
+      <Declaration><![CDATA[METHOD M_HMI_In : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Set NC Channel Override Speed
 fChannelOverride := stHMI_In.fChannelOverride;
 
 // NC Program Name
-sPrgName := stHMI_In.sPrgName;]]></ST>
+sPrgName := stHMI_In.sPrgName;
+// Spindle Override Speed
+q_stPlcToItp.ChnSpindleOvr := stHMI_In.fSpindleOverrideSpeed;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_HMI_Out" Id="{c9b11abe-3756-440a-87f2-c576c5174866}">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD M_HMI_Out : BOOL
+      <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Interpreter Channel State
@@ -353,7 +353,11 @@ stHMI_Out.sInterpreterState := TO_STRING(eInterpreterState);
 
 // Channel Override Speed
 
-stHMI_Out.fChannelOverrideSpeed := fChannelOverride;]]></ST>
+stHMI_Out.fChannelOverrideSpeed := fChannelOverride;
+
+// Tool Path Velocity
+
+stHMI_Out.fToolpathVelocity := i_stItpToPlc.PathVelo;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
@@ -520,10 +524,16 @@ fbReadZeroShiftOffset(
     <LineIds Name="FB_NCI.M_HMI_In">
       <LineId Id="5" Count="3" />
       <LineId Id="4" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_HMI_Out">
       <LineId Id="5" Count="5" />
       <LineId Id="4" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_InterpreterState">
       <LineId Id="7" Count="0" />

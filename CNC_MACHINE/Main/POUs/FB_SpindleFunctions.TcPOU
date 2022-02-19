@@ -10,7 +10,7 @@ VAR
  fbModbusMasterEL   : ModbusRtuMasterV2_KL6x22B;
  fbSpeedRefScale    : FB_CTRL_SCALE;
  stSpeedRefScaleParams            : ST_CTRL_SCALE_PARAMS;
- fScaledSpeedRef    : LREAL;
+ fScaledSpindleSpeedRef    : LREAL;
  nModbusReadBlk1    : ARRAY [1..46] OF INT;
  nModbusReadBlk2    : ARRAY [129..188] OF INT;
  // Need to put into a modbus DUT
@@ -70,8 +70,7 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="M_HMI_In" Id="{7023150e-5dba-40bd-b6bf-f2224d2f965b}">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD M_HMI_In : BOOL
+      <Declaration><![CDATA[METHOD M_HMI_In : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -177,9 +176,10 @@ stSpeedRefScaleParams.fOutMin:=  0.0;
 stSpeedRefScaleParams.tCtrlCycleTime:= T#2MS  ;
 stSpeedRefScaleParams.tTaskCycleTime:=  T#2MS ;
 
+// Scale Spindle Speed Setpoint From RPM to Hz
 fbSpeedRefScale(
-                fIn:=stSpindleControl.nSpeedRefSetpoint,
-                fOut=>fScaledSpeedRef,
+                fIn:=stSpindleControl.i_nSpindleRPMFromNC,
+                fOut=>fScaledSpindleSpeedRef,
                 eErrorId=>,
                 bError=>,
                 stParams:=stSpeedRefScaleParams,
@@ -190,7 +190,7 @@ nModbusWriteDriveCommand.1 :=stSpindleControl.bFastStopReq;
 nModbusWriteDriveCommand.2 :=stSpindleControl.bResetReq;
 nModbusWriteDriveCommand.3 :=stSpindleControl.bCoastStopRequest;
 
-nModbusWriteDriveSetpoint  :=LREAL_TO_INT(fScaledSpeedRef);
+nModbusWriteDriveSetpoint  :=LREAL_TO_INT(fScaledSpindleSpeedRef);
 
 nModbusWriteDriveAccel_Decel :=stSpindleControl.nRampControlTime;
 
@@ -269,40 +269,48 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Drive Control Word  
-IF bWriteDriveCommand THEN                                         
-fbModbusMasterEL.WriteSingleRegister(   
-                                    UnitID:=1,
-                                    Quantity:=1,
-                                    MBAddr:=0,
-                                    cbLength:=SIZEOF(nModbusWriteDriveCommand),
-                                    pMemoryAddr:=ADR(nModbusWriteDriveCommand),
-                                    Execute:=bWriteDriveCommand,
-                                    Timeout:=T#400MS,
-                                                    ); 
-
-ELSIF bWriteDriveSetpoint THEN
-        
-fbModbusMasterEL.WriteSingleRegister(   
+        <ST><![CDATA[
+// Set VFD Control Word
+IF stSpindleStatus.nControlWord <> nModbusWriteDriveCommand THEN       
+    bWriteDriveCommand := TRUE;                                         
+    fbModbusMasterEL.WriteSingleRegister(   
                                         UnitID:=1,
                                         Quantity:=1,
-                                        MBAddr:=1,
-                                        cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
-                                        pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
-                                        Execute:=bWriteDriveSetpoint,
+                                        MBAddr:=0,
+                                        cbLength:=SIZEOF(nModbusWriteDriveCommand),
+                                        pMemoryAddr:=ADR(nModbusWriteDriveCommand),
+                                        Execute:=bWriteDriveCommand,
                                         Timeout:=T#400MS,
                                                         );
-ELSIF bWriteAccel_Decel THEN
-
-fbModbusMasterEL.WriteSingleRegister(   
-                                    UnitID:=1,
-                                    Quantity:=1,
-                                    MBAddr:=3,
-                                    cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
-                                    pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
-                                    Execute:=bWriteAccel_Decel,
-                                    Timeout:=T#400MS,
-                                                    );    
+ELSE   
+    bWriteDriveCommand := FALSE;
+END_IF
+// Set VFD Speed Control
+IF stSpindleStatus.nSpeedRefSetpoint <> nModbusWriteDriveSetpoint THEN
+    bWriteDriveSetpoint := TRUE;         
+    fbModbusMasterEL.WriteSingleRegister(   
+                                            UnitID:=1,
+                                            Quantity:=1,
+                                            MBAddr:=1,
+                                            cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
+                                            pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
+                                            Execute:=bWriteDriveSetpoint,
+                                            Timeout:=T#400MS,
+                                                            );
+ELSE    
+    bWriteDriveSetpoint := FALSE;                                                        
+END_IF
+// Set VFD Accel/Decel Parameters                                                  
+IF bWriteAccel_Decel THEN
+    fbModbusMasterEL.WriteSingleRegister(   
+                                        UnitID:=1,
+                                        Quantity:=1,
+                                        MBAddr:=3,
+                                        cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
+                                        pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
+                                        Execute:=bWriteAccel_Decel,
+                                        Timeout:=T#400MS,
+                                                        );                                                       
 END_IF                                      ]]></ST>
       </Implementation>
     </Method>
@@ -353,6 +361,7 @@ END_IF                                      ]]></ST>
       <LineId Id="34" Count="0" />
       <LineId Id="33" Count="0" />
       <LineId Id="35" Count="4" />
+      <LineId Id="43" Count="0" />
       <LineId Id="25" Count="6" />
       <LineId Id="24" Count="0" />
       <LineId Id="32" Count="0" />
@@ -373,17 +382,25 @@ END_IF                                      ]]></ST>
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_WriteParameters">
-      <LineId Id="17" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="19" Count="7" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="87" Count="7" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="113" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="31" Count="0" />
+      <LineId Id="58" Count="0" />
       <LineId Id="50" Count="0" />
-      <LineId Id="53" Count="0" />
       <LineId Id="32" Count="7" />
       <LineId Id="30" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="61" Count="1" />
       <LineId Id="52" Count="0" />
-      <LineId Id="41" Count="8" />
+      <LineId Id="42" Count="7" />
       <LineId Id="40" Count="0" />
       <LineId Id="55" Count="0" />
     </LineIds>

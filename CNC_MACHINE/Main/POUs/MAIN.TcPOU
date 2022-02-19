@@ -10,8 +10,6 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbCNC();
-fbSpindle();
-
 bFirstScan:=FALSE;
 
 
@@ -19,8 +17,6 @@ bFirstScan:=FALSE;
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="13" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="33" Count="0" />
       <LineId Id="35" Count="0" />
