@@ -25,7 +25,7 @@ VAR
 	nState				: UDINT	:= 0;
 	nErrorState			: UDINT;
 	fChannelOverride    : REAL;
-	
+	fbMessage		    : FB_TcMessage;
 	fbBuildGroup		    : CfgBuildExt3DGroup;
 	fbLoadGCode			    : ItpLoadProgEx;
 	fbStartStopGCode	    : ItpStartStopEx;
@@ -57,7 +57,6 @@ VAR
 	stPlcToItp			: PLCTONC_NCICHANNEL_REF;
     
     fbAlarm			: FB_TcAlarm;
-    fbMessage		: FB_TcMessage;
     bSendEvent    : BOOL;
     bInitEvent    : BOOL;
 	

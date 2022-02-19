@@ -9,6 +9,7 @@ VAR
     
  fbModbusMasterEL   : ModbusRtuMasterV2_KL6x22B;
  fbSpeedRefScale    : FB_CTRL_SCALE;
+ fbMessage		    : FB_TcMessage;
  stSpeedRefScaleParams            : ST_CTRL_SCALE_PARAMS;
  fScaledSpindleSpeedRef    : LREAL;
  nModbusReadBlk1    : ARRAY [1..46] OF INT;
@@ -286,8 +287,7 @@ ELSE
     bWriteDriveCommand := FALSE;
 END_IF
 // Set VFD Speed Control
-IF stSpindleStatus.nSpeedRefSetpoint <> nModbusWriteDriveSetpoint THEN
-    bWriteDriveSetpoint := TRUE;         
+IF bWriteDriveSetpoint THEN       
     fbModbusMasterEL.WriteSingleRegister(   
                                             UnitID:=1,
                                             Quantity:=1,
@@ -297,8 +297,8 @@ IF stSpindleStatus.nSpeedRefSetpoint <> nModbusWriteDriveSetpoint THEN
                                             Execute:=bWriteDriveSetpoint,
                                             Timeout:=T#400MS,
                                                             );
-ELSE    
-    bWriteDriveSetpoint := FALSE;                                                        
+    fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Speed_Updated,0); 
+    fbMessage.Send(0);                                                                                                              
 END_IF
 // Set VFD Accel/Decel Parameters                                                  
 IF bWriteAccel_Decel THEN
@@ -393,11 +393,9 @@ END_IF                                      ]]></ST>
       <LineId Id="18" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="58" Count="0" />
-      <LineId Id="50" Count="0" />
       <LineId Id="32" Count="7" />
       <LineId Id="30" Count="0" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="66" Count="0" />
+      <LineId Id="114" Count="1" />
       <LineId Id="61" Count="1" />
       <LineId Id="52" Count="0" />
       <LineId Id="42" Count="7" />

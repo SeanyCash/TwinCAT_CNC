@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <TcEventSources Version="2">
 	<Source>
-		<GUID>{AC1249EC-7A00-4AA4-851B-9BA1B619868E}</GUID>
+		<GUID>{575327A7-71B7-42A0-BEBD-8072A77678A6}</GUID>
 		<Name LcId="1033">CNC Events</Name>
 		<Event>
 			<Id>1</Id>
@@ -49,6 +49,14 @@
 			<Detail>
 				<Name>Comment</Name>
 				<Text LcId="1033">NC Program Completed</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>7</Id>
+			<Message LcId="1033">Spindle speed updated</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">The spindle speed has been updated</Text>
 			</Detail>
 		</Event>
 	</Source>

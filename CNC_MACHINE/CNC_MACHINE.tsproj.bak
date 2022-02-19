@@ -1708,6 +1708,31 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
+			<Name GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6inData22B</Name>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>Status</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>D</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>22</Elements>
+				</ArrayInfo>
+				<BitSize>176</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<Properties>
+				<Property>
+					<Name>hide</Name>
+				</Property>
+			</Properties>
+		</DataType>
+		<DataType>
 			<Name GUID="{CBC83B73-B816-4597-A9E5-2B03263CA131}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_AXIS_REF_STATE</Name>
 			<BitSize>32</BitSize>
 			<SubItem>
@@ -2403,31 +2428,6 @@ External Setpoint Generation:
 					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}"></Type>
 				</Relation>
 			</Relations>
-		</DataType>
-		<DataType>
-			<Name GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6inData22B</Name>
-			<BitSize>192</BitSize>
-			<SubItem>
-				<Name>Status</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>D</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<ArrayInfo>
-					<LBound>0</LBound>
-					<Elements>22</Elements>
-				</ArrayInfo>
-				<BitSize>176</BitSize>
-				<BitOffs>16</BitOffs>
-			</SubItem>
-			<Properties>
-				<Property>
-					<Name>hide</Name>
-				</Property>
-			</Properties>
 		</DataType>
 		<DataType>
 			<Name GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6outData22B</Name>
@@ -3288,22 +3288,6 @@ External Setpoint Generation:
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stXRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stZRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
 							<Name>GVL.fbCNC.fbNCI.i_stItpToPlc</Name>
 							<Type GUID="{56354211-98EF-4057-9322-975DEAD0E29D}" Namespace="MC">NCTOPLC_NCICHANNEL_REF</Type>
 						</Var>
@@ -3356,25 +3340,25 @@ External Setpoint Generation:
 							<Name>GVL.fbCNC.i_bZHomingSwitch</Name>
 							<Type>BOOL</Type>
 						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stXRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stZRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stXRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stZRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
 						<Var>
 							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
 							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
@@ -3401,6 +3385,22 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stY2Ref.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stXRef.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stZRef.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 					</Vars>
