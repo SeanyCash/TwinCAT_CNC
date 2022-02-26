@@ -26,6 +26,9 @@ VAR
  nCbRead            : UINT;
  bReadBusy          : BOOL;
  bReadError         : BOOL;
+ bWriteBusy         : BOOL;
+ bWriteError        : BOOL;
+ nCbWrite           : UINT;
  
  bWriteDriveCommand             : BOOL;
  bWriteDriveSetpoint            : BOOL;
@@ -42,6 +45,7 @@ VAR
 
 // Read Parameters Sequence Enumeration
  eReadVFDParamsSeq  :(INIT_FIRST,READ_FIRST_BLOCK,INIT_SECOND,READ_SECOND_BLOCK,FINISH);
+ eWriteVFDParamsSeq :(INIT,WRITE_DRIVE_COMMAND,WRITE_SPINDLE_SPEED,WRITE_ACCEL_DECEL);
 
 END_VAR
 
@@ -268,50 +272,81 @@ END_VAR
     <Method Name="M_WriteParameters" Id="{2cc1a04a-a448-4214-8312-bc9179b7e0fd}">
       <Declaration><![CDATA[METHOD M_WriteParameters : BOOL
 
-]]></Declaration>
+VAR
+    
+    bWriteTrigger : R_TRIG;
+
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
-// Set VFD Control Word
-IF stSpindleStatus.nControlWord <> nModbusWriteDriveCommand THEN       
-    bWriteDriveCommand := TRUE;                                         
-    fbModbusMasterEL.WriteSingleRegister(   
-                                        UnitID:=1,
-                                        Quantity:=1,
-                                        MBAddr:=0,
-                                        cbLength:=SIZEOF(nModbusWriteDriveCommand),
-                                        pMemoryAddr:=ADR(nModbusWriteDriveCommand),
-                                        Execute:=bWriteDriveCommand,
-                                        Timeout:=T#400MS,
-                                                        );
-ELSE   
-    bWriteDriveCommand := FALSE;
-END_IF
-// Set VFD Speed Control
-IF bWriteDriveSetpoint THEN       
-    fbModbusMasterEL.WriteSingleRegister(   
+        <ST><![CDATA[(*(*Ctrl bits - individual bits from iCtrl*)
+	bTransmitRequest		: BOOL; // A change of this bit acts as a request to send data
+	bReceiveAccepted		: BOOL; // A change of this bit acts as a request for more data
+	bInitRequest			: BOOL; // low -> high is a request for serial module init
+	bSendContinuous			: BOOL; // not used
+	nOutputLength			: BYTE; 
+	
+	(*Status bits - individual bits from iStatus*)
+	bTransmitAccepted		: BOOL; //a change of this bit acts as a confirmation of bTransmitRequest
+	bReceiveRequest			: BOOL; // a change of this bit acts as a confirmation of bReceiveAccepted
+	bInitAccepted			: BOOL; // low-> high is confirmation of serial module init
+	bBufferFull				: BOOL; // serial module buffer is full
+	bParityError			: BOOL; 
+	bFramingError			: BOOL;
+	bOverrunError			: BOOL;
+	nInputLength			: BYTE;
+
+
+
+*)
+
+CASE eWriteVFDParamsSeq OF
+
+
+    INIT:
+    
+        bWriteDriveCommand := FALSE;
+        bWriteDriveSetpoint := FALSE;
+        bWriteAccel_Decel := FALSE;
+        
+  
+
+    WRITE_DRIVE_COMMAND:     
+        bWriteDriveCommand:=TRUE;                                         
+        fbModbusMasterEL.WriteSingleRegister(   
                                             UnitID:=1,
                                             Quantity:=1,
-                                            MBAddr:=1,
-                                            cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
-                                            pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
-                                            Execute:=bWriteDriveSetpoint,
+                                            MBAddr:=0,
+                                            cbLength:=SIZEOF(nModbusWriteDriveCommand),
+                                            pMemoryAddr:=ADR(nModbusWriteDriveCommand),
+                                            Execute:=bWriteDriveCommand,
                                             Timeout:=T#400MS,
-                                                            );
-    fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Speed_Updated,0); 
-    fbMessage.Send(0);                                                                                                              
-END_IF
-// Set VFD Accel/Decel Parameters                                                  
-IF bWriteAccel_Decel THEN
-    fbModbusMasterEL.WriteSingleRegister(   
-                                        UnitID:=1,
-                                        Quantity:=1,
-                                        MBAddr:=3,
-                                        cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
-                                        pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
-                                        Execute:=bWriteAccel_Decel,
-                                        Timeout:=T#400MS,
-                                                        );                                                       
-END_IF                                      ]]></ST>
+                                                                    );   
+            
+    WRITE_SPINDLE_SPEED:
+        
+        fbModbusMasterEL.WriteSingleRegister(   
+                                                            UnitID:=1,
+                                                            Quantity:=1,
+                                                            MBAddr:=1,
+                                                            cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
+                                                            pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
+                                                            Execute:=bWriteDriveSetpoint,
+                                                            Timeout:=T#400MS, );
+
+    WRITE_ACCEL_DECEL:
+       bWriteAccel_Decel:=TRUE;                                                  
+       fbModbusMasterEL.WriteSingleRegister(   
+                                           UnitID:=1,
+                                           Quantity:=1,
+                                           MBAddr:=3,
+                                           cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
+                                           pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
+                                           Execute:=bWriteAccel_Decel,
+                                           Timeout:=T#400MS,
+                                                           );                                                       
+                       
+
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_SpindleFunctions">
@@ -382,25 +417,33 @@ END_IF                                      ]]></ST>
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_WriteParameters">
+      <LineId Id="227" Count="14" />
+      <LineId Id="221" Count="5" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="130" Count="2" />
+      <LineId Id="134" Count="1" />
+      <LineId Id="179" Count="0" />
+      <LineId Id="181" Count="0" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="125" Count="0" />
       <LineId Id="103" Count="0" />
-      <LineId Id="106" Count="0" />
-      <LineId Id="86" Count="0" />
       <LineId Id="111" Count="0" />
       <LineId Id="87" Count="7" />
       <LineId Id="71" Count="0" />
-      <LineId Id="107" Count="0" />
-      <LineId Id="113" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="32" Count="7" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="114" Count="1" />
-      <LineId Id="61" Count="1" />
-      <LineId Id="52" Count="0" />
+      <LineId Id="176" Count="0" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="209" Count="0" />
+      <LineId Id="214" Count="6" />
+      <LineId Id="210" Count="0" />
+      <LineId Id="200" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="165" Count="0" />
       <LineId Id="42" Count="7" />
       <LineId Id="40" Count="0" />
-      <LineId Id="55" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="126" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

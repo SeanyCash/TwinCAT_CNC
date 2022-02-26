@@ -5274,10 +5274,10 @@ External Setpoint Generation:
 								<ExcludePdo>#x1601</ExcludePdo>
 								<ExcludePdo>#x1602</ExcludePdo>
 								<ExcludePdo>#x1605</ExcludePdo>
-								<Entry Name="Ctrl__Transmit request" Index="#x7000" Sub="#x01">
+								<Entry Name="Ctrl__Transmit request" Index="#x7000" Sub="#x01" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Ctrl__Receive accepted" Index="#x7000" Sub="#x02">
+								<Entry Name="Ctrl__Receive accepted" Index="#x7000" Sub="#x02" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Ctrl__Init request" Index="#x7000" Sub="#x03">
