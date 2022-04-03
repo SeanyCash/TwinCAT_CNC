@@ -3360,6 +3360,14 @@ External Setpoint Generation:
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
+							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
+							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbCNC.fbSpindle.fbModbusMasterEL.OutData</Name>
+							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
+						</Var>
+						<Var>
 							<Name>GVL.fbCNC.fbSpindle.stSpindleControl.q_fSpindleOverrideSpeed</Name>
 							<Type>UDINT</Type>
 						</Var>
@@ -3378,14 +3386,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
-							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.fbSpindle.fbModbusMasterEL.OutData</Name>
-							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
 						</Var>
 						<Var>
 							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
@@ -5274,10 +5274,10 @@ External Setpoint Generation:
 								<ExcludePdo>#x1601</ExcludePdo>
 								<ExcludePdo>#x1602</ExcludePdo>
 								<ExcludePdo>#x1605</ExcludePdo>
-								<Entry Name="Ctrl__Transmit request" Index="#x7000" Sub="#x01">
+								<Entry Name="Ctrl__Transmit request" Index="#x7000" Sub="#x01" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Ctrl__Receive accepted" Index="#x7000" Sub="#x02">
+								<Entry Name="Ctrl__Receive accepted" Index="#x7000" Sub="#x02" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Ctrl__Init request" Index="#x7000" Sub="#x03">

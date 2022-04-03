@@ -343,6 +343,11 @@ stHMI_Out.stY2Ref := Y2_Ref;
 stHMI_Out.stXRef  := X_Ref;
 stHMI_Out.stZRef  := Z_Ref;
 
+stHMI_Out.fActPosX:= LREAL_TO_REAL(X_Ref.NcToPlc.ActPos);
+stHMI_Out.fActPosY:= LREAL_TO_REAL(Y_Ref.NcToPlc.ActPos);
+stHMI_Out.fActPosY2:= LREAL_TO_REAL(Y2_Ref.NcToPlc.ActPos);
+stHMI_Out.fActPosZ:= LREAL_TO_REAL(Z_Ref.NcToPlc.ActPos);
+
 stHMI_Out.sCurrentProgramSelected := sCurrentProgram;
 
 
@@ -792,6 +797,9 @@ END_CASE
       <LineId Id="49" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="52" Count="2" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="60" Count="2" />
       <LineId Id="56" Count="0" />
       <LineId Id="32" Count="7" />
       <LineId Id="10" Count="0" />
