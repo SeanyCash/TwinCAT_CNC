@@ -540,7 +540,7 @@
 ]
 </script>
 </div>
-<div id="VFDStandbyModeIndicator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="587" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="16" data-tchmi-is-enabled="true">
+<div id="VFDStandbyModeIndicator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="576" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="16" data-tchmi-is-enabled="true">
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
