@@ -87,7 +87,6 @@ METHOD M_HMI_Out : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Map VFD status information to HMI struct
-
 stHMI_Out.nSpeedRefSetpoint	    := stSpindleStatus.nSpeedRefSetpoint;	  
 stHMI_Out.nRampControlTime      := stSpindleStatus.nRampControlTime;    
 stHMI_Out.sErrorCode		    := TO_STRING(eVFDErrors);	 
@@ -112,7 +111,7 @@ stHMI_Out.nRuntimeHours         := stSpindleStatus.nRuntimeHours;
 stHMI_Out.nRuntimeMinutes       := stSpindleStatus.nRuntimeMinutes;
 stHMI_Out.nInternalDriveTemp    := stSpindleStatus.nInternalDriveTemp;  
 stHMI_Out.nOutputVoltage        := stSpindleStatus.nOutputVoltage;
-
+// Map VFD Parameter information to HMI struct
 stHMI_Out.nMaxSpeedLimit		:= stSpindleParams.nMaxSpeedLimit;
 stHMI_Out.nMinSpeedLimit	    := stSpindleParams.nMinSpeedLimit;
 stHMI_Out.nAccelRampTime		:= stSpindleParams.nAccelRampTime;
@@ -127,7 +126,11 @@ stHMI_Out.nRelayOutputFunction  := stSpindleParams.nRelayOutputFunction;
 stHMI_Out.nUserPGain            := stSpindleParams.nUserPGain;
 stHMI_Out.nUserIConstant        := stSpindleParams.nUserIConstant;
 stHMI_Out.nMotorControlMode     := stSpindleParams.nMotorControlMode;
-stHMI_Out.nMaximumCurrentLimit  := stSpindleParams.nMaximumCurrentLimit;]]></ST>
+stHMI_Out.nMaximumCurrentLimit  := stSpindleParams.nMaximumCurrentLimit;
+
+//// Map Modbus Comms information to HMI struct
+
+stHMI_Out.sReadErrorID := TO_STRING(eReadErrorID);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InputMapping" Id="{83d865f8-d7ae-49d7-a6f4-fcb7ec40a615}">
@@ -381,7 +384,7 @@ END_CASE]]></ST>
       <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_HMI_Out">
-      <LineId Id="26" Count="1" />
+      <LineId Id="26" Count="0" />
       <LineId Id="4" Count="20" />
       <LineId Id="50" Count="0" />
       <LineId Id="25" Count="0" />
@@ -390,6 +393,10 @@ END_CASE]]></ST>
       <LineId Id="53" Count="0" />
       <LineId Id="47" Count="2" />
       <LineId Id="55" Count="10" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="70" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_InputMapping">
       <LineId Id="39" Count="0" />

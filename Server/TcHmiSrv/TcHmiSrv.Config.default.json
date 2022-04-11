@@ -109,6 +109,149 @@
                 }
             ]
         },
+        "PLC1.Tc2_ModbusRTU.MODBUS_ERRORS": {
+            "allOf": [
+                {
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        32,
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        102,
+                        103,
+                        107,
+                        110,
+                        120,
+                        150,
+                        232,
+                        233
+                    ],
+                    "options": [
+                        {
+                            "label": "MODBUSERROR_NO_ERROR",
+                            "value": 0
+                        },
+                        {
+                            "label": "MODBUSERROR_ILLEGAL_FUNCTION",
+                            "value": 1
+                        },
+                        {
+                            "label": "MODBUSERROR_ILLEGAL_DATA_ADDRESS",
+                            "value": 2
+                        },
+                        {
+                            "label": "MODBUSERROR_ILLEGAL_DATA_VALUE",
+                            "value": 3
+                        },
+                        {
+                            "label": "MODBUSERROR_SLAVE_DEVICE_FAILURE",
+                            "value": 4
+                        },
+                        {
+                            "label": "MODBUSERROR_ACKNOWLEDGE",
+                            "value": 5
+                        },
+                        {
+                            "label": "MODBUSERROR_SLAVE_DEVICE_BUSY",
+                            "value": 6
+                        },
+                        {
+                            "label": "MODBUSERROR_NEGATIVE_ACKNOWLEDGE",
+                            "value": 7
+                        },
+                        {
+                            "label": "MODBUSERROR_MEMORY_PARITY",
+                            "value": 8
+                        },
+                        {
+                            "label": "MODBUSERROR_reserved9",
+                            "value": 9
+                        },
+                        {
+                            "label": "MODBUSERROR_GATEWAY_PATH_UNAVAILABLE",
+                            "value": 10
+                        },
+                        {
+                            "label": "MODBUSERROR_GATEWAY_TARGET_DEVICE_FAILED_TO_RESPOND",
+                            "value": 11
+                        },
+                        {
+                            "label": "MODBUSERROR_CHARREC_TIMEOUT",
+                            "value": 32
+                        },
+                        {
+                            "label": "MODBUSERROR_ILLEGAL_DATA_SIZE",
+                            "value": 33
+                        },
+                        {
+                            "label": "MODBUSERROR_ILLEGAL_DEVICE_ADDRESS",
+                            "value": 34
+                        },
+                        {
+                            "label": "MODBUSERROR_ILLEGAL_DESTINATION_ADDRESS",
+                            "value": 35
+                        },
+                        {
+                            "label": "MODBUSERROR_ILLEGAL_DESTINATION_SIZE",
+                            "value": 36
+                        },
+                        {
+                            "label": "MODBUSERROR_NO_RESPONSE",
+                            "value": 37
+                        },
+                        {
+                            "label": "MODBUSERROR_TXBUFFOVERRUN",
+                            "value": 102
+                        },
+                        {
+                            "label": "MODBUSERROR_SENDTIMEOUT",
+                            "value": 103
+                        },
+                        {
+                            "label": "MODBUSERROR_DATASIZEOVERRUN",
+                            "value": 107
+                        },
+                        {
+                            "label": "MODBUSERROR_STRINGOVERRUN",
+                            "value": 110
+                        },
+                        {
+                            "label": "MODBUSERROR_INVALIDPOINTER",
+                            "value": 120
+                        },
+                        {
+                            "label": "MODBUSERROR_CRC",
+                            "value": 150
+                        },
+                        {
+                            "label": "MODBUSERROR_INVALIDMEMORYADDRESS",
+                            "value": 232
+                        },
+                        {
+                            "label": "MODBUSERROR_TRANSMITBUFFERTOOSMALL",
+                            "value": 233
+                        }
+                    ]
+                },
+                {
+                    "$ref": "tchmi:general#/definitions/INT16"
+                }
+            ]
+        },
         "PLC1.Tc2_Utilities.T_FIX16": {
             "properties": {
                 "n": {
@@ -3141,6 +3284,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.eReadErrorID": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::eReadErrorID",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.Tc2_ModbusRTU.MODBUS_ERRORS"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.fActPosX": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3168,6 +3321,16 @@
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "MAPPING": "PLC1::GVL::stHMI_Out::nAccelRampTime",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nApplicationMode": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nApplicationMode",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3213,11 +3376,31 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.nMaximumCurrentLimit": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nMaximumCurrentLimit",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.nMinSpeedLimit": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "MAPPING": "PLC1::GVL::stHMI_Out::nMinSpeedLimit",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nMotorControlMode": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nMotorControlMode",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3240,6 +3423,36 @@
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorPower",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nMotorRatedCurrent": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nMotorRatedCurrent",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nMotorRatedFrequency": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nMotorRatedFrequency",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nMotorRatedSpeed": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nMotorRatedSpeed",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
             },
             "USEMAPPING": true
         },
@@ -3323,6 +3536,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.nUserPGain": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nUserPGain",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.sCurrentProgramSelected": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3364,6 +3587,16 @@
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::sJogMode",
             "OPTIONS": {},
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/STRING(80)"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.sReadErrorID": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::sReadErrorID",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },

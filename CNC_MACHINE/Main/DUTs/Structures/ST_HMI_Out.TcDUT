@@ -85,6 +85,21 @@ nUserIConstant      : UINT;
 nMotorControlMode   : UINT;
 nMaximumCurrentLimit: UINT;
 
+// Modbus Comms to VFD status
+sReadErrorID       : STRING;
+//Tx Status
+bTxRequest          : BOOL;
+bRxAccepted         : BOOL;
+bInitRequest        : BOOL;
+bSendContinues      : BOOL;
+//Rx Status
+bTxAccepted         : BOOL;
+bRxRequest          : BOOL;
+bInitAccepted       : BOOL;
+bBufferFull         : BOOL;
+bParityError        : BOOL;
+bFramingError       : BOOL;
+bOverrunError       : BOOL;
 END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>
