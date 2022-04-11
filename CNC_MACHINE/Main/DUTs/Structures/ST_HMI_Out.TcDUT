@@ -42,8 +42,7 @@ stZRef               :Axis_Ref;
 // Current Jog Mode
 sJogMode             : STRING;
 
-// VFD/Spindle Information
-
+// VFD/Spindle Status Information
 nSpeedRefSetpoint	: REAL; 
 nRampControlTime    : UINT;
 sErrorCode			: STRING;
@@ -68,6 +67,23 @@ nRuntimeHours       : UINT;
 nRuntimeMinutes     : UINT;
 nInternalDriveTemp  : REAL; 
 nOutputVoltage      : REAL;
+
+// VFD/Spindle Status Information
+nMaxSpeedLimit		: UINT;
+nMinSpeedLimit	    : UINT;
+nAccelRampTime		: UINT;
+nDecelRampTime		: UINT;
+nStopMode			: UINT;
+nMotorRatedVoltage	: UINT;
+nMotorRatedCurrent  : UINT;
+nMotorRatedFrequency: UINT;
+nMotorRatedSpeed    : UINT;
+nApplicationMode    : UINT;
+nRelayOutputFunction: UINT;
+nUserPGain          : UINT;
+nUserIConstant      : UINT;
+nMotorControlMode   : UINT;
+nMaximumCurrentLimit: UINT;
 
 END_STRUCT
 END_TYPE]]></Declaration>

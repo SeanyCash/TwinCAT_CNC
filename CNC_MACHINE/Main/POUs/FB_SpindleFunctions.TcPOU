@@ -88,33 +88,46 @@ METHOD M_HMI_Out : BOOL
       <Implementation>
         <ST><![CDATA[// Map VFD status information to HMI struct
 
-stHMI_Out.nSpeedRefSetpoint	    :=    stSpindleStatus.nSpeedRefSetpoint;	  
-stHMI_Out.nRampControlTime      :=    stSpindleStatus.nRampControlTime;    
-stHMI_Out.sErrorCode		    :=    TO_STRING(eVFDErrors);	 
-stHMI_Out.bDriveRunning         :=    stSpindleStatus.bDriveRunning; 
-stHMI_Out.bDriveFault           :=    stSpindleStatus.bDriveFault;   
-stHMI_Out.bStandbyMode          :=    stSpindleStatus.bStandbyMode;  
-stHMI_Out.bDriveReady           :=    stSpindleStatus.bDriveReady;   
-stHMI_Out.nOutputFreq		    :=    stSpindleStatus.nOutputFreq;	 
-stHMI_Out.nMotorCurrent		    :=    stSpindleStatus.nMotorCurrent;
-stHMI_Out.nMotorTorque          :=    stSpindleStatus.nMotorTorque; 
-stHMI_Out.nMotorPower           :=    stSpindleStatus.nMotorPower;  
-stHMI_Out.bDigitalInput1  	    :=    stSpindleStatus.nDigitalInputSts.0;
-stHMI_Out.bDigitalInput2  	    :=    stSpindleStatus.nDigitalInputSts.1;
-stHMI_Out.bDigitalInput3  	    :=    stSpindleStatus.nDigitalInputSts.2;    
-stHMI_Out.bDigitalInput4  	    :=    stSpindleStatus.nDigitalInputSts.3;
-stHMI_Out.bDriveEnabled         :=    stSpindleStatus.bDriveEnabled;       
-stHMI_Out.nDCBusVoltage		    :=    stSpindleStatus.nDCBusVoltage;		     
-stHMI_Out.nDrivePowerStageTemp  :=    stSpindleStatus.nDrivePowerStageTemp;
-stHMI_Out.bRelayOutputStatus    :=    stSpindleStatus.nRelayOutputStatus.0;   
-stHMI_Out.nKWHourMeter          :=    stSpindleStatus.nKWHourMeter;  
-stHMI_Out.nRuntimeHours         :=    stSpindleStatus.nRuntimeHours;
-stHMI_Out.nRuntimeMinutes       :=    stSpindleStatus.nRuntimeMinutes;
-stHMI_Out.nInternalDriveTemp    :=    stSpindleStatus.nInternalDriveTemp;  
-stHMI_Out.nOutputVoltage        :=    stSpindleStatus.nOutputVoltage;
+stHMI_Out.nSpeedRefSetpoint	    := stSpindleStatus.nSpeedRefSetpoint;	  
+stHMI_Out.nRampControlTime      := stSpindleStatus.nRampControlTime;    
+stHMI_Out.sErrorCode		    := TO_STRING(eVFDErrors);	 
+stHMI_Out.bDriveRunning         := stSpindleStatus.bDriveRunning; 
+stHMI_Out.bDriveFault           := stSpindleStatus.bDriveFault;   
+stHMI_Out.bStandbyMode          := stSpindleStatus.bStandbyMode;  
+stHMI_Out.bDriveReady           := stSpindleStatus.bDriveReady;   
+stHMI_Out.nOutputFreq		    := stSpindleStatus.nOutputFreq;	 
+stHMI_Out.nMotorCurrent		    := stSpindleStatus.nMotorCurrent;
+stHMI_Out.nMotorTorque          := stSpindleStatus.nMotorTorque; 
+stHMI_Out.nMotorPower           := stSpindleStatus.nMotorPower;  
+stHMI_Out.bDigitalInput1  	    := stSpindleStatus.nDigitalInputSts.0;
+stHMI_Out.bDigitalInput2  	    := stSpindleStatus.nDigitalInputSts.1;
+stHMI_Out.bDigitalInput3  	    := stSpindleStatus.nDigitalInputSts.2;    
+stHMI_Out.bDigitalInput4  	    := stSpindleStatus.nDigitalInputSts.3;
+stHMI_Out.bDriveEnabled         := stSpindleStatus.bDriveEnabled;       
+stHMI_Out.nDCBusVoltage		    := stSpindleStatus.nDCBusVoltage;		     
+stHMI_Out.nDrivePowerStageTemp  := stSpindleStatus.nDrivePowerStageTemp;
+stHMI_Out.bRelayOutputStatus    := stSpindleStatus.nRelayOutputStatus.0;   
+stHMI_Out.nKWHourMeter          := stSpindleStatus.nKWHourMeter;  
+stHMI_Out.nRuntimeHours         := stSpindleStatus.nRuntimeHours;
+stHMI_Out.nRuntimeMinutes       := stSpindleStatus.nRuntimeMinutes;
+stHMI_Out.nInternalDriveTemp    := stSpindleStatus.nInternalDriveTemp;  
+stHMI_Out.nOutputVoltage        := stSpindleStatus.nOutputVoltage;
 
-    
-]]></ST>
+stHMI_Out.nMaxSpeedLimit		:= stSpindleParams.nMaxSpeedLimit;
+stHMI_Out.nMinSpeedLimit	    := stSpindleParams.nMinSpeedLimit;
+stHMI_Out.nAccelRampTime		:= stSpindleParams.nAccelRampTime;
+stHMI_Out.nDecelRampTime		:= stSpindleParams.nDecelRampTime;
+stHMI_Out.nStopMode			    := stSpindleParams.nStopMode;
+stHMI_Out.nMotorRatedVoltage	:= stSpindleParams.nMotorRatedVoltage;
+stHMI_Out.nMotorRatedCurrent    := stSpindleParams.nMotorRatedCurrent;
+stHMI_Out.nMotorRatedFrequency  := stSpindleParams.nMotorRatedFrequency;
+stHMI_Out.nMotorRatedSpeed      := stSpindleParams.nMotorRatedSpeed;
+stHMI_Out.nApplicationMode      := stSpindleParams.nApplicationMode;
+stHMI_Out.nRelayOutputFunction  := stSpindleParams.nRelayOutputFunction;
+stHMI_Out.nUserPGain            := stSpindleParams.nUserPGain;
+stHMI_Out.nUserIConstant        := stSpindleParams.nUserIConstant;
+stHMI_Out.nMotorControlMode     := stSpindleParams.nMotorControlMode;
+stHMI_Out.nMaximumCurrentLimit  := stSpindleParams.nMaximumCurrentLimit;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InputMapping" Id="{83d865f8-d7ae-49d7-a6f4-fcb7ec40a615}">
@@ -373,7 +386,10 @@ END_CASE]]></ST>
       <LineId Id="50" Count="0" />
       <LineId Id="25" Count="0" />
       <LineId Id="29" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
       <LineId Id="47" Count="2" />
+      <LineId Id="55" Count="10" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_InputMapping">
       <LineId Id="39" Count="0" />

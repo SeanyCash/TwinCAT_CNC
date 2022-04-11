@@ -3163,6 +3163,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.nAccelRampTime": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nAccelRampTime",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.nDCBusVoltage": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3193,6 +3203,26 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.nMaxSpeedLimit": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nMaxSpeedLimit",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nMinSpeedLimit": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nMinSpeedLimit",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.nMotorCurrent": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3210,6 +3240,16 @@
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorPower",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nMotorRatedVoltage": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nMotorRatedVoltage",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
             },
             "USEMAPPING": true
         },
@@ -3270,6 +3310,16 @@
             "MAPPING": "PLC1::GVL::stHMI_Out::nSpeedRefSetpoint",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nStopMode": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "ADS",
+            "MAPPING": "PLC1::GVL::stHMI_Out::nStopMode",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
             },
             "USEMAPPING": true
         },
