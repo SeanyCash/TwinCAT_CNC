@@ -13,7 +13,7 @@
     <HmiVerboseLevel>2</HmiVerboseLevel>
     <HmiVersion>1.0.0.0</HmiVersion>
     <Name>CNC</Name>
-    <HmiCommunicationRouterPort>10110</HmiCommunicationRouterPort>
+    <HmiCommunicationRouterPort>10111</HmiCommunicationRouterPort>
     <HmiCommunicationServerPort>3000</HmiCommunicationServerPort>
     <HmiInitial>1.10.1336.404</HmiInitial>
     <HmiRecent>1.12.752.0</HmiRecent>

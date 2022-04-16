@@ -130,7 +130,8 @@ stHMI_Out.nMaximumCurrentLimit  := stSpindleParams.nMaximumCurrentLimit;
 
 //// Map Modbus Comms information to HMI struct
 
-stHMI_Out.sReadErrorID := TO_STRING(eReadErrorID);]]></ST>
+stHMI_Out.sReadErrorID := TO_STRING(eReadErrorID);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InputMapping" Id="{83d865f8-d7ae-49d7-a6f4-fcb7ec40a615}">
@@ -397,6 +398,7 @@ END_CASE]]></ST>
       <LineId Id="68" Count="0" />
       <LineId Id="71" Count="0" />
       <LineId Id="70" Count="0" />
+      <LineId Id="80" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_InputMapping">
       <LineId Id="39" Count="0" />
