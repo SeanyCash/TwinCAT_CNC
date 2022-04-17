@@ -1,5 +1,43 @@
 ﻿[
   {
+    "serverExtensions": [
+      {
+        "publishServerExtension": true,
+        "name": "ADS"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiEventLogger"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiLua"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiRecipeManagement"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiSqliteLogger"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiSrv"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiTextStorage"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiUserManagement"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiVision"
+      }
+    ],
     "isNew": false,
     "profileName": "CNC",
     "publishMode": "TcHmi",

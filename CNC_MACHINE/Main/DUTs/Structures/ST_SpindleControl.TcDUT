@@ -11,7 +11,7 @@ bFastStopReq            : BOOL;
 bResetReq               : BOOL;
 bCoastStopRequest       : BOOL;
 i_nSpindleRPMFromNC   	AT %I*  : UINT;  //Spindle Speed setpoint from NC
-nRampControlTime		: UINT; //Modbus RTU Register 4
+nRampControlTime		: UINT :=700; //Modbus RTU Register 4
 q_fSpindleOverrideSpeed AT %Q*  : UDINT;
 
 END_STRUCT

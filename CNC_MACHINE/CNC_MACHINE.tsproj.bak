@@ -1708,31 +1708,6 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6inData22B</Name>
-			<BitSize>192</BitSize>
-			<SubItem>
-				<Name>Status</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>D</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
-				<ArrayInfo>
-					<LBound>0</LBound>
-					<Elements>22</Elements>
-				</ArrayInfo>
-				<BitSize>176</BitSize>
-				<BitOffs>16</BitOffs>
-			</SubItem>
-			<Properties>
-				<Property>
-					<Name>hide</Name>
-				</Property>
-			</Properties>
-		</DataType>
-		<DataType>
 			<Name GUID="{CBC83B73-B816-4597-A9E5-2B03263CA131}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_AXIS_REF_STATE</Name>
 			<BitSize>32</BitSize>
 			<SubItem>
@@ -2430,6 +2405,31 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
+			<Name GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6inData22B</Name>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>Status</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>D</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>22</Elements>
+				</ArrayInfo>
+				<BitSize>176</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<Properties>
+				<Property>
+					<Name>hide</Name>
+				</Property>
+			</Properties>
+		</DataType>
+		<DataType>
 			<Name GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU" AutoDeleteType="true">MB_KL6outData22B</Name>
 			<BitSize>192</BitSize>
 			<SubItem>
@@ -2542,8 +2542,8 @@ External Setpoint Generation:
 				<Axis Id="1" CreateSymbols="true" AxisType="1">
 					<Name>Y</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="494.9" Deceleration="494.9" Jerk="99969.7999999999"/>
-						<Velo RefSearch="1" RefSync="1" SlowManual="50" FastManual="180" Fast="125" Maximum="245"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="206.208333333333" Deceleration="206.208333333333" Jerk="17355.8680555555"/>
+						<Velo RefSearch="1" RefSync="1" SlowManual="50" FastManual="180" Fast="100" Maximum="245"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
@@ -2709,8 +2709,8 @@ External Setpoint Generation:
 				<Axis Id="2" CreateSymbols="true" AxisType="1">
 					<Name>Y²</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="494.9" Deceleration="494.9" Jerk="99969.7999999999"/>
-						<Velo RefSearch="1" RefSync="1" SlowManual="50" Fast="125" Maximum="245"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="206.208333333333" Deceleration="206.208333333333" Jerk="17355.8680555555"/>
+						<Velo RefSearch="1" RefSync="1" SlowManual="50" Fast="100" Maximum="245"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="4">
@@ -2878,7 +2878,7 @@ External Setpoint Generation:
 				<Axis Id="3" CreateSymbols="true" AxisType="1">
 					<Name>X</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="604.634" Deceleration="604.634" Jerk="146233"/>
+						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="252.5" Deceleration="252.5" Jerk="25502.5"/>
 						<Velo RefSearch="10" RefSync="10" FastManual="200" Fast="150" Maximum="250"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
@@ -3047,7 +3047,7 @@ External Setpoint Generation:
 				<Axis Id="4" CreateSymbols="true" AxisType="1">
 					<Name>Z</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="202" Deceleration="202" Jerk="40804"/>
+						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="101" Deceleration="101" Jerk="10201"/>
 						<Velo RefSearch="1" RefSync="1" SlowManual="30" FastManual="80" Fast="80" Maximum="100"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
@@ -3288,6 +3288,51 @@ External Setpoint Generation:
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
+							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stXRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stZRef.NcToPlc</Name>
+							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.bTxAccepted</Name>
+							<Comment><![CDATA[Rx Status]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.bRxRequest</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.bInitAccepted</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.bBufferFull</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.bParityError</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.bFramingError</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.bOverrunError</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL.fbCNC.fbNCI.i_stItpToPlc</Name>
 							<Type GUID="{56354211-98EF-4057-9322-975DEAD0E29D}" Namespace="MC">NCTOPLC_NCICHANNEL_REF</Type>
 						</Var>
@@ -3340,54 +3385,25 @@ External Setpoint Generation:
 							<Name>GVL.fbCNC.i_bZHomingSwitch</Name>
 							<Type>BOOL</Type>
 						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stYRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stXRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stZRef.NcToPlc</Name>
-							<Type GUID="{10036166-C9D3-404B-BDD3-323034AAA7F4}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bTxAccepted</Name>
-							<Comment><![CDATA[Rx Status]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bRxRequest</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bInitAccepted</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bBufferFull</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bParityError</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bFramingError</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bOverrunError</Name>
-							<Type>BOOL</Type>
-						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stY2Ref.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stXRef.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stZRef.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
 						<Var>
 							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
 							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
@@ -3415,39 +3431,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stXRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stZRef.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bTxRequest</Name>
-							<Comment><![CDATA[Tx Status]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bRxAccepted</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bInitRequest</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.bSendContinues</Name>
-							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2021-10-28T06:25:25">
@@ -5900,6 +5883,7 @@ External Setpoint Generation:
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^NC Channel">
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.fbNCI.i_stItpToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Inputs^GVL.fbCNC.fbSpindle.stSpindleControl.i_nSpindleRPMFromNC" VarB="Outputs^ToPlc^SpindleRpm"/>
 				<Link VarA="PlcTask Outputs^GVL.fbCNC.fbNCI.q_stPlcToItp" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 		</OwnerA>
