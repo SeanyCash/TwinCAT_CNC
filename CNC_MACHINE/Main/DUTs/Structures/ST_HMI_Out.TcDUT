@@ -12,6 +12,7 @@ fRapidRate                  : REAL;
 sInterpreterState           : STRING;
 fChannelOverrideSpeed       : REAL;
 fToolpathVelocity           : LREAL;
+fToolpathVelocityIPM        : LREAL;
 
 // ====================== Status Screen=================================
 

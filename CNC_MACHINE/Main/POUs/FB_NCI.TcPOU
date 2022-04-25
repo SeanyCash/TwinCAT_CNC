@@ -356,7 +356,13 @@ stHMI_Out.fChannelOverrideSpeed := fChannelOverride;
 
 // Tool Path Velocity
 
-stHMI_Out.fToolpathVelocity := i_stItpToPlc.PathVelo;]]></ST>
+stHMI_Out.fToolpathVelocity := i_stItpToPlc.PathVelo;
+
+IF i_stItpToPlc.PathVelo <>0 THEN
+    stHMI_Out.fToolpathVelocityIPM := (i_stItpToPlc.PathVelo / 0.42);
+ELSE
+ stHMI_Out.fToolpathVelocityIPM := 0.0;  
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
@@ -533,6 +539,10 @@ fbReadZeroShiftOffset(
       <LineId Id="13" Count="0" />
       <LineId Id="16" Count="0" />
       <LineId Id="15" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="21" Count="2" />
     </LineIds>
     <LineIds Name="FB_NCI.M_InterpreterState">
       <LineId Id="7" Count="0" />

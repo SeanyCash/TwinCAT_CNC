@@ -6296,6 +6296,16 @@
     "TcHmiUserManagement": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiUserManagement"
     },
+    "TcHmi.Controls.Beckhoff.TcHmiEcDiagnostics": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiEcDiagnostics",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmiEcDiagnostics": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiEcDiagnostics"
+    },
     "TcHmi.Controls.System.TcHmiControl": {
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "object",

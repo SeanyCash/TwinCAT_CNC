@@ -111,6 +111,9 @@
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <Target Name="Clean" DependsOnTargets="BaseClean" />
   <ItemGroup>
+    <Content Include="Contents\EtherCATDiagnostics.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\Jog.content">
       <SubType>Content</SubType>
     </Content>
@@ -186,6 +189,15 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Server\ADS\ADS.Storage.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiEcDiagnostics\TcHmiEcDiagnostics.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiEcDiagnostics\TcHmiEcDiagnostics.Config.remote.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiEcDiagnostics\TcHmiEcDiagnostics.Storage.json">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Server\TcHmiEventLogger\TcHmiEventLogger.Config.default.json">
@@ -290,6 +302,7 @@
     <Folder Include="Recipe Management" />
     <Folder Include="Recipe Management\Recipes" />
     <Folder Include="Server\ADS" />
+    <Folder Include="Server\TcHmiEcDiagnostics" />
     <Folder Include="Server\TcHmiEventLogger" />
     <Folder Include="Server\TcHmiLua" />
     <Folder Include="Server\TcHmiRecipeManagement" />
