@@ -17,21 +17,21 @@
               "displayName": "Access right",
               "category": "General",
               "displayPriority": 10,
-              "description": "Name of the access right."
+              "description": "Right which this rule defines."
             },
             {
               "name": "group",
               "displayName": "Group",
               "category": "General",
               "displayPriority": 10,
-              "description": "Name of the user group."
+              "description": "Group to which this access right is given."
             },
             {
               "name": "permission",
               "displayName": "Permission",
               "category": "General",
               "displayPriority": 10,
-              "description": "Name of the permission described by this rule."
+              "description": "Permission for this access rule. \nAllow of one group overrides Deny/Inherit of another group. \nDeny will result in deny if we have no Allow of another group. \nInherit will ask parent control when we got no Allow/Deny. If the parent does not define something there will be a specified default."
             }
           ],
           "properties": {
@@ -2530,21 +2530,23 @@
         ],
         "properties": {
           "virtualControlRight": {
-            "description": "Name of the virtual control right.",
+            "description": "Name of the right which is configured on a parent control (aka outer right).",
             "type": "string",
             "minLength": 1
           },
           "controlRight": {
-            "description": "Real control right.",
+            "description": "Name of the right which is working on this control (aka inner right).",
             "type": "string",
             "minLength": 1
           }
         },
+        "description": "Allows a mapping of rights to parent control virtual rights. For example the 'operate' right of this control can be configured to react on a custom 'canStartPump' right of a parent control.",
         "required": [
           "controlRight",
           "virtualControlRight"
         ]
-      }
+      },
+      "description": "Allows a mapping of rights to parent control virtual rights. For example the 'operate' right of this control can be configured to react on a custom 'canStartPump' right of a parent control."
     },
     "Visibility": {
       "type": "string",
@@ -2943,18 +2945,18 @@
       "description": "List Item List",
       "type": "object",
       "engineeringColumns": [
-        "index",
+        "id",
         "text",
         "value",
         "category"
       ],
       "propertiesMeta": [
         {
-          "name": "index",
-          "displayName": "Index",
+          "name": "id",
+          "displayName": "ID",
           "category": "General",
           "displayPriority": 10,
-          "description": "Index for this entry",
+          "description": "Numerical ID for this entry. Can be chosen freely, but must be unique.",
           "defaultValue": null,
           "defaultValueInternal": null
         },
@@ -2987,7 +2989,7 @@
         }
       ],
       "properties": {
-        "index": {
+        "id": {
           "type": "number"
         },
         "text": {
@@ -4215,6 +4217,30 @@
     },
     "TcHmiEventLine": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiEventLine"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiFileExplorer": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiFileExplorer",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiFileExplorer.MenuBarPosition": {
+      "type": "string",
+      "enum": [
+        "Top",
+        "Bottom"
+      ],
+      "default": "Top"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiFileExplorer.NameArray": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "TcHmiFileExplorer": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiFileExplorer"
     },
     "TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart": {
       "$schema": "http://json-schema.org/draft-04/schema",

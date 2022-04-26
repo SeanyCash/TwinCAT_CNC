@@ -277,6 +277,7 @@
     },
     "DEFLATECOMPRESSIONLEVEL": 5,
     "DIAGNOSTICS_DOMAINS": [],
+    "DISABLED_CONFIGURATION_HINTS": [],
     "DISCOVERY": 2,
     "ENABLE_SERVER_UPDATE": true,
     "ENDPOINTS": [
@@ -296,14 +297,14 @@
         "TcHmiEcDiagnostics": {
             "ENABLED": true,
             "NAME": "TcHmiEcDiagnostics",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.12.752.0\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.12.754.4\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
         "TcHmiEventLogger": {
             "ENABLED": true,
             "NAME": "TcHmiEventLogger",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.12.752.0\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.12.754.4\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -318,8 +319,7 @@
         "TcHmiRecipeManagement": {
             "ENABLED": true,
             "NAME": "TcHmiRecipeManagement",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.RecipeManagement.12.752.0\\runtimes\\win-x64\\native\\",
-            "PROCESSID": -1,
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.RecipeManagement.12.754.4\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -350,8 +350,7 @@
         "TcHmiVision": {
             "ENABLED": true,
             "NAME": "TcHmiVision",
-            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Vision.12.752.0\\runtimes\\win\\net472\\",
-            "PROCESSID": -1,
+            "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Vision.12.754.4\\runtimes\\win\\net472\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         }
@@ -712,6 +711,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AdsSyncReadDeviceInfoReq",
             "OPTIONS": {},
@@ -728,6 +728,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AdsSyncReadReq",
             "OPTIONS": {},
@@ -762,6 +763,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AdsSyncReadStateReq",
             "OPTIONS": {},
@@ -814,6 +816,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AdsSyncReadWriteReq",
             "OPTIONS": {},
@@ -854,6 +857,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AdsSyncWriteControlReq",
             "OPTIONS": {},
@@ -890,6 +894,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AdsSyncWriteReq",
             "OPTIONS": {},
@@ -926,6 +931,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "CheckLicense",
             "OPTIONS": {},
@@ -954,6 +960,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -964,6 +971,7 @@
             "ACCESS": 1,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Diagnostics",
             "OPTIONS": {},
@@ -1046,6 +1054,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetDefinitions",
             "OPTIONS": {},
@@ -1058,6 +1067,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetSchema",
             "OPTIONS": {},
@@ -1073,6 +1083,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListCommonTypes",
             "OPTIONS": {},
@@ -1101,6 +1112,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListRoutes",
             "OPTIONS": {},
@@ -1134,6 +1146,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListSymbols",
             "OPTIONS": {},
@@ -1146,6 +1159,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "RuntimePorts",
             "OPTIONS": {},
@@ -1196,6 +1210,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AddOrChangeUser",
             "OPTIONS": {},
@@ -1282,30 +1297,64 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AddSymbol",
             "OPTIONS": {},
             "SCHEMA": {
                 "function": true,
                 "writeValue": {
-                    "allOf": [
-                        {
-                            "$ref": "tchmi:server#/definitions/symbol"
-                        },
-                        {
-                            "properties": {
-                                "AUTOMAP": {
-                                    "description": "Automatically obtain symbol information",
-                                    "type": "boolean"
+                    "properties": {
+                        "ACCESS": {
+                            "allOf": [
+                                {
+                                    "$ref": "tchmi:server#/definitions/accessEnum"
                                 },
-                                "NAME": {
-                                    "description": "Name of the symbol",
-                                    "type": "string"
+                                {
+                                    "default": 3
                                 }
-                            },
+                            ]
+                        },
+                        "AUTOMAP": {
+                            "default": true,
+                            "description": "Automatically obtain symbol information such as options and schema from the domain.",
+                            "type": "boolean"
+                        },
+                        "CUSTOMERDATA": {
+                            "type": "string"
+                        },
+                        "DOMAIN": {
+                            "type": "string"
+                        },
+                        "HIDDEN": {
+                            "default": false,
+                            "type": "boolean"
+                        },
+                        "MAPPING": {
+                            "type": "string"
+                        },
+                        "NAME": {
+                            "description": "Name of the symbol",
+                            "type": "string"
+                        },
+                        "OPTIONS": {
+                            "additionalProperties": {},
                             "type": "object"
+                        },
+                        "SCHEMA": {
+                            "$ref": "tchmi:server#/definitions/schemaRef"
+                        },
+                        "USEMAPPING": {
+                            "default": true,
+                            "type": "boolean"
                         }
-                    ]
+                    },
+                    "required": [
+                        "NAME",
+                        "DOMAIN",
+                        "MAPPING"
+                    ],
+                    "type": "object"
                 }
             },
             "USEMAPPING": true
@@ -1314,6 +1363,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "AddToConfiguration",
             "OPTIONS": {},
@@ -1348,6 +1398,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ChangeUserSettings",
             "OPTIONS": {},
@@ -1400,6 +1451,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ConfirmAlarm",
             "OPTIONS": {},
@@ -1415,6 +1467,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Copy",
             "OPTIONS": {},
@@ -1453,6 +1506,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "CreateEvent",
             "OPTIONS": {},
@@ -1468,6 +1522,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config::DEFAULTAUTHEXTENSION",
             "OPTIONS": {},
@@ -1481,6 +1536,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Delete",
             "OPTIONS": {},
@@ -1509,6 +1565,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "DeleteConfiguration",
             "OPTIONS": {},
@@ -1524,6 +1581,7 @@
             "ACCESS": 1,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Diagnostics",
             "OPTIONS": {},
@@ -1718,6 +1776,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ForceLogout",
             "OPTIONS": {},
@@ -1762,6 +1821,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetConfiguration",
             "OPTIONS": {},
@@ -1793,6 +1853,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetCurrentUser",
             "OPTIONS": {},
@@ -1803,7 +1864,7 @@
                         "type": "boolean"
                     },
                     "autoLogoff": {
-                        "format": "date-time",
+                        "format": "timespan",
                         "type": "string"
                     },
                     "clientCertificate": {
@@ -1854,6 +1915,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetDefinitions",
             "OPTIONS": {},
@@ -1890,6 +1952,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetSchema",
             "OPTIONS": {},
@@ -1932,6 +1995,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetServerInformation",
             "OPTIONS": {},
@@ -1945,6 +2009,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetSymbolAccess",
             "OPTIONS": {},
@@ -1967,6 +2032,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Heartbeat",
             "OPTIONS": {},
@@ -1979,6 +2045,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Import",
             "OPTIONS": {},
@@ -1994,6 +2061,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "IsAuthRequired",
             "OPTIONS": {},
@@ -2007,13 +2075,103 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListActiveSessions",
             "OPTIONS": {},
             "SCHEMA": {
                 "function": true,
-                "items": {},
-                "type": "array"
+                "properties": {
+                    "clients": {
+                        "additionalProperties": {
+                            "items": {
+                                "properties": {
+                                    "commands": {
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "symbol": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "symbol"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "sessionId": {
+                                        "type": "string"
+                                    },
+                                    "userName": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "commands",
+                                    "sessionId",
+                                    "userName"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "type": "object"
+                    },
+                    "subscriptions": {
+                        "additionalProperties": {
+                            "properties": {
+                                "clientCount": {
+                                    "type": "integer"
+                                },
+                                "commands": {
+                                    "items": {
+                                        "properties": {
+                                            "lastSent": {
+                                                "format": "date-time",
+                                                "type": "string"
+                                            },
+                                            "symbol": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "symbol"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "intervalTime": {
+                                    "type": "integer"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "Subscription",
+                                        "ReadWrite"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "clientCount",
+                                "type",
+                                "commands"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
             },
             "USEMAPPING": true
         },
@@ -2021,6 +2179,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListConfigurations",
             "OPTIONS": {},
@@ -2037,6 +2196,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListDomains",
             "OPTIONS": {},
@@ -2050,6 +2210,10 @@
                         "configVersion": {
                             "description": "The version of the extension's configuration.",
                             "type": "string"
+                        },
+                        "debuggerAttached": {
+                            "description": "indicates whether a debugger is or will be attached to the extension",
+                            "type": "boolean"
                         },
                         "error": {
                             "$ref": "tchmi:general#/definitions/errorDetails"
@@ -2121,6 +2285,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListEvents",
             "OPTIONS": {},
@@ -2207,6 +2372,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListFiles",
             "OPTIONS": {},
@@ -2260,6 +2426,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListInternalSymbols",
             "OPTIONS": {},
@@ -2273,6 +2440,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListSymbolNames",
             "OPTIONS": {},
@@ -2305,6 +2473,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListSymbols",
             "OPTIONS": {},
@@ -2321,6 +2490,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListUserNames",
             "OPTIONS": {},
@@ -2338,6 +2508,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListUsers",
             "OPTIONS": {},
@@ -2369,6 +2540,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "LocalizeText",
             "OPTIONS": {},
@@ -2413,6 +2585,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Login",
             "OPTIONS": {},
@@ -2442,6 +2615,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Logout",
             "OPTIONS": {},
@@ -2454,6 +2628,7 @@
             "ACCESS": 1,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "MappingUsage",
             "OPTIONS": {},
@@ -2574,6 +2749,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::bAxisEnable",
             "OPTIONS": {},
@@ -2586,6 +2762,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::bAxisReset",
             "OPTIONS": {},
@@ -2598,6 +2775,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::bStopExecute",
             "OPTIONS": {},
@@ -2610,6 +2788,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::X_MC_OUT::bPowerStatus",
             "OPTIONS": {},
@@ -2622,6 +2801,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::Y2_MC_OUT::bPowerStatus",
             "OPTIONS": {},
@@ -2634,6 +2814,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::Y_MC_OUT::bPowerStatus",
             "OPTIONS": {},
@@ -2646,6 +2827,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::Y_Ref::Status::Homed",
             "OPTIONS": {},
@@ -2658,6 +2840,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::Z_MC_OUT::bPowerStatus",
             "OPTIONS": {},
@@ -2670,6 +2853,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::bAllAxesReady",
             "OPTIONS": {},
@@ -2682,6 +2866,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::nHomeAllSeq",
             "OPTIONS": {},
@@ -2694,6 +2879,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::fbCNC::sCurrentProgram",
             "OPTIONS": {},
@@ -2706,7 +2892,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::ProgramCall",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:server#/definitions/PLC1.E_Programs"
             },
@@ -2716,6 +2905,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bAxisEnable",
             "OPTIONS": {},
@@ -2728,7 +2918,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bBufferFull",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -2747,6 +2940,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bExecuteZeroShift",
             "OPTIONS": {},
@@ -2759,7 +2953,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bFramingError",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -2778,6 +2975,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bHold",
             "OPTIONS": {},
@@ -2790,7 +2988,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bInitAccepted",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -2809,6 +3010,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bJogEnable",
             "OPTIONS": {},
@@ -2821,7 +3023,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bOverrunError",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -2840,7 +3045,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bParityError",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -2859,7 +3067,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bReceiveRequest",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -2878,6 +3089,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bReset",
             "OPTIONS": {},
@@ -2890,6 +3102,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bSpindleEnable",
             "OPTIONS": {},
@@ -2902,6 +3115,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bStart",
             "OPTIONS": {},
@@ -2914,6 +3128,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bStop",
             "OPTIONS": {},
@@ -2926,6 +3141,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bTriggerProgramCall",
             "OPTIONS": {},
@@ -2938,6 +3154,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bXJogNegative",
             "OPTIONS": {},
@@ -2950,6 +3167,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bXJogPositive",
             "OPTIONS": {},
@@ -2962,6 +3180,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bYJogNegative",
             "OPTIONS": {},
@@ -2974,6 +3193,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bYJogPositive",
             "OPTIONS": {},
@@ -2986,6 +3206,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bZJogNegative",
             "OPTIONS": {},
@@ -2998,6 +3219,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bZJogPositive",
             "OPTIONS": {},
@@ -3010,6 +3232,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::eJogMode",
             "OPTIONS": {},
@@ -3022,6 +3245,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::fChannelOverride",
             "OPTIONS": {},
@@ -3034,6 +3258,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::fJogPosition",
             "OPTIONS": {},
@@ -3046,6 +3271,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::fJogVelocity",
             "OPTIONS": {},
@@ -3058,6 +3284,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::sPrgName",
             "OPTIONS": {},
@@ -3077,7 +3304,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bBufferFull",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3087,7 +3317,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bDigitalInput1",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3097,7 +3330,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bDigitalInput2",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3107,7 +3343,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bDigitalInput3",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3117,7 +3356,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bDigitalInput4",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3127,7 +3369,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bDriveEnabled",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3137,7 +3382,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bDriveFault",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3147,7 +3395,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bDriveReady",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3157,7 +3408,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bDriveRunning",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3167,7 +3421,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bFramingError",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3177,7 +3434,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bInitAccepted",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3187,7 +3447,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bOverrunError",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3197,7 +3460,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bParityError",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3207,7 +3473,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bRelayOutputStatus",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3217,7 +3486,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bRxRequest",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3227,7 +3499,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bStandbyMode",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3237,7 +3512,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bTxAccepted",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3247,6 +3525,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bXHomeSwitch",
             "OPTIONS": {},
@@ -3259,6 +3538,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bXLimitSwitch",
             "OPTIONS": {},
@@ -3271,6 +3551,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bY1HomeSwitch",
             "OPTIONS": {},
@@ -3283,6 +3564,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bY2HomeSwitch",
             "OPTIONS": {},
@@ -3295,6 +3577,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bYLimitSwitch",
             "OPTIONS": {},
@@ -3307,6 +3590,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bZHomeSwitch",
             "OPTIONS": {},
@@ -3319,7 +3603,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::eReadErrorID",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:server#/definitions/PLC1.Tc2_ModbusRTU.MODBUS_ERRORS"
             },
@@ -3329,7 +3616,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::fActPosX",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3339,6 +3629,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::fChannelOverrideSpeed",
             "OPTIONS": {},
@@ -3351,7 +3642,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::fToolpathVelocity",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
@@ -3361,7 +3655,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::fToolpathVelocityIPM",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
@@ -3371,7 +3668,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nAccelRampTime",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3381,7 +3681,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nApplicationMode",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3391,7 +3694,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nDCBusVoltage",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3401,7 +3707,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nDrivePowerStageTemp",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3411,7 +3720,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nInternalDriveTemp",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3421,7 +3733,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMaxSpeedLimit",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3431,7 +3746,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMaximumCurrentLimit",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3441,7 +3759,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMinSpeedLimit",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3451,7 +3772,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorControlMode",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3461,7 +3785,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorCurrent",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3471,7 +3798,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorPower",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3481,7 +3811,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorRatedCurrent",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3491,7 +3824,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorRatedFrequency",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3501,7 +3837,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorRatedSpeed",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3511,7 +3850,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorRatedVoltage",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3521,7 +3863,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nMotorTorque",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3531,7 +3876,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nOutputFreq",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3541,7 +3889,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nOutputVoltage",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3551,7 +3902,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nRampControlTime",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3561,7 +3915,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nRuntimeHours",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3571,7 +3928,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nSpeedRefSetpoint",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
@@ -3581,7 +3941,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nStopMode",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3591,7 +3954,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nUserPGain",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
@@ -3601,6 +3967,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::sCurrentProgramSelected",
             "OPTIONS": {},
@@ -3613,7 +3980,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::sErrorCode",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },
@@ -3623,6 +3993,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::sInterpreterState",
             "OPTIONS": {},
@@ -3635,6 +4006,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::sJogMode",
             "OPTIONS": {},
@@ -3647,7 +4019,10 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::sReadErrorID",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },
@@ -3657,6 +4032,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::NcToPlc::ActPos",
             "OPTIONS": {},
@@ -3669,6 +4045,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::NcToPlc::ActVelo",
             "OPTIONS": {},
@@ -3681,6 +4058,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::Status::ErrorID",
             "OPTIONS": {},
@@ -3702,6 +4080,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stXRef::Status::Homed",
             "OPTIONS": {},
@@ -3714,6 +4093,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::NcToPlc::ActPos",
             "OPTIONS": {},
@@ -3726,6 +4106,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::NcToPlc::ActVelo",
             "OPTIONS": {},
@@ -3738,6 +4119,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::Status::ErrorID",
             "OPTIONS": {},
@@ -3759,6 +4141,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stY2Ref::Status::Homed",
             "OPTIONS": {},
@@ -3771,6 +4154,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stYRef::NcToPlc::ActPos",
             "OPTIONS": {},
@@ -3783,6 +4167,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stYRef::NcToPlc::ActVelo",
             "OPTIONS": {},
@@ -3795,6 +4180,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stYRef::Status::ErrorID",
             "OPTIONS": {},
@@ -3816,6 +4202,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stYRef::Status::Homed",
             "OPTIONS": {},
@@ -3828,6 +4215,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::NcToPlc::ActPos",
             "OPTIONS": {},
@@ -3840,6 +4228,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::NcToPlc::ActVelo",
             "OPTIONS": {},
@@ -3852,6 +4241,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::Status::ErrorID",
             "OPTIONS": {},
@@ -3873,6 +4263,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
+            "DYNAMIC": true,
             "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stZRef::Status::Homed",
             "OPTIONS": {},
@@ -3885,6 +4276,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "RefreshDefinitions",
             "OPTIONS": {},
@@ -3905,6 +4297,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Remove",
             "OPTIONS": {},
@@ -3941,6 +4334,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "RemoveFromConfiguration",
             "OPTIONS": {},
@@ -3975,6 +4369,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "RemoveUnusedDefinitions",
             "OPTIONS": {},
@@ -3987,6 +4382,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "RemoveUser",
             "OPTIONS": {},
@@ -4016,6 +4412,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Rename",
             "OPTIONS": {},
@@ -4054,6 +4451,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "RenameConfiguration",
             "OPTIONS": {},
@@ -4081,6 +4479,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Restart",
             "OPTIONS": {},
@@ -4093,6 +4492,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "SetConfiguration",
             "OPTIONS": {},
@@ -4126,6 +4526,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "SetLocale",
             "OPTIONS": {},
@@ -4142,6 +4543,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Shutdown",
             "OPTIONS": {},
@@ -4154,6 +4556,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "SubscribeEvents",
             "OPTIONS": {},
@@ -4168,7 +4571,9 @@
         },
         "TcHmiEcDiagnostics.Config": {
             "ACCESS": 0,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -4177,7 +4582,9 @@
         },
         "TcHmiEcDiagnostics.Diagnostics": {
             "ACCESS": 1,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Diagnostics",
             "OPTIONS": {},
@@ -4187,18 +4594,24 @@
                     "devices": {
                         "additionalProperties": {
                             "properties": {
+                                "connectionState": {
+                                    "propertyOrder": 4,
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
                                 "enabled": {
+                                    "hidden": true,
                                     "propertyOrder": 1,
                                     "readOnly": true,
                                     "type": "boolean"
                                 },
                                 "master": {
-                                    "propertyOrder": 5,
+                                    "propertyOrder": 7,
                                     "readOnly": true,
                                     "type": "string"
                                 },
                                 "masterState": {
-                                    "propertyOrder": 6,
+                                    "propertyOrder": 8,
                                     "readOnly": true,
                                     "type": "string"
                                 },
@@ -4208,11 +4621,17 @@
                                     "type": "string"
                                 },
                                 "targetAdsState": {
-                                    "propertyOrder": 4,
+                                    "propertyOrder": 6,
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "targetAdsVersion": {
+                                    "propertyOrder": 5,
                                     "readOnly": true,
                                     "type": "string"
                                 },
                                 "targetAvailable": {
+                                    "hidden": true,
                                     "propertyOrder": 3,
                                     "readOnly": true,
                                     "type": "boolean"
@@ -4222,6 +4641,8 @@
                             "required": [
                                 "enabled",
                                 "target",
+                                "targetAvailable",
+                                "connectionState",
                                 "master"
                             ],
                             "type": "object"
@@ -4236,9 +4657,51 @@
             },
             "USEMAPPING": true
         },
-        "TcHmiEcDiagnostics.GetMaster": {
+        "TcHmiEcDiagnostics.ForceProcessDataValues": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "ForceProcessDataValues",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "device": {
+                            "required": true,
+                            "type": "string"
+                        },
+                        "slaveAddr": {
+                            "required": true,
+                            "type": "integer"
+                        },
+                        "values": {
+                            "items": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/EcDiagnosticsProcessDataObjectEntryID"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/EcDiagnosticsProcessDataObjectEntryValue"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiEcDiagnostics.GetMaster": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetMaster",
             "OPTIONS": {},
@@ -4266,7 +4729,9 @@
         },
         "TcHmiEcDiagnostics.GetMasterOnlineInfo": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetMasterOnlineInfo",
             "OPTIONS": {},
@@ -4362,7 +4827,9 @@
         },
         "TcHmiEcDiagnostics.GetProcessDataValues": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetProcessDataValues",
             "OPTIONS": {},
@@ -4372,38 +4839,7 @@
                     "in": {
                         "items": [
                             {
-                                "properties": {
-                                    "entries": {
-                                        "items": [
-                                            {
-                                                "properties": {
-                                                    "index": {
-                                                        "type": "string"
-                                                    },
-                                                    "subIndex": {
-                                                        "type": "string"
-                                                    },
-                                                    "value": {}
-                                                },
-                                                "required": [
-                                                    "index",
-                                                    "subIndex",
-                                                    "value"
-                                                ],
-                                                "type": "object"
-                                            }
-                                        ],
-                                        "type": "array"
-                                    },
-                                    "index": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "entries",
-                                    "index"
-                                ],
-                                "type": "object"
+                                "$ref": "#/definitions/EcDiagnosticsProcessDataInOutValues"
                             }
                         ],
                         "type": "array"
@@ -4411,47 +4847,12 @@
                     "out": {
                         "items": [
                             {
-                                "properties": {
-                                    "entries": {
-                                        "items": [
-                                            {
-                                                "properties": {
-                                                    "index": {
-                                                        "type": "string"
-                                                    },
-                                                    "subIndex": {
-                                                        "type": "string"
-                                                    },
-                                                    "value": {}
-                                                },
-                                                "required": [
-                                                    "index",
-                                                    "subIndex",
-                                                    "value"
-                                                ],
-                                                "type": "object"
-                                            }
-                                        ],
-                                        "type": "array"
-                                    },
-                                    "index": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "entries",
-                                    "index"
-                                ],
-                                "type": "object"
+                                "$ref": "#/definitions/EcDiagnosticsProcessDataInOutValues"
                             }
                         ],
                         "type": "array"
                     }
                 },
-                "required": [
-                    "in",
-                    "out"
-                ],
                 "type": "object",
                 "writeValue": {
                     "properties": {
@@ -4462,6 +4863,10 @@
                         "slaveAddr": {
                             "required": true,
                             "type": "integer"
+                        },
+                        "updateForcedState": {
+                            "required": false,
+                            "type": "boolean"
                         }
                     },
                     "type": "object"
@@ -4471,7 +4876,9 @@
         },
         "TcHmiEcDiagnostics.GetSlaves": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetSlaves",
             "OPTIONS": {},
@@ -4500,12 +4907,13 @@
                             }
                         },
                         "type": "object"
+                    },
+                    "slavesCount": {
+                        "type": "number"
                     }
                 },
                 "required": [
-                    "disabledSlaves",
-                    "hotConnectGroups",
-                    "master"
+                    "slavesCount"
                 ],
                 "type": "object",
                 "writeValue": {
@@ -4517,7 +4925,9 @@
         },
         "TcHmiEcDiagnostics.GetSlavesOnlineInfo": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetSlavesOnlineInfo",
             "OPTIONS": {},
@@ -4872,7 +5282,9 @@
         },
         "TcHmiEcDiagnostics.GetSlavesScanned": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetSlavesScanned",
             "OPTIONS": {},
@@ -4935,7 +5347,9 @@
         },
         "TcHmiEcDiagnostics.GetTarget": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetTarget",
             "OPTIONS": {},
@@ -4984,7 +5398,9 @@
         },
         "TcHmiEcDiagnostics.ListConfiguredDevices": {
             "ACCESS": 1,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListConfiguredDevices",
             "OPTIONS": {},
@@ -5018,7 +5434,9 @@
         },
         "TcHmiEcDiagnostics.ListMastersOfRoute": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ListMastersOfRoute",
             "OPTIONS": {},
@@ -5050,9 +5468,44 @@
             },
             "USEMAPPING": true
         },
-        "TcHmiEcDiagnostics.SendSlavesScanCmd": {
+        "TcHmiEcDiagnostics.ReleaseProcessDataValues": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "ReleaseProcessDataValues",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "device": {
+                            "required": true,
+                            "type": "string"
+                        },
+                        "slaveAddr": {
+                            "required": true,
+                            "type": "integer"
+                        },
+                        "values": {
+                            "items": [
+                                {
+                                    "$ref": "#/definitions/EcDiagnosticsProcessDataObjectEntryID"
+                                }
+                            ],
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiEcDiagnostics.SendSlavesScanCmd": {
+            "ACCESS": 3,
+            "CUSTOMERDATA": "",
+            "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "SendSlavesScanCmd",
             "OPTIONS": {},
@@ -5064,10 +5517,74 @@
             },
             "USEMAPPING": true
         },
+        "TcHmiEcDiagnostics.SetProcessDataValues": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "SetProcessDataValues",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "device": {
+                            "required": true,
+                            "type": "string"
+                        },
+                        "slaveAddr": {
+                            "required": true,
+                            "type": "integer"
+                        },
+                        "values": {
+                            "items": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/EcDiagnosticsProcessDataObjectEntryID"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/EcDiagnosticsProcessDataObjectEntryValue"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiEventLogger.ClearLoggedEvents": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiEventLogger",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "ClearLoggedEvents",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "targetName": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "targetName"
+                    ],
+                    "type": "object"
+                }
+            },
+            "USEMAPPING": true
+        },
         "TcHmiEventLogger.Config": {
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEventLogger",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -5078,6 +5595,7 @@
             "ACCESS": 1,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEventLogger",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Diagnostics",
             "OPTIONS": {},
@@ -5153,10 +5671,27 @@
             },
             "USEMAPPING": true
         },
+        "TcHmiEventLogger.ListEnabledTargetSystems": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiEventLogger",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "ListEnabledTargetSystems",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "items": {
+                    "type": "string"
+                },
+                "type": "array"
+            },
+            "USEMAPPING": true
+        },
         "TcHmiLua.Config": {
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiLua",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -5167,6 +5702,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiOpcUa",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "AvailableNamespaces",
             "OPTIONS": {},
@@ -5179,6 +5715,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiOpcUa",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -5189,6 +5726,7 @@
             "ACCESS": 1,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiOpcUa",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Diagnostics",
             "OPTIONS": {},
@@ -5241,6 +5779,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiOpcUa",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetDefinitions",
             "OPTIONS": {},
@@ -5251,6 +5790,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiOpcUa",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetSchema",
             "OPTIONS": {},
@@ -5263,6 +5803,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiOpcUa",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ListSymbols",
             "OPTIONS": {},
@@ -5273,6 +5814,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiOpcUa",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Reconnect",
             "OPTIONS": {},
@@ -5283,6 +5825,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ActivateRecipe",
             "OPTIONS": {},
@@ -5306,6 +5849,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -5316,6 +5860,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetActiveRecipes",
             "OPTIONS": {},
@@ -5348,6 +5893,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetRecipes",
             "OPTIONS": {},
@@ -5377,6 +5923,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ReadFromTarget",
             "OPTIONS": {},
@@ -5410,6 +5957,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "UpdateRecipe",
             "OPTIONS": {},
@@ -5443,6 +5991,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ChangeChannelState",
             "OPTIONS": {},
@@ -5495,6 +6044,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "CheckIfSaveRecordIsAttached",
             "OPTIONS": {},
@@ -5518,6 +6068,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "CloseConnection",
             "OPTIONS": {},
@@ -5562,6 +6113,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -5572,6 +6124,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "DeleteScopeServerRecords",
             "OPTIONS": {},
@@ -5599,6 +6152,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "DetachControl",
             "OPTIONS": {},
@@ -5643,6 +6197,7 @@
             "ACCESS": 1,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Diagnostics",
             "OPTIONS": {},
@@ -5668,6 +6223,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetActualWindow",
             "OPTIONS": {},
@@ -5748,6 +6304,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetData",
             "OPTIONS": {},
@@ -5923,6 +6480,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetLayout",
             "OPTIONS": {},
@@ -6790,6 +7348,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetLegend",
             "OPTIONS": {},
@@ -6858,6 +7417,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetMenubar",
             "OPTIONS": {},
@@ -6924,6 +7484,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetTooltip",
             "OPTIONS": {},
@@ -7016,6 +7577,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetWindow",
             "OPTIONS": {},
@@ -7114,6 +7676,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Goto",
             "OPTIONS": {},
@@ -7163,6 +7726,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Init",
             "OPTIONS": {},
@@ -7196,6 +7760,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "OpenConnection",
             "OPTIONS": {},
@@ -7240,6 +7805,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Pan",
             "OPTIONS": {},
@@ -7332,6 +7898,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Redo",
             "OPTIONS": {},
@@ -7376,6 +7943,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ResizeCharts",
             "OPTIONS": {},
@@ -7446,6 +8014,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Scroll",
             "OPTIONS": {},
@@ -7498,6 +8067,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ScrollBig",
             "OPTIONS": {},
@@ -7550,6 +8120,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "SetChartSize",
             "OPTIONS": {},
@@ -7602,6 +8173,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "SetDisplayWidth",
             "OPTIONS": {},
@@ -7651,6 +8223,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "SetOverviewMode",
             "OPTIONS": {},
@@ -7699,6 +8272,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "SetOverviewRect",
             "OPTIONS": {},
@@ -7754,6 +8328,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "StartDisplay",
             "OPTIONS": {},
@@ -7798,6 +8373,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "StartRecord",
             "OPTIONS": {},
@@ -7842,6 +8418,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "StopDisplay",
             "OPTIONS": {},
@@ -7886,6 +8463,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "StopRecord",
             "OPTIONS": {},
@@ -7930,6 +8508,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Undo",
             "OPTIONS": {},
@@ -7974,6 +8553,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Wheel",
             "OPTIONS": {},
@@ -8054,6 +8634,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Zoom",
             "OPTIONS": {},
@@ -8146,6 +8727,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ZoomOutMax",
             "OPTIONS": {},
@@ -8190,6 +8772,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiScope",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ZoomToDefault",
             "OPTIONS": {},
@@ -8234,6 +8817,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteHistorize",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -8244,6 +8828,7 @@
             "ACCESS": 1,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteHistorize",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Diagnostics",
             "OPTIONS": {},
@@ -8295,6 +8880,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteHistorize",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetTrendLineData",
             "OPTIONS": {},
@@ -8379,6 +8965,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteHistorize",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetTrendLineWindow",
             "OPTIONS": {},
@@ -8441,6 +9028,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteHistorize",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "HistorizeData",
             "OPTIONS": {},
@@ -8453,6 +9041,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteLogger",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Clear",
             "OPTIONS": {},
@@ -8465,6 +9054,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteLogger",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -8475,6 +9065,7 @@
             "ACCESS": 1,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteLogger",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Diagnostics",
             "OPTIONS": {},
@@ -8619,6 +9210,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSqliteLogger",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ListEvents",
             "OPTIONS": {},
@@ -8631,6 +9223,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -8641,6 +9234,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "AddUser",
             "OPTIONS": {},
@@ -8674,6 +9268,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ChangePassword",
             "OPTIONS": {},
@@ -8697,6 +9292,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -8707,6 +9303,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "DisableUser",
             "OPTIONS": {},
@@ -8723,6 +9320,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "EnableUser",
             "OPTIONS": {},
@@ -8739,6 +9337,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ListDisabledUsers",
             "OPTIONS": {},
@@ -8755,6 +9354,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ListSymbols",
             "OPTIONS": {},
@@ -8767,6 +9367,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ListUsers",
             "OPTIONS": {},
@@ -8783,6 +9384,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "RemoveUser",
             "OPTIONS": {},
@@ -8799,6 +9401,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiUserManagement",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "RenameUser",
             "OPTIONS": {},
@@ -8828,6 +9431,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiVision",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -8838,6 +9442,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiVision",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "GetSchema",
             "OPTIONS": {},
@@ -8853,6 +9458,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiVision",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "ListSymbols",
             "OPTIONS": {},
@@ -8863,6 +9469,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Unsubscribe",
             "OPTIONS": {},
@@ -8879,6 +9486,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "UnsubscribeEvents",
             "OPTIONS": {},
@@ -8895,6 +9503,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "UpdateEventsSubscription",
             "OPTIONS": {},
@@ -8911,6 +9520,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Upload",
             "OPTIONS": {},
@@ -8945,11 +9555,14 @@
                         "fileName": {
                             "description": "Name of the file.",
                             "type": "string"
+                        },
+                        "isDirectory": {
+                            "default": false,
+                            "type": "boolean"
                         }
                     },
                     "required": [
-                        "fileName",
-                        "data"
+                        "fileName"
                     ],
                     "type": "object"
                 }
@@ -8960,6 +9573,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": true,
             "HIDDEN": true,
             "MAPPING": "Config::USERSELECTTYPE",
             "OPTIONS": {},
@@ -9015,6 +9629,10 @@
             },
             "SYMBOLACCESS": 0,
             "SYMBOLS": {
+                "ADS.AdsSyncReadDeviceInfoReq": 3,
+                "ADS.AdsSyncReadStateReq": 3,
+                "ADS.CheckLicense": 3,
+                "ADS.Diagnostics": 1,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,
                 "CreateEvent": 3,
@@ -9046,6 +9664,8 @@
                 "TcHmiEcDiagnostics.GetTarget": 3,
                 "TcHmiEcDiagnostics.ListConfiguredDevices": 1,
                 "TcHmiEcDiagnostics.ListMastersOfRoute": 3,
+                "TcHmiEventLogger.Diagnostics": 1,
+                "TcHmiEventLogger.ListEnabledTargetSystems": 3,
                 "TcHmiScope.ChangeChannelState": 3,
                 "TcHmiScope.CheckIfSaveRecordIsAttached": 3,
                 "TcHmiScope.CloseConnection": 3,
@@ -9113,14 +9733,15 @@
     "VIDEOSEGMENTSIZE": 1048576,
     "VIRTUALDIRECTORIES": {
         "/": "..\\..\\TwinCAT_CNC\\",
-        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.752.0\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.752.0\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.752.0\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.752.0\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.752.0\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.754.4\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.754.4\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.754.4\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.754.4\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.754.4\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.752.0\\runtimes\\native1.12-tchmi",
+        "/NCPrograms": "..\\..\\..\\..\\..\\TwinCAT\\Mc\\Nci",
         "/bin": "..\\..\\TwinCAT_CNC\\bin\\",
         "/bin/framework": "..\\..\\TwinCAT_CNC\\bin\\framework",
-        "/framework": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.752.0\\runtimes\\native1.12-tchmi"
+        "/framework": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.754.4\\runtimes\\native1.12-tchmi"
     }
 }
