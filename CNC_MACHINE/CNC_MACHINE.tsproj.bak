@@ -2709,7 +2709,7 @@ External Setpoint Generation:
 				<Axis Id="2" CreateSymbols="true" AxisType="1">
 					<Name>Y²</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="206.208333333333" Deceleration="206.208333333333" Jerk="17355.8680555555"/>
+						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="206.208" Deceleration="206.208" Jerk="17355.9"/>
 						<Velo RefSearch="2.5" RefSync="1" SlowManual="50" Fast="100" Maximum="245"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>

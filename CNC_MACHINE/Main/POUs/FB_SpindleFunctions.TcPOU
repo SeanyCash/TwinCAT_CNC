@@ -4,6 +4,12 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_SpindleFunctions IMPLEMENTS I_HMI;
 
 // Spindle VFD control for Invertek Optidrive E3 (240V single phase input, 240V three phase output, 2.2KW) and GMT 400hz 2.2kw 3 HP Spindle using Modbus RTU
+VAR_INPUT
+    
+nSpindleSpeedFromNC     : UINT;
+
+END_VAR
+
 
 VAR
     
@@ -179,7 +185,7 @@ stHMI_Out.nOutputVoltage        := stSpindleStatus.nOutputVoltage;
 // Map VFD Parameter information to HMI struct
 stHMI_Out.nMaxSpeedLimit		:= stSpindleParams.nMaxSpeedLimit;
 stHMI_Out.nMinSpeedLimit	    := stSpindleParams.nMinSpeedLimit;
-stHMI_Out.nAccelRampTime		:= stSpindleParams.nAccelRampTime;
+stHMI_Out.fAccelRampTime		:= UINT_TO_REAL(stSpindleParams.nAccelRampTime)/100;
 stHMI_Out.nDecelRampTime		:= stSpindleParams.nDecelRampTime;
 stHMI_Out.nStopMode			    := stSpindleParams.nStopMode;
 stHMI_Out.nMotorRatedVoltage	:= stSpindleParams.nMotorRatedVoltage;
@@ -279,7 +285,7 @@ fbSpeedRefScale(
                 eErrorId=>,
                 bError=>,
                 stParams:=stSpeedRefScaleParams,
-                                                    );
+                                                    );                                                                                                 
                                                     
 nModbusWriteDriveCommand.0 :=stSpindleControl.bRunEnable;
 nModbusWriteDriveCommand.1 :=stSpindleControl.bFastStopReq;
@@ -596,7 +602,7 @@ END_CASE]]></ST>
       <LineId Id="43" Count="0" />
       <LineId Id="25" Count="6" />
       <LineId Id="24" Count="0" />
-      <LineId Id="32" Count="0" />
+      <LineId Id="48" Count="0" />
       <LineId Id="8" Count="3" />
       <LineId Id="7" Count="0" />
       <LineId Id="6" Count="0" />

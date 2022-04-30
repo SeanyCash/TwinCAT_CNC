@@ -3622,6 +3622,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.fAccelRampTime": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::fAccelRampTime",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.fActPosX": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3960,6 +3970,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.nToolNumber": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::nToolNumber",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.nUserPGain": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -4035,6 +4055,36 @@
             "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stItpToPlc.BlockNo": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::stItpToPlc::BlockNo",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UDINT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stItpToPlc.PathVelo": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::stItpToPlc::PathVelo",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.stItpToPlc.Tool": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::stItpToPlc::Tool",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
             },
             "USEMAPPING": true
         },

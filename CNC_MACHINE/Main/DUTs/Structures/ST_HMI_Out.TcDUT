@@ -11,9 +11,8 @@ fFeedRate                   : REAL;
 fRapidRate                  : REAL;
 sInterpreterState           : STRING;
 fChannelOverrideSpeed       : REAL;
-fToolpathVelocity           : LREAL;
 fToolpathVelocityIPM        : LREAL;
-
+stItpToPlc			        : NCTOPLC_NCICHANNEL_REF;
 // ====================== Status Screen=================================
 
 // Homing/Limit Switch Indicators
@@ -24,6 +23,7 @@ bYLimitSwitch       : BOOL;
 bXHomeSwitch        : BOOL;
 bXLimitSwitch       : BOOL;
 bZHomeSwitch        : BOOL;
+
 
 // Axis Data
 
@@ -72,7 +72,7 @@ nOutputVoltage      : REAL;
 // VFD/Spindle Status Information
 nMaxSpeedLimit		: UINT;
 nMinSpeedLimit	    : UINT;
-nAccelRampTime		: UINT;
+fAccelRampTime		: REAL;
 nDecelRampTime		: UINT;
 nStopMode			: UINT;
 nMotorRatedVoltage	: UINT;

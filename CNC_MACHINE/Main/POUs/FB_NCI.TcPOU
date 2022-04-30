@@ -14,6 +14,7 @@ VAR_OUTPUT
 	bError				: BOOL;
 	bDone				: BOOL;
     sLoadedProgram      : STRING;
+    out_stItpToPlc	    : NCTOPLC_NCICHANNEL_REF;
 END_VAR
 VAR_IN_OUT
 	stX					: AXIS_REF;
@@ -73,6 +74,8 @@ M_ExecuteProgram();
 M_ZeroShiftOffset();
 
 stItpToPlc := i_stItpToPlc;
+// Pass NC status out to other FBs
+out_stItpToPlc := i_stItpToPlc;
 //stPlcToItp := q_stPlcToItp;
 
 IF bExecuteZeroShift THEN
@@ -353,15 +356,14 @@ stHMI_Out.sInterpreterState := TO_STRING(eInterpreterState);
 
 stHMI_Out.fChannelOverrideSpeed := fChannelOverride;
 
-// Tool Path Velocity
-
-stHMI_Out.fToolpathVelocity := i_stItpToPlc.PathVelo;
-
 IF i_stItpToPlc.PathVelo <>0 THEN
     stHMI_Out.fToolpathVelocityIPM := (i_stItpToPlc.PathVelo / 0.42);
 ELSE
  stHMI_Out.fToolpathVelocityIPM := 0.0;  
-END_IF]]></ST>
+END_IF
+
+// Interpreter Status to HMI
+stHMI_Out.stItpToPlc := i_stItpToPlc;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
@@ -494,6 +496,8 @@ fbReadZeroShiftOffset(
       <LineId Id="632" Count="0" />
       <LineId Id="634" Count="0" />
       <LineId Id="633" Count="0" />
+      <LineId Id="708" Count="0" />
+      <LineId Id="707" Count="0" />
       <LineId Id="635" Count="0" />
       <LineId Id="639" Count="0" />
       <LineId Id="207" Count="0" />
@@ -535,14 +539,13 @@ fbReadZeroShiftOffset(
     <LineIds Name="FB_NCI.M_HMI_Out">
       <LineId Id="5" Count="5" />
       <LineId Id="4" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="15" Count="0" />
       <LineId Id="20" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="21" Count="2" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="29" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_InterpreterState">
       <LineId Id="7" Count="0" />
