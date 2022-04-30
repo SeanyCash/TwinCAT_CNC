@@ -96,6 +96,7 @@ VAR
 	
 	ProgramCall	: E_Programs;
     sCurrentProgram : STRING;
+    fbStringTrimmer : FB_StringTrimmer;
     
     
     
@@ -319,7 +320,16 @@ bExecuteZeroShift := stHMI_In.bExecuteZeroShift;
 
 bAxisReset := stHMI_In.bReset;
 
-// Axis Jogging    ]]></ST>
+// Axis Jogging 
+
+// NC Program Name
+
+fbStringTrimmer(
+                TriggerSequence:=stHMI_In.bInitiateNCProgramSelect,
+                TrimLeft:=3,
+                TrimRight:=3,
+                STR:=stHMI_In.sPrgName,
+                sString => sPrgName     );   ]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_HMI_Out" Id="{579ae688-d5bb-4d46-9cff-7ebda2f9644e}">
@@ -788,6 +798,10 @@ END_CASE
       <LineId Id="70" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="12" Count="0" />
+      <LineId Id="86" Count="1" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="88" Count="4" />
+      <LineId Id="85" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_Out">
       <LineId Id="11" Count="7" />

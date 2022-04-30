@@ -76,6 +76,9 @@
     <Compile Include="POUs\FB_MotionFunctions.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Utilities\FB_StringTrimmer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
@@ -83,6 +86,7 @@
     <Folder Include="DUTs\Enums" />
     <Folder Include="DUTs\Structures" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\Utilities" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

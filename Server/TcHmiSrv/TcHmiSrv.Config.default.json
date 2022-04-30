@@ -3006,6 +3006,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.bInitiateNCProgramSelect": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::bInitiateNCProgramSelect",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.bJogEnable": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",

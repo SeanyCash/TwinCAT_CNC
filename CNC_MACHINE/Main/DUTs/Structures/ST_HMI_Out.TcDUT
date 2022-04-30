@@ -6,7 +6,7 @@ STRUCT
     
 // Output Values/status to the HMI
 
-sCurrentProgramSelected     : STRING;
+sCurrentProgramSelected     : STRING[255];
 fFeedRate                   : REAL;
 fRapidRate                  : REAL;
 sInterpreterState           : STRING;

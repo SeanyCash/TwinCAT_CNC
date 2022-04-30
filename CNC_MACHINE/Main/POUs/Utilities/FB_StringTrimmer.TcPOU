@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FB_StringTrimmer" Id="{6d1403dd-cca8-4e1b-95c6-7e6876f89753}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StringTrimmer
+VAR_INPUT
+TriggerSequence : BOOL;
+TrimLeft    : INT;
+TrimRight   : INT;
+STR         : STRING;    
+END_VAR
+VAR_OUTPUT
+sString     : STRING;    
+END_VAR
+VAR    
+Execute             : BOOL;
+rExecuteTrig        : R_TRIG;
+nStringLength       : INT;  
+nStringTrimPosition : INT;
+sLeftTrimmedString  : STRING; 
+eStringTrim : (GET_LENGTH,TRIM_LEFT,TRIM_RIGHT,COMPLETE) := GET_LENGTH;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[rExecuteTrig(CLK:=TriggerSequence);
+
+IF rExecuteTrig.Q THEN
+   Execute:=TRUE; 
+END_IF
+
+CASE eStringTrim OF
+
+GET_LENGTH:
+    IF Execute THEN
+        nStringLength := LEN(STR);
+        IF nStringLength <> 0 THEN
+        eStringTrim := TRIM_LEFT;
+        END_IF
+     END_IF
+TRIM_LEFT:
+    sLeftTrimmedString:=DELETE(STR,TrimLeft,0,);
+    eStringTrim := TRIM_RIGHT;
+TRIM_RIGHT:
+    nStringTrimPosition := nStringLength - TrimRight;      
+    sString:=DELETE(sLeftTrimmedString,TrimRight,nStringTrimPosition,);
+    eStringTrim := GET_LENGTH;
+    Execute:=FALSE;
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="FB_StringTrimmer">
+      <LineId Id="57" Count="1" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="13" Count="3" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="17" Count="6" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

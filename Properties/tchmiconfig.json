@@ -159,8 +159,8 @@
   "userFunctions": [],
   "symbols": {
     "internal": {
-      "NCProgramPath": {
-        "value": "",
+      "Units": {
+        "value": "Metric",
         "type": "tchmi:general#/definitions/STRING(80)",
         "persist": false,
         "readonly": false

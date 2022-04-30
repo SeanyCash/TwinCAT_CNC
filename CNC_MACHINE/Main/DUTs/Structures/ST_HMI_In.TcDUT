@@ -24,6 +24,7 @@ bStart          : BOOL;
 
 ProgramCall	: E_Programs;
 bTriggerProgramCall : BOOL;
+bInitiateNCProgramSelect : BOOL;
 
 // User Speed/Override Settings
 

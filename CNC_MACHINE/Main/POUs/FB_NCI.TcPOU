@@ -336,8 +336,7 @@ fbConfirmHsk(
         <ST><![CDATA[// Set NC Channel Override Speed
 fChannelOverride := stHMI_In.fChannelOverride;
 
-// NC Program Name
-sPrgName := stHMI_In.sPrgName;
+//stHMI_In.sPrgName;
 // Spindle Override Speed
 q_stPlcToItp.ChnSpindleOvr := stHMI_In.fSpindleOverrideSpeed;]]></ST>
       </Implementation>
@@ -527,8 +526,9 @@ fbReadZeroShiftOffset(
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_HMI_In">
-      <LineId Id="5" Count="3" />
-      <LineId Id="4" Count="0" />
+      <LineId Id="5" Count="1" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="15" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="11" Count="0" />
     </LineIds>
