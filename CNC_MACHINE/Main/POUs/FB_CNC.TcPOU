@@ -101,7 +101,6 @@ VAR
     
     
 	bExecuteNCProgram:	BOOL	:= FALSE;
-    bExecuteZeroShift:  BOOL    := FALSE;
     sPrgName                : STRING[255];
     out_stItpToPlc	    : NCTOPLC_NCICHANNEL_REF;
     CNC_stItpToPlc      : NCTOPLC_NCICHANNEL_REF;
@@ -242,7 +241,6 @@ Z_Motion(
                                         
 fbNCI(
 	        bExecute:= bExecuteNCProgram,
-            bExecuteZeroShift:= bExecuteZeroShift,
             bStop:= bStopExecute,
             sPrgName := sPrgName, 
 	        bBusy=> , 
@@ -307,7 +305,6 @@ END_IF
 
 bExecuteNCProgram := stHMI_In.bStart;
 bStopExecute := stHMI_In.bStop;
-bExecuteZeroShift := stHMI_In.bExecuteZeroShift;
 
 // Axis Reset
 
@@ -751,9 +748,7 @@ END_CASE
     </Method>
     <LineIds Name="FB_CNC">
       <LineId Id="13935" Count="15" />
-      <LineId Id="13961" Count="113" />
-      <LineId Id="14201" Count="0" />
-      <LineId Id="14075" Count="7" />
+      <LineId Id="13961" Count="121" />
       <LineId Id="14085" Count="0" />
       <LineId Id="14416" Count="0" />
       <LineId Id="14305" Count="1" />
@@ -786,7 +781,6 @@ END_CASE
       <LineId Id="20" Count="0" />
       <LineId Id="59" Count="1" />
       <LineId Id="58" Count="0" />
-      <LineId Id="78" Count="0" />
       <LineId Id="69" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="71" Count="0" />

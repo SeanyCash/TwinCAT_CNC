@@ -27,6 +27,15 @@
     "DEFAULTTIMEZONE": "client",
     "DEFAULTUSERGROUP": "__SystemUsers",
     "DEFINITIONS": {
+        "PLC1.ARRAY_54..57_OF-Tc2_NCI.ZeroShiftDesc": {
+            "items": {
+                "$ref": "#/definitions/PLC1.Tc2_NCI.ZeroShiftDesc"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "startOffset": 54,
+            "type": "array"
+        },
         "PLC1.E_Programs": {
             "allOf": [
                 {
@@ -251,6 +260,20 @@
                     "$ref": "tchmi:general#/definitions/INT16"
                 }
             ]
+        },
+        "PLC1.Tc2_NCI.ZeroShiftDesc": {
+            "properties": {
+                "fShiftX": {
+                    "$ref": "tchmi:general#/definitions/LREAL"
+                },
+                "fShiftY": {
+                    "$ref": "tchmi:general#/definitions/LREAL"
+                },
+                "fShiftZ": {
+                    "$ref": "tchmi:general#/definitions/LREAL"
+                }
+            },
+            "type": "object"
         },
         "PLC1.Tc2_Utilities.T_FIX16": {
             "properties": {
@@ -3073,6 +3096,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.bReadZeroShift": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::bReadZeroShift",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.bReceiveRequest": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3290,6 +3323,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.nZeroShiftNumber": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::nZeroShiftNumber",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UDINT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.sPrgName": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3307,6 +3350,36 @@
                         "$ref": "tchmi:general#/definitions/String"
                     }
                 ]
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.ZeroShiftDesc": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::ZeroShiftDesc",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.ARRAY_54..57_OF-Tc2_NCI.ZeroShiftDesc"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.ZeroShiftDesc.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::ZeroShiftDesc[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.Tc2_NCI.ZeroShiftDesc"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.ZeroShiftDesc.0.fShiftX": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::ZeroShiftDesc[0]::fShiftX",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/LREAL"
             },
             "USEMAPPING": true
         },

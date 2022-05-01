@@ -170,6 +170,12 @@
         "type": "tchmi:general#/definitions/INT",
         "persist": false,
         "readonly": false
+      },
+      "nGOffset": {
+        "value": 54,
+        "type": "tchmi:general#/definitions/INT16",
+        "persist": false,
+        "readonly": false
       }
     }
   },

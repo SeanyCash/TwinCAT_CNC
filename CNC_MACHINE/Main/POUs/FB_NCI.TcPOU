@@ -6,7 +6,7 @@ VAR_INPUT
 	bExecute			: BOOL;
     bStop               : BOOL;
     sPrgName			: STRING(255);
-	bExecuteZeroShift	: BOOL;
+	
 	
 END_VAR
 VAR_OUTPUT
@@ -34,7 +34,10 @@ VAR
 	fbConfirmHsk		    : ItpConfirmHsk;
 	fbZeroShiftOffset	    : ItpWriteZeroShiftEx;
     fbReadZeroShiftOffset   : ItpReadZeroShiftEx;
-	nZeroShiftNumber	    : UDINT := 54;
+    bExecuteZeroShift	    : BOOL;
+    bZeroShiftWriteBusy     : BOOL;
+    bReadZeroShift          : BOOL;
+    nZeroShiftNumber	    : UDINT := 54;
 	
 	nInterpreterState	: UDINT	:= 0;
 	bConfirmHsk			: BOOL	:= FALSE;
@@ -78,10 +81,10 @@ stItpToPlc := i_stItpToPlc;
 out_stItpToPlc := i_stItpToPlc;
 //stPlcToItp := q_stPlcToItp;
 
-IF bExecuteZeroShift THEN
-    NC_In.ZeroShiftDesc.fShiftX := stX.NcToPlc.ActPos;
-    NC_In.ZeroShiftDesc.fShiftY := stY.NcToPlc.ActPos;
-    NC_In.ZeroShiftDesc.fShiftZ := stZ.NcToPlc.ActPos;
+IF bExecuteZeroShift AND nZeroShiftNumber <> 0 THEN
+    NC_In.ZeroShiftDesc[nZeroShiftNumber].fShiftX := stX.NcToPlc.ActPos;
+    NC_In.ZeroShiftDesc[nZeroShiftNumber].fShiftY := stY.NcToPlc.ActPos;
+    NC_In.ZeroShiftDesc[nZeroShiftNumber].fShiftZ := stZ.NcToPlc.ActPos;
 END_IF;
 ]]></ST>
     </Implementation>
@@ -341,7 +344,13 @@ fChannelOverride := stHMI_In.fChannelOverride;
 
 //stHMI_In.sPrgName;
 // Spindle Override Speed
-q_stPlcToItp.ChnSpindleOvr := stHMI_In.fSpindleOverrideSpeed;]]></ST>
+q_stPlcToItp.ChnSpindleOvr := stHMI_In.fSpindleOverrideSpeed;
+
+// Zero Shift Offset
+
+bExecuteZeroShift := stHMI_In.bExecuteZeroShift;
+nZeroShiftNumber := stHMI_In.nZeroShiftNumber;
+bReadZeroShift := stHMI_In.bReadZeroShift;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_HMI_Out" Id="{c9b11abe-3756-440a-87f2-c576c5174866}">
@@ -363,7 +372,12 @@ ELSE
 END_IF
 
 // Interpreter Status to HMI
-stHMI_Out.stItpToPlc := i_stItpToPlc;]]></ST>
+stHMI_Out.stItpToPlc := i_stItpToPlc;
+
+stHMI_Out.ZeroShiftDesc[54]:= NC_In.ZeroShiftDesc[54];
+stHMI_Out.ZeroShiftDesc[55]:= NC_In.ZeroShiftDesc[55];
+stHMI_Out.ZeroShiftDesc[56]:= NC_In.ZeroShiftDesc[56];
+stHMI_Out.ZeroShiftDesc[57]:= NC_In.ZeroShiftDesc[57];]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
@@ -466,25 +480,29 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbZeroShiftOffset(
+        <ST><![CDATA[IF nZeroShiftNumber <> 0 THEN
+
+fbZeroShiftOffset(
 	bExecute:= bExecuteZeroShift, 
 	nZsNo:= nZeroShiftNumber, 
 	tTimeOut:= , 
 	sNciToPlc:= stItpToPlc, 
-	sZeroShiftDesc:= NC_In.ZeroShiftDesc, 
-	bBusy=> , 
+	sZeroShiftDesc:= NC_In.ZeroShiftDesc[nZeroShiftNumber], 
+	bBusy=> bZeroShiftWriteBusy, 
 	bErr=> , 
 	nErrId=> );
 	
-fbReadZeroShiftOffset(
-	bExecute:= , 
+(*fbReadZeroShiftOffset(
+	bExecute:= NOT bZeroShiftWriteBusy, 
 	nZsNo:= nZeroShiftNumber, 
 	tTimeOut:= , 
 	sNciToPlc:= stItpToPlc, 
-	sZeroShiftDesc:= NC_In.ZeroShiftDesc, 
+	sZeroShiftDesc:= NC_In.ZeroShiftDesc[nZeroShiftNumber], 
 	bBusy=> , 
 	bErr=> , 
-	nErrId=> );	]]></ST>
+	nErrId=> );	*)
+    
+END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_NCI">
@@ -535,6 +553,11 @@ fbReadZeroShiftOffset(
       <LineId Id="15" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="11" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="24" Count="1" />
     </LineIds>
     <LineIds Name="FB_NCI.M_HMI_Out">
       <LineId Id="5" Count="5" />
@@ -546,6 +569,9 @@ fbReadZeroShiftOffset(
       <LineId Id="30" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="29" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="34" Count="2" />
     </LineIds>
     <LineIds Name="FB_NCI.M_InterpreterState">
       <LineId Id="7" Count="0" />
@@ -573,11 +599,13 @@ fbReadZeroShiftOffset(
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_ZeroShiftOffset">
+      <LineId Id="31" Count="1" />
       <LineId Id="6" Count="7" />
       <LineId Id="5" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="19" Count="7" />
       <LineId Id="15" Count="0" />
+      <LineId Id="33" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

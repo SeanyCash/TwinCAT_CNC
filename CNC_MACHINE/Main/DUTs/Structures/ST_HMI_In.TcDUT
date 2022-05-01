@@ -49,7 +49,9 @@ fJogVelocity	 : LREAL;
 
 // NCI Functions
 
-bExecuteZeroShift : BOOL;
+bExecuteZeroShift       : BOOL;
+bReadZeroShift          : BOOL;
+nZeroShiftNumber        : UDINT;
 fSpindleOverrideSpeed   : UDINT;
 
 

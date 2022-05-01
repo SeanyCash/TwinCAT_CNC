@@ -13,6 +13,7 @@ sInterpreterState           : STRING;
 fChannelOverrideSpeed       : REAL;
 fToolpathVelocityIPM        : LREAL;
 stItpToPlc			        : NCTOPLC_NCICHANNEL_REF;
+ZeroShiftDesc               : ARRAY [54..57] OF ZeroShiftDesc;
 // ====================== Status Screen=================================
 
 // Homing/Limit Switch Indicators

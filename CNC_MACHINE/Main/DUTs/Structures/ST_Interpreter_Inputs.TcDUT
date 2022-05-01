@@ -4,7 +4,7 @@
     <Declaration><![CDATA[TYPE ST_Interpreter_Inputs :
 STRUCT
 	
-ZeroShiftDesc	: ZeroShiftDesc;
+ZeroShiftDesc       : ARRAY [54..57] OF ZeroShiftDesc;
 
 END_STRUCT
 END_TYPE
