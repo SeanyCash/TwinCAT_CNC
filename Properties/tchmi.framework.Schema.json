@@ -2565,6 +2565,2179 @@
         }
       }
     },
+    "TcHmi.Controls.BaseTemplate.TcHmiBreadcrumb": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiBreadcrumb",
+      "frameworkControlNamespace": "TcHmi.Controls.BaseTemplate"
+    },
+    "TcHmi.Controls.BaseTemplate.TcHmiBurgerMenu": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiBurgerMenu",
+      "frameworkControlNamespace": "TcHmi.Controls.BaseTemplate"
+    },
+    "TcHmiBurgerMenu": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiBurgerMenu"
+    },
+    "TcHmi.Controls.BaseTemplate.TcHmiHeader": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiHeader",
+      "frameworkControlNamespace": "TcHmi.Controls.BaseTemplate"
+    },
+    "TcHmiHeader": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiHeader"
+    },
+    "TcHmi.Controls.BaseTemplate.TcHmiHeader.HeaderItems": {
+      "id": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiHeader.HeaderItems",
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "title": "Time",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "Time"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              },
+              "timeDisplayLayout": {
+                "enum": [
+                  "Time",
+                  "Date",
+                  "TimeDateSingleLine",
+                  "TimeDateMultiLine",
+                  "DateTimeSingleLine",
+                  "DateTimeMultiLine"
+                ],
+                "type": "string"
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "Time",
+                "defaultValueInternal": "Time",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 128,
+                "defaultValueInternal": 128,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": null,
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred Height Unit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 96,
+                "defaultValueInternal": 96,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Permissions",
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "defaultValue": null,
+                "defaultValueInternal": "TimeDateMultiLine",
+                "description": "The layout of the displayed time and date",
+                "displayName": "Time Display Layout",
+                "displaypriority": 10,
+                "name": "timeDisplayLayout"
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights",
+              "timeDisplayLayout"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "title": "Text",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "Text"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              },
+              "text": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "targetRegion": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "targetContent": {
+                "anyOf": [
+                  {
+                    "$ref": "tchmi:framework#/definitions/Path"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "Text",
+                "defaultValueInternal": "Text",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 160,
+                "defaultValueInternal": 160,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred Height Unit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 96,
+                "defaultValueInternal": 96,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "category": "Permissions",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "Application name",
+                "defaultValueInternal": "Application name",
+                "description": "The displayed text.",
+                "displayName": "Text",
+                "displaypriority": 20,
+                "name": "text"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": null,
+                "defaultValueInternal": null,
+                "description": "Target Region",
+                "displayName": "Target Region",
+                "displaypriority": 20,
+                "name": "targetRegion"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "",
+                "defaultValueInternal": "",
+                "description": "Content path to the Messages page",
+                "displayName": "Target Content",
+                "displaypriority": 20,
+                "name": "targetContent"
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights",
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "title": "EventLine",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "EventLine"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              },
+              "filter": {
+                "$ref": "tchmi:server#/definitions/eventFilter"
+              },
+              "targetRegion": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "targetContent": {
+                "anyOf": [
+                  {
+                    "$ref": "tchmi:framework#/definitions/Path"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "EventLine",
+                "defaultValueInternal": "EventLine",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 560,
+                "defaultValueInternal": 560,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred Height Unit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 160,
+                "defaultValueInternal": 160,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "category": "Permissions",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "description": "The filter for the displayed events.",
+                "displayName": "Filter",
+                "displaypriority": 20,
+                "name": "filter",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "defaultValue": null,
+                "defaultValueInternal": null,
+                "description": "Target Region",
+                "displayName": "Target Region",
+                "displaypriority": 20,
+                "name": "targetRegion"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "",
+                "defaultValueInternal": "",
+                "description": "Content path to the Messages page",
+                "displayName": "Target Content",
+                "displaypriority": 20,
+                "name": "targetContent"
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights",
+              "filter"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "title": "StateImage",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "StateImage"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              },
+              "stateList": {
+                "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiStateImage.StateList"
+              },
+              "stateVar": {
+                "$ref": "tchmi:general#/definitions/Any"
+              },
+              "iconWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "iconWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "text": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "textPosition": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "StateImage",
+                "defaultValueInternal": "StateImage",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 160,
+                "defaultValueInternal": 160,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred Height Unit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "category": "Permissions",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "defaultValue": null,
+                "defaultValueInternal": null,
+                "description": "Enumeration to switch the icon state",
+                "displayName": "State Variable",
+                "displaypriority": 20,
+                "name": "stateVar"
+              },
+              {
+                "category": "Specific",
+                "description": "An array of string, icon maps ",
+                "displayName": "State defintions",
+                "displaypriority": 20,
+                "name": "stateList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred width of the item. Percentage values will be based on the icon height.",
+                "displayName": "Icon Width",
+                "displaypriority": 10,
+                "name": "iconWidth"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Icon Width Unit",
+                "displaypriority": 20,
+                "name": "iconWidthUnit",
+                "refTo": "iconWidth"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": null,
+                "defaultValueInternal": null,
+                "description": "The displayed text.",
+                "displayName": "Text",
+                "displaypriority": 30,
+                "name": "text"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Left",
+                "defaultValueInternal": "Left",
+                "description": "The position of the description text.",
+                "displayName": "Text Position",
+                "displaypriority": 40,
+                "name": "textPosition"
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights",
+              "iconWidth",
+              "iconWidthUnit",
+              "stateList",
+              "stateVar"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "title": "UserManagement",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "UserManagement"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              },
+              "allowLogout": {
+                "type": "boolean"
+              },
+              "allowSwitchUser": {
+                "type": "boolean"
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "UserManagement",
+                "defaultValueInternal": "UserManagement",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 320,
+                "defaultValueInternal": 320,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred Height Unit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 128,
+                "defaultValueInternal": 128,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "category": "Permissions",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "defaultValue": null,
+                "defaultValueInternal": true,
+                "description": "Defines whether the logout button is displayed in the dropdown.",
+                "displayName": "Allow Logout",
+                "displaypriority": 10,
+                "name": "allowLogout"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": null,
+                "defaultValueInternal": false,
+                "description": "Defines whether the switch user button is displayed in the dropdown.",
+                "displayName": "Allow Switch User",
+                "displaypriority": 20,
+                "name": "allowSwitchUser"
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "title": "Image",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "Image"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "altText": {
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              },
+              "image": {
+                "anyOf": [
+                  {
+                    "$ref": "tchmi:framework#/definitions/Path"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "targetRegion": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "targetContent": {
+                "anyOf": [
+                  {
+                    "$ref": "tchmi:framework#/definitions/Path"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "Image",
+                "defaultValueInternal": "Image",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 160,
+                "defaultValueInternal": 160,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred HeightUnit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 96,
+                "defaultValueInternal": 96,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "category": "Permissions",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "",
+                "defaultValueInternal": "",
+                "description": "The displayed image",
+                "displayName": "Image",
+                "displaypriority": 20,
+                "name": "image"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "Image",
+                "defaultValueInternal": "Image",
+                "description": "The text which will be displayed if the image was not found.",
+                "displayName": "Alternative Text",
+                "displaypriority": 20,
+                "name": "altText"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": null,
+                "defaultValueInternal": null,
+                "description": "Target Region",
+                "displayName": "Target Region",
+                "displaypriority": 20,
+                "name": "targetRegion"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "",
+                "defaultValueInternal": "",
+                "description": "Content path to the Messages page",
+                "displayName": "Target Content",
+                "displaypriority": 20,
+                "name": "targetContent"
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights",
+              "image"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "title": "ThemeSelect",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "ThemeSelect"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "ThemeSelect",
+                "defaultValueInternal": "ThemeSelect",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 560,
+                "defaultValueInternal": 560,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred Height Unit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 160,
+                "defaultValueInternal": 160,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "category": "Permissions",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "title": "LocalizationSelect",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "LocalizationSelect"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              },
+              "localizationMapping": {
+                "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiLocalizationSelect.ListItemList"
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "LocalizationSelect",
+                "defaultValueInternal": "LocalizationSelect",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 560,
+                "defaultValueInternal": 560,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred Height Unit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 160,
+                "defaultValueInternal": 160,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "category": "Permissions",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "name": "localizationMapping",
+                "displayName": "Localization Mapping",
+                "category": "Specific",
+                "displaypriority": 10,
+                "description": "[Optional] Changes the label for each localization identifier..",
+                "defaultValue": [
+                  {
+                    "code": "de-DE",
+                    "text": "German (Germany)"
+                  },
+                  {
+                    "code": "en-US",
+                    "text": "English (United States)"
+                  }
+                ],
+                "defaultValueInternal": []
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "title": "ADS State",
+            "type": "object",
+            "engineeringColumns": [
+              "itemType",
+              "priority",
+              "prefWidth"
+            ],
+            "properties": {
+              "itemType": {
+                "enum": [
+                  "AdsState"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5"
+                ],
+                "type": "string"
+              },
+              "itemAlign": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              },
+              "prefWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "prefHeight": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "prefHeightUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "minWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "classList": {
+                "$ref": "tchmi:framework#/definitions/ClassNameList"
+              },
+              "accessRights": {
+                "$ref": "tchmi:framework#/definitions/AccessConfig"
+              },
+              "adsRuntime": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "serverInterval": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "serverDomain": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "stateImages": {
+                "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiAdsState.StateImages"
+              },
+              "iconWidth": {
+                "$ref": "tchmi:framework#/definitions/MeasurementValue"
+              },
+              "iconWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "text": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "textPosition": {
+                "enum": [
+                  "Right",
+                  "Left"
+                ],
+                "type": "string"
+              }
+            },
+            "propertiesMeta": [
+              {
+                "category": "General",
+                "defaultValue": "AdsState",
+                "defaultValueInternal": "AdsState",
+                "description": "The type of the header item.",
+                "displayName": "Item Type",
+                "displaypriority": 10,
+                "name": "itemType"
+              },
+              {
+                "category": "General",
+                "defaultValue": "3",
+                "defaultValueInternal": "3",
+                "description": "Element priority for the resizign process(1 : low priority, 5: high priority)",
+                "displayName": "Priority",
+                "displaypriority": 10,
+                "name": "priority"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Right",
+                "defaultValueInternal": "Right",
+                "description": "The horizontal alignment of the item inside the header bar.",
+                "displayName": "Item Position",
+                "displaypriority": 10,
+                "name": "itemAlign"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 160,
+                "defaultValueInternal": 160,
+                "description": "The preferred width of the item.",
+                "displayName": "Preferred Width",
+                "displaypriority": 10,
+                "name": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": null,
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Preferred Width Unit",
+                "displaypriority": 10,
+                "name": "prefWidthUnit",
+                "refTo": "prefWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred heigth of the item.",
+                "displayName": "Preferred Height",
+                "displaypriority": 10,
+                "name": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred heigth of the item.",
+                "displayName": "Preferred Height Unit",
+                "displaypriority": 10,
+                "name": "prefHeightUnit",
+                "refTo": "prefHeight"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": 96,
+                "defaultValueInternal": 96,
+                "description": "The minimal width of the item.",
+                "displayName": "Minimum Width",
+                "displaypriority": 10,
+                "name": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of minimal width of the item.",
+                "displayName": "Minimum Width Unit",
+                "displaypriority": 10,
+                "name": "minWidthUnit",
+                "refTo": "minWidth"
+              },
+              {
+                "category": "Layout",
+                "description": "Defines the classes the control is part of. These can be addressed in themes.",
+                "displayName": "Class List",
+                "displaypriority": 10,
+                "name": "classList",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Permissions",
+                "name": "accessRights",
+                "displayName": "Access Right",
+                "displaypriority": 10,
+                "description": "[Optional] Array of user groups which have access to this content.",
+                "defaultValue": [],
+                "defaultValueInternal": []
+              },
+              {
+                "category": "Specific",
+                "name": "adsRuntime",
+                "displayName": "Runtime",
+                "displaypriority": 10,
+                "description": "The ADS extension runtime to be watched.",
+                "defaultValue": "PLC1",
+                "defaultValueInternal": null
+              },
+              {
+                "category": "Specific",
+                "defaultValue": 48,
+                "defaultValueInternal": 48,
+                "description": "The preferred width of the item. Percentage values will be based on the icon height.",
+                "displayName": "Icon Width",
+                "displaypriority": 10,
+                "name": "iconWidth"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "px",
+                "defaultValueInternal": "px",
+                "description": "The unit of preferred width of the item.",
+                "displayName": "Icon Width Unit",
+                "displaypriority": 20,
+                "name": "iconWidthUnit",
+                "refTo": "iconWidth"
+              },
+              {
+                "category": "Specific",
+                "defaultValue": "PLC 1 State",
+                "defaultValueInternal": null,
+                "description": "The displayed text.",
+                "displayName": "Text",
+                "displaypriority": 20,
+                "name": "text"
+              },
+              {
+                "category": "General",
+                "defaultValue": "Left",
+                "defaultValueInternal": "Left",
+                "description": "The position of the description text.",
+                "displayName": "Text Position",
+                "displaypriority": 30,
+                "name": "textPosition"
+              },
+              {
+                "category": "Specific",
+                "name": "serverInterval",
+                "displayName": "Server Interval",
+                "displaypriority": 60,
+                "description": "Sets the interval for the ADS state subscription in milliseconds. This migth be expensive performance wise, so do not set to a very low value.",
+                "defaultValue": 500,
+                "defaultValueInternal": null
+              },
+              {
+                "category": "Specific",
+                "name": "serverDomain",
+                "displayName": "Server Domain",
+                "displaypriority": 70,
+                "description": "The domain of the ADS extension in the server. Defaults to 'ADS'.",
+                "defaultValue": "ADS",
+                "defaultValueInternal": ""
+              },
+              {
+                "category": "Specific",
+                "name": "stateImages",
+                "displayName": "StateImages",
+                "displaypriority": 40,
+                "description": "A structure defining an image for each state the control can have and the fallback image.",
+                "defaultValue": null,
+                "defaultValueInternal": null
+              }
+            ],
+            "required": [
+              "itemType",
+              "priority",
+              "itemAlign",
+              "prefWidth",
+              "prefWidthUnit",
+              "prefHeight",
+              "prefHeightUnit",
+              "minWidth",
+              "minWidthUnit",
+              "classList",
+              "accessRights",
+              "adsRuntime",
+              "serverInterval",
+              "serverDomain",
+              "iconWidth",
+              "iconWidthUnit"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "TcHmi.Controls.BaseTemplate.TcHmiNavigation": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiNavigation",
+      "frameworkControlNamespace": "TcHmi.Controls.BaseTemplate"
+    },
+    "TcHmiNavigation": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiNavigation"
+    },
+    "TcHmi.Controls.BaseTemplate.TcHmiNavigation.NavigationOrientation": {
+      "enum": [
+        "Horizontal",
+        "Vertical"
+      ],
+      "type": "string"
+    },
+    "TcHmi.Controls.BaseTemplate.TcHmiNavigation.ListItem": {
+      "title": "List Item",
+      "description": "Navigation Item",
+      "type": "object",
+      "engineeringColumns": [
+        "name",
+        "content"
+      ],
+      "propertiesMeta": [
+        {
+          "name": "name",
+          "displayName": "Name",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "Name of the Page. Will be displayed on the navigation button.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "content",
+          "displayName": "Content",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "Path to the .content file the button click will switch to.  ",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "icon_a",
+          "displayName": "Icon Active",
+          "category": "Icon",
+          "displayPriority": 10,
+          "description": "[Optional] Select an image for the Icon in active state. For themeable Icons place the icon in every theme folder with the exact same structure and declare the path to the icon in 'Base' Theme here ",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "icon_n",
+          "displayName": "Icon Normal",
+          "category": "Icon",
+          "displayPriority": 10,
+          "description": "[Optional] Select an image for the Icon in normal state. For themeable Icons place the icon in every theme folder with the exact same structure and declare the path to the icon in 'Base' Theme here ",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "icon_p",
+          "displayName": "Icon Pressed",
+          "category": "Icon",
+          "displayPriority": 10,
+          "description": "[Optional] Select an image for the Icon in pressed state. For themeable Icons place the icon in every theme folder with the exact same structure and declare the path to the icon in 'Base' Theme here ",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "subItem",
+          "displayName": "Sub Item",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "[Optional] Create sub Item for this Item. Sub item will be displayed in the context menu when this Content is selected.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "accessRights",
+          "displayName": "Access Right",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "[Optional] Array of user groups which have access to this content.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "content": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "icon_a": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "icon_n": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "icon_p": {
+          "$ref": "tchmi:framework#/definitions/Path"
+        },
+        "subItem": {
+          "$ref": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiNavigation.ListItemList"
+        },
+        "accessRights": {
+          "$ref": "tchmi:framework#/definitions/AccessConfig"
+        }
+      },
+      "required": [
+        "name",
+        "content"
+      ]
+    },
+    "TcHmi.Controls.BaseTemplate.TcHmiNavigation.ListItemList": {
+      "title": "ListItemList",
+      "description": "List Navigation Items",
+      "type": "array",
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiNavigation.ListItem"
+      }
+    },
     "TcHmi.Controls.Beckhoff.TcHmiButton": {
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "object",
@@ -7719,6 +9892,309 @@
         "name"
       ]
     },
+    "TcHmi.Functions.BaseTemplate.MediaQueryList": {
+      "id": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.MediaQueryList",
+      "type": "array",
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.MediaQuery"
+      }
+    },
+    "TcHmi.Functions.BaseTemplate.MediaQuery": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "maxWidth": {
+          "type": "number"
+        },
+        "minWidth": {
+          "type": "number"
+        },
+        "controlBehaviourList": {
+          "$ref": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.ControlBehaviourList"
+        }
+      },
+      "required": [
+        "name",
+        "minWidth",
+        "maxWidth"
+      ],
+      "propertiesMeta": [
+        {
+          "name": "name",
+          "displayName": "Name",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "maxWidth",
+          "displayName": "MaxWidth",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "minWidth",
+          "displayName": "Min Width",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "controlBehaviourList",
+          "displayName": "Control Behaviour List",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        }
+      ],
+      "engineeringColumns": [
+        "minWidth",
+        "maxWidth",
+        "name"
+      ],
+      "title": "MediaQuery",
+      "type": "object",
+      "id": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.MediaQuery"
+    },
+    "TcHmi.Functions.BaseTemplate.ControlBehaviourList": {
+      "id": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.ControlBehaviourList",
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "array",
+      "definitions": {
+        "ControlBehaviour": {
+          "title": "ControlBehaviour",
+          "type": "object",
+          "engineeringColumns": [
+            "controlType",
+            "controlID",
+            "displayOption"
+          ],
+          "properties": {
+            "controlType": {
+              "enum": [
+                "TcHmi.Controls.BaseTemplate.TcHmiNavigation",
+                "TcHmi.Controls.System.TcHmiContainer"
+              ],
+              "type": "string"
+            },
+            "controlID": {
+              "type": "string"
+            },
+            "displayOption": {
+              "enum": [
+                "full",
+                "icons",
+                "burger_top",
+                "burger_bottom"
+              ],
+              "type": "string"
+            }
+          },
+          "propertiesMeta": [
+            {
+              "name": "controlType",
+              "displayName": "Control Type",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "",
+              "defaultValue": null,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "controlID",
+              "displayName": "ControlID",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "",
+              "defaultValue": null,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "displayOption",
+              "displayName": "Display Option",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "",
+              "defaultValue": null,
+              "defaultValueInternal": null
+            }
+          ]
+        }
+      },
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.ControlBehaviourList/definitions/ControlBehaviour"
+      }
+    },
+    "TcHmi.Functions.BaseTemplate.AffectedControl": {
+      "properties": {
+        "controlID": {
+          "type": "string"
+        },
+        "position": {
+          "enum": [
+            "Top",
+            "Bottom",
+            "Left",
+            "Right",
+            "Center"
+          ],
+          "type": "string"
+        },
+        "defaultHeight": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "defaultWidth": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "defaultTop": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "defaultBottom": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "defaultLeft": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "defaultRight": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "propertiesMeta": [
+        {
+          "name": "controlID",
+          "displayName": "Control ID",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "position",
+          "displayName": "Position",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "defaultHeight",
+          "displayName": "Default Height",
+          "category": "Default Control Sizes",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "defaultWidth",
+          "displayName": "Default Width",
+          "category": "Default Control Sizes",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "defaultTop",
+          "displayName": "Default Top",
+          "category": "Default Control Sizes",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "defaultBottom",
+          "displayName": "Default Bottom",
+          "category": "Default Control Sizes",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "defaultLeft",
+          "displayName": "Default Left",
+          "category": "Default Control Sizes",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "defaultRight",
+          "displayName": "Default Right",
+          "category": "Default Control Sizes",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        }
+      ],
+      "type": "object",
+      "id": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.AffectedControl"
+    },
+    "TcHmi.Functions.BaseTemplate.AffectedControlList": {
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.AffectedControl"
+      },
+      "type": "array",
+      "id": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.AffectedControlList"
+    },
     "TcHmi.Functions.Beckhoff.Increment.IncrementValueSymbol": {
       "allOf": [
         {
@@ -7757,6 +10233,129 @@
         "Info",
         "Debug"
       ]
+    }
+  },
+  "TcHmiBreadcrumb": {
+    "$ref": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiBreadcrumb"
+  },
+  "TcHmi.Controls.BaseTemplate.TcHmiBreadcrumb.ListItem": {
+    "title": "List Item",
+    "description": "Navigation Item",
+    "type": "object",
+    "engineeringColumns": [
+      "name",
+      "content"
+    ],
+    "propertiesMeta": [
+      {
+        "name": "name",
+        "displayName": "Name",
+        "category": "General",
+        "displayPriority": 10,
+        "description": "Name of the Page. Will be displayed on the navigation button.",
+        "defaultValue": null,
+        "defaultValueInternal": null
+      },
+      {
+        "name": "content",
+        "displayName": "Content",
+        "category": "General",
+        "displayPriority": 10,
+        "description": "Path to the .content file the button click will switch to.  ",
+        "defaultValue": null,
+        "defaultValueInternal": null
+      },
+      {
+        "name": "icon_a",
+        "displayName": "Icon Active",
+        "category": "Icon",
+        "displayPriority": 10,
+        "description": "[Optional] Select an image for the Icon in active state. For themeable Icons place the icon in every theme folder with the exact same structure and declare the path to the icon in 'Base' Theme here ",
+        "defaultValue": null,
+        "defaultValueInternal": null
+      },
+      {
+        "name": "icon_n",
+        "displayName": "Icon Normal",
+        "category": "Icon",
+        "displayPriority": 10,
+        "description": "[Optional] Select an image for the Icon in normal state. For themeable Icons place the icon in every theme folder with the exact same structure and declare the path to the icon in 'Base' Theme here ",
+        "defaultValue": null,
+        "defaultValueInternal": null
+      },
+      {
+        "name": "icon_p",
+        "displayName": "Icon Pressed",
+        "category": "Icon",
+        "displayPriority": 10,
+        "description": "[Optional] Select an image for the Icon in pressed state. For themeable Icons place the icon in every theme folder with the exact same structure and declare the path to the icon in 'Base' Theme here ",
+        "defaultValue": null,
+        "defaultValueInternal": null
+      },
+      {
+        "name": "subItem",
+        "displayName": "Sub Item",
+        "category": "General",
+        "displayPriority": 10,
+        "description": "[Optional] Create sub Item for this Item. Sub item will be displayed in the context menu when this Content is selected.",
+        "defaultValue": null,
+        "defaultValueInternal": null
+      },
+      {
+        "name": "accessRights",
+        "displayName": "Access Right",
+        "category": "General",
+        "displayPriority": 10,
+        "description": "[Optional] Array of user groups which have access to this content.",
+        "defaultValue": null,
+        "defaultValueInternal": [
+          {
+            "accessright": "observe",
+            "group": "__SystemUsers",
+            "permission": "Allow"
+          },
+          {
+            "accessright": "operate",
+            "group": "__SystemUsers",
+            "permission": "Allow"
+          }
+        ]
+      }
+    ],
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "content": {
+        "$ref": "tchmi:framework#/definitions/Path"
+      },
+      "icon_a": {
+        "$ref": "tchmi:framework#/definitions/Path"
+      },
+      "icon_n": {
+        "$ref": "tchmi:framework#/definitions/Path"
+      },
+      "icon_p": {
+        "$ref": "tchmi:framework#/definitions/Path"
+      },
+      "subItem": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiBreadcrumb.ListItemList"
+      },
+      "accessRights": {
+        "$ref": "tchmi:framework#/definitions/AccessConfig"
+      }
+    },
+    "required": [
+      "name",
+      "content"
+    ]
+  },
+  "TcHmi.Controls.BaseTemplate.TcHmiBreadcrumb.ListItemList": {
+    "title": "ListItemList",
+    "description": "List Navigation Items",
+    "type": "array",
+    "items": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.BaseTemplate.TcHmiBreadcrumb.ListItem"
     }
   }
 }

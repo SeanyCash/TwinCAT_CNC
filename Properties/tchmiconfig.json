@@ -192,6 +192,10 @@
   },
   "packages": [
     {
+      "name": "Beckhoff.TwinCAT.HMI.BaseTemplate",
+      "basePath": "/Beckhoff.TwinCAT.HMI.BaseTemplate"
+    },
+    {
       "name": "Beckhoff.TwinCAT.HMI.Controls",
       "basePath": "/Beckhoff.TwinCAT.HMI.Controls"
     },

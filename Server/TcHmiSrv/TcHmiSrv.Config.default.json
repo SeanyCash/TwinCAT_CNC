@@ -348,7 +348,7 @@
             "STARTUPTYPE": 1
         },
         "TcHmiVision": {
-            "ENABLED": true,
+            "ENABLED": false,
             "NAME": "TcHmiVision",
             "PATH": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Vision.12.754.4\\runtimes\\win\\net472\\",
             "REQUIRED": false,
@@ -9793,6 +9793,7 @@
     "VIDEOSEGMENTSIZE": 1048576,
     "VIRTUALDIRECTORIES": {
         "/": "..\\..\\TwinCAT_CNC\\",
+        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.754.4\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.754.4\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.754.4\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.754.4\\runtimes\\native1.12-tchmi",
