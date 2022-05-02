@@ -45,12 +45,13 @@ VAR
 	fbADSRead		: ADSREADEX;
 	fbADSWrite		: ADSWRITE;
 
-	sReadNCLine		: STRING;
-	sReadNCName		: STRING;
-	sReadNCFileInfo	: STRING;
-	arrUDINT        : ARRAY[0..100] OF UINT;
-	NC_In			: ST_Interpreter_Inputs;
-	NC_Out			: ST_Interpreter_Outputs;
+	sReadNCLine		    : STRING[255];
+    bReadNCLineExecute  : BOOL;
+	sReadNCName		    : STRING[100];
+    bReadNCNameExec     : BOOL;
+	sReadNCFileInfo	    : STRING;
+	NC_In			    : ST_Interpreter_Inputs;
+	NC_Out			    : ST_Interpreter_Outputs;
 
 //=====================Interpreter Channel Info ====================
 
@@ -69,6 +70,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[M_InterpreterState();
 M_NCName();
+M_NCLine();
 M_HMI_In();
 M_HMI_Out();
 M_StartStop();
@@ -377,7 +379,10 @@ stHMI_Out.stItpToPlc := i_stItpToPlc;
 stHMI_Out.ZeroShiftDesc[54]:= NC_In.ZeroShiftDesc[54];
 stHMI_Out.ZeroShiftDesc[55]:= NC_In.ZeroShiftDesc[55];
 stHMI_Out.ZeroShiftDesc[56]:= NC_In.ZeroShiftDesc[56];
-stHMI_Out.ZeroShiftDesc[57]:= NC_In.ZeroShiftDesc[57];]]></ST>
+stHMI_Out.ZeroShiftDesc[57]:= NC_In.ZeroShiftDesc[57];
+// NC program info
+stHMI_Out.sReadNCLine := sReadNCLine;
+stHMI_Out.sReadNCName := sReadNCName;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
@@ -421,11 +426,11 @@ END_VAR
         <ST><![CDATA[fbADSRead(
 					NETID:=,
 					PORT:=500,
-					IDXGRP:=2301,
-					IDXOFFS:=20000001,
-					LEN:=,
-					DESTADDR:=,
-					READ:=,
+					IDXGRP:=16#2302,
+					IDXOFFS:=16#20000001,
+					LEN:=SIZEOF(sReadNCLine),
+					DESTADDR:=ADR(sReadNCLine),
+					READ:=bReadNCLineExecute,
 					TMOUT:=,
 					BUSY=>,
 					ERR=>,
@@ -442,13 +447,13 @@ END_VAR
         <ST><![CDATA[sLoadedProgram:=sPrgName;
 
 fbADSRead(
-					NETID:='',
+					NETID:=,
 					PORT:=500,
-					IDXGRP:= ,
-					IDXOFFS:=7,
-					LEN:=SIZEOF(arrUDINT),
-					DESTADDR:=ADR(arrUDINT),
-					READ:=,
+					IDXGRP:=16#2102,
+					IDXOFFS:=16#7,
+					LEN:=SIZEOF(sReadNCName),
+					DESTADDR:=ADR(sReadNCName),
+					READ:=TRUE,
 					TMOUT:=,
 					BUSY=>,
 					ERR=>,
@@ -506,7 +511,9 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_NCI">
-      <LineId Id="520" Count="2" />
+      <LineId Id="520" Count="1" />
+      <LineId Id="773" Count="0" />
+      <LineId Id="522" Count="0" />
       <LineId Id="518" Count="0" />
       <LineId Id="524" Count="0" />
       <LineId Id="574" Count="0" />
@@ -572,6 +579,9 @@ END_IF]]></ST>
       <LineId Id="33" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="34" Count="2" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_InterpreterState">
       <LineId Id="7" Count="0" />

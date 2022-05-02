@@ -103,6 +103,11 @@ bParityError        AT %I*   : BOOL;
 bFramingError       AT %I*   : BOOL;
 bOverrunError       AT %I*   : BOOL;
 
+// NC program info
+
+sReadNCLine		    : STRING[255];
+sReadNCName		    : STRING[100];
+
 END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>

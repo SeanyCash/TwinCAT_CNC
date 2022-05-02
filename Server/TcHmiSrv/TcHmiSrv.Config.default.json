@@ -4131,6 +4131,23 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.sReadNCLine.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::sReadNCLine[0]",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "maxLength": 255
+                    },
+                    {
+                        "$ref": "tchmi:general#/definitions/String"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.stItpToPlc.BlockNo": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
