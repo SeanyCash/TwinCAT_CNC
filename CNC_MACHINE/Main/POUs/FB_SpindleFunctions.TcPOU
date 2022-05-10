@@ -54,6 +54,13 @@ VAR
  eWriteVFDParamsSeq :(INIT,WRITE_DRIVE_COMMAND,WRITE_SPINDLE_SPEED,WRITE_ACCEL_DECEL);
  eEnableSpindleSeq  :(INIT,ENABLE_DRIVE,RESET_DRIVE,FINISH_ENABLE);
  eSetSpindleSpeedSeq  :(INIT,SET_RAMP,SET_SPEED,FINISH_SPEED);
+ eWriteDriveCommand   :(INIT,RUN_ENABLE,FAST_STOP,COAST_STOP);
+
+END_VAR
+
+VAR_OUTPUT
+    bSpindleAtRequestedSpeed    : BOOL;
+END_VAR
 
 END_VAR
 
@@ -63,7 +70,6 @@ END_VAR
 M_InputMapping();
 M_OutputMapping();
 M_DriveErrors();
-M_WriteParameters();
 M_HMI_In();
 M_HMI_Out();
 
@@ -280,7 +286,7 @@ stSpeedRefScaleParams.tTaskCycleTime:=  T#2MS ;
 
 // Scale Spindle Speed Setpoint From RPM to Hz
 fbSpeedRefScale(
-                fIn:=stSpindleControl.i_nSpindleRPMFromNC,
+                fIn:=FB_NCI.stItpToPlc.SpindleRpm,
                 fOut=>fScaledSpindleSpeedRef,
                 eErrorId=>,
                 bError=>,
@@ -295,6 +301,9 @@ nModbusWriteDriveCommand.3 :=stSpindleControl.bCoastStopRequest;
 nModbusWriteDriveSetpoint  :=LREAL_TO_INT(fScaledSpindleSpeedRef);
 
 nModbusWriteDriveAccel_Decel :=stSpindleControl.nRampControlTime;
+
+// Spindle at setpoint speed once speed write method return is TRUE
+bSpindleAtRequestedSpeed := M_SetSpeed;
 
 ]]></ST>
       </Implementation>
@@ -408,6 +417,14 @@ SET_RAMP:
                                                     
 SET_SPEED:
     bWriteDriveSetpoint := TRUE;
+    fbModbusMasterEL.WriteSingleRegister(   
+                                                   UnitID:=1,
+                                                   Quantity:=1,
+                                                   MBAddr:=1,
+                                                   cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
+                                                   pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
+                                                   Execute:=bWriteDriveSetpoint,
+                                                   Timeout:=T#400MS, ); 
     eWriteVFDParamsSeq := WRITE_SPINDLE_SPEED;
                                                          
      IF eWriteVFDParamsSeq = WRITE_SPINDLE_SPEED THEN 
@@ -421,7 +438,6 @@ FINISH_SPEED:
           M_SetSpeed:=TRUE;
      END_IF 
     
-
 END_CASE]]></ST>
       </Implementation>
     </Method>
@@ -434,48 +450,24 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_WriteParameters" Id="{2cc1a04a-a448-4214-8312-bc9179b7e0fd}">
-      <Declaration><![CDATA[METHOD M_WriteParameters : BOOL
+    <Method Name="M_WriteDriveCommand" Id="{2cc1a04a-a448-4214-8312-bc9179b7e0fd}">
+      <Declaration><![CDATA[METHOD M_WriteDriveCommand : BOOL
 
-VAR
-    
-    bWriteTrigger : R_TRIG;
-
+VAR_INPUT
+   bRunEnable           : BOOL; 
+   bFastStopReq         : BOOL;
+   bResetReq            : BOOL;
+   bCoastStopRequest    : BOOL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[(*(*Ctrl bits - individual bits from iCtrl*)
-	bTransmitRequest		: BOOL; // A change of this bit acts as a request to send data
-	bReceiveAccepted		: BOOL; // A change of this bit acts as a request for more data
-	bInitRequest			: BOOL; // low -> high is a request for serial module init
-	bSendContinuous			: BOOL; // not used
-	nOutputLength			: BYTE; 
-	
-	(*Status bits - individual bits from iStatus*)
-	bTransmitAccepted		: BOOL; //a change of this bit acts as a confirmation of bTransmitRequest
-	bReceiveRequest			: BOOL; // a change of this bit acts as a confirmation of bReceiveAccepted
-	bInitAccepted			: BOOL; // low-> high is confirmation of serial module init
-	bBufferFull				: BOOL; // serial module buffer is full
-	bParityError			: BOOL; 
-	bFramingError			: BOOL;
-	bOverrunError			: BOOL;
-	nInputLength			: BYTE;
-
-
-
-*)
-
-CASE eWriteVFDParamsSeq OF
-
-
-    INIT:
-    
+        <ST><![CDATA[    
         bWriteDriveCommand := FALSE;
         bWriteDriveSetpoint := FALSE;
         bWriteAccel_Decel := FALSE;
         
   
 
-    WRITE_DRIVE_COMMAND:                                             
+  //  WRITE_DRIVE_COMMAND:                                             
         fbModbusMasterEL.WriteSingleRegister(   
                                             UnitID:=1,
                                             Quantity:=1,
@@ -485,37 +477,14 @@ CASE eWriteVFDParamsSeq OF
                                             Execute:=bWriteDriveCommand,
                                             Timeout:=T#400MS,
                                                                     );   
-            
-    WRITE_SPINDLE_SPEED:  
-      fbModbusMasterEL.WriteSingleRegister(   
-                                                         UnitID:=1,
-                                                         Quantity:=1,
-                                                         MBAddr:=1,
-                                                         cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
-                                                         pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
-                                                         Execute:=bWriteDriveSetpoint,
-                                                         Timeout:=T#400MS, ); 
 
-    WRITE_ACCEL_DECEL:                                                 
-       fbModbusMasterEL.WriteSingleRegister(   
-                                           UnitID:=1,
-                                           Quantity:=1,
-                                           MBAddr:=3,
-                                           cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
-                                           pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
-                                           Execute:=bWriteAccel_Decel,
-                                           Timeout:=T#400MS,
-                                                           );                                                       
-                       
 
-END_CASE]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_SpindleFunctions">
-      <LineId Id="2232" Count="6" />
-      <LineId Id="2248" Count="0" />
-      <LineId Id="2247" Count="0" />
-      <LineId Id="2240" Count="4" />
+      <LineId Id="2312" Count="3" />
+      <LineId Id="2317" Count="8" />
       <LineId Id="1542" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_DriveErrors">
@@ -608,6 +577,9 @@ END_CASE]]></ST>
       <LineId Id="6" Count="0" />
       <LineId Id="15" Count="0" />
       <LineId Id="14" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="52" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="23" Count="0" />
     </LineIds>
@@ -629,6 +601,8 @@ END_CASE]]></ST>
       <LineId Id="69" Count="7" />
       <LineId Id="30" Count="7" />
       <LineId Id="88" Count="0" />
+      <LineId Id="98" Count="6" />
+      <LineId Id="97" Count="0" />
       <LineId Id="87" Count="0" />
       <LineId Id="84" Count="0" />
       <LineId Id="50" Count="4" />
@@ -636,17 +610,12 @@ END_CASE]]></ST>
       <LineId Id="89" Count="1" />
       <LineId Id="92" Count="1" />
       <LineId Id="58" Count="0" />
-      <LineId Id="60" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_Stop">
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_SpindleFunctions.M_WriteParameters">
-      <LineId Id="227" Count="14" />
-      <LineId Id="221" Count="5" />
-      <LineId Id="124" Count="0" />
-      <LineId Id="130" Count="2" />
+    <LineIds Name="FB_SpindleFunctions.M_WriteDriveCommand">
       <LineId Id="134" Count="1" />
       <LineId Id="179" Count="0" />
       <LineId Id="181" Count="0" />
@@ -656,17 +625,9 @@ END_CASE]]></ST>
       <LineId Id="103" Count="0" />
       <LineId Id="87" Count="7" />
       <LineId Id="71" Count="0" />
-      <LineId Id="176" Count="0" />
-      <LineId Id="128" Count="0" />
-      <LineId Id="249" Count="6" />
-      <LineId Id="248" Count="0" />
-      <LineId Id="200" Count="0" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="42" Count="7" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="160" Count="0" />
-      <LineId Id="127" Count="0" />
       <LineId Id="126" Count="0" />
+      <LineId Id="273" Count="0" />
+      <LineId Id="272" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

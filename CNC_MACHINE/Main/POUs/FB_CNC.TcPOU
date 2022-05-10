@@ -104,6 +104,7 @@ VAR
     sPrgName                : STRING[255];
     out_stItpToPlc	    : NCTOPLC_NCICHANNEL_REF;
     CNC_stItpToPlc      : NCTOPLC_NCICHANNEL_REF;
+    bSpindleAtSpeed     : BOOL;
 
     
 	
@@ -250,9 +251,11 @@ fbNCI(
 	        stY:=Y_Ref, 
 	        stZ:=Z_Ref, 
             sLoadedProgram=>sCurrentProgram,
-            out_sTItpToPlc => CNC_stItpToPlc);
+            out_sTItpToPlc => CNC_stItpToPlc,
+            bSpindleAtSpeed := bSpindleAtSpeed);
             
-fbSpindle(nSpindleSpeedFromNC := CNC_stItpToPlc.SpindleRpm);
+fbSpindle(nSpindleSpeedFromNC := CNC_stItpToPlc.SpindleRpm,
+          bSpindleAtRequestedSpeed => bSpindleAtSpeed);
 
 // All Axes Ready Bit
 
@@ -751,7 +754,9 @@ END_CASE
       <LineId Id="13961" Count="121" />
       <LineId Id="14085" Count="0" />
       <LineId Id="14416" Count="0" />
+      <LineId Id="14527" Count="0" />
       <LineId Id="14305" Count="1" />
+      <LineId Id="14525" Count="0" />
       <LineId Id="14089" Count="9" />
       <LineId Id="680" Count="0" />
     </LineIds>

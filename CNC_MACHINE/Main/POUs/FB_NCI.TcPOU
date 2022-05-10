@@ -6,6 +6,7 @@ VAR_INPUT
 	bExecute			: BOOL;
     bStop               : BOOL;
     sPrgName			: STRING(255);
+    bSpindleAtSpeed     : BOOL;
 	
 	
 END_VAR
@@ -31,7 +32,7 @@ VAR
 	fbLoadGCode			    : ItpLoadProgEx;
 	fbStartStopGCode	    : ItpStartStopEx;
 	fbClearGroup		    : CfgReconfigGroup;
-	fbConfirmHsk		    : ItpConfirmHsk;
+	fbConfirmSpindleHsk		: ItpConfirmHsk;
 	fbZeroShiftOffset	    : ItpWriteZeroShiftEx;
     fbReadZeroShiftOffset   : ItpReadZeroShiftEx;
     bExecuteZeroShift	    : BOOL;
@@ -320,13 +321,13 @@ END_CASE
 
 // handling of m-functions is done outside statemachine
 // all m-functions are directly confirmed
-IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmHsk.bBusy THEN
+IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmSpindleHsk.bBusy AND bSpindleAtSpeed THEN
 	bConfirmHsk	:= TRUE;
 ELSE	
 	bConfirmHsk	:= FALSE;
 END_IF	
 
-fbConfirmHsk(
+fbConfirmSpindleHsk(
 	bExecute:=bConfirmHsk , 
 	sNciToPlc:=stItpToPlc , 
 	sPlcToNci:=stPlcToItp , 
