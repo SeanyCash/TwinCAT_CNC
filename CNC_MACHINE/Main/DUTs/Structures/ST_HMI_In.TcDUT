@@ -54,6 +54,9 @@ bReadZeroShift          : BOOL;
 nZeroShiftNumber        : UDINT;
 fSpindleOverrideSpeed   : UDINT;
 
+// Serial Comms Reset
+bResetSerialComm        : BOOL;
+
 
 END_STRUCT
 END_TYPE

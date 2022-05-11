@@ -80,7 +80,7 @@ END_IF
 
 M_PowerStepper();
 M_Reset();
-M_Stop();
+M_FastStop();
 M_Halt();
 M_Home( );
 M_Gearing( );
@@ -89,6 +89,26 @@ M_Jog();
 M_HMI_Out();
 ]]></ST>
     </Implementation>
+    <Method Name="M_FastStop" Id="{c1ce39fb-2615-4855-8be7-e49f38ce3586}">
+      <Declaration><![CDATA[METHOD M_FastStop : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcStop(
+	Axis:= Ref, 
+	Execute:= bStopAxis, 
+	Deceleration:= Motion_In.bStopDecel, 
+	Jerk:= Motion_In.bStopJerk, 
+	Options:= Motion_In.stStopOptions, 
+	Done=> Motion_Out.bStopDone, 
+	Busy=> Motion_Out.bStopBusy, 
+	Active=> Motion_Out.bStopActive, 
+	CommandAborted=> Motion_Out.bStopAbort, 
+	Error=> Motion_Out.bStopError, 
+	ErrorID=> Motion_Out.nStopErrorID);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Gearing" Id="{7c95005e-3c30-49b2-be93-35e9b89aab5e}">
       <Declaration><![CDATA[METHOD M_Gearing : BOOL
 VAR_INPUT
@@ -274,26 +294,6 @@ END_VAR]]></Declaration>
 	        ErrorID=> Motion_Out.nResetErrorID);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Stop" Id="{c1ce39fb-2615-4855-8be7-e49f38ce3586}">
-      <Declaration><![CDATA[METHOD M_Stop : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[mcStop(
-	Axis:= Ref, 
-	Execute:= bStopAxis, 
-	Deceleration:= Motion_In.bStopDecel, 
-	Jerk:= Motion_In.bStopJerk, 
-	Options:= Motion_In.stStopOptions, 
-	Done=> Motion_Out.bStopDone, 
-	Busy=> Motion_Out.bStopBusy, 
-	Active=> Motion_Out.bStopActive, 
-	CommandAborted=> Motion_Out.bStopAbort, 
-	Error=> Motion_Out.bStopError, 
-	ErrorID=> Motion_Out.nStopErrorID);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_TouchProbe" Id="{501d32c0-2672-4596-a933-cd18dea39564}">
       <Declaration><![CDATA[METHOD M_TouchProbe : BOOL
 VAR_INPUT
@@ -326,15 +326,12 @@ END_VAR
       </Implementation>
     </Method>
     <LineIds Name="FB_MotionFunctions">
-      <LineId Id="391" Count="6" />
-      <LineId Id="386" Count="1" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="273" Count="0" />
-      <LineId Id="183" Count="3" />
-      <LineId Id="227" Count="0" />
-      <LineId Id="319" Count="0" />
-      <LineId Id="228" Count="0" />
+      <LineId Id="464" Count="17" />
       <LineId Id="126" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_FastStop">
+      <LineId Id="6" Count="10" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Gearing">
       <LineId Id="35" Count="0" />
@@ -387,10 +384,6 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Reset">
       <LineId Id="9" Count="5" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_Stop">
-      <LineId Id="6" Count="10" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_TouchProbe">

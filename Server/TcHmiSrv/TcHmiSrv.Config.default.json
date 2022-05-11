@@ -3141,6 +3141,23 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.bResetSerialComm": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::bResetSerialComm",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "comment": "Serial Comms Reset"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.bSpindleEnable": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
