@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <TcEventSources Version="2">
 	<Source>
-		<GUID>{575327A7-71B7-42A0-BEBD-8072A77678A6}</GUID>
+		<GUID>{F948B84B-81E4-4560-A447-E4D1A4BC4B08}</GUID>
 		<Name LcId="1033">CNC Events</Name>
 		<Event>
 			<Id>1</Id>
@@ -57,6 +57,14 @@
 			<Detail>
 				<Name>Comment</Name>
 				<Text LcId="1033">The spindle speed has been updated</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>8</Id>
+			<Message LcId="1033">Spindle Active</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">Spindle is currently enabled and active</Text>
 			</Detail>
 		</Event>
 	</Source>

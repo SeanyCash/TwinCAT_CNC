@@ -29,6 +29,8 @@ bInitiateNCProgramSelect : BOOL;
 // User Speed/Override Settings
 
 fChannelOverride            : REAL :=100.0;
+bManualSpindleOverride      : BOOL;
+nManualSpindleSetpoint      : UINT;
 
 // User Program Select
 
@@ -53,6 +55,7 @@ bExecuteZeroShift       : BOOL;
 bReadZeroShift          : BOOL;
 nZeroShiftNumber        : UDINT;
 fSpindleOverrideSpeed   : UDINT;
+bSpindleSpeedExecute    : BOOL;
 
 // Serial Comms Reset
 bResetSerialComm        : BOOL;

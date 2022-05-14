@@ -86,6 +86,9 @@ nUserPGain          : UINT;
 nUserIConstant      : UINT;
 nMotorControlMode   : UINT;
 nMaximumCurrentLimit: UINT;
+// Spindle at requested speed
+bSpindleAtRequestedSpeed    : BOOL;
+fScaledSpindleSpeedRef      : LREAL;
 
 // Modbus Comms to VFD status
 sReadErrorID       : STRING;

@@ -3052,6 +3052,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.bManualSpindleOverride": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::bManualSpindleOverride",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.bOverrunError": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3340,6 +3350,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.nManualSpindleSetpoint": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::nManualSpindleSetpoint",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.nZeroShiftNumber": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -3592,6 +3612,23 @@
             "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.bSpindleAtRequestedSpeed": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::bSpindleAtRequestedSpeed",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "comment": "Spindle at requested speed"
+                    }
+                ]
             },
             "USEMAPPING": true
         },

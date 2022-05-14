@@ -6,7 +6,6 @@ VAR_INPUT
 	bExecute			: BOOL;
     bStop               : BOOL;
     sPrgName			: STRING(255);
-    bSpindleAtSpeed     : BOOL;
 	
 	
 END_VAR
@@ -16,6 +15,7 @@ VAR_OUTPUT
 	bDone				: BOOL;
     sLoadedProgram      : STRING;
     out_stItpToPlc	    : NCTOPLC_NCICHANNEL_REF;
+    bSetSpindleSpeed    : BOOL;
 END_VAR
 VAR_IN_OUT
 	stX					: AXIS_REF;
@@ -24,7 +24,10 @@ VAR_IN_OUT
 
 END_VAR
 VAR
-	nState				: UDINT	:= 0;
+	fbSpindle       : FB_SpindleFunctions;
+    bSpindleAtSpeed     : BOOL;
+    bSpindleActive      : BOOL;
+    nState				: UDINT	:= 0;
 	nErrorState			: UDINT;
 	fChannelOverride    : REAL;
 	fbMessage		    : FB_TcMessage;
@@ -39,6 +42,7 @@ VAR
     bZeroShiftWriteBusy     : BOOL;
     bReadZeroShift          : BOOL;
     nZeroShiftNumber	    : UDINT := 54;
+    bSpindleSpeedSet        : BOOL;
 	
 	nInterpreterState	: UDINT	:= 0;
 	bConfirmHsk			: BOOL	:= FALSE;
@@ -78,6 +82,9 @@ M_StartStop();
 M_SetOverride();
 M_ExecuteProgram();
 M_ZeroShiftOffset();
+// Call Spindle control from here. Had it in CNC function block but NC controls the spindle speed and start stop so it makes sense to be here. I think.
+fbSpindle(nSpindleSpeedFromNC := stItpToPlc.SpindleRpm,
+          bSpindleAtRequestedSpeed => bSpindleAtSpeed,);
 
 stItpToPlc := i_stItpToPlc;
 // Pass NC status out to other FBs
@@ -257,10 +264,27 @@ CASE nState OF
 	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
 	IF nInterpreterState <> Tc2_NCI.NCI_INTERPRETER_READY THEN
 		// nci is running
-		nState	:= 60;
+		nState	:= 59;
 	END_IF
 
-60:
+    
+59:// Set spindle speed and enable  
+    //Call spindle set speed method
+    IF NOT bSpindleSpeedSet THEN
+     bSpindleSpeedSet :=    fbSpindle.M_SetSpeed();
+    ELSIF bSpindleSpeedSet THEN // wait for spindle set speed method to complete
+      nState	:= 60;   
+    END_IF
+60:// Turn Spindle On and wait for active signal
+    IF NOT bSpindleActive THEN
+     bSpindleActive := fbSpindle.M_Enable(); 
+    ELSIF bSpindleActive THEN // wait for spindle active method to complete
+      nState	:= 61;   
+    END_IF
+     
+     
+61:
+    bSpindleSpeedSet := FALSE;
 	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
 	IF	nInterpreterState = Tc2_NCI.NCI_INTERPRETER_READY THEN
 		// program has finished
@@ -321,7 +345,7 @@ END_CASE
 
 // handling of m-functions is done outside statemachine
 // all m-functions are directly confirmed
-IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmSpindleHsk.bBusy AND bSpindleAtSpeed THEN
+IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmSpindleHsk.bBusy AND bSpindleActive THEN  // spindle speed is set from NC, and the spindle is active and running
 	bConfirmHsk	:= TRUE;
 ELSE	
 	bConfirmHsk	:= FALSE;
@@ -519,7 +543,10 @@ END_IF]]></ST>
       <LineId Id="524" Count="0" />
       <LineId Id="574" Count="0" />
       <LineId Id="630" Count="0" />
-      <LineId Id="632" Count="0" />
+      <LineId Id="843" Count="0" />
+      <LineId Id="851" Count="0" />
+      <LineId Id="847" Count="0" />
+      <LineId Id="846" Count="0" />
       <LineId Id="634" Count="0" />
       <LineId Id="633" Count="0" />
       <LineId Id="708" Count="0" />
@@ -545,7 +572,22 @@ END_IF]]></ST>
       <LineId Id="80" Count="0" />
       <LineId Id="249" Count="0" />
       <LineId Id="81" Count="11" />
-      <LineId Id="94" Count="110" />
+      <LineId Id="94" Count="65" />
+      <LineId Id="280" Count="0" />
+      <LineId Id="283" Count="1" />
+      <LineId Id="287" Count="0" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="288" Count="0" />
+      <LineId Id="290" Count="1" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="281" Count="0" />
+      <LineId Id="296" Count="3" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="294" Count="0" />
+      <LineId Id="293" Count="0" />
+      <LineId Id="161" Count="0" />
+      <LineId Id="292" Count="0" />
+      <LineId Id="162" Count="42" />
       <LineId Id="243" Count="1" />
       <LineId Id="205" Count="4" />
       <LineId Id="236" Count="0" />
