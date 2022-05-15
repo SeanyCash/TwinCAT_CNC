@@ -3837,6 +3837,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.nCurrentMCode": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::nCurrentMCode",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.nDCBusVoltage": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",

@@ -1282,4 +1282,8 @@
   "color": "rgba(221, 219, 216, 1)"
 }
 </script>
+<div id="TcHmiTextblock_117" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="352" data-tchmi-left-unit="px" data-tchmi-top="70" data-tchmi-top-unit="px" data-tchmi-width="61" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="33" data-tchmi-text-font-size="28" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-text="%s%PLC1.GVL.stHMI_Out.nCurrentMCode%/s%">
+</div>
+<div id="TcHmiTextblock_116" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="333" data-tchmi-left-unit="px" data-tchmi-text="M" data-tchmi-top="70" data-tchmi-top-unit="px" data-tchmi-width="19" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="32" data-tchmi-text-font-size="28" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Left">
+</div>
 </div>

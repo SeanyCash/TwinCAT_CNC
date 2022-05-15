@@ -35,7 +35,10 @@ VAR
 	fbLoadGCode			    : ItpLoadProgEx;
 	fbStartStopGCode	    : ItpStartStopEx;
 	fbClearGroup		    : CfgReconfigGroup;
-	fbConfirmSpindleHsk		: ItpConfirmHsk;
+	fbConfirmMCodeHsk		: ItpConfirmHsk;
+    bHskBusy                : BOOL;
+    bHskError               : BOOL;
+    nHskErrorID             : UDINT;
 	fbZeroShiftOffset	    : ItpWriteZeroShiftEx;
     fbReadZeroShiftOffset   : ItpReadZeroShiftEx;
     bExecuteZeroShift	    : BOOL;
@@ -43,6 +46,9 @@ VAR
     bReadZeroShift          : BOOL;
     nZeroShiftNumber	    : UDINT := 54;
     bSpindleSpeedSet        : BOOL;
+    nMCodeSeq               : INT;
+    bExecuteSpindleSpeed    : BOOL;
+    bExecuteSpindleEnable   : BOOL;
 	
 	nInterpreterState	: UDINT	:= 0;
 	bConfirmHsk			: BOOL	:= FALSE;
@@ -69,6 +75,11 @@ VAR
     fbAlarm			: FB_TcAlarm;
     bSendEvent    : BOOL;
     bInitEvent    : BOOL;
+    
+// M Code Triggers
+
+rTrigM03          : R_TRIG;
+rTrigM05          : R_TRIG;
 	
 END_VAR
 ]]></Declaration>
@@ -81,6 +92,7 @@ M_HMI_Out();
 M_StartStop();
 M_SetOverride();
 M_ExecuteProgram();
+M_MCodeFunctions();
 M_ZeroShiftOffset();
 // Call Spindle control from here. Had it in CNC function block but NC controls the spindle speed and start stop so it makes sense to be here. I think.
 fbSpindle(nSpindleSpeedFromNC := stItpToPlc.SpindleRpm,
@@ -264,26 +276,10 @@ CASE nState OF
 	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
 	IF nInterpreterState <> Tc2_NCI.NCI_INTERPRETER_READY THEN
 		// nci is running
-		nState	:= 59;
+		nState	:= 60;
 	END_IF
-
-    
-59:// Set spindle speed and enable  
-    //Call spindle set speed method
-    IF NOT bSpindleSpeedSet THEN
-     bSpindleSpeedSet :=    fbSpindle.M_SetSpeed();
-    ELSIF bSpindleSpeedSet THEN // wait for spindle set speed method to complete
-      nState	:= 60;   
-    END_IF
-60:// Turn Spindle On and wait for active signal
-    IF NOT bSpindleActive THEN
-     bSpindleActive := fbSpindle.M_Enable(); 
-    ELSIF bSpindleActive THEN // wait for spindle active method to complete
-      nState	:= 61;   
-    END_IF
      
-     
-61:
+60:
     bSpindleSpeedSet := FALSE;
 	nInterpreterState	:= ItpGetStateInterpreter(sNciToPlc:=stItpToPlc);
 	IF	nInterpreterState = Tc2_NCI.NCI_INTERPRETER_READY THEN
@@ -342,22 +338,6 @@ CASE nState OF
 	    bError	:= FALSE;
 	END_IF
 END_CASE
-
-// handling of m-functions is done outside statemachine
-// all m-functions are directly confirmed
-IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmSpindleHsk.bBusy AND bSpindleActive THEN  // spindle speed is set from NC, and the spindle is active and running
-	bConfirmHsk	:= TRUE;
-ELSE	
-	bConfirmHsk	:= FALSE;
-END_IF	
-
-fbConfirmSpindleHsk(
-	bExecute:=bConfirmHsk , 
-	sNciToPlc:=stItpToPlc , 
-	sPlcToNci:=stPlcToItp , 
-	bBusy=> , 
-	bErr=> , 
-	nErrId=> );
     
 	]]></ST>
       </Implementation>
@@ -407,7 +387,10 @@ stHMI_Out.ZeroShiftDesc[56]:= NC_In.ZeroShiftDesc[56];
 stHMI_Out.ZeroShiftDesc[57]:= NC_In.ZeroShiftDesc[57];
 // NC program info
 stHMI_Out.sReadNCLine := sReadNCLine;
-stHMI_Out.sReadNCName := sReadNCName;]]></ST>
+stHMI_Out.sReadNCName := sReadNCName;
+
+// Get Current M Code
+stHMI_Out.nCurrentMCode:= ItpGetHskMFunc(sNciToPlc:=stItpToPlc);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_InterpreterState" Id="{20895469-b475-4424-b32a-e6207df46880}">
@@ -418,6 +401,46 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// Interpreter State mapped from fbCNC call
 eInterpreterState := i_stItpToPlc.ItpState;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_MCodeFunctions" Id="{9076bbcc-6dde-4307-b020-d9bfdd475baf}">
+      <Declaration><![CDATA[METHOD M_MCodeFunctions : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Get Current M Code
+nMCodeSeq:= ItpGetHskMFunc(sNciToPlc:=stItpToPlc);
+
+rTrigM03(CLK:=(nMCodeSeq = 3));
+
+IF rTrigM03.Q THEN    
+  bExecuteSpindleSpeed := NOT bSpindleSpeedSet;
+  bExecuteSpindleEnable := NOT bSpindleActive;
+  bSpindleSpeedSet := fbSpindle.M_SetSpeed(bExecute:=bExecuteSpindleSpeed);
+  bSpindleActive := fbSpindle.M_Enable(bExecute:=bExecuteSpindleEnable);
+  IF bSpindleSpeedSet AND bSpindleActive THEN
+      bConfirmHsk := TRUE;
+  END_IF
+END_IF  
+
+//END_CASE
+
+// handling of m-functions is done outside statemachine
+// all m-functions are directly confirmed
+(*IF ItpIsHskMFunc(stItpToPlc) AND bSpindleSpeedSet AND bSpindleActive THEN  // spindle speed is set from NC, and the spindle is active and running
+	bConfirmHsk	:= TRUE;
+ELSE	
+	bConfirmHsk	:= FALSE;
+END_IF	*)
+
+fbConfirmMCodeHsk(
+	bExecute:=bConfirmHsk , 
+	sNciToPlc:=stItpToPlc , 
+	sPlcToNci:=stPlcToItp , 
+	bBusy=> bHskBusy, 
+	bErr=> bHskError, 
+	nErrId=> nHskErrorID);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_NCFileInfo" Id="{b55ec5ca-99a1-4a79-94b9-b4f299483b66}">
@@ -543,6 +566,7 @@ END_IF]]></ST>
       <LineId Id="524" Count="0" />
       <LineId Id="574" Count="0" />
       <LineId Id="630" Count="0" />
+      <LineId Id="997" Count="0" />
       <LineId Id="843" Count="0" />
       <LineId Id="851" Count="0" />
       <LineId Id="847" Count="0" />
@@ -573,18 +597,7 @@ END_IF]]></ST>
       <LineId Id="249" Count="0" />
       <LineId Id="81" Count="11" />
       <LineId Id="94" Count="65" />
-      <LineId Id="280" Count="0" />
-      <LineId Id="283" Count="1" />
-      <LineId Id="287" Count="0" />
-      <LineId Id="289" Count="0" />
-      <LineId Id="288" Count="0" />
-      <LineId Id="290" Count="1" />
-      <LineId Id="160" Count="0" />
-      <LineId Id="281" Count="0" />
-      <LineId Id="296" Count="3" />
-      <LineId Id="295" Count="0" />
-      <LineId Id="294" Count="0" />
-      <LineId Id="293" Count="0" />
+      <LineId Id="283" Count="0" />
       <LineId Id="161" Count="0" />
       <LineId Id="292" Count="0" />
       <LineId Id="162" Count="42" />
@@ -593,7 +606,7 @@ END_IF]]></ST>
       <LineId Id="236" Count="0" />
       <LineId Id="240" Count="0" />
       <LineId Id="257" Count="0" />
-      <LineId Id="210" Count="19" />
+      <LineId Id="210" Count="3" />
       <LineId Id="268" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
@@ -625,10 +638,28 @@ END_IF]]></ST>
       <LineId Id="39" Count="0" />
       <LineId Id="38" Count="0" />
       <LineId Id="40" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="42" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_InterpreterState">
       <LineId Id="7" Count="0" />
       <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_NCI.M_MCodeFunctions">
+      <LineId Id="66" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="75" Count="1" />
+      <LineId Id="67" Count="1" />
+      <LineId Id="80" Count="2" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="47" Count="14" />
+      <LineId Id="46" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_NCFileInfo">
       <LineId Id="5" Count="0" />

@@ -60,7 +60,7 @@ VAR
 // Sequence Enumerations
  eReadVFDParamsSeq      :(INIT_FIRST,READ_FIRST_BLOCK,INIT_SECOND,READ_SECOND_BLOCK,FINISH);
  eEnableSpindleSeq      :(START,ENABLE_DRIVE,RESET_DRIVE,FINISH_ENABLE);
- eSetSpindleSpeedSeq    :(START,SET_SPEED,FINISH_SPEED);
+ eSetSpindleSpeedSeq    :(START,SET_ACCEL,SET_SPEED,FINISH_SPEED);
 
 	bTestEnable: BOOL;
 	bTestSetSpeed: BOOL;
@@ -83,10 +83,6 @@ M_OutputMapping();
 M_DriveErrors();
 M_HMI_In();
 M_HMI_Out();
-
-IF bTestEnable THEN
-    M_Enable();    
-END_IF
 
 tWriteTimer(IN:=bWriteTimerExec,PT:=T#400MS);
 
@@ -117,6 +113,7 @@ END_VAR
     <Method Name="M_Enable" Id="{00000b6e-cbd2-4a72-a802-b97127827ff0}">
       <Declaration><![CDATA[METHOD M_Enable : BOOL
 VAR_INPUT
+    bExecute    : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -126,7 +123,7 @@ START:
     M_Enable:=FALSE;
     stSpindleControl.bRunEnable := FALSE;
     stSpindleControl.bResetReq  := FALSE;
-    IF NOT stSpindleControl.bRunEnable AND NOT stSpindleControl.bResetReq THEN
+    IF NOT stSpindleControl.bRunEnable AND NOT stSpindleControl.bResetReq AND bExecute THEN
         eEnableSpindleSeq:=ENABLE_DRIVE;
 	END_IF 
     
@@ -167,12 +164,13 @@ RESET_DRIVE:
 
 FINISH_ENABLE:
 
-    stSpindleControl.bRunEnable := FALSE;
+   // stSpindleControl.bRunEnable := FALSE;
     stSpindleControl.bResetReq  := FALSE;
     fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Active,0); 
     fbMessage.Send(0);
     eEnableSpindleSeq :=START;
     M_Enable:=TRUE;
+    bExecute := FALSE;
 
 END_CASE]]></ST>
       </Implementation>
@@ -195,12 +193,12 @@ bResetSerialComm:= stHMI_In.bResetSerialComm;
 bManualSpindleOverride := stHMI_In.bManualSpindleOverride;
 nManualSpindleSetpoint := stHMI_In.nManualSpindleSetpoint;
 
-IF stHMI_In.bSpindleSpeedExecute AND stHMI_In.bManualSpindleOverride THEN     
+(*IF stHMI_In.bSpindleSpeedExecute AND stHMI_In.bManualSpindleOverride THEN     
      bSpindleSetManually := M_SetSpeed();
      IF bSpindleSetManually THEN
          stHMI_In.bSpindleSpeedExecute:=FALSE;
 	 END_IF
-END_IF]]></ST>
+END_IF*)]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_HMI_Out" Id="{7a175b83-8eaa-4aad-b855-25562de10eb8}">
@@ -271,7 +269,8 @@ fbSpeedRefScaleforHMI(
                 eErrorId=>,
                 bError=>,
                 stParams:=stSpeedRefScaleParamsforHMI,
-                                                    );  
+                                                    );
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -461,6 +460,7 @@ END_VAR
     <Method Name="M_SetSpeed" Id="{0d91e475-0382-4cfa-b413-5ce8843a481a}">
       <Declaration><![CDATA[METHOD M_SetSpeed : BOOL
 VAR_INPUT
+    bExecute    : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -471,9 +471,29 @@ START:
     M_SetSpeed:=FALSE;
     bSpindleAtRequestedSpeed := FALSE;
     bWriteDriveSetpoint := FALSE;
-    IF stSpindleStatus.bDriveReady AND stSpindleStatus.bDriveEnabled THEN
-        eSetSpindleSpeedSeq:=SET_SPEED;
+    bWriteAccel_Decel := FALSE;
+    bWriteTimerExec:=FALSE;
+    IF stSpindleStatus.bDriveReady AND stSpindleStatus.bDriveEnabled AND bExecute THEN
+        eSetSpindleSpeedSeq:=SET_ACCEL;
 	END_IF
+    
+SET_ACCEL:
+    bWriteTimerExec:=TRUE;
+    bWriteAccel_Decel:=TRUE;
+    fbModbusMasterEL.WriteSingleRegister(   
+                                                  UnitID:=1,
+                                                  Quantity:=1,
+                                                  MBAddr:=3,
+                                                  cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
+                                                  pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
+                                                  Execute:=bWriteAccel_Decel AND NOT tWriteTimer.Q,
+                                                  Timeout:=T#400MS,
+                                                  Busy => bWriteBusy );      
+
+    IF bWriteAccel_Decel AND tWriteTimer.Q THEN
+        bWriteTimerExec:=FALSE;
+        eSetSpindleSpeedSeq:=SET_SPEED;
+    END_IF
                                                     
 SET_SPEED:
     bWriteTimerExec:=TRUE;
@@ -497,18 +517,17 @@ FINISH_SPEED:
           fbMessage.Send(0);
           bWriteTimerExec:=FALSE;
           bWriteDriveSetpoint := FALSE;
+          bWriteAccel_Decel := FALSE;
           bSpindleAtRequestedSpeed := TRUE; 
           eSetSpindleSpeedSeq:=START;
           M_SetSpeed:=TRUE;
+          bExecute := FALSE;
 END_CASE]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_SpindleFunctions">
       <LineId Id="2312" Count="3" />
       <LineId Id="2317" Count="1" />
-      <LineId Id="2390" Count="0" />
-      <LineId Id="2389" Count="0" />
-      <LineId Id="2391" Count="1" />
       <LineId Id="2472" Count="0" />
       <LineId Id="2485" Count="0" />
       <LineId Id="2321" Count="4" />
@@ -553,6 +572,7 @@ END_CASE]]></ST>
       <LineId Id="72" Count="1" />
       <LineId Id="65" Count="0" />
       <LineId Id="64" Count="0" />
+      <LineId Id="78" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
@@ -583,6 +603,7 @@ END_CASE]]></ST>
       <LineId Id="83" Count="0" />
       <LineId Id="85" Count="16" />
       <LineId Id="84" Count="0" />
+      <LineId Id="104" Count="0" />
       <LineId Id="80" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_InitalizeParameters">
@@ -652,7 +673,14 @@ END_CASE]]></ST>
       <LineId Id="10" Count="2" />
       <LineId Id="109" Count="0" />
       <LineId Id="164" Count="0" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="189" Count="0" />
       <LineId Id="15" Count="2" />
+      <LineId Id="172" Count="0" />
+      <LineId Id="174" Count="13" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="173" Count="0" />
       <LineId Id="36" Count="1" />
       <LineId Id="165" Count="1" />
       <LineId Id="154" Count="7" />
@@ -664,9 +692,11 @@ END_CASE]]></ST>
       <LineId Id="167" Count="1" />
       <LineId Id="150" Count="0" />
       <LineId Id="91" Count="0" />
+      <LineId Id="190" Count="0" />
       <LineId Id="110" Count="0" />
       <LineId Id="90" Count="0" />
       <LineId Id="92" Count="0" />
+      <LineId Id="197" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

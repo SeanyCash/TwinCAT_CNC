@@ -110,6 +110,7 @@ bOverrunError       AT %I*   : BOOL;
 
 sReadNCLine		    : STRING[255];
 sReadNCName		    : STRING[100];
+nCurrentMCode       : INT;
 
 END_STRUCT
 END_TYPE]]></Declaration>
