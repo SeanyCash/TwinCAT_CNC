@@ -338,8 +338,18 @@ CASE nState OF
 	    bError	:= FALSE;
 	END_IF
 END_CASE
-    
-	]]></ST>
+
+// handling of m-functions is done outside statemachine
+// all m-functions are directly confiremd. In a real application we have of course to consider the m-function numbers to turn on/off certain functions in the machine.
+	
+
+fbConfirmMCodeHsk(
+	bExecute:=bConfirmHsk , 
+	sNciToPlc:=stItpToPlc , 
+	sPlcToNci:=stPlcToItp , 
+	bBusy=> , 
+	bErr=> , 
+	nErrId=> );]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_HMI_In" Id="{9f4f47f9-fd80-4bd7-98c1-19ae73c5acf0}">
@@ -412,35 +422,23 @@ END_VAR
         <ST><![CDATA[// Get Current M Code
 nMCodeSeq:= ItpGetHskMFunc(sNciToPlc:=stItpToPlc);
 
-rTrigM03(CLK:=(nMCodeSeq = 3));
+CASE nMCodeSeq OF  
 
-IF rTrigM03.Q THEN    
-  bExecuteSpindleSpeed := NOT bSpindleSpeedSet;
-  bExecuteSpindleEnable := NOT bSpindleActive;
-  bSpindleSpeedSet := fbSpindle.M_SetSpeed(bExecute:=bExecuteSpindleSpeed);
-  bSpindleActive := fbSpindle.M_Enable(bExecute:=bExecuteSpindleEnable);
-  IF bSpindleSpeedSet AND bSpindleActive THEN
-      bConfirmHsk := TRUE;
-  END_IF
-END_IF  
+3: 
+  
+  
+  bExecuteSpindleSpeed := fbSpindle.M_SetSpeed(bExecute:=bExecuteSpindleSpeed);
+  bExecuteSpindleEnable := fbSpindle.M_Enable(bExecute:=bExecuteSpindleEnable);
 
-//END_CASE
+END_CASE
 
-// handling of m-functions is done outside statemachine
-// all m-functions are directly confirmed
-(*IF ItpIsHskMFunc(stItpToPlc) AND bSpindleSpeedSet AND bSpindleActive THEN  // spindle speed is set from NC, and the spindle is active and running
+IF ItpIsHskMFunc(stItpToPlc) AND NOT fbConfirmMCodeHsk.bBusy AND (ItpGetHskMFunc(sNciToPlc:=stItpToPlc) = 3) THEN
 	bConfirmHsk	:= TRUE;
 ELSE	
 	bConfirmHsk	:= FALSE;
-END_IF	*)
+END_IF
 
-fbConfirmMCodeHsk(
-	bExecute:=bConfirmHsk , 
-	sNciToPlc:=stItpToPlc , 
-	sPlcToNci:=stPlcToItp , 
-	bBusy=> bHskBusy, 
-	bErr=> bHskError, 
-	nErrId=> nHskErrorID);]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_NCFileInfo" Id="{b55ec5ca-99a1-4a79-94b9-b4f299483b66}">
@@ -607,7 +605,9 @@ END_IF]]></ST>
       <LineId Id="240" Count="0" />
       <LineId Id="257" Count="0" />
       <LineId Id="210" Count="3" />
-      <LineId Id="268" Count="0" />
+      <LineId Id="296" Count="0" />
+      <LineId Id="303" Count="1" />
+      <LineId Id="309" Count="7" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_HMI_In">
@@ -648,17 +648,18 @@ END_IF]]></ST>
     <LineIds Name="FB_NCI.M_MCodeFunctions">
       <LineId Id="66" Count="0" />
       <LineId Id="63" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="64" Count="0" />
       <LineId Id="70" Count="0" />
       <LineId Id="6" Count="0" />
-      <LineId Id="75" Count="1" />
-      <LineId Id="67" Count="1" />
-      <LineId Id="80" Count="2" />
-      <LineId Id="71" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="93" Count="1" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="90" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="7" Count="0" />
-      <LineId Id="47" Count="14" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="86" Count="3" />
+      <LineId Id="54" Count="1" />
       <LineId Id="46" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_NCFileInfo">
