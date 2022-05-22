@@ -27,6 +27,7 @@ VAR
 	fbSpindle           : FB_SpindleFunctions;
     bSpindleAtSpeed     : BOOL;
     bSpindleActive      : BOOL;
+    bSpindleStopped     : BOOL;
     nState				: UDINT	:= 0;
 	nErrorState			: UDINT;
 	fChannelOverride    : REAL;
@@ -47,8 +48,6 @@ VAR
     nZeroShiftNumber	    : UDINT := 54;
     bSpindleSpeedSet        : BOOL;
     nMCodeSeq               : INT;
-    bExecuteSpindleSpeed    : BOOL;
-    bExecuteSpindleEnable   : BOOL;
 	
 	nInterpreterState	: UDINT	:= 0;
 	bConfirmHsk			: BOOL	:= FALSE;
@@ -78,9 +77,10 @@ VAR
     
 // M Code Triggers
 
-rTrigM03          : R_TRIG;
+rTrigMHandshake   : R_TRIG;
 rTrigM05          : R_TRIG;
 tM3Pulse          : TP;
+tHskPulse         : TP;
 bSpindleEnableTest  : BOOL;
 bSpindleEnableDone  : BOOL;
 bSpindleSetSpeedTest    : BOOL;
@@ -142,7 +142,7 @@ END_VAR
 	
 
 fbConfirmMCodeHsk(
-	bExecute:=bConfirmHsk , 
+	bExecute:=tHskPulse.Q , 
 	sNciToPlc:=stItpToPlc , 
 	sPlcToNci:=q_stPlcToItp , 
 	bBusy=> bHskBusy, 
@@ -449,24 +449,34 @@ CASE nMCodeSeq OF
 0:
 
     bConfirmHsk	:= FALSE;
-    bExecuteSpindleSpeed := FALSE;
-    bExecuteSpindleEnable := FALSE;
     bSpindleActive := FALSE;
+    bSpindleStopped := FALSE;
     tM3Pulse (IN:=FALSE);
+    tHskPulse(IN:=FALSE);
 
 3:
   
-    IF NOT bConfirmHsk THEN 
+    IF NOT bSpindleActive THEN 
      tM3Pulse (IN:=TRUE,PT:=T#500MS);
      bSpindleActive   := fbSpindle.M_SetSpeed(bExecute:=tM3Pulse.Q);
     END_IF
     IF bSpindleActive THEN
-      //tM3Pulse (IN:=TRUE,PT:=T#500MS);
-      bConfirmHsk	:= TRUE;
+        tHskPulse(IN:=TRUE,PT:=T#200MS);
     ELSE	
-      bConfirmHsk	:= FALSE;
+        tHskPulse(IN:=FALSE);
     END_IF
-
+5:
+  
+    IF NOT bSpindleStopped THEN 
+     tM3Pulse (IN:=TRUE,PT:=T#500MS);
+     bSpindleStopped   := fbSpindle.M_CoastStop(bExecute:=tM3Pulse.Q);
+    END_IF
+    IF bSpindleStopped THEN
+        tHskPulse(IN:=TRUE,PT:=T#200MS);
+    ELSE	
+        tHskPulse(IN:=FALSE);
+    END_IF
+    
 END_CASE
 
 
@@ -697,9 +707,10 @@ END_IF]]></ST>
       <LineId Id="104" Count="0" />
       <LineId Id="107" Count="0" />
       <LineId Id="106" Count="0" />
-      <LineId Id="112" Count="1" />
       <LineId Id="122" Count="0" />
+      <LineId Id="137" Count="0" />
       <LineId Id="115" Count="0" />
+      <LineId Id="139" Count="0" />
       <LineId Id="92" Count="0" />
       <LineId Id="75" Count="0" />
       <LineId Id="93" Count="0" />
@@ -708,9 +719,13 @@ END_IF]]></ST>
       <LineId Id="67" Count="0" />
       <LineId Id="116" Count="0" />
       <LineId Id="100" Count="0" />
-      <LineId Id="121" Count="0" />
-      <LineId Id="101" Count="2" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="102" Count="1" />
       <LineId Id="99" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="127" Count="5" />
+      <LineId Id="134" Count="2" />
+      <LineId Id="125" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="7" Count="0" />
       <LineId Id="47" Count="0" />

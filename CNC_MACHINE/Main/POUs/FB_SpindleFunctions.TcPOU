@@ -61,6 +61,7 @@ VAR
  eReadVFDParamsSeq      :(INIT_FIRST,READ_FIRST_BLOCK,INIT_SECOND,READ_SECOND_BLOCK,FINISH);
  nEnableSpindleSeq      :INT;
  eSetSpindleSpeedSeq    :(START,SET_ACCEL,SET_SPEED,FINISH_SPEED,START_ENABLE,ENABLE_DRIVE,RESET_DRIVE,FINISH_ENABLE,SPINDLE_ACTIVE);
+ eCoastStop             :(INIT_STOP,ENABLE_STOP,WAIT_FOR_STOPPED,DISABLE_DRIVE,FINISH_STOP);
 
 	bTestEnable: BOOL;
 	bTestSetSpeed: BOOL;
@@ -97,10 +98,75 @@ tReadTimer(IN:=bReadTimerExecute,PT:=T#500MS,);
     <Method Name="M_CoastStop" Id="{f02bd68b-a8e2-4168-ba64-5310fb0ed017}">
       <Declaration><![CDATA[METHOD M_CoastStop : BOOL
 VAR_INPUT
+    bExecute    : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[CASE eCoastStop OF
+
+
+ INIT_STOP:
+
+    M_CoastStop := FALSE;
+    stSpindleControl.bCoastStopRequest  := FALSE;
+    IF NOT stSpindleControl.bCoastStopRequest THEN
+        eCoastStop:=ENABLE_STOP;
+        bWriteTimerExec:=FALSE;
+	END_IF 
+    
+ENABLE_STOP:
+    bWriteTimerExec:=TRUE;
+    stSpindleControl.bCoastStopRequest := TRUE;
+
+    fbModbusMasterEL.WriteSingleRegister(   
+                                          UnitID:=1,
+                                          Quantity:=1,
+                                          MBAddr:=0,
+                                          cbLength:=SIZEOF(nModbusWriteDriveCommand),
+                                          pMemoryAddr:=ADR(nModbusWriteDriveCommand),
+                                          Execute:=stSpindleControl.bCoastStopRequest,
+                                          Timeout:=T#400MS, ); 
+     IF stSpindleControl.bCoastStopRequest AND tWriteTimer.Q THEN 
+        eCoastStop:=WAIT_FOR_STOPPED;
+        bWriteTimerExec:=FALSE;
+        stSpindleControl.bCoastStopRequest := FALSE;   
+     END_IF
+     
+WAIT_FOR_STOPPED:
+    IF stSpindleStatus.nOutputFreq = 0 THEN 
+        eCoastStop:=DISABLE_DRIVE;
+         bWriteTimerExec:=FALSE;   
+     END_IF
+    
+ 
+DISABLE_DRIVE:
+    bWriteTimerExec:=TRUE;
+    stSpindleControl.bRunEnable := FALSE;
+
+    fbModbusMasterEL.WriteSingleRegister(   
+                                          UnitID:=1,
+                                          Quantity:=1,
+                                          MBAddr:=0,
+                                          cbLength:=SIZEOF(nModbusWriteDriveCommand),
+                                          pMemoryAddr:=ADR(nModbusWriteDriveCommand),
+                                          Execute:= NOT stSpindleControl.bRunEnable,
+                                          Timeout:=T#400MS, ); 
+     IF NOT stSpindleControl.bRunEnable AND tWriteTimer.Q THEN 
+        eCoastStop:=FINISH_STOP;
+         bWriteTimerExec:=FALSE;   
+     END_IF 
+
+FINISH_STOP:
+
+    stSpindleControl.bCoastStopRequest := FALSE;
+    bWriteTimerExec := FALSE;
+    fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Active,0); 
+    fbMessage.Send(0);
+    eCoastStop :=INIT_STOP;
+    M_CoastStop:=TRUE;
+    bExecute := FALSE;
+   
+END_CASE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_DriveErrors" Id="{5214dc49-55b0-4763-8ae7-946b59ed4930}">
@@ -747,7 +813,23 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="1542" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_CoastStop">
+      <LineId Id="64" Count="2" />
+      <LineId Id="10" Count="5" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="16" Count="16" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="102" Count="1" />
+      <LineId Id="106" Count="2" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="87" Count="14" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="57" Count="6" />
       <LineId Id="5" Count="0" />
+      <LineId Id="67" Count="1" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_DriveErrors">
       <LineId Id="5" Count="0" />
