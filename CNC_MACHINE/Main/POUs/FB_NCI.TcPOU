@@ -81,6 +81,10 @@ VAR
 rTrigM03          : R_TRIG;
 rTrigM05          : R_TRIG;
 tM3Pulse          : TP;
+bSpindleEnableTest  : BOOL;
+bSpindleEnableDone  : BOOL;
+bSpindleSetSpeedTest    : BOOL;
+bSpindleSetSpeedDone    : BOOL;
 	
 END_VAR
 ]]></Declaration>
@@ -110,6 +114,19 @@ IF bExecuteZeroShift AND nZeroShiftNumber <> 0 THEN
     NC_In.ZeroShiftDesc[nZeroShiftNumber].fShiftY := stY.NcToPlc.ActPos;
     NC_In.ZeroShiftDesc[nZeroShiftNumber].fShiftZ := stZ.NcToPlc.ActPos;
 END_IF;
+
+IF bSpindleEnableTest THEN
+  bSpindleEnableDone:=  fbSpindle.M_Enable(bExecute:=bSpindleEnableTest);
+  IF bSpindleEnableDone THEN
+    bSpindleEnableTest:=FALSE;
+  END_IF
+END_IF
+IF bSpindleSetSpeedTest THEN
+  bSpindleSetSpeedDone:=  fbSpindle.M_SetSpeed_1(bExecute:=bSpindleSetSpeedTest);
+  IF bSpindleSetSpeedDone THEN
+    bSpindleSetSpeedTest:=FALSE;
+  END_IF
+END_IF
 ]]></ST>
     </Implementation>
     <Method Name="M_ExecuteProgram" Id="{f5d89ea2-b283-4fc0-aa63-1e3309b96a56}">
@@ -596,6 +613,17 @@ END_IF]]></ST>
       <LineId Id="291" Count="0" />
       <LineId Id="636" Count="1" />
       <LineId Id="641" Count="0" />
+      <LineId Id="1082" Count="0" />
+      <LineId Id="1081" Count="0" />
+      <LineId Id="1083" Count="0" />
+      <LineId Id="1092" Count="0" />
+      <LineId Id="1095" Count="0" />
+      <LineId Id="1094" Count="0" />
+      <LineId Id="1084" Count="0" />
+      <LineId Id="1086" Count="1" />
+      <LineId Id="1097" Count="1" />
+      <LineId Id="1096" Count="0" />
+      <LineId Id="1088" Count="0" />
       <LineId Id="290" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_ExecuteProgram">
