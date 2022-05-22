@@ -103,6 +103,7 @@ stItpToPlc := i_stItpToPlc;
 // Pass NC status out to other FBs
 out_stItpToPlc := i_stItpToPlc;
 //stPlcToItp := q_stPlcToItp;
+//q_stPlcToItp := stPlcToItp;
 
 IF bExecuteZeroShift AND nZeroShiftNumber <> 0 THEN
     NC_In.ZeroShiftDesc[nZeroShiftNumber].fShiftX := stX.NcToPlc.ActPos;
@@ -126,7 +127,7 @@ END_VAR
 fbConfirmMCodeHsk(
 	bExecute:=bConfirmHsk , 
 	sNciToPlc:=stItpToPlc , 
-	sPlcToNci:=stPlcToItp , 
+	sPlcToNci:=q_stPlcToItp , 
 	bBusy=> bHskBusy, 
 	bErr=> , 
 	nErrId=> );
@@ -433,20 +434,21 @@ CASE nMCodeSeq OF
     bConfirmHsk	:= FALSE;
     bExecuteSpindleSpeed := FALSE;
     bExecuteSpindleEnable := FALSE;
+    bSpindleActive := FALSE;
     tM3Pulse (IN:=FALSE);
 
 3:
   
- IF NOT bConfirmHsk THEN 
-  tM3Pulse (IN:=TRUE,PT:=T#500MS);
-  bSpindleActive   := fbSpindle.M_SetSpeed(bExecute:=tM3Pulse.Q);
- END_IF
- IF bSpindleActive THEN
-        rTrigM03(CLK:=bSpindleActive);
-	    bConfirmHsk	:= rTrigM03.Q;
- ELSE	
-	    bConfirmHsk	:= FALSE;
- END_IF
+    IF NOT bConfirmHsk THEN 
+     tM3Pulse (IN:=TRUE,PT:=T#500MS);
+     bSpindleActive   := fbSpindle.M_SetSpeed(bExecute:=tM3Pulse.Q);
+    END_IF
+    IF bSpindleActive THEN
+      //tM3Pulse (IN:=TRUE,PT:=T#500MS);
+      bConfirmHsk	:= TRUE;
+    ELSE	
+      bConfirmHsk	:= FALSE;
+    END_IF
 
 END_CASE
 
@@ -588,6 +590,7 @@ END_IF]]></ST>
       <LineId Id="708" Count="0" />
       <LineId Id="707" Count="0" />
       <LineId Id="635" Count="0" />
+      <LineId Id="1080" Count="0" />
       <LineId Id="639" Count="0" />
       <LineId Id="207" Count="0" />
       <LineId Id="291" Count="0" />
@@ -667,16 +670,17 @@ END_IF]]></ST>
       <LineId Id="107" Count="0" />
       <LineId Id="106" Count="0" />
       <LineId Id="112" Count="1" />
+      <LineId Id="122" Count="0" />
       <LineId Id="115" Count="0" />
       <LineId Id="92" Count="0" />
       <LineId Id="75" Count="0" />
       <LineId Id="93" Count="0" />
       <LineId Id="111" Count="0" />
-      <LineId Id="114" Count="0" />
+      <LineId Id="123" Count="0" />
       <LineId Id="67" Count="0" />
       <LineId Id="116" Count="0" />
       <LineId Id="100" Count="0" />
-      <LineId Id="117" Count="0" />
+      <LineId Id="121" Count="0" />
       <LineId Id="101" Count="2" />
       <LineId Id="99" Count="0" />
       <LineId Id="39" Count="0" />
