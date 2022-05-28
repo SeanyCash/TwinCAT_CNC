@@ -120,14 +120,7 @@ IF bSpindleEnableTest THEN
   IF bSpindleEnableDone THEN
     bSpindleEnableTest:=FALSE;
   END_IF
-END_IF
-IF bSpindleSetSpeedTest THEN
-  bSpindleSetSpeedDone:=  fbSpindle.M_SetSpeed_1(bExecute:=bSpindleSetSpeedTest);
-  IF bSpindleSetSpeedDone THEN
-    bSpindleSetSpeedTest:=FALSE;
-  END_IF
-END_IF
-]]></ST>
+END_IF]]></ST>
     </Implementation>
     <Method Name="M_ExecuteProgram" Id="{f5d89ea2-b283-4fc0-aa63-1e3309b96a56}">
       <Declaration><![CDATA[METHOD M_ExecuteProgram : BOOL
@@ -565,7 +558,12 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbStartStopGCode( bStop:=bStop, sNciToPlc:= stItpToPlc );]]></ST>
+        <ST><![CDATA[fbStartStopGCode( bStop:=bStop, sNciToPlc:= stItpToPlc );
+
+IF NOT bSpindleStopped THEN 
+     tM3Pulse (IN:=TRUE,PT:=T#500MS);
+     bSpindleStopped   := fbSpindle.M_CoastStop(bExecute:=tM3Pulse.Q);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_ZeroShiftOffset" Id="{2a915930-d001-41c5-9e1b-3c451820ac54}">
@@ -630,11 +628,6 @@ END_IF]]></ST>
       <LineId Id="1095" Count="0" />
       <LineId Id="1094" Count="0" />
       <LineId Id="1084" Count="0" />
-      <LineId Id="1086" Count="1" />
-      <LineId Id="1097" Count="1" />
-      <LineId Id="1096" Count="0" />
-      <LineId Id="1088" Count="0" />
-      <LineId Id="290" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_ExecuteProgram">
       <LineId Id="320" Count="0" />
@@ -752,6 +745,8 @@ END_IF]]></ST>
     </LineIds>
     <LineIds Name="FB_NCI.M_StartStop">
       <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="3" />
+      <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_ZeroShiftOffset">
       <LineId Id="31" Count="1" />
