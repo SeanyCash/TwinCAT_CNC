@@ -458,6 +458,7 @@ CASE nMCodeSeq OF
     ELSE	
         tHskPulse(IN:=FALSE);
     END_IF
+    
 5:
   
     IF NOT bSpindleStopped THEN 
@@ -559,11 +560,12 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbStartStopGCode( bStop:=bStop, sNciToPlc:= stItpToPlc );
-
+(*
 IF NOT bSpindleStopped THEN 
      tM3Pulse (IN:=TRUE,PT:=T#500MS);
      bSpindleStopped   := fbSpindle.M_CoastStop(bExecute:=tM3Pulse.Q);
-END_IF]]></ST>
+END_IF
+*)]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_ZeroShiftOffset" Id="{2a915930-d001-41c5-9e1b-3c451820ac54}">
@@ -715,6 +717,7 @@ END_IF]]></ST>
       <LineId Id="138" Count="0" />
       <LineId Id="102" Count="1" />
       <LineId Id="99" Count="0" />
+      <LineId Id="144" Count="0" />
       <LineId Id="124" Count="0" />
       <LineId Id="127" Count="5" />
       <LineId Id="134" Count="2" />
@@ -747,6 +750,7 @@ END_IF]]></ST>
       <LineId Id="5" Count="0" />
       <LineId Id="10" Count="3" />
       <LineId Id="9" Count="0" />
+      <LineId Id="14" Count="0" />
     </LineIds>
     <LineIds Name="FB_NCI.M_ZeroShiftOffset">
       <LineId Id="31" Count="1" />

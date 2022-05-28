@@ -95,6 +95,25 @@ tReadTimer(IN:=bReadTimerExecute,PT:=T#500MS,);
                                        
 ]]></ST>
     </Implementation>
+    <Method Name="M_ActiveSpeedChange" Id="{8c91d8ac-e153-43a1-8a22-2e9bee5bdf48}">
+      <Declaration><![CDATA[METHOD M_ActiveSpeedChange : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF stSpindleStatus.nSpeedRefSetpoint <> nModbusWriteDriveSetpoint AND NOT tWriteTimer.Q THEN
+    fbModbusMasterEL.WriteSingleRegister(   
+                                                  UnitID:=1,
+                                                  Quantity:=1,
+                                                  MBAddr:=1,
+                                                  cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
+                                                  pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
+                                                  Execute:=TRUE AND NOT tWriteTimer.Q,
+                                                  Timeout:=T#400MS,
+                                                  Busy => bWriteBusy );      
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_CoastStop" Id="{f02bd68b-a8e2-4168-ba64-5310fb0ed017}">
       <Declaration><![CDATA[METHOD M_CoastStop : BOOL
 VAR_INPUT
@@ -693,6 +712,11 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="2485" Count="0" />
       <LineId Id="2321" Count="4" />
       <LineId Id="1542" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SpindleFunctions.M_ActiveSpeedChange">
+      <LineId Id="6" Count="0" />
+      <LineId Id="9" Count="8" />
+      <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_CoastStop">
       <LineId Id="64" Count="2" />
