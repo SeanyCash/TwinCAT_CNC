@@ -1,33 +1,14 @@
 + =======================================
 + ---
 + Version 1
-+   Tony     15/11/2005 Written
-+   Tony     06/01/2006 Added ATC option
-+   Tony     14/05/2006 Fixed G20 inch in header
-+   Tony     24/07/2006 Added G2 & G3 Arc support + removed (( ))
-+   Tony     18/06/2007 Replaced the Tool comment
-+   Mark     14/08/2008 Added G1 to Feed moves,
-+   Removed 2nd G20 in header.
-+   Mark     28/08/2009 Added G91.1 to force use of incremental arcs
-+   Added Substitution, File & Toolpath Notes.
-+   Mark     30/11/2009 Added TOOLPATHS_OUTPUT.
-+   Brian    15/12/2009 Remove M05 from NEW_SEGMENT
-+   Mark     18/01/2014 Added Dwell
-+   Nathan   14/03/2017 OEM Customized
-+   Added M6 toolchange
-+   Added Dust Collector M7 Enable
-+   Drew     17/07/2019 Added G71 to fix units in header
-+   10/09/2019 Added Toolchange to header
-+   04/23/2020 Added helical arc commands
-+   Added Material and setup information to header
++ 	Sean Peterson     5/29/22 Written
++ 	Created Post processor for AVID PRO4896 using Beckhoff's TwinCAT3 control platform. Modified AVID CNC PRO4896 PP V3.0
++	Changed GCode for metric dimensions (G71 in TwinCAT)
++	Turn Off Tool Length Compensation with D0
++	Removed G80 (cancel motion modes aka drilling) since this is handled with TwinCATs built in Tool Table
++	Feedrate by default is in mm/min
 + ---
-+ Version 2
-+   Adding post revision block.
-+ ---
-+ Version 3
-+   Bumping internal version number as requested by Avid support.
 + =======================================
-
 
 POST_NAME = "Beckhoff CNC (mm) (*.NC)"
 
@@ -92,7 +73,7 @@ begin HEADER
 
 "( [TP_FILENAME] )"
 "( File created: [DATE] - [TIME])"
-"( for Beckhoff CNC Machines, post processor v1.0 )"
+"( for AVID PRO4896 with Beckhoff TwinCAT Controls Platform, post processor v1.0 )"
 "( Material Size: X= [XLENGTH], Y= [YLENGTH], Z= [ZLENGTH])"
 "( Z Origin for Material  = [Z_ORIGIN])"
 "( XY Origin for Material = [XY_ORIGIN])"
@@ -106,13 +87,11 @@ begin HEADER
 "(Tools used in this file: )"
 "([TOOLS_USED])"
 
-"[N] G00 G21 G17 G90 G40 G49 G80"
-"[N] T[T]M6"
-"[N] M07"
-"[N] G00G43[ZH]H[T]"
-"[N] [S]M03"
+"[N] G00 G71 G17 G90 G40 D0"
+"[N] T[T]"
+"[N] G00 G43 [ZH] H[T]"
+"[N] [S] M03"
 "(Toolpath: [TOOLPATH_NAME] Tool: [TOOLNAME])"
-"[N] G94"
 "[N] [XH][YH][F]"
 
 +---------------------------------------------------
