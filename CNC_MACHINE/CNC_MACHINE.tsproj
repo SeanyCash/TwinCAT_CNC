@@ -2516,6 +2516,11 @@ External Setpoint Generation:
 				<Cpu CpuId="3"/>
 				<IoIdleTask Priority="6" Affinity="#x00000008"/>
 			</Settings>
+			<Licenses>
+				<Target>
+					<ManualSelect>{8161723B-0C2E-405C-B829-EDC5DAAB5104}</ManualSelect>
+				</Target>
+			</Licenses>
 			<Tasks>
 				<Task Id="3" Priority="10" CycleTime="100000" AmsPort="350" Affinity="#x00000008" AdtTasks="true">
 					<Name>StandardPlcTask</Name>
@@ -3283,7 +3288,7 @@ External Setpoint Generation:
 			</NC>
 		</Motion>
 		<Plc>
-			<Project GUID="{BAEA0BE9-F1E8-4314-86B8-0F7DE89572E6}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" CopyTmcToTarget="true" CopyTpyToTarget="false" SymbolicMapping="true">
+			<Project GUID="{64EA087B-AF6F-4600-AB87-345CEDCA4F88}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" CopyTmcToTarget="true" CopyTpyToTarget="false" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Main\Main.tmc">
 					<Name>Main Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
