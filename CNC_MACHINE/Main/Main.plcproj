@@ -76,6 +76,9 @@
     <Compile Include="POUs\FB_MotionFunctions.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Utilities\FB_ModbusRTU_SerialComms.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Utilities\FB_StringTrimmer.TcPOU">
       <SubType>Code</SubType>
     </Compile>

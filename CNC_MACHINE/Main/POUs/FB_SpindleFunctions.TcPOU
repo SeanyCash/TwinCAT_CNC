@@ -13,11 +13,13 @@ END_VAR
 
 
 VAR
+	
+fbModbusRTUComms			: FB_ModbusRTU_SerialComms;
     
  fbModbusMasterEL           : ModbusRtuMasterV2_KL6x22B;
  fbSpeedRefScale            : FB_CTRL_SCALE;
  fbSpeedRefScaleforHMI      : FB_CTRL_SCALE;
- fbMessage		    : FB_TcMessage;
+ fbMessage		    		: FB_TcMessage;
  stSpeedRefScaleParams            : ST_CTRL_SCALE_PARAMS;
  stSpeedRefScaleParamsforHMI      : ST_CTRL_SCALE_PARAMS;
  fScaledSpindleSpeedRef    : LREAL;
@@ -91,9 +93,22 @@ tWriteTimer(IN:=bWriteTimerExec,PT:=T#400MS);
 
 tReadTimer(IN:=bReadTimerExecute,PT:=T#500MS,);
 
-
+(*
                                        
-]]></ST>
+fbModbusRTUComms(
+	nModbusStationAddress:= , 
+	bReadExecute:= , 
+	nReadQuantity:= , 
+	nModbusReadDataAddress:= , 
+	nModbusReadData:= , 
+	bWriteExecute:= , 
+	nWriteQuantity:= , 
+	nModbusWriteDataAddress:= , 
+	nModbusWriteData:= , 
+	bReadComplete=> , 
+	bReadFailed=> , 
+	bWriteComplete=> , 
+	bWriteFailed=> );	*)]]></ST>
     </Implementation>
     <Method Name="M_ActiveSpeedChange" Id="{8c91d8ac-e153-43a1-8a22-2e9bee5bdf48}">
       <Declaration><![CDATA[METHOD M_ActiveSpeedChange : BOOL
@@ -711,6 +726,9 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="2472" Count="0" />
       <LineId Id="2485" Count="0" />
       <LineId Id="2321" Count="4" />
+      <LineId Id="2639" Count="4" />
+      <LineId Id="2645" Count="3" />
+      <LineId Id="2650" Count="3" />
       <LineId Id="1542" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ActiveSpeedChange">
