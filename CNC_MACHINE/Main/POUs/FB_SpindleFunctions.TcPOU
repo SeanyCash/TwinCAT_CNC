@@ -52,7 +52,7 @@ fbModbusRTUComms			: FB_ModbusRTU_SerialComms;
  nModbusWriteDriveCommand       : WORD;
  nModbusWriteDriveSetpoint      : INT;
  nModbusWriteDriveAccel_Decel   : UINT;
- 
+ trigWriteBusy					: F_TRIG;
  
  eVFDErrors         : E_VFDErrors;
  stSpindleStatus	: ST_SpindleStatus;
@@ -145,14 +145,13 @@ END_VAR
     stSpindleControl.bCoastStopRequest  := FALSE;
     IF NOT stSpindleControl.bCoastStopRequest THEN
         eCoastStop:=ENABLE_STOP;
-        bWriteTimerExec:=FALSE;
+        //bWriteTimerExec:=FALSE;
 	END_IF 
     
 ENABLE_STOP:
-    bWriteTimerExec:=TRUE;
+    //bWriteTimerExec:=TRUE;
     stSpindleControl.bCoastStopRequest := TRUE;
     stSpindleControl.bRunEnable := FALSE;
-
     fbModbusMasterEL.WriteSingleRegister(   
                                           UnitID:=1,
                                           Quantity:=1,
@@ -160,11 +159,13 @@ ENABLE_STOP:
                                           cbLength:=SIZEOF(nModbusWriteDriveCommand),
                                           pMemoryAddr:=ADR(nModbusWriteDriveCommand),
                                           Execute:=stSpindleControl.bCoastStopRequest,
-                                          Timeout:=T#400MS, ); 
-     IF stSpindleControl.bCoastStopRequest AND tWriteTimer.Q THEN 
-        eCoastStop:=WAIT_FOR_STOPPED;
-        bWriteTimerExec:=FALSE;
-        stSpindleControl.bCoastStopRequest := FALSE;   
+                                          Timeout:=T#400MS,
+										  Busy => bWriteBusy );
+	 trigWriteBusy(CLK := bWriteBusy); 
+     IF trigWriteBusy.Q THEN
+        	eCoastStop:=WAIT_FOR_STOPPED;
+        	//bWriteTimerExec:=FALSE;
+        	stSpindleControl.bCoastStopRequest := FALSE;
      END_IF
      
 WAIT_FOR_STOPPED:
@@ -175,10 +176,9 @@ WAIT_FOR_STOPPED:
     
  
 DISABLE_DRIVE:
-    bWriteTimerExec:=TRUE;
+    //bWriteTimerExec:=TRUE;
     stSpindleControl.bRunEnable := FALSE;
     stSpindleControl.bCoastStopRequest := FALSE; 
-
     fbModbusMasterEL.WriteSingleRegister(   
                                           UnitID:=1,
                                           Quantity:=1,
@@ -186,21 +186,24 @@ DISABLE_DRIVE:
                                           cbLength:=SIZEOF(nModbusWriteDriveCommand),
                                           pMemoryAddr:=ADR(nModbusWriteDriveCommand),
                                           Execute:= NOT stSpindleControl.bRunEnable,
-                                          Timeout:=T#400MS, ); 
-     IF NOT stSpindleControl.bRunEnable AND tWriteTimer.Q THEN 
-        eCoastStop:=FINISH_STOP;
-         bWriteTimerExec:=FALSE;   
+                                          Timeout:=T#400MS,
+										  Busy => bWriteBusy);
+	 trigWriteBusy(CLK := bWriteBusy); 
+     IF trigWriteBusy.Q THEN
+     	eCoastStop:=FINISH_STOP;
+        bWriteTimerExec:=FALSE;   
      END_IF 
 
 FINISH_STOP:
-
-    stSpindleControl.bCoastStopRequest := FALSE;
-    bWriteTimerExec := FALSE;
-    fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Active,0); 
-    fbMessage.Send(0);
-    eCoastStop :=INIT_STOP;
-    M_CoastStop:=TRUE;
-    bExecute := FALSE;
+	IF stSpindleStatus.nOutputFreq = 0 AND stSpindleControl.bRunEnable := FALSE THEN
+    	stSpindleControl.bCoastStopRequest := FALSE;
+    	//bWriteTimerExec := FALSE;
+    	fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Stopped,0); 
+    	fbMessage.Send(0);
+    	eCoastStop :=INIT_STOP;
+    	M_CoastStop:=TRUE;
+    	bExecute := FALSE;
+	END_IF
    
 END_CASE;]]></ST>
       </Implementation>
@@ -458,8 +461,6 @@ stSpeedRefScaleParams.tCtrlCycleTime:= T#2MS  ;
 stSpeedRefScaleParams.tTaskCycleTime:=  T#2MS ;
 
 // Scale Spindle Speed Setpoint From RPM to Hz
-
-
 fbSpeedRefScale(
                 fIn:=nSpindleSetpoint,
                 fOut=>fScaledSpindleSpeedRef,
@@ -476,9 +477,6 @@ nModbusWriteDriveCommand.3 :=stSpindleControl.bCoastStopRequest;
 nModbusWriteDriveSetpoint  :=LREAL_TO_INT(fScaledSpindleSpeedRef);
 
 nModbusWriteDriveAccel_Decel :=stSpindleControl.nRampControlTime;
-
-// Spindle at setpoint speed once speed write method return is TRUE
-//bSpindleAtRequestedSpeed := M_SetSpeed;
 
 ]]></ST>
       </Implementation>
@@ -576,31 +574,28 @@ START:
     bSpindleAtRequestedSpeed := FALSE;
     bWriteDriveSetpoint := FALSE;
     bWriteAccel_Decel := FALSE;
-    bWriteTimerExec:=FALSE;
     IF stSpindleStatus.bDriveReady AND stSpindleStatus.bDriveEnabled AND bExecute THEN
         eSetSpindleSpeedSeq:=SET_ACCEL;
 	END_IF
     
 SET_ACCEL:
-    bWriteTimerExec:=TRUE;
     bWriteAccel_Decel:=TRUE;
     fbModbusMasterEL.WriteSingleRegister(   
-                                                  UnitID:=1,
-                                                  Quantity:=1,
-                                                  MBAddr:=3,
-                                                  cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
-                                                  pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
-                                                  Execute:=bWriteAccel_Decel AND NOT tWriteTimer.Q,
-                                                  Timeout:=T#400MS,
-                                                  Busy => bWriteBusy );      
-
-    IF bWriteAccel_Decel AND tWriteTimer.Q THEN
-        bWriteTimerExec:=FALSE;
+                                          UnitID:=1,
+                                          Quantity:=1,
+                                          MBAddr:=3,
+                                          cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
+                                          pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
+                                          Execute:=bWriteAccel_Decel,
+                                          Timeout:=T#400MS,
+                                          Busy => bWriteBusy);      
+	trigWriteBusy(CLK := bWriteBusy); 
+    IF trigWriteBusy.Q THEN
+		bWriteAccel_Decel := FALSE;
         eSetSpindleSpeedSeq:=SET_SPEED;
     END_IF
                                                     
 SET_SPEED:
-    bWriteTimerExec:=TRUE;
     bWriteDriveSetpoint:=TRUE;
     fbModbusMasterEL.WriteSingleRegister(   
                                                   UnitID:=1,
@@ -608,24 +603,23 @@ SET_SPEED:
                                                   MBAddr:=1,
                                                   cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
                                                   pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
-                                                  Execute:=bWriteDriveSetpoint AND NOT tWriteTimer.Q,
+                                                  Execute:=bWriteDriveSetpoint,
                                                   Timeout:=T#400MS,
-                                                  Busy => bWriteBusy );      
-
-    IF bWriteDriveSetpoint AND tWriteTimer.Q THEN
+                                                  Busy => bWriteBusy);      
+	trigWriteBusy(CLK := bWriteBusy); 
+    IF trigWriteBusy.Q THEN
+		bWriteDriveSetpoint := FALSE;
         eSetSpindleSpeedSeq:=FINISH_SPEED;
     END_IF
 
 FINISH_SPEED:
           fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Speed_Updated,0); 
           fbMessage.Send(0);
-          bWriteTimerExec:=FALSE;
           bWriteDriveSetpoint := FALSE;
-          bWriteAccel_Decel := FALSE;
-          bSpindleAtRequestedSpeed := TRUE; 
+          bWriteAccel_Decel := FALSE; 
           eSetSpindleSpeedSeq:=START_ENABLE;
 
- START_ENABLE:
+START_ENABLE:
 
     stSpindleControl.bRunEnable := FALSE;
     stSpindleControl.bResetReq  := FALSE;
@@ -634,9 +628,8 @@ FINISH_SPEED:
 	END_IF 
     
 ENABLE_DRIVE:
-    bWriteTimerExec:=TRUE;
-    stSpindleControl.bRunEnable := TRUE;
 
+    stSpindleControl.bRunEnable := TRUE;
     fbModbusMasterEL.WriteSingleRegister(   
                                           UnitID:=1,
                                           Quantity:=1,
@@ -644,15 +637,14 @@ ENABLE_DRIVE:
                                           cbLength:=SIZEOF(nModbusWriteDriveCommand),
                                           pMemoryAddr:=ADR(nModbusWriteDriveCommand),
                                           Execute:=stSpindleControl.bRunEnable,
-                                          Timeout:=T#400MS, ); 
-     IF stSpindleControl.bRunEnable AND tWriteTimer.Q THEN 
-        eSetSpindleSpeedSeq:=FINISH_ENABLE;
-         bWriteTimerExec:=FALSE;
-     ELSE
-        eSetSpindleSpeedSeq:=RESET_DRIVE;
-        bWriteTimerExec:=FALSE;   
+                                          Timeout:=T#400MS,
+										  Busy => bWriteBusy);
+	 trigWriteBusy(CLK := bWriteBusy); 
+     IF trigWriteBusy.Q THEN
+		stSpindleControl.bRunEnable := FALSE; 
+        eSetSpindleSpeedSeq:=FINISH_ENABLE; 
      END_IF 
-                                                    
+(*                                                    
 RESET_DRIVE:
     bWriteTimerExec := TRUE;
     stSpindleControl.bRunEnable:= TRUE;
@@ -669,17 +661,17 @@ RESET_DRIVE:
      IF stSpindleControl.bRunEnable AND stSpindleControl.bResetReq AND tWriteTimer.Q THEN 
           eSetSpindleSpeedSeq:=FINISH_ENABLE;
      END_IF 
-
+*)
 FINISH_ENABLE:
-
-   // stSpindleControl.bRunEnable := FALSE;
-    stSpindleControl.bResetReq  := FALSE;
-     bWriteTimerExec := FALSE;
-    fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Active,0); 
-    fbMessage.Send(0);
-    eSetSpindleSpeedSeq :=START;
-    M_SetSpeed:=TRUE;
-    bExecute := FALSE;
+ 
+	IF stSpindleStatus.bDriveRunning AND stSpindleStatus.nSpeedRefSetpoint = nModbusWriteDriveSetpoint THEN
+		bSpindleAtRequestedSpeed := TRUE;
+    	M_SetSpeed:=TRUE;
+    	bExecute := FALSE;
+		eSetSpindleSpeedSeq :=START;
+		fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Active,0); 
+    	fbMessage.Send(0);
+	END_IF
 END_CASE]]></ST>
       </Implementation>
     </Method>
@@ -742,7 +734,10 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="69" Count="0" />
       <LineId Id="16" Count="4" />
       <LineId Id="114" Count="0" />
-      <LineId Id="21" Count="11" />
+      <LineId Id="22" Count="7" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="30" Count="2" />
       <LineId Id="109" Count="0" />
       <LineId Id="36" Count="0" />
       <LineId Id="102" Count="1" />
@@ -752,11 +747,14 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="70" Count="0" />
       <LineId Id="87" Count="2" />
       <LineId Id="115" Count="0" />
-      <LineId Id="90" Count="11" />
+      <LineId Id="91" Count="7" />
+      <LineId Id="124" Count="2" />
+      <LineId Id="100" Count="1" />
       <LineId Id="86" Count="0" />
       <LineId Id="54" Count="1" />
       <LineId Id="57" Count="6" />
       <LineId Id="5" Count="0" />
+      <LineId Id="127" Count="0" />
       <LineId Id="67" Count="1" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_DriveErrors">
@@ -860,10 +858,7 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="33" Count="0" />
       <LineId Id="35" Count="4" />
       <LineId Id="43" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="59" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="26" Count="5" />
+      <LineId Id="25" Count="6" />
       <LineId Id="24" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="8" Count="3" />
@@ -871,9 +866,6 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="6" Count="0" />
       <LineId Id="15" Count="0" />
       <LineId Id="14" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="52" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="23" Count="0" />
     </LineIds>
@@ -897,36 +889,45 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="109" Count="0" />
       <LineId Id="164" Count="0" />
       <LineId Id="191" Count="0" />
-      <LineId Id="189" Count="0" />
       <LineId Id="15" Count="2" />
       <LineId Id="172" Count="0" />
-      <LineId Id="174" Count="13" />
-      <LineId Id="192" Count="0" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="176" Count="10" />
+      <LineId Id="280" Count="0" />
+      <LineId Id="267" Count="0" />
       <LineId Id="188" Count="0" />
       <LineId Id="173" Count="0" />
       <LineId Id="36" Count="1" />
-      <LineId Id="165" Count="1" />
+      <LineId Id="166" Count="0" />
       <LineId Id="154" Count="7" />
       <LineId Id="128" Count="0" />
       <LineId Id="152" Count="0" />
-      <LineId Id="51" Count="0" />
+      <LineId Id="281" Count="0" />
+      <LineId Id="270" Count="0" />
       <LineId Id="162" Count="1" />
       <LineId Id="53" Count="1" />
       <LineId Id="167" Count="1" />
-      <LineId Id="150" Count="0" />
       <LineId Id="91" Count="0" />
       <LineId Id="190" Count="0" />
-      <LineId Id="110" Count="0" />
       <LineId Id="90" Count="0" />
       <LineId Id="197" Count="0" />
-      <LineId Id="203" Count="21" />
-      <LineId Id="259" Count="0" />
-      <LineId Id="225" Count="1" />
-      <LineId Id="260" Count="0" />
-      <LineId Id="227" Count="22" />
-      <LineId Id="258" Count="0" />
-      <LineId Id="250" Count="3" />
+      <LineId Id="203" Count="8" />
+      <LineId Id="285" Count="0" />
+      <LineId Id="213" Count="0" />
+      <LineId Id="215" Count="7" />
+      <LineId Id="271" Count="0" />
+      <LineId Id="282" Count="0" />
+      <LineId Id="284" Count="0" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="224" Count="0" />
+      <LineId Id="227" Count="19" />
+      <LineId Id="250" Count="0" />
+      <LineId Id="275" Count="0" />
+      <LineId Id="283" Count="0" />
+      <LineId Id="253" Count="0" />
       <LineId Id="202" Count="0" />
+      <LineId Id="277" Count="2" />
+      <LineId Id="276" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_SpindleTesting">
