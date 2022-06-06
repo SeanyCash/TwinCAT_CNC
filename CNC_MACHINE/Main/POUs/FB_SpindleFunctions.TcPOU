@@ -195,7 +195,7 @@ DISABLE_DRIVE:
      END_IF 
 
 FINISH_STOP:
-	IF stSpindleStatus.nOutputFreq = 0 AND stSpindleControl.bRunEnable := FALSE THEN
+	IF (stSpindleStatus.nOutputFreq = 0) AND stSpindleControl.bRunEnable = FALSE THEN
     	stSpindleControl.bCoastStopRequest := FALSE;
     	//bWriteTimerExec := FALSE;
     	fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Stopped,0); 
