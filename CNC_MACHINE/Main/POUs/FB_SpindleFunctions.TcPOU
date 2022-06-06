@@ -29,8 +29,6 @@ fbModbusRTUComms			: FB_ModbusRTU_SerialComms;
  nModbusID          : BYTE :=1;
  nModbusReadQty     : WORD :=24;
  nModbusReadAddr    : WORD;
- tReadTimer         : TON;
- bReadTimerExecute  : BOOL;
  bReadExecute       : BOOL;
  bDiagExecute       : BOOL;
  eReadErrorID       : MODBUS_ERRORS;
@@ -39,10 +37,6 @@ fbModbusRTUComms			: FB_ModbusRTU_SerialComms;
  bReadError         : BOOL;
  bWriteBusy         : BOOL;
  bWriteError        : BOOL;
- bWriteRTRIG        : R_TRIG;
- bWriteFTRIG        : F_TRIG;
- tWriteTimer        : TON;
- bWriteTimerExec    : BOOL;
  nCbWrite           : UINT;
  bResetSerialComm   : BOOL;
  
@@ -52,7 +46,8 @@ fbModbusRTUComms			: FB_ModbusRTU_SerialComms;
  nModbusWriteDriveCommand       : WORD;
  nModbusWriteDriveSetpoint      : INT;
  nModbusWriteDriveAccel_Decel   : UINT;
- trigWriteBusy					: F_TRIG;
+ trigWriteBusy					: F_TRIG; // When Write Busy goes TRUE to FALSE the Modbus action has completed
+ trigReadBusy					: F_TRIG; // When Read Busy goes TRUE to FALSE the Modbus action has completed
  
  eVFDErrors         : E_VFDErrors;
  stSpindleStatus	: ST_SpindleStatus;
@@ -65,13 +60,12 @@ fbModbusRTUComms			: FB_ModbusRTU_SerialComms;
  eSetSpindleSpeedSeq    :(START,SET_ACCEL,SET_SPEED,FINISH_SPEED,START_ENABLE,ENABLE_DRIVE,RESET_DRIVE,FINISH_ENABLE,SPINDLE_ACTIVE);
  eCoastStop             :(INIT_STOP,ENABLE_STOP,WAIT_FOR_STOPPED,DISABLE_DRIVE,FINISH_STOP);
 
-	bTestEnable: BOOL;
-	bTestSetSpeed: BOOL;
-    bTestAccel  : BOOL;
-    nManualSpindleSetpoint  : UINT;
-    nSpindleSetpoint        : UINT;
-    bSpeedSetSuccessful     : BOOL;
-    bSpindleSetManually     : BOOL;
+bTestEnable: BOOL;
+bTestSetSpeed: BOOL;
+bTestAccel  : BOOL;
+nManualSpindleSetpoint  : UINT;
+nSpindleSetpoint        : UINT;
+
 END_VAR
 
 VAR_OUTPUT
@@ -88,10 +82,6 @@ M_DriveErrors();
 M_HMI_In();
 M_HMI_Out();
 M_SpindleTesting();
-
-tWriteTimer(IN:=bWriteTimerExec,PT:=T#400MS);
-
-tReadTimer(IN:=bReadTimerExecute,PT:=T#500MS,);
 
 (*
                                        
@@ -116,14 +106,14 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF stSpindleStatus.nSpeedRefSetpoint <> nModbusWriteDriveSetpoint AND NOT tWriteTimer.Q THEN
+        <ST><![CDATA[IF stSpindleStatus.nSpeedRefSetpoint <> nModbusWriteDriveSetpoint THEN
     fbModbusMasterEL.WriteSingleRegister(   
                                                   UnitID:=1,
                                                   Quantity:=1,
                                                   MBAddr:=1,
                                                   cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
                                                   pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
-                                                  Execute:=TRUE AND NOT tWriteTimer.Q,
+                                                  Execute:=TRUE,
                                                   Timeout:=T#400MS,
                                                   Busy => bWriteBusy );      
 END_IF]]></ST>
@@ -145,11 +135,10 @@ END_VAR
     stSpindleControl.bCoastStopRequest  := FALSE;
     IF NOT stSpindleControl.bCoastStopRequest THEN
         eCoastStop:=ENABLE_STOP;
-        //bWriteTimerExec:=FALSE;
 	END_IF 
     
 ENABLE_STOP:
-    //bWriteTimerExec:=TRUE;
+
     stSpindleControl.bCoastStopRequest := TRUE;
     stSpindleControl.bRunEnable := FALSE;
     fbModbusMasterEL.WriteSingleRegister(   
@@ -164,19 +153,17 @@ ENABLE_STOP:
 	 trigWriteBusy(CLK := bWriteBusy); 
      IF trigWriteBusy.Q THEN
         	eCoastStop:=WAIT_FOR_STOPPED;
-        	//bWriteTimerExec:=FALSE;
         	stSpindleControl.bCoastStopRequest := FALSE;
      END_IF
      
 WAIT_FOR_STOPPED:
     IF stSpindleStatus.nOutputFreq = 0 THEN 
-        eCoastStop:=DISABLE_DRIVE;
-         bWriteTimerExec:=FALSE;   
+        eCoastStop:=DISABLE_DRIVE; 
      END_IF
     
  
 DISABLE_DRIVE:
-    //bWriteTimerExec:=TRUE;
+
     stSpindleControl.bRunEnable := FALSE;
     stSpindleControl.bCoastStopRequest := FALSE; 
     fbModbusMasterEL.WriteSingleRegister(   
@@ -190,14 +177,12 @@ DISABLE_DRIVE:
 										  Busy => bWriteBusy);
 	 trigWriteBusy(CLK := bWriteBusy); 
      IF trigWriteBusy.Q THEN
-     	eCoastStop:=FINISH_STOP;
-        bWriteTimerExec:=FALSE;   
+     	eCoastStop:=FINISH_STOP;  
      END_IF 
 
 FINISH_STOP:
 	IF (stSpindleStatus.nOutputFreq = 0) AND stSpindleControl.bRunEnable = FALSE THEN
     	stSpindleControl.bCoastStopRequest := FALSE;
-    	//bWriteTimerExec := FALSE;
     	fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Stopped,0); 
     	fbMessage.Send(0);
     	eCoastStop :=INIT_STOP;
@@ -494,12 +479,10 @@ END_IF
         
         INIT_FIRST:
             fbModbusMasterEL.ReadRegs(Execute:=bReadExecute);
-            bReadTimerExecute:=FALSE;
             eReadVFDParamsSeq:=READ_FIRST_BLOCK;
         
         READ_FIRST_BLOCK:
             bReadExecute:=TRUE;
-            bReadTimerExecute:=TRUE;
             fbModbusMasterEL.ReadRegs(
                                     UnitID:= 1, 
                                     Quantity:= 45, 
@@ -512,19 +495,20 @@ END_IF
                                     Error=> bReadError, 
                                     ErrorId=> eReadErrorID, 
                                     cbRead=> nCbRead);
-             IF tReadTimer.Q AND NOT bReadError THEN
-             bReadExecute:=FALSE;                       
-             eReadVFDParamsSeq:=INIT_SECOND;
+									
+			 trigReadBusy(CLK:=bReadBusy);						
+             IF trigReadBusy.Q AND NOT bReadError THEN
+             	bReadExecute:=FALSE;                       
+             	eReadVFDParamsSeq:=INIT_SECOND;
              END_IF 
              
         INIT_SECOND:
-           bReadTimerExecute:=FALSE;
+		
            fbModbusMasterEL.ReadRegs(Execute:=bReadExecute);
            eReadVFDParamsSeq:=READ_SECOND_BLOCK; 
     
         READ_SECOND_BLOCK:
             bReadExecute:=TRUE;
-            bReadTimerExecute:=TRUE; 
             fbModbusMasterEL.ReadRegs(
                                     UnitID:= 1, 
                                     Quantity:= 59, 
@@ -538,12 +522,12 @@ END_IF
                                     ErrorId=> eReadErrorID, 
                                     cbRead=> nCbRead);
                                     
-             IF tReadTimer.Q AND NOT bReadError THEN                       
-             eReadVFDParamsSeq:=FINISH;
+             trigReadBusy(CLK:=bReadBusy);						
+             IF trigReadBusy.Q AND NOT bReadError THEN                       
+             	eReadVFDParamsSeq:=FINISH;
              END_IF 
         
         FINISH:
-        bReadTimerExecute:=FALSE;
         bReadExecute:=FALSE;     
         eReadVFDParamsSeq:=INIT_FIRST;
     
@@ -715,9 +699,7 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="2312" Count="3" />
       <LineId Id="2317" Count="1" />
       <LineId Id="2560" Count="0" />
-      <LineId Id="2472" Count="0" />
-      <LineId Id="2485" Count="0" />
-      <LineId Id="2321" Count="4" />
+      <LineId Id="2323" Count="2" />
       <LineId Id="2639" Count="4" />
       <LineId Id="2645" Count="3" />
       <LineId Id="2650" Count="3" />
@@ -730,18 +712,16 @@ fbModbusMasterEL.WriteSingleRegister(
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_CoastStop">
       <LineId Id="64" Count="2" />
-      <LineId Id="10" Count="5" />
-      <LineId Id="69" Count="0" />
-      <LineId Id="16" Count="4" />
+      <LineId Id="10" Count="10" />
       <LineId Id="114" Count="0" />
       <LineId Id="22" Count="7" />
       <LineId Id="120" Count="0" />
       <LineId Id="123" Count="0" />
-      <LineId Id="30" Count="2" />
+      <LineId Id="30" Count="1" />
       <LineId Id="109" Count="0" />
       <LineId Id="36" Count="0" />
       <LineId Id="102" Count="1" />
-      <LineId Id="106" Count="2" />
+      <LineId Id="106" Count="1" />
       <LineId Id="105" Count="0" />
       <LineId Id="104" Count="0" />
       <LineId Id="70" Count="0" />
@@ -749,10 +729,11 @@ fbModbusMasterEL.WriteSingleRegister(
       <LineId Id="115" Count="0" />
       <LineId Id="91" Count="7" />
       <LineId Id="124" Count="2" />
-      <LineId Id="100" Count="1" />
+      <LineId Id="100" Count="0" />
       <LineId Id="86" Count="0" />
       <LineId Id="54" Count="1" />
-      <LineId Id="57" Count="6" />
+      <LineId Id="57" Count="1" />
+      <LineId Id="60" Count="3" />
       <LineId Id="5" Count="0" />
       <LineId Id="127" Count="0" />
       <LineId Id="67" Count="1" />
@@ -872,11 +853,20 @@ fbModbusMasterEL.WriteSingleRegister(
     <LineIds Name="FB_SpindleFunctions.M_ReadParameters">
       <LineId Id="87" Count="0" />
       <LineId Id="149" Count="1" />
-      <LineId Id="88" Count="7" />
+      <LineId Id="88" Count="3" />
+      <LineId Id="93" Count="2" />
       <LineId Id="144" Count="0" />
-      <LineId Id="96" Count="23" />
+      <LineId Id="97" Count="11" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="109" Count="5" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="116" Count="3" />
       <LineId Id="145" Count="0" />
-      <LineId Id="120" Count="22" />
+      <LineId Id="121" Count="13" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="135" Count="3" />
+      <LineId Id="140" Count="2" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ResetDriveError">
