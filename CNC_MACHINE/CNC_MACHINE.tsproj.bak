@@ -2685,10 +2685,9 @@ External Setpoint Generation:
 							</Var>
 						</Vars>
 					</Drive>
-					<Controller Name="Ctrl" CtrType="1">
+					<Controller Name="Ctrl" CtrType="2">
 						<CtrPara PriorControlFactor="1">
-							<PosDiffControl Enable="false"/>
-							<PID PosKp="25" PosExtKp="1"/>
+							<PID PosKp="25" PosIDisableWhenMoving="true" PosExtKp="1" DeadBandPosition="0.01"/>
 							<Observer BandWidth="20"/>
 						</CtrPara>
 					</Controller>
@@ -2850,8 +2849,7 @@ External Setpoint Generation:
 					</Drive>
 					<Controller Name="Ctrl" CtrType="2">
 						<CtrPara PriorControlFactor="1">
-							<PosDiffControl Enable="false"/>
-							<PID PosKp="25" PosExtKp="1"/>
+							<PID PosKp="25" PosIDisableWhenMoving="true" PosExtKp="1" DeadBandPosition="0.01"/>
 							<Observer BandWidth="20"/>
 						</CtrPara>
 					</Controller>
@@ -3013,8 +3011,7 @@ External Setpoint Generation:
 					</Drive>
 					<Controller Name="Ctrl" CtrType="2">
 						<CtrPara PriorControlFactor="1">
-							<PosDiffControl Enable="false"/>
-							<PID PosKp="10" PosExtKp="1"/>
+							<PID PosKp="10" PosIDisableWhenMoving="true" PosExtKp="1" DeadBandPosition="0.01"/>
 							<Observer BandWidth="20"/>
 						</CtrPara>
 					</Controller>
@@ -3176,7 +3173,7 @@ External Setpoint Generation:
 					</Drive>
 					<Controller Name="Ctrl" CtrType="2">
 						<CtrPara PriorControlFactor="1">
-							<PID PosKp="10" PosExtKp="1"/>
+							<PID PosKp="10" PosIDisableWhenMoving="true" PosExtKp="1" DeadBandPosition="0.01"/>
 							<Observer BandWidth="20"/>
 						</CtrPara>
 					</Controller>
