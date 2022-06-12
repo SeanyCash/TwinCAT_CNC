@@ -5,6 +5,6 @@
         "/": "www",
         "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.752.0\\runtimes\\native1.12-tchmi",
         "/Libraries/Controls/Custom/TcHmiOpcUa": "www\\.hmipkgs\\0fa87e6c-8e1c-49ea-a968-f8a36d8c5858\\Content",
-        "/NCPrograms": "..\\..\\..\\..\\..\\TwinCAT\\Mc\\Nci"
+        "/NCPrograms": "C:\\TwinCAT\\Mc\\Nci"
     }
 }
