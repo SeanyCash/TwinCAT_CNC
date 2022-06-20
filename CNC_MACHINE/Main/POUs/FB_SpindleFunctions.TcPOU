@@ -146,7 +146,7 @@ ENABLE_STOP:
     stSpindleControl.bCoastStopRequest := TRUE;
     stSpindleControl.bRunEnable := FALSE;
     //trigWriteExecute(CLK:=stSpindleControl.bCoastStopRequest);
-    PulseWriteExecute(IN:=stSpindleControl.bCoastStopRequest,PT:=T#100MS);
+    PulseWriteExecute(IN:=stSpindleControl.bCoastStopRequest,PT:=T#250MS);
     fbModbusMasterEL.WriteSingleRegister(   
                                           UnitID:=1,
                                           Quantity:=1,
