@@ -94,8 +94,10 @@ begin HEADER
 "[N] G54"
 "[N] T[T]"
 "[N] G00 [ZH] H[T]"
-"[N] [S]" 
+"[N] [S]"
+"[N] G04 X0.2"
 "[N] M03"
+"[N] G04 X10"
 "(Toolpath: [TOOLPATH_NAME] Tool: [TOOLNAME])"
 "[N] [XH][YH][F]"
 
