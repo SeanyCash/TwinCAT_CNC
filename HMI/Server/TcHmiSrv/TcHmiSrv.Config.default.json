@@ -301,7 +301,7 @@
     "DEFLATECOMPRESSIONLEVEL": 5,
     "DIAGNOSTICS_DOMAINS": [],
     "DISABLED_CONFIGURATION_HINTS": [],
-    "DISCOVERY": 2,
+    "DISCOVERY": 1,
     "ENABLE_SERVER_UPDATE": true,
     "ENDPOINTS": [
         "http://127.0.0.1:13000",
@@ -320,14 +320,16 @@
         "TcHmiEcDiagnostics": {
             "ENABLED": true,
             "NAME": "TcHmiEcDiagnostics",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.12.754.4\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.19.0.0\\runtimes\\win-x64\\native\\",
+            "PROCESSID": -1,
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
         "TcHmiEventLogger": {
             "ENABLED": true,
             "NAME": "TcHmiEventLogger",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.12.754.4\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.19.0.0\\runtimes\\win-x64\\native\\",
+            "PROCESSID": -1,
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -342,7 +344,8 @@
         "TcHmiRecipeManagement": {
             "ENABLED": true,
             "NAME": "TcHmiRecipeManagement",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.RecipeManagement.12.754.4\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.RecipeManagement.19.0.0\\runtimes\\win-x64\\native\\",
+            "PROCESSID": -1,
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -371,18 +374,27 @@
             "STARTUPTYPE": 1
         },
         "TcHmiVision": {
-            "ENABLED": false,
+            "ENABLED": true,
             "NAME": "TcHmiVision",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Vision.12.754.4\\runtimes\\win\\net472\\",
+            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Vision.13.7.0\\runtimes\\win\\net472\\",
+            "PROCESSID": -1,
             "REQUIRED": false,
             "STARTUPTYPE": 1
         }
     },
     "FILES": {},
+    "FILESREGEX": [
+        {
+            "FILESHTTPHEADERS": "Content-Security-Policy: frame-ancestors 'self'",
+            "REGEX": ".*\\.(xml|config|htm|html|shtml)$"
+        }
+    ],
     "FLOODPROTECTION": 500,
     "GLOBALHTTPHEADERS": "{LASTMODIFIED}",
     "GZIPENABLED": true,
     "GZIPMINSIZE": 800,
+    "HTTP_FLOODPROTECTION": 10,
+    "INITTIMEOUT": "PT10S",
     "KEEP_ALIVE": "PT40S",
     "KEY": "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRQ3JhMnpNaW1BbTloZnQKeHIwY0MvYVoybjRlV0pxM2daZmNoZDJNbFlRMTg3SWU0czVadmdHRHdOakNnKy9vRjcyWndVQ01leVNoaWY2VgpoOGdJNi9ncjNaRVNDMWhLYkdpVjBGQWhiVloyNDB1bUN3V2RSZzkxUmthZmduejlqa21ZMTZtTkE2Mi90MmdZCm1SY0RheTYxTy9mNTdoaXErNUhaNzFIQktTK1pGakZveUFyb0JGNnB2Z1FQMG1EZVQrRGl5UVFab3hFM0VlUTYKRDg2WS8zS1dkRHhzOG9vcFIwY3VhQWtYV0ZHRUo5MUxNUzRZcUlVOVA2Ung1SFRuaXovcGVGQUNUZjJGWGxHMgpCQ1dHQldwVThPZmJEb0FidU9uUm01aDNEelJPajNZUmdLQy9mMXFvMkhKQ1l1OGtLZDhLbXZvYWlyYWRXN0J2Cm8xSkxYMEFUQWdNQkFBRUNnZ0VBVlhQQjB0MFFQWnZrSmRZeW8yNmJTZXNQZjlVdm0xYncreStJVi9LWTY4UkcKQVB1VFhrMUh1QVJFaWdMM2J6MldlTFZMbGp3MDhJbzM3UmE0OHltZWwwOW1hQlpidHczL3ZOOFJjdmhzWit1Ngo1RlVPUVc2UmVpYkVRZlBzbHdGOVVzSC9kWnBsM1BKeTVBQTg1cWxocVZyeHJSZXlHRm84Uk9YMlhWSkl0Z2oyCjZRNFNtaFV2OUZkMy9FTlMyN1c2UGFJN2l4NS9wU1hsSDBDQkpLTTRIYjRzWXl3TzMraytYU0NObmJlNkEzdTEKVjBxWVhiWHNwL1dIL2JEekhDUVA2SmVOclRsdVZUSEtoV2R4NHVLd2lraVMzdk0vSEhxV3VBd3E3Qm1ha1loawpWSXBxZUFzM2dCS2tPVG1oYXpvL0prYnZWak5La29pWUxtN3J6ek1tZ1FLQmdRRGU5dGRVNEhxQUNJemtFbG5WCnNjWEFyRWExNlB1ZjlyVGRtMTZDeDZXNkJKL3JmeG1Ed0NOVFNwalZCYzRnZzljZ05sNHY1MEhyQjZ0THpRVGkKWTcvZmNUYjlzMDh0ajlYQWxpeTdtNHBTV0VIS2ZQUGJHZWJvSVBQZkROVkN6WThYay80OGM3N1BTdTFNbHZ2YQpCb05raVNWZ2Z5SkpRQk13K2VvbWNGSlg4d0tCZ1FERTBYZmlOUTBqRG9YOFRyQWJlUE4wOUtyeTlCaitxVlpRCjhVMUtkZ2NUeWI2TUFHSlRjQzBhV0lLNEJnYXcyOGxUd2kvWitRN2lVUVQ2K3JkcUtyaldMUkRVcFRxZW9vVEMKeDNmU0paODR5OXVCQzE4UlJVSTlPUFpQcExXcTVLckJOenNYc0M0UUlQdzJKRWZyK0c2bkFudzNjZnQwWXdLTQplYUgxbVVTZllRS0JnSGMrZU1keUR0SHV3THN4ZlU0bWQyYW1QR01KcVpsUnJrVmUxTnNJdjMrTy9hQkxKM0FwCkVEdDVoK2RWNVhuS1NRRjNVa1E0WUM2OHVVWWU3ZC9PRFU0SkZLbjJmZ0FXRHZHaTMyV3V0L2wyTGltSFRqdjkKekZxVlZSZ1RtdkxSVVJnQkZGVnNhYjRmaW00TnljQSsvNEtEUHJRdkNqMDJ3WXpOL0FaMngvTTFBb0dCQUpCZQpOZG12b0ZzK28vbFduc2NJQ1V5WXkydzZzTHJiNjN5a0ExWEREWjN1TmQ3cnlUUDY3SnFPb2hQcUY2NVRDWEp1CjFqckUvYTMwVC9ycFBQQ2JOY21rZE53Rjl1RzF4RHc3cENCNWlEbFpEMEd3M2FNRmNua0Y5MmFrSXIyZnpjQzgKaXBQdG4xd2xWZHRBOGFDZE1rMCsvVzZPSlN4U0UrU0dzODQ3QnFNQkFvR0JBTWFNWENJRWRISUhDUzNTUlBpYgpYaHZhRzFEMEd0ckdmZFRrZlpEejF5YUIrU2pBR2tNSUhCRy9BU0hPdlVlVDIrVEkrcTJ6cmZub1I3NkZGSDlFCldPdWNtcDdNbHVlMGFZOGVsWDZQYWxIbERPUlQvSzdsQm45SDd2a0prTm9xY3FnbHhaMU5WSFNKVHcyZ3R4MnoKZmtnWEJWYXNFT3NhZkgxQ2U1Ymt4cUlkCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K",
     "KEYPASSWORD": "",
@@ -716,7 +728,7 @@
         }
     },
     "PERMESSAGEDEFLATEENABLED": true,
-    "PROJECTNAME": "CNC",
+    "PROJECTNAME": "CNC Engineering",
     "PROJECTVERSION": "1.0.0.0",
     "REMOTESERVERS": {},
     "REMOTESERVERS_CERTIFICATES": [],
@@ -745,6 +757,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.AdsSyncReadReq": {
@@ -780,6 +793,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.AdsSyncReadStateReq": {
@@ -833,6 +847,7 @@
                     ]
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.AdsSyncReadWriteReq": {
@@ -874,6 +889,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.AdsSyncWriteControlReq": {
@@ -911,6 +927,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.AdsSyncWriteReq": {
@@ -948,6 +965,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.CheckLicense": {
@@ -977,6 +995,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.Config": {
@@ -988,6 +1007,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.Diagnostics": {
@@ -1071,6 +1091,7 @@
                 "transient": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.GetDefinitions": {
@@ -1084,6 +1105,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.GetSchema": {
@@ -1100,6 +1122,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.ListCommonTypes": {
@@ -1129,6 +1152,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.ListRoutes": {
@@ -1163,6 +1187,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.ListSymbols": {
@@ -1176,6 +1201,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ADS.RuntimePorts": {
@@ -1227,6 +1253,7 @@
                     ]
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "AddOrChangeUser": {
@@ -1314,6 +1341,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "AddSymbol": {
@@ -1339,7 +1367,7 @@
                             ]
                         },
                         "AUTOMAP": {
-                            "default": true,
+                            "default": false,
                             "description": "Automatically obtain symbol information such as options and schema from the domain.",
                             "type": "boolean"
                         },
@@ -1367,15 +1395,79 @@
                         "SCHEMA": {
                             "$ref": "tchmi:server#/definitions/schemaRef"
                         },
+                        "SUBSYMBOL_MAPPING": {
+                            "type": "string"
+                        },
                         "USEMAPPING": {
                             "default": true,
                             "type": "boolean"
+                        },
+                        "USERGROUPS": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
                         }
                     },
                     "required": [
                         "NAME",
                         "DOMAIN",
                         "MAPPING"
+                    ],
+                    "type": "object"
+                }
+            },
+            "SUBSYMBOL_MAPPING": "",
+            "USEMAPPING": true
+        },
+        "AddSymbols": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "AddSymbols",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "additionalProperties": {
+                    "oneOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "$ref": "tchmi:general#/definitions/errorDetails"
+                        }
+                    ]
+                },
+                "function": true,
+                "type": "object",
+                "writeValue": {
+                    "properties": {
+                        "domain": {
+                            "type": "string"
+                        },
+                        "dryRun": {
+                            "default": false,
+                            "type": "boolean"
+                        },
+                        "ignore": {
+                            "default": [],
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "uniqueItems": true
+                        },
+                        "ignoreProblems": {
+                            "default": false,
+                            "type": "boolean"
+                        },
+                        "skipExisting": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "domain"
                     ],
                     "type": "object"
                 }
@@ -1415,6 +1507,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ChangeUserSettings": {
@@ -1468,6 +1561,7 @@
                     ]
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ConfirmAlarm": {
@@ -1484,6 +1578,7 @@
                     "$ref": "tchmi:server#/definitions/alarm"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Copy": {
@@ -1523,6 +1618,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "CreateEvent": {
@@ -1539,6 +1635,7 @@
                     "$ref": "tchmi:server#/definitions/event"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "DefaultAuthExtension": {
@@ -1553,6 +1650,7 @@
                 "function": true,
                 "type": "string"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Delete": {
@@ -1582,6 +1680,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "DeleteConfiguration": {
@@ -1598,6 +1697,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Diagnostics": {
@@ -1793,6 +1893,7 @@
                 "transient": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ForceLogout": {
@@ -1838,6 +1939,7 @@
                     ]
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "GetConfiguration": {
@@ -1870,6 +1972,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "GetCurrentUser": {
@@ -1932,6 +2035,7 @@
                 },
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "GetDefinitions": {
@@ -1969,6 +2073,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "GetSchema": {
@@ -2012,6 +2117,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "GetServerInformation": {
@@ -2026,6 +2132,7 @@
                 "function": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "GetSymbolAccess": {
@@ -2049,6 +2156,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Heartbeat": {
@@ -2062,6 +2170,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Import": {
@@ -2078,6 +2187,7 @@
                     "$ref": "tchmi:general#/definitions/Any"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "IsAuthRequired": {
@@ -2092,6 +2202,7 @@
                 "function": true,
                 "type": "boolean"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListActiveSessions": {
@@ -2196,6 +2307,7 @@
                 },
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListConfigurations": {
@@ -2213,6 +2325,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListDomains": {
@@ -2252,6 +2365,10 @@
                         "licensed": {
                             "description": "indicate the extension is license status",
                             "type": "boolean"
+                        },
+                        "packageVersion": {
+                            "description": "The version of the NuGet package that contains the extension.",
+                            "type": "string"
                         },
                         "remote": {
                             "description": "Shows if the domain refers to a remote server.",
@@ -2302,6 +2419,7 @@
                 "function": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListEvents": {
@@ -2389,6 +2507,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListFiles": {
@@ -2443,6 +2562,7 @@
                     ]
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListInternalSymbols": {
@@ -2457,6 +2577,7 @@
                 "function": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListSymbolNames": {
@@ -2490,6 +2611,7 @@
                     ]
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListSymbols": {
@@ -2507,6 +2629,7 @@
                 "function": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListUserNames": {
@@ -2525,6 +2648,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "ListUsers": {
@@ -2557,6 +2681,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "LocalizeText": {
@@ -2602,6 +2727,7 @@
                     ]
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Login": {
@@ -2619,6 +2745,7 @@
                 "writeValue": {
                     "properties": {
                         "password": {
+                            "format": "encrypted",
                             "type": "string"
                         },
                         "persistent": {
@@ -2632,6 +2759,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Logout": {
@@ -2645,6 +2773,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "MappingUsage": {
@@ -2766,6 +2895,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.bAxisEnable": {
@@ -2779,6 +2909,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.bAxisReset": {
@@ -2792,6 +2923,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.bStopExecute": {
@@ -2805,6 +2937,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.fbCNC.X_MC_OUT.bPowerStatus": {
@@ -2818,6 +2951,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.fbCNC.Y2_MC_OUT.bPowerStatus": {
@@ -2831,6 +2965,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.fbCNC.Y_MC_OUT.bPowerStatus": {
@@ -2844,6 +2979,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.fbCNC.Y_Ref.Status.Homed": {
@@ -2857,6 +2993,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.fbCNC.Z_MC_OUT.bPowerStatus": {
@@ -2870,6 +3007,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.fbCNC.bAllAxesReady": {
@@ -2883,6 +3021,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.fbCNC.nHomeAllSeq": {
@@ -2896,6 +3035,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/INT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.fbCNC.sCurrentProgram": {
@@ -2909,6 +3049,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.ProgramCall": {
@@ -2922,6 +3063,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:server#/definitions/PLC1.E_Programs"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bAxisEnable": {
@@ -2935,6 +3077,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bBufferFull": {
@@ -2957,6 +3100,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bExecuteZeroShift": {
@@ -2970,6 +3114,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bFramingError": {
@@ -2992,6 +3137,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bHold": {
@@ -3005,6 +3151,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bInitAccepted": {
@@ -3027,16 +3174,21 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bInitiateNCProgramSelect": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bInitiateNCProgramSelect",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bJogEnable": {
@@ -3050,16 +3202,21 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bManualSpindleOverride": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bManualSpindleOverride",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bOverrunError": {
@@ -3082,6 +3239,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bParityError": {
@@ -3104,16 +3262,21 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bReadZeroShift": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bReadZeroShift",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bReceiveRequest": {
@@ -3136,6 +3299,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bReset": {
@@ -3149,13 +3313,17 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bResetSerialComm": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bResetSerialComm",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -3166,13 +3334,17 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bSetPosExecute": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::bSetPosExecute",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -3183,6 +3355,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bSpindleEnable": {
@@ -3196,6 +3369,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bStart": {
@@ -3209,6 +3383,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bStop": {
@@ -3222,6 +3397,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bTriggerProgramCall": {
@@ -3235,6 +3411,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bXJogNegative": {
@@ -3248,6 +3425,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bXJogPositive": {
@@ -3261,6 +3439,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bYJogNegative": {
@@ -3274,6 +3453,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bYJogPositive": {
@@ -3287,6 +3467,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bZJogNegative": {
@@ -3300,6 +3481,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.bZJogPositive": {
@@ -3313,6 +3495,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.eJogMode": {
@@ -3326,6 +3509,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:server#/definitions/PLC1.Tc2_MC2.E_JogMode"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.fChannelOverride": {
@@ -3339,6 +3523,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.fJogPosition": {
@@ -3352,6 +3537,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.fJogVelocity": {
@@ -3365,26 +3551,35 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.nManualSpindleSetpoint": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::nManualSpindleSetpoint",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.nZeroShiftNumber": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_In::nZeroShiftNumber",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UDINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_In.sPrgName": {
@@ -3405,36 +3600,49 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.ZeroShiftDesc": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::ZeroShiftDesc",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:server#/definitions/PLC1.ARRAY_54..57_OF-Tc2_NCI.ZeroShiftDesc"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.ZeroShiftDesc.0": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::ZeroShiftDesc[0]",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:server#/definitions/PLC1.Tc2_NCI.ZeroShiftDesc"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.ZeroShiftDesc.0.fShiftX": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::ZeroShiftDesc[0]::fShiftX",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bBufferFull": {
@@ -3448,6 +3656,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bDigitalInput1": {
@@ -3461,6 +3670,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bDigitalInput2": {
@@ -3474,6 +3684,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bDigitalInput3": {
@@ -3487,6 +3698,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bDigitalInput4": {
@@ -3500,6 +3712,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bDriveEnabled": {
@@ -3513,6 +3726,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bDriveFault": {
@@ -3526,6 +3740,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bDriveReady": {
@@ -3539,6 +3754,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bDriveRunning": {
@@ -3552,6 +3768,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bFramingError": {
@@ -3565,6 +3782,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bInitAccepted": {
@@ -3578,6 +3796,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bOverrunError": {
@@ -3591,6 +3810,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bParityError": {
@@ -3604,6 +3824,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bRelayOutputStatus": {
@@ -3617,6 +3838,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bRxRequest": {
@@ -3630,13 +3852,17 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bSpindleAtRequestedSpeed": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::bSpindleAtRequestedSpeed",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -3647,6 +3873,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bStandbyMode": {
@@ -3660,6 +3887,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bTxAccepted": {
@@ -3673,6 +3901,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bXHomeSwitch": {
@@ -3686,6 +3915,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bXLimitSwitch": {
@@ -3699,6 +3929,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bY1HomeSwitch": {
@@ -3712,6 +3943,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bY2HomeSwitch": {
@@ -3725,6 +3957,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bYLimitSwitch": {
@@ -3738,6 +3971,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bZHomeSwitch": {
@@ -3751,6 +3985,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.eReadErrorID": {
@@ -3764,16 +3999,21 @@
             "SCHEMA": {
                 "$ref": "tchmi:server#/definitions/PLC1.Tc2_ModbusRTU.MODBUS_ERRORS"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.fAccelRampTime": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::fAccelRampTime",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.fActPosX": {
@@ -3787,6 +4027,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.fChannelOverrideSpeed": {
@@ -3800,6 +4041,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.fToolpathVelocity": {
@@ -3813,6 +4055,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.fToolpathVelocityIPM": {
@@ -3826,6 +4069,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nAccelRampTime": {
@@ -3839,6 +4083,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nApplicationMode": {
@@ -3852,16 +4097,21 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nCurrentMCode": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nCurrentMCode",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/INT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nDCBusVoltage": {
@@ -3875,6 +4125,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nDrivePowerStageTemp": {
@@ -3888,6 +4139,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nInternalDriveTemp": {
@@ -3901,6 +4153,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMaxSpeedLimit": {
@@ -3914,6 +4167,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMaximumCurrentLimit": {
@@ -3927,6 +4181,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMinSpeedLimit": {
@@ -3940,6 +4195,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMotorControlMode": {
@@ -3953,6 +4209,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMotorCurrent": {
@@ -3966,6 +4223,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMotorPower": {
@@ -3979,6 +4237,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMotorRatedCurrent": {
@@ -3992,6 +4251,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMotorRatedFrequency": {
@@ -4005,6 +4265,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMotorRatedSpeed": {
@@ -4018,6 +4279,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMotorRatedVoltage": {
@@ -4031,6 +4293,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nMotorTorque": {
@@ -4044,6 +4307,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nOutputFreq": {
@@ -4057,6 +4321,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nOutputVoltage": {
@@ -4070,6 +4335,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nRampControlTime": {
@@ -4083,6 +4349,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nRuntimeHours": {
@@ -4096,6 +4363,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nSpeedRefSetpoint": {
@@ -4109,6 +4377,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/REAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nStopMode": {
@@ -4122,16 +4391,21 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nToolNumber": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::nToolNumber",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.nUserPGain": {
@@ -4145,6 +4419,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.sCurrentProgramSelected": {
@@ -4158,6 +4433,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.sErrorCode": {
@@ -4171,6 +4447,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.sInterpreterState": {
@@ -4184,6 +4461,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.sJogMode": {
@@ -4197,6 +4475,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.sReadErrorID": {
@@ -4210,13 +4489,17 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING(80)"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.sReadNCLine.0": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::sReadNCLine[0]",
+            "OPTIONS": {},
             "SCHEMA": {
                 "allOf": [
                     {
@@ -4227,36 +4510,49 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stItpToPlc.BlockNo": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stItpToPlc::BlockNo",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UDINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stItpToPlc.PathVelo": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stItpToPlc::PathVelo",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stItpToPlc.Tool": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "ADS",
             "DYNAMIC": true,
+            "HIDDEN": false,
             "MAPPING": "PLC1::GVL::stHMI_Out::stItpToPlc::Tool",
+            "OPTIONS": {},
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stXRef.NcToPlc.ActPos": {
@@ -4270,6 +4566,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stXRef.NcToPlc.ActVelo": {
@@ -4283,6 +4580,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stXRef.Status.ErrorID": {
@@ -4305,6 +4603,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stXRef.Status.Homed": {
@@ -4318,6 +4617,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stY2Ref.NcToPlc.ActPos": {
@@ -4331,6 +4631,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stY2Ref.NcToPlc.ActVelo": {
@@ -4344,6 +4645,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stY2Ref.Status.ErrorID": {
@@ -4366,6 +4668,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stY2Ref.Status.Homed": {
@@ -4379,6 +4682,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stYRef.NcToPlc.ActPos": {
@@ -4392,6 +4696,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stYRef.NcToPlc.ActVelo": {
@@ -4405,6 +4710,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stYRef.Status.ErrorID": {
@@ -4427,6 +4733,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stYRef.Status.Homed": {
@@ -4440,6 +4747,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stZRef.NcToPlc.ActPos": {
@@ -4453,6 +4761,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stZRef.NcToPlc.ActVelo": {
@@ -4466,6 +4775,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/LREAL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stZRef.Status.ErrorID": {
@@ -4488,6 +4798,7 @@
                     }
                 ]
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.stZRef.Status.Homed": {
@@ -4501,6 +4812,7 @@
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "RefreshDefinitions": {
@@ -4522,6 +4834,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Remove": {
@@ -4559,6 +4872,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "RemoveFromConfiguration": {
@@ -4594,6 +4908,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "RemoveUnusedDefinitions": {
@@ -4605,8 +4920,39 @@
             "MAPPING": "RemoveUnusedDefinitions",
             "OPTIONS": {},
             "SCHEMA": {
-                "function": true
+                "function": true,
+                "items": [
+                    {
+                        "type": "string"
+                    }
+                ],
+                "type": "array",
+                "writeValue": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "dryRun": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "ignore": {
+                                    "default": [],
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array",
+                                    "uniqueItems": true
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "$ref": "tchmi:general#/definitions/VOID"
+                        }
+                    ]
+                }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "RemoveUser": {
@@ -4637,6 +4983,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Rename": {
@@ -4676,6 +5023,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "RenameConfiguration": {
@@ -4704,6 +5052,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Restart": {
@@ -4717,6 +5066,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "SetConfiguration": {
@@ -4751,6 +5101,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "SetLocale": {
@@ -4768,6 +5119,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Shutdown": {
@@ -4781,6 +5133,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "SubscribeEvents": {
@@ -4798,6 +5151,7 @@
                     "type": "integer"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.Config": {
@@ -4809,6 +5163,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.Diagnostics": {
@@ -4886,10 +5241,12 @@
                 "transient": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.ForceProcessDataValues": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
             "DYNAMIC": false,
             "HIDDEN": true,
@@ -4926,6 +5283,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.GetMaster": {
@@ -4956,6 +5314,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.GetMasterOnlineInfo": {
@@ -5054,6 +5413,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.GetProcessDataValues": {
@@ -5103,6 +5463,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.GetSlaves": {
@@ -5152,6 +5513,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.GetSlavesOnlineInfo": {
@@ -5509,6 +5871,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.GetSlavesScanned": {
@@ -5574,6 +5937,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.GetTarget": {
@@ -5625,6 +5989,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.ListConfiguredDevices": {
@@ -5661,6 +6026,7 @@
                 "readOnly": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.ListMastersOfRoute": {
@@ -5697,10 +6063,12 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.ReleaseProcessDataValues": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
             "DYNAMIC": false,
             "HIDDEN": true,
@@ -5730,6 +6098,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.SendSlavesScanCmd": {
@@ -5746,10 +6115,12 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.SetProcessDataValues": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEcDiagnostics",
             "DYNAMIC": false,
             "HIDDEN": true,
@@ -5786,10 +6157,12 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEventLogger.ClearLoggedEvents": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEventLogger",
             "DYNAMIC": false,
             "HIDDEN": true,
@@ -5809,6 +6182,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEventLogger.Config": {
@@ -5820,6 +6194,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEventLogger.Diagnostics": {
@@ -5837,27 +6212,32 @@
                         "additionalProperties": {
                             "properties": {
                                 "activeAlarmsCount": {
-                                    "propertyOrder": 9,
+                                    "propertyOrder": 10,
                                     "readOnly": true,
                                     "type": "integer"
                                 },
                                 "cachedAlarmsCount": {
                                     "hidden": true,
-                                    "propertyOrder": 7,
+                                    "propertyOrder": 8,
                                     "readOnly": true,
                                     "type": "integer"
                                 },
                                 "cachedInvalidAlarmsCount": {
                                     "hidden": true,
-                                    "propertyOrder": 8,
+                                    "propertyOrder": 9,
                                     "readOnly": true,
                                     "type": "integer"
                                 },
                                 "cachedMessagesCount": {
                                     "hidden": true,
-                                    "propertyOrder": 6,
+                                    "propertyOrder": 7,
                                     "readOnly": true,
                                     "type": "integer"
+                                },
+                                "connectError": {
+                                    "propertyOrder": 2,
+                                    "readOnly": true,
+                                    "type": "string"
                                 },
                                 "connectionState": {
                                     "propertyOrder": 1,
@@ -5865,22 +6245,22 @@
                                     "type": "string"
                                 },
                                 "importedAlarmsCount": {
-                                    "propertyOrder": 4,
-                                    "readOnly": true,
-                                    "type": "integer"
-                                },
-                                "importedEventsCount": {
-                                    "propertyOrder": 2,
-                                    "readOnly": true,
-                                    "type": "integer"
-                                },
-                                "importedInvalidAlarmsCount": {
                                     "propertyOrder": 5,
                                     "readOnly": true,
                                     "type": "integer"
                                 },
-                                "importedMessagesCount": {
+                                "importedEventsCount": {
                                     "propertyOrder": 3,
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "importedInvalidAlarmsCount": {
+                                    "propertyOrder": 6,
+                                    "readOnly": true,
+                                    "type": "integer"
+                                },
+                                "importedMessagesCount": {
+                                    "propertyOrder": 4,
                                     "readOnly": true,
                                     "type": "integer"
                                 }
@@ -5900,10 +6280,12 @@
                 "transient": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiEventLogger.ListEnabledTargetSystems": {
             "ACCESS": 3,
+            "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiEventLogger",
             "DYNAMIC": false,
             "HIDDEN": true,
@@ -5916,6 +6298,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiLua.Config": {
@@ -5927,6 +6310,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiOpcUa.AvailableNamespaces": {
@@ -5940,6 +6324,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiOpcUa.Config": {
@@ -5951,6 +6336,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiOpcUa.Diagnostics": {
@@ -6004,6 +6390,7 @@
                 "transient": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiOpcUa.GetDefinitions": {
@@ -6015,6 +6402,7 @@
             "MAPPING": "GetDefinitions",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiOpcUa.GetSchema": {
@@ -6028,6 +6416,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiOpcUa.ListSymbols": {
@@ -6039,6 +6428,7 @@
             "MAPPING": "ListSymbols",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiOpcUa.Reconnect": {
@@ -6050,6 +6440,7 @@
             "MAPPING": "Reconnect",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiRecipeManagement.ActivateRecipe": {
@@ -6074,6 +6465,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiRecipeManagement.Config": {
@@ -6085,6 +6477,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiRecipeManagement.GetActiveRecipes": {
@@ -6118,6 +6511,7 @@
                     ]
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiRecipeManagement.GetRecipes": {
@@ -6148,6 +6542,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiRecipeManagement.ReadFromTarget": {
@@ -6182,6 +6577,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiRecipeManagement.UpdateRecipe": {
@@ -6216,6 +6612,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.ChangeChannelState": {
@@ -6269,6 +6666,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.CheckIfSaveRecordIsAttached": {
@@ -6293,6 +6691,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.CloseConnection": {
@@ -6338,6 +6737,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Config": {
@@ -6349,6 +6749,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.DeleteScopeServerRecords": {
@@ -6377,6 +6778,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.DetachControl": {
@@ -6422,6 +6824,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Diagnostics": {
@@ -6448,6 +6851,7 @@
                 "transient": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.GetActualWindow": {
@@ -6529,6 +6933,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.GetData": {
@@ -6705,6 +7110,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.GetLayout": {
@@ -7573,6 +7979,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.GetLegend": {
@@ -7642,6 +8049,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.GetMenubar": {
@@ -7709,6 +8117,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.GetTooltip": {
@@ -7802,6 +8211,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.GetWindow": {
@@ -7901,6 +8311,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Goto": {
@@ -7951,6 +8362,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Init": {
@@ -7985,6 +8397,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.OpenConnection": {
@@ -8030,6 +8443,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Pan": {
@@ -8123,6 +8537,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Redo": {
@@ -8168,6 +8583,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.ResizeCharts": {
@@ -8239,6 +8655,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Scroll": {
@@ -8292,6 +8709,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.ScrollBig": {
@@ -8345,6 +8763,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.SetChartSize": {
@@ -8398,6 +8817,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.SetDisplayWidth": {
@@ -8448,6 +8868,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.SetOverviewMode": {
@@ -8497,6 +8918,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.SetOverviewRect": {
@@ -8553,6 +8975,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.StartDisplay": {
@@ -8598,6 +9021,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.StartRecord": {
@@ -8643,6 +9067,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.StopDisplay": {
@@ -8688,6 +9113,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.StopRecord": {
@@ -8733,6 +9159,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Undo": {
@@ -8778,6 +9205,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Wheel": {
@@ -8859,6 +9287,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.Zoom": {
@@ -8952,6 +9381,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.ZoomOutMax": {
@@ -8997,6 +9427,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiScope.ZoomToDefault": {
@@ -9042,6 +9473,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteHistorize.Config": {
@@ -9053,6 +9485,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteHistorize.Diagnostics": {
@@ -9105,6 +9538,7 @@
                 "transient": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteHistorize.GetTrendLineData": {
@@ -9190,6 +9624,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteHistorize.GetTrendLineWindow": {
@@ -9253,6 +9688,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteHistorize.HistorizeData": {
@@ -9266,6 +9702,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteLogger.Clear": {
@@ -9279,6 +9716,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteLogger.Config": {
@@ -9290,6 +9728,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteLogger.Diagnostics": {
@@ -9435,6 +9874,7 @@
                 "transient": true,
                 "type": "object"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSqliteLogger.ListEvents": {
@@ -9448,6 +9888,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiSrv.Config": {
@@ -9459,6 +9900,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.AddUser": {
@@ -9493,6 +9935,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.ChangePassword": {
@@ -9517,6 +9960,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.Config": {
@@ -9528,6 +9972,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.DisableUser": {
@@ -9545,6 +9990,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.EnableUser": {
@@ -9562,6 +10008,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.ListDisabledUsers": {
@@ -9579,6 +10026,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.ListSymbols": {
@@ -9592,6 +10040,7 @@
             "SCHEMA": {
                 "function": true
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.ListUsers": {
@@ -9609,6 +10058,7 @@
                 },
                 "type": "array"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.RemoveUser": {
@@ -9626,6 +10076,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiUserManagement.RenameUser": {
@@ -9656,6 +10107,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiVision.Config": {
@@ -9667,6 +10119,7 @@
             "MAPPING": "Config",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiVision.GetSchema": {
@@ -9683,6 +10136,7 @@
                     "type": "string"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "TcHmiVision.ListSymbols": {
@@ -9694,6 +10148,7 @@
             "MAPPING": "ListSymbols",
             "OPTIONS": {},
             "SCHEMA": {},
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Unsubscribe": {
@@ -9711,6 +10166,7 @@
                     "type": "integer"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "UnsubscribeEvents": {
@@ -9728,6 +10184,7 @@
                     "type": "integer"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "UpdateEventsSubscription": {
@@ -9745,6 +10202,7 @@
                     "type": "integer"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "Upload": {
@@ -9798,6 +10256,7 @@
                     "type": "object"
                 }
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
         "UserSelectType": {
@@ -9812,6 +10271,7 @@
                 "function": true,
                 "type": "number"
             },
+            "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         }
     },
@@ -9964,16 +10424,16 @@
     "VIDEOSEGMENTSIZE": 1048576,
     "VIRTUALDIRECTORIES": {
         "/": "..\\..\\HMI\\",
-        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.754.4\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.754.4\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.754.4\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.754.4\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.754.4\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.754.4\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.758.8\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.758.8\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.758.8\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.758.8\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.758.8\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.758.8\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.752.0\\runtimes\\native1.12-tchmi",
         "/NCPrograms": "..\\..\\..\\..\\..\\..\\TwinCAT\\Mc\\Nci",
         "/bin": "..\\..\\HMI\\bin\\",
         "/bin/framework": "..\\..\\HMI\\bin\\framework",
-        "/framework": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.754.4\\runtimes\\native1.12-tchmi"
+        "/framework": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.758.8\\runtimes\\native1.12-tchmi"
     }
 }

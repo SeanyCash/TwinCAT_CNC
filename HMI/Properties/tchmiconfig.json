@@ -1,5 +1,5 @@
 ﻿{
-  "$schema": "./../../Packages/Beckhoff.TwinCAT.HMI.Framework.12.754.4/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
+  "$schema": "./../../Packages/Beckhoff.TwinCAT.HMI.Framework.12.758.8/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
   "basePath": "./framework",
   "scaleMode": "None",
   "startupView": "Desktop.view",
@@ -78,7 +78,7 @@
   "userControls": [],
   "content": [
     {
-      "url": "Contents/Alarms.content",
+      "url": "Contents/Overview.content",
       "preload": false,
       "keepAlive": false,
       "loadSync": false,
@@ -100,27 +100,6 @@
     },
     {
       "url": "Contents/Jog.content",
-      "preload": false,
-      "keepAlive": false,
-      "loadSync": false,
-      "preloadBindings": false
-    },
-    {
-      "url": "Contents/Main.content",
-      "preload": false,
-      "keepAlive": false,
-      "loadSync": false,
-      "preloadBindings": false
-    },
-    {
-      "url": "Contents/MetricUnits.content",
-      "preload": false,
-      "keepAlive": false,
-      "loadSync": false,
-      "preloadBindings": false
-    },
-    {
-      "url": "Contents/Offsets.content",
       "preload": false,
       "keepAlive": false,
       "loadSync": false,
@@ -153,6 +132,34 @@
       "keepAlive": false,
       "loadSync": false,
       "preloadBindings": false
+    },
+    {
+      "url": "Contents/Offsets.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/Alarms.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/Main.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/MetricUnits.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     }
   ],
   "views": [
@@ -178,7 +185,8 @@
         "persist": false,
         "readonly": false
       }
-    }
+    },
+    "themedResources": {}
   },
   "trigger": [],
   "actionTemplates": [],
