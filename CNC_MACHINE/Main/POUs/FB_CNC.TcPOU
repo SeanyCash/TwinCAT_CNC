@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC IMPLEMENTS I_HMI;
 VAR_INPUT
@@ -166,7 +166,9 @@ Y_Motion(
 			bPositiveLimitSwitch := bYLimitSwitch,
             bNegativeLimitSwitch := bYNegativeLimit OR bY2NegativeLimit,
 			bHomeExecute := bHomeY,
-										);
+            bSetPosExecute := stHMI_In.bSetPosExecute,
+			fSetPosition :=	2500.00						
+                                                                            );
                                         
 
 							
@@ -188,8 +190,9 @@ Y2_Motion(
 			eHomingMode := eHomingMode,
 			bPositiveLimitSwitch := bYLimitSwitch,
             bNegativeLimitSwitch := bY2NegativeLimit OR bYNegativeLimit,
-			bHomeExecute := bHomeY2
-										);
+			bHomeExecute := bHomeY2,
+            bSetPosExecute := stHMI_In.bSetPosExecute,
+			fSetPosition :=	2500.00								);
 						
 X_Motion( 
 			Ref:= X_Ref,
@@ -209,8 +212,9 @@ X_Motion(
 			eHomingMode := eHomingMode,
 			bPositiveLimitSwitch := bXLimitSwitch,
             bNegativeLimitSwitch := bXNegativeLimit,
-			bHomeExecute := bHomeX
-										);
+			bHomeExecute := bHomeX,
+            bSetPosExecute := stHMI_In.bSetPosExecute,
+			fSetPosition :=1285.00									);
 							
 Z_Motion( 
 			Ref:= Z_Ref,
@@ -230,8 +234,9 @@ Z_Motion(
 			eHomingMode := eHomingMode,
             bPositiveLimitSwitch := bZPositiveLimit,
             bNegativeLimitSwitch := FALSE,
-			bHomeExecute := bHomeZ
-										);
+			bHomeExecute := bHomeZ,
+            bSetPosExecute := stHMI_In.bSetPosExecute,
+			fSetPosition := -212.69);
 
 
 
@@ -744,7 +749,17 @@ END_CASE
     </Method>
     <LineIds Name="FB_CNC">
       <LineId Id="13935" Count="15" />
-      <LineId Id="13961" Count="121" />
+      <LineId Id="13961" Count="41" />
+      <LineId Id="14743" Count="0" />
+      <LineId Id="14003" Count="0" />
+      <LineId Id="14744" Count="0" />
+      <LineId Id="14004" Count="21" />
+      <LineId Id="14745" Count="0" />
+      <LineId Id="14026" Count="20" />
+      <LineId Id="14746" Count="0" />
+      <LineId Id="14047" Count="20" />
+      <LineId Id="14747" Count="0" />
+      <LineId Id="14068" Count="14" />
       <LineId Id="14085" Count="0" />
       <LineId Id="14416" Count="0" />
       <LineId Id="14637" Count="0" />

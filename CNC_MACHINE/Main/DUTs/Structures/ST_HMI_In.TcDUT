@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="ST_HMI_In" Id="{00e1f3e5-dcaa-4395-83d0-f9d2a4f4c93d}">
     <Declaration><![CDATA[TYPE ST_HMI_In :
 STRUCT
@@ -48,6 +48,11 @@ bZJogNegative    : BOOL;
 eJogMode         : E_JogMode;
 fJogPosition	 : LREAL;
 fJogVelocity	 : LREAL;
+
+// Axis Set Position
+
+bSetPosExecute      : BOOL;
+fSetPosition        : LREAL;
 
 // NCI Functions
 

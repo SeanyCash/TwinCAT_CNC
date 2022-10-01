@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <DUT Name="ST_Motion_Inputs" Id="{22bf156f-0142-4b0e-a2c7-c04907dd37a3}">
     <Declaration><![CDATA[TYPE ST_Motion_Inputs :
 STRUCT
@@ -22,8 +22,6 @@ bHaltDecel			: LREAL;
 bHaltJerk			: LREAL;
 HaltBufferMode		: MC_BufferMode;
 HaltOptions			: ST_MoveOptions;
-
-
 
 END_STRUCT
 END_TYPE

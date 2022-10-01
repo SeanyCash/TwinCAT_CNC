@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
   <POU Name="FB_MotionFunctions" Id="{500ca146-bff1-4570-8da1-57ff34083845}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_MotionFunctions IMPLEMENTS I_HMI;
 
@@ -29,6 +29,10 @@ bJogNegative                : BOOL;
 eJogMode                    : E_JogMode;
 fJogPosition				: LREAL;
 fJogVelocity				: LREAL;
+// MC Set Position
+bSetPosExecute              : BOOL;
+fSetPosition                : LREAL;
+
 // Touch Probe Input  
 bTouchProbeTrigger          : TRIGGER_REF;		
 
@@ -56,6 +60,8 @@ mcGearOut       : MC_GearOut;
 mcReset         : MC_Reset;
 
 mcJog           : MC_Jog;
+
+mcSetPosition   : MC_SetPosition;
 
 mcTouchProbe    : MC_TouchProbe;
 
@@ -86,6 +92,7 @@ M_Home( );
 M_Gearing( );
 M_HMI_In();
 M_Jog();
+M_SetPosition();
 M_HMI_Out();
 ]]></ST>
     </Implementation>
@@ -294,6 +301,24 @@ END_VAR]]></Declaration>
 	        ErrorID=> Motion_Out.nResetErrorID);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_SetPosition" Id="{8a785116-e4be-42c8-8633-79b7138a59dd}">
+      <Declaration><![CDATA[METHOD M_SetPosition : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcSetPosition(
+                Axis:= Ref, 
+                Execute:= bSetPosExecute, 
+                Position:= fSetPosition, 
+                Mode:= FALSE, 
+                Options:= , 
+                Done=> Motion_Out.bSetPosDone, 
+                Busy=> Motion_Out.bSetPosBusy, 
+                Error=> Motion_Out.bSetPosError, 
+                ErrorID=> Motion_Out.nSetPosErrorID);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_TouchProbe" Id="{501d32c0-2672-4596-a933-cd18dea39564}">
       <Declaration><![CDATA[METHOD M_TouchProbe : BOOL
 VAR_INPUT
@@ -326,7 +351,9 @@ END_VAR
       </Implementation>
     </Method>
     <LineIds Name="FB_MotionFunctions">
-      <LineId Id="464" Count="17" />
+      <LineId Id="464" Count="16" />
+      <LineId Id="554" Count="0" />
+      <LineId Id="481" Count="0" />
       <LineId Id="126" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_FastStop">
@@ -384,6 +411,10 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Reset">
       <LineId Id="9" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MotionFunctions.M_SetPosition">
+      <LineId Id="6" Count="8" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_TouchProbe">
