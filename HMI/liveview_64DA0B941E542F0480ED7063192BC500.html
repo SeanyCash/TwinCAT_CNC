@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<!--
+  Copyright (C) 2022     
+  For any information visit: 
+
+  Deployment
+  +++++++++++++++++++++++++++
+	Version: 1.0.0.0
+	Date: Oct Mon 03, 2022, Time: 08:26:56
+-->
+<html lang="en">
+<head>
+  <title>Please enter your Title...</title>
+  <meta name="tchmi-buildtime" content="2022-10-03T08:26:56">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <!-- target-densitydpi=device-dpi -->
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width"><script>
+	TCHMI_TARGET_PARTIAL = "Desktop.view";
+</script><script>
+	 TCHMI_CONFIG_OVERRIDE = {"basePath":"/framework"};
+	 TCHMI_LIVEVIEW = true;
+	 TCHMI_ENGINEERING_WEBSOCKET = "ws://127.0.0.1:10114";
+	 TCHMI_ENGINEERING  = true;
+	 TCHMI_CONSOLE_LOG_LEVEL  = 2;
+	 TCHMI_CONSOLE_LOG_TCHMISERVER_MESSAGES  = false;
+	 TCHMI_CONSOLE_LOG_ENGINEERING_COM_MESSAGES  = false;
+</script><script>TCHMI_NUGET_METADATA = {
+  "Beckhoff.TwinCAT.HMI.BaseTemplate": {
+    "version": "12.758.8",
+    "authors": "Beckhoff",
+    "title": "BaseTemplate",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides controls for TwinCAT HMI project templates."
+  },
+  "Beckhoff.TwinCAT.HMI.Controls": {
+    "version": "12.758.8",
+    "authors": "Beckhoff",
+    "title": "Controls",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides the controls for the TwinCAT HMI client."
+  },
+  "Beckhoff.TwinCAT.HMI.EcDiagnostics": {
+    "version": "19.0.0",
+    "authors": "Beckhoff",
+    "title": "EcDiagnostics",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides the extension for the TwinCAT HMI Server to enable the fieldbus diagnostics of EtherCAT topologies in TwinCAT HMI applications."
+  },
+  "Beckhoff.TwinCAT.HMI.EcDiagnostics.Meta": {
+    "version": "1.0.0",
+    "authors": "Beckhoff",
+    "title": "EcDiagnostics (Meta)",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This meta package ensures compatibility between the Beckhoff.TwinCAT.HMI.EcDiagnostics extension package and client packages, such as Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.\n\n    The extension is not provided by this meta package itself, but by a dependency to a compatible version of the extension package within this meta package. Compatibility here refers to the symbol API of the dependent extension, i.e. the symbols and their parameters and return values provided by the extension. Changes to the symbol API of the dependent extension are represented by the version number of this meta package, since the version number of the dependent extension package already represents the version number of the server API (C++ or .NET) used by the extension, which is not directly relevant for clients, such as controls. Clients using an extension should therefore always reference the corresponding meta package with the same major number, instead of directly referencing the extension package, to ensure compatibility when updating packages."
+  },
+  "Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": {
+    "version": "12.758.8",
+    "authors": "Beckhoff",
+    "title": "EcDiagnosticsControl",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides a control for fieldbus diagnostics of EtherCAT topologies in TwinCAT HMI applications."
+  },
+  "Beckhoff.TwinCAT.HMI.EventLogger": {
+    "version": "19.0.0",
+    "authors": "Beckhoff",
+    "title": "EventLogger",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides the extension for the TwinCAT HMI Server to support alarms and messages of the TwinCAT 3 EventLogger."
+  },
+  "Beckhoff.TwinCAT.HMI.Framework": {
+    "version": "12.758.8",
+    "authors": "Beckhoff",
+    "title": "Framework",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides the client framework for the TwinCAT HMI."
+  },
+  "Beckhoff.TwinCAT.HMI.Functions": {
+    "version": "12.758.8",
+    "authors": "Beckhoff",
+    "title": "Functions",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides functions for use in the \"Actions and Conditions Editor\" and symbol expressions."
+  },
+  "Beckhoff.TwinCAT.HMI.PDFViewer": {
+    "version": "12.758.8",
+    "authors": "Beckhoff",
+    "title": "ResponsiveNavigation",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides a PDF.js based control to view PDF documents in TwinCAT HMI applications."
+  },
+  "Beckhoff.TwinCAT.HMI.RecipeManagement": {
+    "version": "19.0.0",
+    "authors": "Beckhoff",
+    "title": "RecipeManagement",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides a Recipe Management extension for the TwinCAT HMI Server."
+  },
+  "Beckhoff.TwinCAT.HMI.ResponsiveNavigation": {
+    "version": "12.758.8",
+    "authors": "Beckhoff",
+    "title": "ResponsiveNavigation",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides controls for creation of responsive navigation menus."
+  },
+  "Beckhoff.TwinCAT.HMI.Vision": {
+    "version": "13.7.0",
+    "authors": "Beckhoff",
+    "title": "Vision",
+    "description": "TwinCAT HMI is a development environment for web-based HMIs (Human Machine Interfaces). This package provides the extension for the TwinCAT HMI Server to display TwinCAT 3 Vision images in the HMI Client."
+  },
+  "Microsoft.TypeScript.MSBuild": {
+    "version": "3.9.9",
+    "authors": "Microsoft",
+    "title": "Microsoft.TypeScript.MSBuild",
+    "description": "The TypeScript MSBuild task, and matching compiler version."
+  }
+};
+</script>
+
+  
+  <link rel="icon" href="./Favicon.ico">
+  <script src="framework/Object.js"></script>
+<script src="framework/Lib/jquery.min.js"></script>
+<script src="framework/Lib/acorn.js"></script>
+<script src="framework/TcHmiFramework.js"></script>
+
+  <script>
+    window.onload = function load() {
+	    if((!this['TcHmi'] || !this['TcHmi'].System) && document.body){
+			document.body.innerHTML = 'TwinCAT HMI Framework could not be loaded. Perhaps a more modern web browser (which supports ES6 JavaScript) is needed.';
+	    }
+    };
+  </script>
+<script src="/framework/Controls/System/TcHmiControl/TcHmiControl.js"></script>
+<script src="/framework/Controls/System/TcHmiContainerControl/TcHmiContainerControl.js"></script>
+<script src="/framework/Controls/System/TcHmiPartial/TcHmiPartial.js"></script>
+<script src="/framework/Controls/System/TcHmiContainer/TcHmiContainer.js"></script>
+<script src="/framework/Controls/System/TcHmiContent/TcHmiContent.js"></script>
+<script src="/framework/Controls/System/TcHmiGrid/TcHmiGrid.js"></script>
+<script src="/framework/Controls/System/TcHmiHtmlHost/TcHmiHtmlHost.js"></script>
+<script src="/framework/Controls/System/TcHmiUserControl/TcHmiUserControl.js"></script>
+<script src="/framework/Controls/System/TcHmiView/TcHmiView.js"></script>
+<script src="/framework/Controls/System/TcHmiRegion/TcHmiRegion.js"></script>
+<script src="/framework/Controls/System/TcHmiUserControlHost/TcHmiUserControlHost.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/Helpers/TcHmiCallbackManager/TcHmiCallbackManager.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/Helpers/TcHmiContentTabs/TcHmiContentTabs.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiCharting/TcHmiCharting.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/Helpers/TcHmiDirectoryBrowser/TcHmiDirectoryBrowser.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/Helpers/TcHmiPopups/TcHmiPopups.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiButton/TcHmiButton.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiToggleButton/TcHmiToggleButton.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiBarChart/TcHmiBarChart.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiCheckbox/TcHmiCheckbox.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiCombobox/TcHmiCombobox.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiDatagrid/TcHmiDatagrid.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiDateTimeInput/TcHmiDateTimeInput.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiDateTimePicker/TcHmiDateTimePicker.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiEllipse/TcHmiEllipse.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiEventGrid/TcHmiEventGrid.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiEventLine/TcHmiEventLine.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiFileExplorer/TcHmiFileExplorer.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiHorizontalBarChart/TcHmiHorizontalBarChart.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiIFrame/TcHmiIFrame.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiImage/TcHmiImage.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiKeyboard/TcHmiKeyboard.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiLine/TcHmiLine.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiLinearGauge/TcHmiLinearGauge.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiLineChart/TcHmiLineChart.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiPolygon/TcHmiPolygon.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiPolyline/TcHmiPolyline.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiRadialGauge/TcHmiRadialGauge.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiRadioButton/TcHmiRadioButton.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiRectangle/TcHmiRectangle.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiTachometer/TcHmiTachometer.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiTextblock/TcHmiTextblock.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiTextbox/TcHmiTextbox.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiTimespanInput/TcHmiTimespanInput.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiTimespanPicker/TcHmiTimespanPicker.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiTrendLineChart/TcHmiTrendLineChart.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiVideo/TcHmiVideo.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiRecipeSelect/TcHmiRecipeSelect.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiThemeSelect/TcHmiThemeSelect.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiLocalizationSelect/TcHmiLocalizationSelect.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiDateTimeDisplay/TcHmiDateTimeDisplay.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiToggleSwitch/TcHmiToggleSwitch.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiInput/TcHmiInput.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiNumericInput/TcHmiNumericInput.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiPasswordInput/TcHmiPasswordInput.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiSpinboxInput/TcHmiSpinboxInput.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiAudio/TcHmiAudio.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiStateImage/TcHmiStateImage.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiRecipeEdit/TcHmiRecipeEdit.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiAdsState/TcHmiAdsState.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/TcHmiUserManagement/TcHmiUserManagement.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Controls/EventClassesProvider.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.BaseTemplate/TcHmiBreadcrumb/TcHmiBreadcrumb.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.BaseTemplate/TcHmiBurgerMenu/TcHmiBurgerMenu.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.BaseTemplate/TcHmiHeader/TcHmiHeader.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.BaseTemplate/TcHmiNavigation/TcHmiNavigation.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.BaseTemplate/TcHmiResponsiveBehaviour/TcHmiResponsiveBehaviour.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl/TcHmiEcDiagnostics/TcHmiEcDiagnostics.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ActivateRecipe.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/CheckAccess.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/CheckBinding.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/CheckBindingEx.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/Concatenate.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ConvertBooleanToEnum.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ConvertBooleanToVisibility.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/CreateBinding.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/Decrement.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/DownloadRecipes.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/DownloadRecipeTypes.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/EnumToString.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ForceLogout.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ForceLogoutEx.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/FormatString.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/GaugeValueFormatter.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/GetElementByIndex.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/GetLocale.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/GetLocalizedText.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/GetRegisteredLocales.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/GetTheme.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/GoToLoginPage.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/Increment.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/LineChartTooltipFormatter.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/Log.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/Login.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/LoginEx.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/Logout.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/LogoutEx.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/RemoveBinding.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/SetAttributeToThemeValue.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/SetElementByIndex.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/SetLocaleEx.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/SetLocale.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/SetTheme.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/SymbolExists.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/TeachAsNewRecipe.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/TeachRecipe.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ToDateString.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ToDateTimeString.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ToLowerCase.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ToTimeString.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/ToUpperCase.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/TrimToLength.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.Functions/UploadRecipeFiles.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.PDFViewer/TcHmiPdfViewer/TcHmiPdfViewer.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.ResponsiveNavigation/TcHmiNavigationBar/TcHmiNavigationBar.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.ResponsiveNavigation/TcHmiNavigationContent/TcHmiNavigationContent.js"></script>
+<script src="/Beckhoff.TwinCAT.HMI.ResponsiveNavigation/TcHmiBreadcrumb/TcHmiBreadcrumb.js"></script>
+<script src="/GCode%20Viewer%20Javascript/analyzer.js"></script>
+<script src="/GCode%20Viewer%20Javascript/gCodeReader.js"></script>
+<script src="/GCode%20Viewer%20Javascript/JavaScript1.js"></script>
+<script src="/GCode%20Viewer%20Javascript/renderer.js"></script>
+<script src="/GCode%20Viewer%20Javascript/renderer3d.js"></script>
+<script src="/GCode%20Viewer%20Javascript/ui.js"></script>
+<script src="/GCode%20Viewer%20Javascript/Worker.js"></script>
+</head>
+<body>
+	<noscript style="font-size: large; padding: 50px;">
+		TwinCAT HMI needs to execute JavaScript Code in the browser. 
+		Please enable JavaScript in this browser to use the HMI.
+	</noscript>
+	
+</body>
+</html>
