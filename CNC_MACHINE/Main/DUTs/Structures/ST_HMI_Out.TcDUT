@@ -34,6 +34,11 @@ fActPosY2           : REAL;
 fActPosX            : REAL;
 fActPosZ            : REAL;
 
+// Drive Temp Status
+nYDriveTemp         : INT;
+nY2DriveTemp        : INT;
+nXDriveTemp         : INT;
+nZDriveTemp         : INT;
 
 // Axis Ref Variables to pass to HMI for status indication
 

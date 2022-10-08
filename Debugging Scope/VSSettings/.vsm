@@ -5,40 +5,16 @@
   <Children>
     <Node>
       <Title>YT Scope Project</Title>
-      <Expanded>False</Expanded>
+      <Expanded>True</Expanded>
       <FileName>C:\Users\User\Documents\TwinCAT_CNC\Debugging Scope\YT Scope Project.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
-              <Title>bRunEnable</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>bWriteBusy</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>eCoastStop</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>eSetSpindleSpeedSeq</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Q</Title>
+              <Title>bPollingPulse</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -47,71 +23,21 @@
         </Node>
         <Node>
           <Title>YT Chart</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>Q</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>eCoastStop</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>eSetSpindleSpeedSeq</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>bWriteBusy</Title>
+                  <Title>bPollingPulse</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
               </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (1)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>YT Chart (1)</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (2)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>YT Chart (2)</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group (3)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
             </Node>
           </Children>
         </Node>

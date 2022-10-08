@@ -65,6 +65,8 @@ mcSetPosition   : MC_SetPosition;
 
 mcTouchProbe    : MC_TouchProbe;
 
+fbCoERead       : FB_EcCoeSdoRead;
+
 // Event Logger Instances	
 fbEventLogger	: FB_TcEventLogger;
 fbAlarm			: FB_TcAlarm;

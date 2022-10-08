@@ -4452,6 +4452,53 @@
             "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_Out.nXDriveTemp": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::nXDriveTemp",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nY2DriveTemp": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::nY2DriveTemp",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nYDriveTemp": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::nYDriveTemp",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/INT"
+                    },
+                    {
+                        "comment": "Drive Temp Status"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.nZDriveTemp": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::nZDriveTemp",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_Out.sCurrentProgramSelected": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -10376,6 +10423,10 @@
                 "PLC1.GVL.stHMI_In.bCoupleYAxes": 3,
                 "PLC1.GVL.stHMI_In.bDecoupleAxes": 3,
                 "PLC1.GVL.stHMI_Out.bYAxesCoupled": 3,
+                "PLC1.GVL.stHMI_Out.nXDriveTemp": 3,
+                "PLC1.GVL.stHMI_Out.nY2DriveTemp": 3,
+                "PLC1.GVL.stHMI_Out.nYDriveTemp": 3,
+                "PLC1.GVL.stHMI_Out.nZDriveTemp": 3,
                 "SetLocale": 3,
                 "SubscribeEvents": 3,
                 "TcHmiEcDiagnostics.Diagnostics": 1,
