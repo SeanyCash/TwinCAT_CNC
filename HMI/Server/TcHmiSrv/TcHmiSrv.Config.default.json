@@ -3103,6 +3103,26 @@
             "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
+        "PLC1.GVL.stHMI_In.bCoupleYAxes": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::bCoupleYAxes",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.bDecoupleAxes": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::bDecoupleAxes",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "PLC1.GVL.stHMI_In.bExecuteZeroShift": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
@@ -3958,6 +3978,16 @@
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
             "SUBSYMBOL_MAPPING": "",
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_Out.bYAxesCoupled": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_Out::bYAxesCoupled",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
             "USEMAPPING": true
         },
         "PLC1.GVL.stHMI_Out.bYLimitSwitch": {
@@ -10343,6 +10373,9 @@
                 "LocalizeText": 3,
                 "Login": 3,
                 "Logout": 3,
+                "PLC1.GVL.stHMI_In.bCoupleYAxes": 3,
+                "PLC1.GVL.stHMI_In.bDecoupleAxes": 3,
+                "PLC1.GVL.stHMI_Out.bYAxesCoupled": 3,
                 "SetLocale": 3,
                 "SubscribeEvents": 3,
                 "TcHmiEcDiagnostics.Diagnostics": 1,

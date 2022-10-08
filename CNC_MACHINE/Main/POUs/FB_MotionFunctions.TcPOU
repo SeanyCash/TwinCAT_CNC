@@ -133,7 +133,7 @@ IF bGearingEnabled THEN
 mcGearIn(
 	Master:= Ref, 
 	Slave:= SlaveRef, 
-	Execute:= bGearInExecute, 
+	Execute:= bGearInExecute OR fbCNC.rGearInTrigger.Q, 
 	RatioNumerator:=1 , 
 	RatioDenominator:=1 , 
 	Acceleration:= , 
@@ -150,7 +150,7 @@ mcGearIn(
     
 mcGearOut(
 	Slave:= SlaveRef, 
-	Execute:= bGearOutExecute, 
+	Execute:= bGearOutExecute OR fbCNC.rGearOutTrigger.Q, 
 	Options:= , 
 	Done=> Motion_Out.bGearOutDone, 
 	Busy=> , 
@@ -206,7 +206,8 @@ CASE eJogMode OF
     MC_JOGMODE_INCHING_MODULO:
         stHMI_Out.sJogMode:= 'INCHING MODULO JOG';
         
-END_CASE]]></ST>
+END_CASE
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Home" Id="{1d749ffd-f5a6-45ff-a0e1-191b93a80305}">
@@ -393,6 +394,7 @@ END_VAR
       <LineId Id="30" Count="0" />
       <LineId Id="41" Count="0" />
       <LineId Id="24" Count="0" />
+      <LineId Id="43" Count="0" />
     </LineIds>
     <LineIds Name="FB_MotionFunctions.M_Home">
       <LineId Id="6" Count="12" />

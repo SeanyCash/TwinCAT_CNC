@@ -74,7 +74,9 @@ VAR
 	bHomeZ		    : BOOL;
 	eHomingMode		: MC_HomingMode;
     bGearInTrigger  : BOOL;
+    bGearOutTrigger : BOOL;
     rGearInTrigger  : R_TRIG;
+    rGearOutTrigger : R_TRIG;
     rtrigAxisNotGeared  : R_TRIG;
 	bAllAxesReady	: BOOL;
     bAllAxesHomed   : BOOL;
@@ -124,6 +126,7 @@ END_IF
 rtrigAxisNotGeared(CLK := Y_MC_OUT.bPowerStatus AND NOT Y_MC_OUT.bGearInDone);
 
 rGearInTrigger(CLK:= bGearInTrigger);
+rGearOutTrigger(CLK:= bGearOutTrigger);
 
 // Rising triggers for HMI control. Having issues calling directly in the Methods
 trigAxisEnable(CLK := stHMI_In.bAxisEnable);
@@ -302,6 +305,11 @@ IF trigAxisEnable.Q THEN
 
 END_IF
 
+// Trigger Y coupling
+
+bGearInTrigger := stHMI_In.bCoupleYAxes;
+bGearOutTrigger := stHMI_In.bDecoupleAxes;
+
 // NCI Functions
 
 bExecuteNCProgram := stHMI_In.bStart;
@@ -334,7 +342,8 @@ stHMI_Out.bY2HomeSwitch := bY2HomingSwitch;
 stHMI_Out.bYLimitSwitch := bYLimitSwitch;	
 stHMI_Out.bXHomeSwitch := bXHomingSwitch;
 stHMI_Out.bXLimitSwitch := bXLimitSwitch;	
-stHMI_Out.bZHomeSwitch  := bZHomingSwitch;	
+stHMI_Out.bZHomeSwitch  := bZHomingSwitch;
+stHMI_Out.bYAxesCoupled := Y2_Ref.Status.Coupled;
 
 
 // Pass Axis Ref info to HMI
@@ -749,6 +758,7 @@ END_CASE
     </Method>
     <LineIds Name="FB_CNC">
       <LineId Id="13935" Count="15" />
+      <LineId Id="14853" Count="0" />
       <LineId Id="13961" Count="41" />
       <LineId Id="14743" Count="0" />
       <LineId Id="14003" Count="0" />
@@ -788,6 +798,11 @@ END_CASE
       <LineId Id="53" Count="0" />
       <LineId Id="44" Count="0" />
       <LineId Id="37" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="110" Count="0" />
       <LineId Id="57" Count="0" />
       <LineId Id="20" Count="0" />
       <LineId Id="59" Count="1" />
@@ -805,6 +820,7 @@ END_CASE
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_Out">
       <LineId Id="11" Count="7" />
+      <LineId Id="64" Count="0" />
       <LineId Id="44" Count="0" />
       <LineId Id="47" Count="0" />
       <LineId Id="46" Count="0" />

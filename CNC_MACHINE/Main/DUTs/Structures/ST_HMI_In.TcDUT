@@ -39,6 +39,8 @@ sPrgName         : STRING[255];
 // Axis Jog Functions
 
 bJogEnable       : BOOL;
+bCoupleYAxes     : BOOL;
+bDecoupleAxes    : BOOL;
 bXJogPositive    : BOOL;
 bXJogNegative    : BOOL;
 bYJogPositive    : BOOL;
