@@ -1,65 +1,33 @@
 ﻿<div id="GCode" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="1059" data-tchmi-height="510">
-
-<div id="GCodeLines_Datagrid" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDatagrid" data-tchmi-height="195" data-tchmi-height-unit="px" data-tchmi-left="206" data-tchmi-left-unit="px" data-tchmi-top="37" data-tchmi-top-unit="px" data-tchmi-width="653" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-zindex="3" data-tchmi-show-row-numbers="true" data-tchmi-row-numbers-start-number="1" data-tchmi-row-numbers-width="50" data-tchmi-row-numbers-resizable="false" data-tchmi-header-height="30" data-tchmi-row-height="50" data-tchmi-table-border-width="4" data-tchmi-row-numbers-font-size="22" data-tchmi-header-font-size="22" data-tchmi-row-numbers-font-size-unit="px" data-tchmi-grid-font-size="22" data-tchmi-data-symbol="">
-<script data-tchmi-target-attribute="data-tchmi-cell-content-padding" type="application/json">
-{
-  "left": 4,
-  "right": 4,
-  "top": 0,
-  "bottom": 0,
-  "leftUnit": "px",
-  "rightUnit": "px",
-  "topUnit": "px",
-  "bottomUnit": "px"
-}
-</script>
-<script data-tchmi-target-attribute="data-tchmi-selected-row-value" type="application/json">
-
-</script>
-<script data-tchmi-target-attribute="data-tchmi-selected-cell-value" type="application/json">
-
-</script>
-
-
-
-
-<script data-tchmi-target-attribute="data-tchmi-src-column" type="application/json">
+<div id="TcHmiFileExplorer" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiFileExplorer" data-tchmi-height="440" data-tchmi-height-unit="px" data-tchmi-left="16" data-tchmi-left-unit="px" data-tchmi-top="60" data-tchmi-top-unit="px" data-tchmi-width="806" data-tchmi-width-unit="px" data-tchmi-root="/NCPrograms" data-tchmi-zindex="3" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "name": "GCodeLine",
-    "label": "GCodeLine",
-    "control": "TextBlock",
-    "width": 600,
-    "widthUnit": "px",
-    "resize": false,
-    "sortable": false,
-    "minWidth": 600,
-    "minWidthUnit": "px",
-    "cellBackground": null,
-    "textColor": null,
-    "editable": false,
-    "horizontalAlignment": "Center",
-    "verticalAlignment": "Center",
-    "headerHorizontalAlignment": "Center",
-    "headerVerticalAlignment": "Center"
-  }
-]
-</script>
-
-
-
-
-
-<script data-tchmi-target-attribute="data-tchmi-src-data" type="application/json">
-[
-  {
-    "GCodeLine": "%s%PLC1.GVL.stHMI_Out.sReadNCLine[0]%/s%"
-  },
-  {
-    "GCodeLine": "%s%PLC1.GVL.stHMI_Out.sReadNCLine[1]%/s%"
-  },
-  {
-    "GCodeLine": "%s%PLC1.GVL.stHMI_Out.sReadNCLine[2]%/s%"
+    "event": "TcHmiFileExplorer.onSelectionChanged",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%NCProgramPath%/i%",
+        "value": {
+          "objectType": "Symbol",
+          "valueType": "tchmi:general#/definitions/String",
+          "symbolExpression": "%ctrl%TcHmiFileExplorer::SelectedItems%/ctrl%"
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.sPrgName%/s%",
+        "value": {
+          "objectType": "Symbol",
+          "valueType": "tchmi:general#/definitions/String",
+          "symbolExpression": "%ctrl%TcHmiFileExplorer::SelectedItems%/ctrl%"
+        },
+        "asyncWait": true
+      }
+    ]
   }
 ]
 </script>
@@ -78,15 +46,6 @@
 </script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
-{
-  "left": "Solid",
-  "right": "Solid",
-  "top": "Solid",
-  "bottom": "Solid"
-}
-</script>
-
-<script data-tchmi-target-attribute="data-tchmi-table-border-style" type="application/json">
 {
   "left": "Solid",
   "right": "Solid",
@@ -95,7 +54,12 @@
 }
 </script>
 </div>
-<div id="TcHmiTextblock_113" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="92" data-tchmi-height-unit="px" data-tchmi-left="206" data-tchmi-left-unit="px" data-tchmi-text="%s%PLC1.GVL.stHMI_Out.sReadNCLine.0%/s%" data-tchmi-top="345" data-tchmi-top-unit="px" data-tchmi-width="763" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="22">
+<div id="ZPosition_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="233" data-tchmi-left-unit="px" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="589" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="18" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text="%s%PLC1.GVL.stHMI_Out.sCurrentProgramSelected|Interval=300%/s%" data-tchmi-text-font-family="Ubuntu Mono">
+<script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
+{
+  "color": "rgba(14, 15, 14, 1)"
+}
+</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
 {
@@ -117,6 +81,95 @@
   "top": "Solid",
   "bottom": "Solid"
 }
+</script>
+</div>
+<div id="TcHmiTextblock_16" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="16" data-tchmi-left-unit="px" data-tchmi-text="Loaded Program:" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="217" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-text-font-size="28" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="10" data-tchmi-text-font-family="Ubuntu Mono">
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+</div>
+<div id="TcHmiButton_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="32" data-tchmi-height-unit="px" data-tchmi-left="721" data-tchmi-left-unit="px" data-tchmi-text="LOAD" data-tchmi-top="65" data-tchmi-top-unit="px" data-tchmi-width="94" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="22" data-tchmi-zindex="3">
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-color" type="application/json">
+{
+  "color": "rgba(0, 0, 0, 1)"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiButton_2.onStatePressed",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bInitiateNCProgramSelect%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": true
+        },
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "TcHmiButton_2.onStateReleased",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%PLC1.GVL.stHMI_In.bInitiateNCProgramSelect%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
+        },
+        "asyncWait": true
+      }
+    ]
+  }
+]
 </script>
 </div>
 </div>

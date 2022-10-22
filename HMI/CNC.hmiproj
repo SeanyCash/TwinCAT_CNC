@@ -110,6 +110,9 @@
     <Content Include="Contents\GCode.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Contents\Offsets_Region.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\Jog.content">
       <SubType>Content</SubType>
     </Content>
