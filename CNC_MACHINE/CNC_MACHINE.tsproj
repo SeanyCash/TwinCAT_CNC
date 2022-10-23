@@ -3405,6 +3405,10 @@ External Setpoint Generation:
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
+							<Name>GVL.fbCNC.q_bEnableDustCollector</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
@@ -5852,6 +5856,9 @@ External Setpoint Generation:
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bYHomingSwitch" VarB="Y1 Homing Prox^Input"/>
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bYLimitSwitch" VarB="Y Limit Switch^Input"/>
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.i_bZHomingSwitch" VarB="Z Homing Prox^Input"/>
+			</OwnerB>
+			<OwnerB Name="TIID^CNC Controller (EtherCAT)^Term 1 (EK1100)^Output Card (EL2008)">
+				<Link VarA="PlcTask Outputs^GVL.fbCNC.q_bEnableDustCollector" VarB="Channel 1^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^CNC Controller (EtherCAT)^Term 1 (EK1100)^Serial Comms (EL6021)">
 				<Link VarA="PlcTask Inputs^GVL.fbCNC.fbNCI.fbSpindle.fbModbusMasterEL.InData^D" VarB="COM TxPDO-Map Inputs^Data In 0"/>

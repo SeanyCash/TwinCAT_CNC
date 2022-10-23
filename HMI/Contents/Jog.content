@@ -181,7 +181,7 @@
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "event": "TcHmiToggleSwitch_1.onPressed",
+    "event": "DustCollector_Toggle.onPressed",
     "actions": [
       {
         "objectType": "Condition",
@@ -193,7 +193,7 @@
                 "compare1": {
                   "objectType": "Symbol",
                   "valueType": "tchmi:framework#/definitions/ToggleState",
-                  "symbolExpression": "%ctrl%TcHmiToggleSwitch_1::ToggleState%/ctrl%"
+                  "symbolExpression": "%ctrl%DustCollector_Toggle::ToggleState%/ctrl%"
                 },
                 "compare2": {
                   "objectType": "StaticValue",
@@ -219,7 +219,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiToggleSwitch_1::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctrl%DustCollector_Toggle::BackgroundColor%/ctrl%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -247,7 +247,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiToggleSwitch_1::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctrl%DustCollector_Toggle::BackgroundColor%/ctrl%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",

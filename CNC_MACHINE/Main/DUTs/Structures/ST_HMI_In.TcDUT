@@ -20,6 +20,9 @@ bHold           : BOOL;
 bStop           : BOOL;
 bStart          : BOOL;
 
+// Dust Collector
+bEnableDustCollectorPB  : BOOL;
+
 // Homing Program Selection
 
 ProgramCall	: E_Programs;

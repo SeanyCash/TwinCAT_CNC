@@ -728,7 +728,7 @@
         }
     },
     "PERMESSAGEDEFLATEENABLED": true,
-    "PROJECTNAME": "CNC Engineering",
+    "PROJECTNAME": "CNC",
     "PROJECTVERSION": "1.0.0.0",
     "REMOTESERVERS": {},
     "REMOTESERVERS_CERTIFICATES": [],
@@ -3120,6 +3120,23 @@
             "MAPPING": "PLC1::GVL::stHMI_In::bDecoupleAxes",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL.stHMI_In.bEnableDustCollectorPB": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL::stHMI_In::bEnableDustCollectorPB",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "comment": "Dust Collector"
+                    }
+                ]
             },
             "USEMAPPING": true
         },
@@ -10422,6 +10439,7 @@
                 "Logout": 3,
                 "PLC1.GVL.stHMI_In.bCoupleYAxes": 3,
                 "PLC1.GVL.stHMI_In.bDecoupleAxes": 3,
+                "PLC1.GVL.stHMI_In.bEnableDustCollectorPB": 3,
                 "PLC1.GVL.stHMI_Out.bYAxesCoupled": 3,
                 "PLC1.GVL.stHMI_Out.nXDriveTemp": 3,
                 "PLC1.GVL.stHMI_Out.nY2DriveTemp": 3,

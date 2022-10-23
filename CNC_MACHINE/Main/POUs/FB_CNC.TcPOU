@@ -71,6 +71,11 @@ VAR
     bXNegativeLimit     : BOOL;
     bZPositiveLimit     : BOOL;
     
+    // Dust Collector Relay
+    bEnableDustCollector    : BOOL;     // enable dust collector automatically with spindle M3 code
+    bEnableDustCollectorPB  : BOOL;     // enable dust collector override from pushbutton
+    q_bEnableDustCollector  AT %Q* : BOOL;
+    
     // Limit Switch Stop Triggers (use to one shot a stop command when axis limit switch is triggered)
     bYStopTrigger       : R_TRIG;
     bXStopTrigger       : R_TRIG;
@@ -275,7 +280,8 @@ fbNCI(
 	        stY:=Y_Ref, 
 	        stZ:=Z_Ref, 
             sLoadedProgram=>sCurrentProgram,
-            out_sTItpToPlc => CNC_stItpToPlc);
+            out_sTItpToPlc => CNC_stItpToPlc,
+            bEnableDustCollector => bEnableDustCollector);
             
 
 // All Axes Ready Bit
@@ -411,7 +417,10 @@ fbStringTrimmer(
                 TrimLeft:=3,
                 TrimRight:=3,
                 STR:=stHMI_In.sPrgName,
-                sString => sPrgName     );   ]]></ST>
+                sString => sPrgName     );   
+                
+// Dust Collector
+bEnableDustCollectorPB := stHMI_In.bEnableDustCollectorPB;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_HMI_Out" Id="{579ae688-d5bb-4d46-9cff-7ebda2f9644e}">
@@ -512,7 +521,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[// Dust Collector Relay Output
+q_bEnableDustCollector := bEnableDustCollector OR bEnableDustCollectorPB;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_PRG_HomeAll" Id="{dab3d8ef-3b5b-4130-bf86-a872d94b2fd9}">
@@ -871,6 +881,7 @@ END_CASE
       <LineId Id="14068" Count="14" />
       <LineId Id="14085" Count="0" />
       <LineId Id="14416" Count="0" />
+      <LineId Id="15015" Count="0" />
       <LineId Id="14637" Count="0" />
       <LineId Id="14089" Count="9" />
       <LineId Id="680" Count="0" />
@@ -931,6 +942,7 @@ END_CASE
       <LineId Id="93" Count="0" />
       <LineId Id="88" Count="4" />
       <LineId Id="85" Count="0" />
+      <LineId Id="117" Count="2" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_Out">
       <LineId Id="11" Count="7" />
@@ -974,6 +986,7 @@ END_CASE
       <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Outputs">
+      <LineId Id="20" Count="0" />
       <LineId Id="15" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_PRG_HomeAll">
