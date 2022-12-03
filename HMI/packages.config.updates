@@ -1,0 +1,10 @@
+﻿[
+  {
+    "id": "Beckhoff.TwinCAT.HMI.Vision",
+    "version": "13.7.1"
+  },
+  {
+    "id": "Microsoft.TypeScript.MSBuild",
+    "version": "4.9.3"
+  }
+]
