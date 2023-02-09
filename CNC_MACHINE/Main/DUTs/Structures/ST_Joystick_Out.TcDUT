@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ST_Joystick_Out" Id="{7cc9994c-d10c-444b-a2be-30f91ed77317}">
+    <Declaration><![CDATA[TYPE ST_Joystick_Out :
+STRUCT
+    bIsActive : BOOL;
+	Start_Button : BOOL; 
+	Back_Button : BOOL;
+	A_Button : BOOL;
+	B_Button : BOOL;
+	X_Button : BOOL;
+	Y_Button : BOOL;
+	LeftShoulder_Button : BOOL;
+	RightShoulder_Button : BOOL;
+	LeftStick_Button : BOOL;
+	RightStick_Button : BOOL;
+	DPad_Up_Button : BOOL;
+	DPad_Left_Button : BOOL;
+	DPad_Right_Button : BOOL;
+	DPad_Down_Button : BOOL;
+	iLeftStick_X_Axis : DINT;
+	iLeftStick_Y_Axis : DINT;
+	iRightStick_X_Axis : DINT;
+	iRightStick_Y_Axis : DINT;
+	iLeftTrigger_Axis : DINT;
+	iRightTrigger_Axis  : DINT;
+	sBatteryInfo		: STRING;  
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

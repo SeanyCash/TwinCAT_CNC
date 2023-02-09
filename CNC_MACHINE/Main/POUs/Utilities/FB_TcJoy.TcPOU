@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_TcJoy" Id="{9129424f-01bc-4dfe-bce8-563189fd07db}" SpecialFunc="None">
+    <Declaration><![CDATA[// --------------------------------------------Reworked FB from Jensen Mechatronics--------------------------------------------
+
+FUNCTION_BLOCK FB_TcJoy IMPLEMENTS I_HMI;
+VAR_INPUT
+    bEnable : BOOL :=TRUE;
+END_VAR
+VAR_OUTPUT    
+    
+ // Xbox controller outputs
+ stJoystickOut   : ST_Joystick_Out;
+ 
+END_VAR
+VAR
+	// From VB App To PLC
+	bHeartBeatToggle : BOOL;  // From VB App
+	iADSWatchdogMS : DINT;    // If Rate is > this, all outputs go to 0.
+	iADSWatchdogDeadDurationMS : DINT;    // If watchdog trips, outputs go to 0 for this long.
+	bWatchdogFailureActive			: BOOL;
+	bControllerInputsMustBeReleased  : BOOL;  // Are controller inputs holding us in latency lock down?
+	// From PLC To VB (Status)
+	iUpdateRateMS : DINT;    // Rate in MS between heartbeat changes detected.
+	
+	// Internal Use Only
+	HeartBeatChanged_RTRIG : R_TRIG;
+	bHeartBeatToggle_Last : BOOL;
+	UpdateRate_TMR : TON;
+	
+	LatencyWatchdog_TMR : TON; // Watch for missing ADS and kill joy output for a while.
+	LatencyWatchdogDeadDuration_TMR : TON; // Watchdog will kill the outputs for this long...
+	
+	iScanCount: DINT; // Scan counter for VB Status.
+	
+	bControllerConnected : BOOL;  // Is there a controller connected?
+    
+    bIsActive : BOOL;  // Are we running?
+    
+	// Controller Outputs for use in programs:
+	Start_Button : BOOL; 
+	Back_Button : BOOL;
+	A_Button : BOOL;
+	B_Button : BOOL;
+	X_Button : BOOL;
+	Y_Button : BOOL;
+	LeftShoulder_Button : BOOL;
+	RightShoulder_Button : BOOL;
+	LeftStick_Button : BOOL;
+	RightStick_Button : BOOL;
+	DPad_Up_Button : BOOL;
+	DPad_Left_Button : BOOL;
+	DPad_Right_Button : BOOL;
+	DPad_Down_Button : BOOL;
+	iLeftStick_X_Axis : DINT;
+	iLeftStick_Y_Axis : DINT;
+	iRightStick_X_Axis : DINT;
+	iRightStick_Y_Axis : DINT;
+	iLeftTrigger_Axis : DINT;
+	iRightTrigger_Axis  : DINT;
+	sBatteryInfo		: STRING;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[M_HMI_In();
+M_HMI_Out();
+M_XAxisControl();
+M_YAxisControl();
+M_ZAxisControl();
+M_Outputs();
+
+
+iScanCount := iScanCount+1;
+
+UpdateRate_TMR(PT:=T#999M);
+
+HeartBeatChanged_RTRIG(clk := bHeartBeatToggle <> bHeartBeatToggle_Last);
+
+// VB "Just" changed heartbeat.
+IF HeartBeatChanged_RTRIG.Q THEN
+	bHeartBeatToggle_Last := bHeartBeatToggle;
+	iUpdateRateMS := TIME_TO_DINT(UpdateRate_TMR.ET); // Grab Elapsed Time
+	UpdateRate_TMR(IN:=FALSE); // Reset Timer
+	UpdateRate_TMR(IN:=TRUE); // Reset Timer
+END_IF
+
+LatencyWatchdog_TMR(IN:=bHeartBeatToggle, PT:=DINT_TO_TIME(iADSWatchdogMS));
+
+// AHH Latency Elapsed!
+IF LatencyWatchdog_TMR.Q THEN
+	bWatchdogFailureActive := TRUE;
+	bControllerConnected := FALSE;
+END_IF
+
+
+
+//Force User to release all buttons/sticks on controller before allowing outputs again.
+IF bWatchdogFailureActive AND (Start_Button OR 
+	Back_Button OR 
+	A_Button OR 
+	B_Button OR 
+	X_Button OR 
+	Y_Button OR 
+	LeftShoulder_Button OR 
+	RightShoulder_Button OR 
+	LeftStick_Button OR
+	RightStick_Button OR
+	DPad_Up_Button OR 
+	DPad_Left_Button OR 
+	DPad_Right_Button OR 
+	DPad_Down_Button OR 
+	iLeftStick_X_Axis <> 0 OR
+	iLeftStick_Y_Axis <> 0 OR
+	iRightStick_X_Axis <> 0 OR
+	iRightStick_Y_Axis <> 0 OR
+	iLeftTrigger_Axis <> 0 OR
+	iRightTrigger_Axis <> 0)	THEN
+		bControllerInputsMustBeReleased := TRUE;
+ELSE
+		bControllerInputsMustBeReleased := FALSE;
+END_IF
+
+LatencyWatchdogDeadDuration_TMR(IN:=bWatchdogFailureActive AND NOT bControllerInputsMustBeReleased AND bControllerConnected, PT:=DINT_TO_TIME(iADSWatchdogDeadDurationMS));
+
+// ReEnable after setting duration expires
+IF LatencyWatchdogDeadDuration_TMR.Q THEN
+	bWatchdogFailureActive := FALSE;
+END_IF
+
+// Null the outputs on WD Active so we don't jog into a wall if we lose connection.
+IF (bWatchdogFailureActive OR NOT bControllerConnected OR bControllerInputsMustBeReleased) THEN
+		// Null all outputs now.
+		Start_Button := FALSE; 
+		Back_Button := FALSE; 
+		A_Button := FALSE; 
+		B_Button := FALSE; 
+		X_Button := FALSE; 
+		Y_Button := FALSE; 
+		LeftShoulder_Button := FALSE; 
+		RightShoulder_Button := FALSE; 
+		LeftStick_Button := FALSE; 
+		RightStick_Button := FALSE; 
+		DPad_Up_Button := FALSE; 
+		DPad_Left_Button := FALSE; 
+		DPad_Right_Button := FALSE; 
+		DPad_Down_Button := FALSE; 
+		iLeftStick_X_Axis := 0;
+		iLeftStick_Y_Axis := 0;
+		iRightStick_X_Axis := 0;
+		iRightStick_Y_Axis := 0;
+		iLeftTrigger_Axis := 0;
+		iRightTrigger_Axis := 0;
+		sBatteryInfo		:= 'Unkn';
+		
+		UpdateRate_TMR(IN:=FALSE); // Reset Rate Timer
+ELSE
+	; // All is well, VB will update our values constantly.
+END_IF
+
+bIsActive := NOT bWatchdogFailureActive AND bControllerConnected AND NOT bControllerInputsMustBeReleased;]]></ST>
+    </Implementation>
+    <Method Name="M_Enable" Id="{e11dbd2e-ef5b-4a80-9e37-8e9f91c38bb3}">
+      <Declaration><![CDATA[METHOD M_Enable : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//bEnable := ;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_In" Id="{0ac16883-cc0f-4b0c-9ee6-02fca7adae52}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_In : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//stHMI.bEnableJoystickControls]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{4f9129a5-2462-4ef0-8b5e-630c46ab5da3}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//stHMIOut.bXButtonPressed etc.....]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Outputs" Id="{f42027ab-888a-4ef2-9c42-f5eaa58e8da6}">
+      <Declaration><![CDATA[METHOD M_Outputs : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bEnable THEN
+
+stJoystickOut.Start_Button := Start_Button;
+stJoystickOut.Back_Button := Back_Button;
+stJoystickOut.A_Button := A_Button;
+stJoystickOut.B_Button := B_Button;
+stJoystickOut.X_Button := X_Button;
+stJoystickOut.Y_Button := Y_Button;
+stJoystickOut.LeftShoulder_Button := LeftShoulder_Button; 
+stJoystickOut.RightShoulder_Button := RightShoulder_Button;
+stJoystickOut.LeftStick_Button := LeftStick_Button;
+stJoystickOut.RightStick_Button := RightStick_Button; 
+stJoystickOut.DPad_Up_Button := DPad_Up_Button;
+stJoystickOut.DPad_Left_Button := DPad_Left_Button;
+stJoystickOut.DPad_Right_Button := DPad_Right_Button; 
+stJoystickOut.DPad_Down_Button := DPad_Down_Button;
+stJoystickOut.iLeftStick_X_Axis := iLeftStick_X_Axis; 
+stJoystickOut.iLeftStick_Y_Axis := iLeftStick_Y_Axis; 
+stJoystickOut.iRightStick_X_Axis := iRightStick_X_Axis;
+stJoystickOut.iRightStick_Y_Axis := iRightStick_Y_Axis;
+stJoystickOut.iLeftTrigger_Axis := iLeftTrigger_Axis; 
+stJoystickOut.iRightTrigger_Axis := iRightTrigger_Axis;		
+
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_XAxisControl" Id="{7795cb23-c6b0-45e0-b1c0-549e4a1f4ffd}">
+      <Declaration><![CDATA[METHOD M_XAxisControl : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_YAxisControl" Id="{96ee5d9c-40f3-4c29-bff8-bf645f9daff8}">
+      <Declaration><![CDATA[METHOD M_YAxisControl : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ZAxisControl" Id="{5c308bf8-28c3-4f20-8740-ca1b719a4d46}">
+      <Declaration><![CDATA[METHOD M_ZAxisControl : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_TcJoy">
+      <LineId Id="242" Count="94" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_Enable">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_HMI_In">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_HMI_Out">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_Outputs">
+      <LineId Id="26" Count="1" />
+      <LineId Id="5" Count="8" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="15" Count="9" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="28" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_XAxisControl">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_YAxisControl">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_ZAxisControl">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

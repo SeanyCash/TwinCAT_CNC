@@ -5,6 +5,7 @@
     
 // Main FB Calls
 fbCNC				: FB_CNC;
+fbTcJoy             : FB_TcJoy;
 
 // Global HMI Data Structure....Better way to do this? Probably but screw it this makes the GVL/Project structure look clean.
 stHMI_In            : ST_HMI_In;

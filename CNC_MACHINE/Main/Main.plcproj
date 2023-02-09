@@ -39,6 +39,9 @@
     <Compile Include="DUTs\Structures\ST_Interpreter_Outputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Structures\ST_Joystick_Out.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\Structures\ST_Motion_Inputs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +83,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Utilities\FB_StringTrimmer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Utilities\FB_TcJoy.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
