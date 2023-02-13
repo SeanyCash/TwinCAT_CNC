@@ -37,6 +37,21 @@ VAR
     
     // Xbox controller outputs
     stJoystickOut   : ST_Joystick_Out;
+    bJoystickEnable : BOOL;  
+    eJogMode        : E_JogMode;
+    // External Jog Vars
+    eJogSourceInput :(HMI,XBOX_CONTROLLER);
+    bJogEnable      : BOOL;
+    fJogPosition    : LREAL;
+    fXJogVelocity   : LREAL;
+    fYJogVelocity   : LREAL;
+    fZJogVelocity   : LREAL;
+    bYJogPositive   : BOOL;
+    bYJogNegative   : BOOL;
+    bXJogPositive   : BOOL;
+    bXJogNegative   : BOOL;
+    bZJogPositive   : BOOL;
+    bZJogNegative   : BOOL;
 	
 	
 	Y_Ref	        : AXIS_REF;
@@ -126,6 +141,9 @@ VAR
     sPrgName                : STRING[255];
     out_stItpToPlc	    : NCTOPLC_NCICHANNEL_REF;
     CNC_stItpToPlc      : NCTOPLC_NCICHANNEL_REF;
+    
+    
+
 
 END_VAR
 ]]></Declaration>
@@ -167,6 +185,10 @@ X_Ref.ReadStatus();
 Z_Ref.ReadStatus();
 M_CoEStatus();
 
+// Call External Jog Input Handling
+
+M_JogInputHandling();
+
 // Call HMI Interface Methods
 
 M_HMI_In();
@@ -177,7 +199,8 @@ M_HMI_Out();
 M_LimitSwitchLogic();
 
 // Call Joystick Controls
-fbTcJoy();
+fbTcJoy(stJoystickOut => stJoystickOut );
+
 
 // Motion Calls
 
@@ -187,12 +210,12 @@ Y_Motion(
             SlaveRef:= Y2_Ref,
 		  	Motion_In := Y_MC_IN,
 		  	Motion_Out => Y_MC_OUT,
-            bJogEnable:= stHMI_In.bJogEnable AND Y_Ref.NcToPlc.CoupleState = 1,
-            eJogMode:= stHMI_In.eJogMode,
-			fJogPosition:= stHMI_In.fJogPosition,
-			fJogVelocity:= stHMI_In.fJogVelocity,
-            bJogPositive := stHMI_In.bYJogPositive,
-            bJogNegative := stHMI_In.bYJogNegative,
+            bJogEnable:= bJogEnable AND Y_Ref.NcToPlc.CoupleState = 1,
+            eJogMode:= eJogMode,
+			fJogPosition:= fJogPosition,
+			fJogVelocity:= fYJogVelocity,
+            bJogPositive := bYJogPositive,
+            bJogNegative := bYJogNegative,
             bStopAxis := bStopExecute OR bYStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bYHomingSwitch,
@@ -212,12 +235,12 @@ Y2_Motion(
             SlaveRef:= Y2_Ref,
 		  	Motion_In := Y2_MC_IN,
 		  	Motion_Out => Y2_MC_OUT,
-            bJogEnable:= stHMI_In.bJogEnable AND Y2_Ref.NcToPlc.CoupleState = 3,
-            eJogMode:= stHMI_In.eJogMode,
-			fJogPosition:= stHMI_In.fJogPosition,
-			fJogVelocity:= stHMI_In.fJogVelocity,
-            bJogPositive := stHMI_In.bYJogPositive,
-            bJogNegative := stHMI_In.bYJogNegative,
+            bJogEnable:= bJogEnable AND Y2_Ref.NcToPlc.CoupleState = 3,
+            eJogMode:= eJogMode,
+			fJogPosition:= fJogPosition,
+			fJogVelocity:= fYJogVelocity,
+            bJogPositive := bYJogPositive,
+            bJogNegative := bYJogNegative,
             bStopAxis := bStopExecute OR bYStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bY2HomingSwitch,
@@ -234,12 +257,12 @@ X_Motion(
             SlaveRef:= X_Ref,
 		  	Motion_In := X_MC_IN,
 		  	Motion_Out => X_MC_OUT,
-            bJogEnable:= stHMI_In.bJogEnable,
-            eJogMode:= stHMI_In.eJogMode,
-			fJogPosition:= stHMI_In.fJogPosition,
-			fJogVelocity:= stHMI_In.fJogVelocity,
-            bJogPositive := stHMI_In.bXJogPositive,
-            bJogNegative := stHMI_In.bXJogNegative,
+            bJogEnable:= bJogEnable,
+            eJogMode:= eJogMode,
+			fJogPosition:= fJogPosition,
+			fJogVelocity:= fXJogVelocity,
+            bJogPositive := bXJogPositive,
+            bJogNegative := bXJogNegative,
             bStopAxis := bStopExecute OR bXStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bXHomingSwitch,
@@ -256,12 +279,12 @@ Z_Motion(
             SlaveRef:= Z_Ref,
 		  	Motion_In := Z_MC_IN,
 		  	Motion_Out => Z_MC_OUT ,
-            bJogEnable:= stHMI_In.bJogEnable,
-            eJogMode:= stHMI_In.eJogMode,
-			fJogPosition:= stHMI_In.fJogPosition,
-			fJogVelocity:= stHMI_In.fJogVelocity,
-            bJogPositive := stHMI_In.bZJogPositive,
-            bJogNegative := stHMI_In.bZJogNegative,
+            bJogEnable:= bJogEnable,
+            eJogMode:= eJogMode,
+			fJogPosition:= fJogPosition,
+			fJogVelocity:= fZJogVelocity,
+            bJogPositive := bZJogPositive,
+            bJogNegative := bZJogNegative,
             bStopAxis := bStopExecute OR bZStopTrigger.Q,
             bResetAxis := bAxisReset,
 			bHomingInput := bZHomingSwitch,
@@ -491,13 +514,51 @@ bYLimitSwitch	:= i_bYLimitSwitch;
 bXLimitSwitch	:= i_bXLimitSwitch;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_JoystickControl" Id="{fe916ffb-e720-480f-977d-5fed915d2121}">
-      <Declaration><![CDATA[METHOD M_JoystickControl : BOOL
+    <Method Name="M_JogInputHandling" Id="{fe916ffb-e720-480f-977d-5fed915d2121}">
+      <Declaration><![CDATA[METHOD M_JogInputHandling : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[// This method handles jog commands from external sources, whether an HMI or external controller (keyboard, xbox controller,etc...)
+IF NOT bJoystickEnable THEN
+        eJogSourceInput := HMI;
+ELSIF bJoystickEnable THEN
+        eJogSourceInput := XBOX_CONTROLLER;
+END_IF
+
+
+CASE eJogSourceInput OF
+
+    HMI:
+        eJogMode        := stHMI_In.eJogMode;
+        bJogEnable      := stHMI_In.bJogEnable;
+        fJogPosition    := stHMI_In.fJogPosition;  
+        fXJogVelocity   := stHMI_In.fJogVelocity;
+        fYJogVelocity   := stHMI_In.fJogVelocity;
+        fZJogVelocity   := stHMI_In.fJogVelocity;
+        bYJogPositive   := stHMI_In.bYJogPositive;
+        bYJogNegative   := stHMI_In.bYJogNegative;
+        bXJogPositive   := stHMI_In.bXJogPositive;
+        bXJogNegative   := stHMI_In.bXJogNegative;
+        bZJogPositive   := stHMI_In.bZJogPositive;
+        bZJogNegative   := stHMI_In.bZJogNegative;
+ 
+    XBOX_CONTROLLER:
+        eJogMode        := stJoystickOut.eJogMode;
+        bJogEnable      := stJoystickOut.bJogEnable;
+        fJogPosition    := stJoystickOut.fJogPosition;  
+        fXJogVelocity   := stJoystickOut.fXJogVelocity;
+        fYJogVelocity   := stJoystickOut.fYJogVelocity;
+        fZJogVelocity   := stJoystickOut.fZJogVelocity;
+        bYJogPositive   := stJoystickOut.bYJogPositive;
+        bYJogNegative   := stJoystickOut.bYJogNegative;
+        bXJogPositive   := stJoystickOut.bXJogPositive;
+        bXJogNegative   := stJoystickOut.bXJogNegative;
+        bZJogPositive   := stJoystickOut.bZJogPositive;
+        bZJogNegative   := stJoystickOut.bZJogNegative;
+    
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_LimitSwitchLogic" Id="{d221ad2e-2e3c-403f-a0d1-ca7284c8dd6e}">
@@ -883,10 +944,15 @@ END_CASE
       <LineId Id="14853" Count="0" />
       <LineId Id="13961" Count="10" />
       <LineId Id="14873" Count="0" />
+      <LineId Id="15283" Count="0" />
+      <LineId Id="15282" Count="0" />
+      <LineId Id="15285" Count="0" />
+      <LineId Id="15284" Count="0" />
       <LineId Id="13972" Count="8" />
       <LineId Id="15141" Count="0" />
       <LineId Id="15140" Count="0" />
       <LineId Id="15142" Count="0" />
+      <LineId Id="15274" Count="0" />
       <LineId Id="13981" Count="21" />
       <LineId Id="14743" Count="0" />
       <LineId Id="14003" Count="0" />
@@ -992,8 +1058,34 @@ END_CASE
       <LineId Id="13" Count="0" />
       <LineId Id="15" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CNC.M_JoystickControl">
-      <LineId Id="5" Count="0" />
+    <LineIds Name="FB_CNC.M_JogInputHandling">
+      <LineId Id="16" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="44" Count="1" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="46" Count="4" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="37" Count="4" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_LimitSwitchLogic">
       <LineId Id="16" Count="1" />

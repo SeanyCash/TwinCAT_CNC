@@ -59,6 +59,28 @@ VAR
 	iLeftTrigger_Axis : DINT;
 	iRightTrigger_Axis  : DINT;
 	sBatteryInfo		: STRING;
+    
+    // Jog Mode Enumeration
+    nJogSelectInteger   : INT;
+    eJogSelectMode      : E_JogMode;
+    trigJogIncrement     : R_TRIG;
+    trigJogDecrement     : R_TRIG;
+ 
+    fbXJogScaling       : FB_CTRL_SCALE;
+    stXParams           : ST_CTRL_SCALE_PARAMS;   
+    fbYJogScaling       : FB_CTRL_SCALE;
+    stYParams           : ST_CTRL_SCALE_PARAMS;
+    fbZJogScaling       : FB_CTRL_SCALE;
+    stZParams           : ST_CTRL_SCALE_PARAMS;
+    fXVelocityScaled    : REAL;    
+    fYVelocityScaled    : REAL;
+    fZVelocityScaled    : REAL;
+    bYJogPositive   : BOOL;
+    bYJogNegative   : BOOL;
+    bXJogPositive   : BOOL;
+    bXJogNegative   : BOOL;
+    bZJogPositive   : BOOL;
+    bZJogNegative   : BOOL;
 	
 END_VAR
 ]]></Declaration>
@@ -68,6 +90,8 @@ M_HMI_Out();
 M_XAxisControl();
 M_YAxisControl();
 M_ZAxisControl();
+M_JogMode();
+M_AxisScalingParameters();
 M_Outputs();
 
 
@@ -92,8 +116,6 @@ IF LatencyWatchdog_TMR.Q THEN
 	bWatchdogFailureActive := TRUE;
 	bControllerConnected := FALSE;
 END_IF
-
-
 
 //Force User to release all buttons/sticks on controller before allowing outputs again.
 IF bWatchdogFailureActive AND (Start_Button OR 
@@ -160,6 +182,34 @@ END_IF
 
 bIsActive := NOT bWatchdogFailureActive AND bControllerConnected AND NOT bControllerInputsMustBeReleased;]]></ST>
     </Implementation>
+    <Method Name="M_AxisScalingParameters" Id="{66fc3595-2914-4900-ab15-4f39c46e81f7}">
+      <Declaration><![CDATA[METHOD M_AxisScalingParameters : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[stXParams.fInMax := 32767;
+stXParams.fInMin := 0;
+stXParams.fOutMax := 250.0;
+stXParams.fOutMin    := 0.0;
+stXParams.tCtrlCycleTime := T#100MS;
+stXParams.tTaskCycleTime := T#2MS;
+
+stYParams.fInMax := 32767;
+stYParams.fInMin := 0;
+stYParams.fOutMax := 245.0;
+stYParams.fOutMin    := 0.0;
+stYParams.tCtrlCycleTime := T#100MS;
+stYParams.tTaskCycleTime := T#2MS;
+
+stZParams.fInMax := 32767;
+stZParams.fInMin := 0;
+stZParams.fOutMax := 100.0;
+stZParams.fOutMin    := 0.0;
+stZParams.tCtrlCycleTime := T#100MS;
+stZParams.tTaskCycleTime := T#2MS;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Enable" Id="{e11dbd2e-ef5b-4a80-9e37-8e9f91c38bb3}">
       <Declaration><![CDATA[METHOD M_Enable : BOOL
 VAR_INPUT
@@ -185,13 +235,79 @@ METHOD M_HMI_Out : BOOL
         <ST><![CDATA[//stHMIOut.bXButtonPressed etc.....]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Inputs" Id="{44d78638-62b6-423f-a474-bf533c11d11f}">
+      <Declaration><![CDATA[METHOD M_Inputs : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Make external jog controller assignments here, to internal variables for jog control
+
+//Xbox controller mapping
+
+//PS5 controller mapping
+
+//Keyboard mapping
+
+//etc...
+
+
+// TcJoy inputs should be buffered here, not directly linked to variables inside the FB]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_JogMode" Id="{5a525eec-016c-4cc3-9a10-42bf3e7ac809}">
+      <Declaration><![CDATA[METHOD M_JogMode : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[trigJogIncrement(CLK:= RightShoulder_Button);
+trigJogDecrement(CLK:= LeftShoulder_Button);
+
+
+IF trigJogIncrement.Q AND nJogSelectInteger <=2 THEN    
+
+    nJogSelectInteger := nJogSelectInteger +1;
+    
+ELSIF trigJogDecrement.Q AND nJogSelectInteger >=1 THEN
+    nJogSelectInteger := nJogSelectInteger - 1;
+    
+ELSIF trigJogIncrement.Q AND nJogSelectInteger >= 3 THEN
+    nJogSelectInteger :=0;
+ 
+ELSIF trigJogDecrement.Q AND nJogSelectInteger <= 1 THEN
+    nJogSelectInteger := 3;   
+END_IF
+
+
+
+CASE nJogSelectInteger  OF
+    
+    0:
+        eJogSelectMode := MC_JOGMODE_STANDARD_SLOW;
+    1:
+        eJogSelectMode := MC_JOGMODE_STANDARD_FAST;
+    2:
+        eJogSelectMode := MC_JOGMODE_CONTINOUS;
+    3:
+        eJogSelectMode := MC_JOGMODE_INCHING;
+    
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Outputs" Id="{f42027ab-888a-4ef2-9c42-f5eaa58e8da6}">
       <Declaration><![CDATA[METHOD M_Outputs : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF bEnable THEN
+        <ST><![CDATA[// change this so we don't output all the keystroke/button commands, only output functions relating to MC jog using a controller. Velocity, position, jog mode, etc....
+// all mapping should be handled internally in this function block
+
+
+
+
+IF bEnable THEN
 
 stJoystickOut.Start_Button := Start_Button;
 stJoystickOut.Back_Button := Back_Button;
@@ -212,7 +328,25 @@ stJoystickOut.iLeftStick_Y_Axis := iLeftStick_Y_Axis;
 stJoystickOut.iRightStick_X_Axis := iRightStick_X_Axis;
 stJoystickOut.iRightStick_Y_Axis := iRightStick_Y_Axis;
 stJoystickOut.iLeftTrigger_Axis := iLeftTrigger_Axis; 
-stJoystickOut.iRightTrigger_Axis := iRightTrigger_Axis;		
+stJoystickOut.iRightTrigger_Axis := iRightTrigger_Axis;
+
+
+// Output buffering to MC Jog relevant functions
+
+stJoystickOut.eJogMode      := eJogSelectMode;
+stJoystickOut.bJogEnable    := (iLeftTrigger_Axis >= 230);
+stJoystickOut.fXJogVelocity := fXVelocityScaled;
+stJoystickOut.fYJogVelocity := fYVelocityScaled;
+stJoystickOut.fZJogVelocity := fZVelocityScaled;
+
+stJoystickOut.bXJogNegative := bXJogNegative;
+stJoystickOut.bXJogPositive := bXJogPositive;
+
+stJoystickOut.bYJogNegative := bYJogNegative;
+stJoystickOut.bYJogPositive := bYJogPositive;
+
+stJoystickOut.bZJogNegative := bZJogNegative;
+stJoystickOut.bZJogPositive := bZJogPositive;
 
 END_IF]]></ST>
       </Implementation>
@@ -223,7 +357,18 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[fbXJogScaling(fIn := ABS(iLeftStick_X_Axis),
+              fOut => fXVelocityScaled,
+              stParams := stXParams); 
+              
+IF iLeftStick_X_Axis > 0 THEN
+    bXJogPositive := TRUE;
+ELSIF iLeftStick_X_Axis < 0 THEN
+    bXJogNegative := TRUE;
+ELSE
+    bXJogPositive := FALSE;
+    bXJogNegative := FALSE;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_YAxisControl" Id="{96ee5d9c-40f3-4c29-bff8-bf645f9daff8}">
@@ -232,7 +377,18 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[fbYJogScaling(fIn := ABS(iLeftStick_Y_Axis),
+              fOut => fYVelocityScaled,
+              stParams := stYParams); 
+              
+IF iLeftStick_Y_Axis > 0 THEN
+    bYJogPositive := TRUE;
+ELSIF iLeftStick_Y_Axis < 0 THEN
+    bYJogNegative := TRUE;
+ELSE
+    bYJogPositive := FALSE;
+    bYJogNegative := FALSE;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_ZAxisControl" Id="{5c308bf8-28c3-4f20-8740-ca1b719a4d46}">
@@ -241,12 +397,34 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[fbZJogScaling(fIn := ABS(iRightStick_Y_Axis),
+              fOut => fZVelocityScaled,
+              stParams := stZParams); 
+              
+IF iRightStick_Y_Axis > 0 THEN
+    bZJogPositive := TRUE;
+ELSIF iRightStick_Y_Axis < 0 THEN
+    bZJogNegative := TRUE;
+ELSE
+    bZJogPositive := FALSE;
+    bZJogNegative := FALSE;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_TcJoy">
-      <LineId Id="242" Count="94" />
+      <LineId Id="242" Count="4" />
+      <LineId Id="405" Count="0" />
+      <LineId Id="417" Count="0" />
+      <LineId Id="247" Count="23" />
+      <LineId Id="273" Count="63" />
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_AxisScalingParameters">
+      <LineId Id="5" Count="3" />
+      <LineId Id="10" Count="7" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="19" Count="5" />
+      <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="FB_TcJoy.M_Enable">
       <LineId Id="5" Count="0" />
@@ -257,22 +435,91 @@ END_VAR
     <LineIds Name="FB_TcJoy.M_HMI_Out">
       <LineId Id="4" Count="0" />
     </LineIds>
+    <LineIds Name="FB_TcJoy.M_Inputs">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcJoy.M_JogMode">
+      <LineId Id="33" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="27" Count="2" />
+      <LineId Id="37" Count="3" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
     <LineIds Name="FB_TcJoy.M_Outputs">
+      <LineId Id="33" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="34" Count="3" />
       <LineId Id="26" Count="1" />
       <LineId Id="5" Count="8" />
       <LineId Id="25" Count="0" />
       <LineId Id="15" Count="9" />
+      <LineId Id="41" Count="2" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="44" Count="2" />
       <LineId Id="29" Count="0" />
-      <LineId Id="28" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="49" Count="0" />
     </LineIds>
     <LineIds Name="FB_TcJoy.M_XAxisControl">
       <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="4" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="17" Count="3" />
+      <LineId Id="14" Count="0" />
     </LineIds>
     <LineIds Name="FB_TcJoy.M_YAxisControl">
+      <LineId Id="9" Count="1" />
       <LineId Id="5" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="14" Count="5" />
+      <LineId Id="12" Count="0" />
     </LineIds>
     <LineIds Name="FB_TcJoy.M_ZAxisControl">
+      <LineId Id="9" Count="1" />
       <LineId Id="5" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="6" />
+      <LineId Id="12" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

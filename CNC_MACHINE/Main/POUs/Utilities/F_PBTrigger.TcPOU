@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="F_PBTrigger" Id="{71e15ad6-d3c2-4fee-819c-500531ea5599}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_PBTrigger : BOOL
+VAR_INPUT
+    Input : BOOL;
+END_VAR
+VAR
+    Trigger  : R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Trigger(CLK:=Input);
+
+F_PBTrigger := Trigger.Q;]]></ST>
+    </Implementation>
+    <LineIds Name="F_PBTrigger">
+      <LineId Id="7" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

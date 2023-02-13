@@ -24,7 +24,21 @@ STRUCT
 	iRightStick_Y_Axis : DINT;
 	iLeftTrigger_Axis : DINT;
 	iRightTrigger_Axis  : DINT;
-	sBatteryInfo		: STRING;  
+	sBatteryInfo		: STRING;
+
+// Buffered Joystick Outputs  
+    eJogMode        : E_JogMode;
+    bJogEnable      : BOOL;
+    fJogPosition    : LREAL;
+    fXJogVelocity   : LREAL;
+    fYJogVelocity   : LREAL;
+    fZJogVelocity   : LREAL;
+    bYJogPositive   : BOOL;
+    bYJogNegative   : BOOL;
+    bXJogPositive   : BOOL;
+    bXJogNegative   : BOOL;
+    bZJogPositive   : BOOL;
+    bZJogNegative   : BOOL;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

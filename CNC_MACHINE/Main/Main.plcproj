@@ -88,6 +88,9 @@
     <Compile Include="POUs\Utilities\FB_TcJoy.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Utilities\F_PBTrigger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
