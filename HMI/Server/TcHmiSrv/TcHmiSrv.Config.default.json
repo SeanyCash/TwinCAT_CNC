@@ -320,16 +320,14 @@
         "TcHmiEcDiagnostics": {
             "ENABLED": true,
             "NAME": "TcHmiEcDiagnostics",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.19.0.0\\runtimes\\win-x64\\native\\",
-            "PROCESSID": -1,
+            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.19.0.109\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
         "TcHmiEventLogger": {
             "ENABLED": true,
             "NAME": "TcHmiEventLogger",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.19.0.0\\runtimes\\win-x64\\native\\",
-            "PROCESSID": -1,
+            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.19.0.109\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -344,8 +342,7 @@
         "TcHmiRecipeManagement": {
             "ENABLED": true,
             "NAME": "TcHmiRecipeManagement",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.RecipeManagement.19.0.0\\runtimes\\win-x64\\native\\",
-            "PROCESSID": -1,
+            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.RecipeManagement.19.0.109\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -376,8 +373,7 @@
         "TcHmiVision": {
             "ENABLED": true,
             "NAME": "TcHmiVision",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Vision.13.7.0\\runtimes\\win\\net472\\",
-            "PROCESSID": -1,
+            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Vision.13.7.109\\runtimes\\win\\net472\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         }
@@ -5332,7 +5328,6 @@
                     }
                 },
                 "readOnly": true,
-                "transient": true,
                 "type": "object"
             },
             "SUBSYMBOL_MAPPING": "",
@@ -5351,11 +5346,9 @@
                 "writeValue": {
                     "properties": {
                         "device": {
-                            "required": true,
                             "type": "string"
                         },
                         "slaveAddr": {
-                            "required": true,
                             "type": "integer"
                         },
                         "values": {
@@ -5404,7 +5397,6 @@
                 ],
                 "type": "object",
                 "writeValue": {
-                    "required": true,
                     "type": "string"
                 }
             },
@@ -5495,6 +5487,9 @@
                     },
                     "stateMachine": {
                         "type": "integer"
+                    },
+                    "stateMachineRequested": {
+                        "type": "integer"
                     }
                 },
                 "required": [
@@ -5503,7 +5498,6 @@
                 ],
                 "type": "object",
                 "writeValue": {
-                    "required": true,
                     "type": "string"
                 }
             },
@@ -5542,15 +5536,15 @@
                 "writeValue": {
                     "properties": {
                         "device": {
-                            "required": true,
                             "type": "string"
                         },
                         "slaveAddr": {
-                            "required": true,
                             "type": "integer"
                         },
                         "updateForcedState": {
-                            "required": false,
+                            "type": "boolean"
+                        },
+                        "updateValue": {
                             "type": "boolean"
                         }
                     },
@@ -5603,7 +5597,6 @@
                 ],
                 "type": "object",
                 "writeValue": {
-                    "required": true,
                     "type": "string"
                 }
             },
@@ -5961,7 +5954,6 @@
                 ],
                 "type": "object",
                 "writeValue": {
-                    "required": true,
                     "type": "string"
                 }
             },
@@ -6029,6 +6021,9 @@
                         "updated"
                     ],
                     "type": "object"
+                },
+                "writeValue": {
+                    "type": "string"
                 }
             },
             "SUBSYMBOL_MAPPING": "",
@@ -6079,7 +6074,6 @@
                 ],
                 "type": "object",
                 "writeValue": {
-                    "required": true,
                     "type": "string"
                 }
             },
@@ -6153,11 +6147,25 @@
                 ],
                 "type": "array",
                 "writeValue": {
-                    "required": true,
                     "type": "string"
                 }
             },
             "SUBSYMBOL_MAPPING": "",
+            "USEMAPPING": true
+        },
+        "TcHmiEcDiagnostics.ListSlavesWithForcedProcessData": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "ListSlavesWithForcedProcessData",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "type": "string"
+                }
+            },
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.ReleaseProcessDataValues": {
@@ -6171,25 +6179,30 @@
             "SCHEMA": {
                 "function": true,
                 "writeValue": {
-                    "properties": {
-                        "device": {
-                            "required": true,
+                    "oneOf": [
+                        {
                             "type": "string"
                         },
-                        "slaveAddr": {
-                            "required": true,
-                            "type": "integer"
-                        },
-                        "values": {
-                            "items": [
-                                {
-                                    "$ref": "#/definitions/EcDiagnosticsProcessDataObjectEntryID"
+                        {
+                            "properties": {
+                                "device": {
+                                    "type": "string"
+                                },
+                                "slaveAddr": {
+                                    "type": "integer"
+                                },
+                                "values": {
+                                    "items": [
+                                        {
+                                            "$ref": "#/definitions/EcDiagnosticsProcessDataObjectEntryID"
+                                        }
+                                    ],
+                                    "type": "array"
                                 }
-                            ],
-                            "type": "array"
+                            },
+                            "type": "object"
                         }
-                    },
-                    "type": "object"
+                    ]
                 }
             },
             "SUBSYMBOL_MAPPING": "",
@@ -6204,12 +6217,39 @@
             "MAPPING": "SendSlavesScanCmd",
             "OPTIONS": {},
             "SCHEMA": {
+                "function": true,
                 "writeValue": {
-                    "required": true,
                     "type": "string"
                 }
             },
             "SUBSYMBOL_MAPPING": "",
+            "USEMAPPING": true
+        },
+        "TcHmiEcDiagnostics.SetMasterStateMachine": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiEcDiagnostics",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "SetMasterStateMachine",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true,
+                "writeValue": {
+                    "properties": {
+                        "device": {
+                            "type": "string"
+                        },
+                        "state": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "device",
+                        "state"
+                    ],
+                    "type": "object"
+                }
+            },
             "USEMAPPING": true
         },
         "TcHmiEcDiagnostics.SetProcessDataValues": {
@@ -6225,11 +6265,9 @@
                 "writeValue": {
                     "properties": {
                         "device": {
-                            "required": true,
                             "type": "string"
                         },
                         "slaveAddr": {
-                            "required": true,
                             "type": "integer"
                         },
                         "values": {
@@ -6371,7 +6409,6 @@
                     }
                 },
                 "readOnly": true,
-                "transient": true,
                 "type": "object"
             },
             "SUBSYMBOL_MAPPING": "",
@@ -6541,7 +6578,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
-            "DYNAMIC": true,
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ActivateRecipe",
             "OPTIONS": {},
@@ -6566,7 +6603,7 @@
             "ACCESS": 0,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
-            "DYNAMIC": true,
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "Config",
             "OPTIONS": {},
@@ -6578,7 +6615,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
-            "DYNAMIC": true,
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetActiveRecipes",
             "OPTIONS": {},
@@ -6594,7 +6631,7 @@
                     "anyOf": [
                         {
                             "items": {
-                                "doc": "recipe name(s)",
+                                "description": "recipe name(s)",
                                 "type": "string"
                             },
                             "type": "array"
@@ -6612,7 +6649,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
-            "DYNAMIC": true,
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "GetRecipes",
             "OPTIONS": {},
@@ -6639,11 +6676,35 @@
             "SUBSYMBOL_MAPPING": "",
             "USEMAPPING": true
         },
+        "TcHmiRecipeManagement.ListRecipeTypes": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiRecipeManagement",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "ListRecipeTypes",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true
+            },
+            "USEMAPPING": true
+        },
+        "TcHmiRecipeManagement.ListRecipes": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiRecipeManagement",
+            "DYNAMIC": false,
+            "HIDDEN": true,
+            "MAPPING": "ListRecipes",
+            "OPTIONS": {},
+            "SCHEMA": {
+                "function": true
+            },
+            "USEMAPPING": true
+        },
         "TcHmiRecipeManagement.ReadFromTarget": {
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
-            "DYNAMIC": true,
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "ReadFromTarget",
             "OPTIONS": {},
@@ -6678,7 +6739,7 @@
             "ACCESS": 3,
             "CUSTOMERDATA": "",
             "DOMAIN": "TcHmiRecipeManagement",
-            "DYNAMIC": true,
+            "DYNAMIC": false,
             "HIDDEN": true,
             "MAPPING": "UpdateRecipe",
             "OPTIONS": {},
@@ -6686,7 +6747,7 @@
                 "function": true,
                 "properties": {
                     "info": {
-                        "doc": "List of updates made",
+                        "description": "List of updates made",
                         "items": {
                             "type": "string"
                         },
@@ -10457,8 +10518,16 @@
                 "TcHmiEcDiagnostics.GetTarget": 3,
                 "TcHmiEcDiagnostics.ListConfiguredDevices": 1,
                 "TcHmiEcDiagnostics.ListMastersOfRoute": 3,
+                "TcHmiEcDiagnostics.ListSlavesWithForcedProcessData": 3,
                 "TcHmiEventLogger.Diagnostics": 1,
                 "TcHmiEventLogger.ListEnabledTargetSystems": 3,
+                "TcHmiRecipeManagement.ActivateRecipe": 3,
+                "TcHmiRecipeManagement.GetActiveRecipes": 3,
+                "TcHmiRecipeManagement.GetRecipes": 3,
+                "TcHmiRecipeManagement.ListRecipeTypes": 3,
+                "TcHmiRecipeManagement.ListRecipes": 3,
+                "TcHmiRecipeManagement.ReadFromTarget": 3,
+                "TcHmiRecipeManagement.UpdateRecipe": 3,
                 "TcHmiScope.ChangeChannelState": 3,
                 "TcHmiScope.CheckIfSaveRecordIsAttached": 3,
                 "TcHmiScope.CloseConnection": 3,
@@ -10526,14 +10595,14 @@
     "VIDEOSEGMENTSIZE": 1048576,
     "VIRTUALDIRECTORIES": {
         "/": "..\\..\\HMI\\",
-        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.758.8\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.758.8\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.758.8\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.758.8\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.758.8\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.758.8\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.760.48\\runtimes\\native1.12-tchmi",
         "/bin": "..\\..\\HMI\\bin\\",
         "/bin/framework": "..\\..\\HMI\\bin\\framework",
-        "/framework": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.758.8\\runtimes\\native1.12-tchmi"
+        "/framework": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.760.48\\runtimes\\native1.12-tchmi"
     }
 }

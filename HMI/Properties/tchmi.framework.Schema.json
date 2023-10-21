@@ -690,6 +690,27 @@
       "type": "string",
       "minLength": 1
     },
+    "Inputmode": {
+      "description": "Defines which keyboard layout should be loaded in the system keyboard when interacting. The exact layout file is defined in the project. \nThe most common one are: 'numeric', 'decimal', 'text'. Own project keywords are possible. \n'skip' ignores a focusIn, 'none' closes a keyboard on focusIn.",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "text",
+            "numeric",
+            "decimal",
+            "skip",
+            "none"
+          ],
+          "description": "'skip' ignores a focusIn, 'none' closes a keyboard on focusIn."
+        },
+        {
+          "type": "string",
+          "description": "Project defined input mode"
+        }
+      ],
+      "default": "text"
+    },
     "LinearGradientColor": {
       "type": "object",
       "engineeringColumns": [
@@ -768,7 +789,7 @@
           "category": "general",
           "displayName": "Left",
           "displayPriority": 10,
-          "description": "",
+          "description": "Sets the left padding of the element.",
           "defaultValue": null,
           "defaultValueInternal": null
         },
@@ -787,7 +808,7 @@
           "category": "general",
           "displayName": "Top",
           "displayPriority": 10,
-          "description": "",
+          "description": "Sets the top padding of the element.",
           "defaultValue": null,
           "defaultValueInternal": null
         },
@@ -806,7 +827,7 @@
           "category": "general",
           "displayName": "Right",
           "displayPriority": 10,
-          "description": "",
+          "description": "Sets the right padding of the element.",
           "defaultValue": null,
           "defaultValueInternal": null
         },
@@ -825,7 +846,7 @@
           "category": "general",
           "displayName": "Bottom",
           "displayPriority": 10,
-          "description": "",
+          "description": "Sets the bottom padding of the element.",
           "defaultValue": null,
           "defaultValueInternal": null
         },
@@ -877,6 +898,119 @@
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "string",
       "minLength": 1
+    },
+    "PixelPadding": {
+      "type": "object",
+      "propertiesMeta": [
+        {
+          "name": "left",
+          "category": "general",
+          "displayName": "Left",
+          "displayPriority": 10,
+          "description": "Sets the left padding of the element.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "leftUnit",
+          "category": "general",
+          "refTo": "left",
+          "displayName": "LeftUnit",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "px"
+        },
+        {
+          "name": "top",
+          "category": "general",
+          "displayName": "Top",
+          "displayPriority": 10,
+          "description": "Sets the top padding of the element.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "topUnit",
+          "category": "general",
+          "refTo": "top",
+          "displayName": "TopUnit",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "px"
+        },
+        {
+          "name": "right",
+          "category": "general",
+          "displayName": "Right",
+          "displayPriority": 10,
+          "description": "Sets the right padding of the element.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "rightUnit",
+          "category": "general",
+          "refTo": "right",
+          "displayName": "RightUnit",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "px"
+        },
+        {
+          "name": "bottom",
+          "category": "general",
+          "displayName": "Bottom",
+          "displayPriority": 10,
+          "description": "Sets the bottom padding of the element.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "bottomUnit",
+          "category": "general",
+          "refTo": "bottom",
+          "displayName": "BottomUnit",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "px"
+        }
+      ],
+      "properties": {
+        "left": {
+          "$ref": "#/definitions/PositiveNumber"
+        },
+        "leftUnit": {
+          "$ref": "#/definitions/PixelUnit"
+        },
+        "top": {
+          "$ref": "#/definitions/PositiveNumber"
+        },
+        "topUnit": {
+          "$ref": "#/definitions/PixelUnit"
+        },
+        "right": {
+          "$ref": "#/definitions/PositiveNumber"
+        },
+        "rightUnit": {
+          "$ref": "#/definitions/PixelUnit"
+        },
+        "bottom": {
+          "$ref": "#/definitions/PositiveNumber"
+        },
+        "bottomUnit": {
+          "$ref": "#/definitions/PixelUnit"
+        }
+      },
+      "required": [
+        "left",
+        "top",
+        "right",
+        "bottom"
+      ]
     },
     "PixelUnit": {
       "$schema": "http://json-schema.org/draft-04/schema",
@@ -2591,6 +2725,15 @@
         }
       }
     },
+    "DataPrecedence": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "string",
+      "enum": [
+        "Data",
+        "UserInput",
+        "ChangedDataOnly"
+      ]
+    },
     "TcHmi.Controls.BaseTemplate.TcHmiBreadcrumb": {
       "type": "object",
       "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
@@ -2890,6 +3033,9 @@
                     "type": "string"
                   },
                   {
+                    "$ref": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiRegion"
+                  },
+                  {
                     "type": "null"
                   }
                 ]
@@ -3121,6 +3267,9 @@
                 "oneOf": [
                   {
                     "type": "string"
+                  },
+                  {
+                    "$ref": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiRegion"
                   },
                   {
                     "type": "null"
@@ -3867,6 +4016,9 @@
                 "oneOf": [
                   {
                     "type": "string"
+                  },
+                  {
+                    "$ref": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiRegion"
                   },
                   {
                     "type": "null"
@@ -5004,6 +5156,15 @@
             "description": "Scales all values with this scale factor.",
             "defaultValue": null,
             "defaultValueInternal": 1
+          },
+          {
+            "name": "colorRanges",
+            "category": "General",
+            "displayName": "Bar color ranges",
+            "displayPriority": 10,
+            "description": "An array of colors to be used in different ranges.",
+            "defaultValue": null,
+            "defaultValueInternal": null
           }
         ],
         "properties": {
@@ -5015,9 +5176,65 @@
           },
           "scaleFactor": {
             "type": "number"
+          },
+          "colorRanges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "color": {
+                  "$ref": "tchmi:framework#/definitions/SolidColor"
+                },
+                "expression": {
+                  "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiBarChart.ChartBarColorFilter"
+                }
+              }
+            }
           }
-        },
-        "required": []
+        }
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiBarChart.ChartBarColorFilter": {
+      "title": "ChartBarColorFilter",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "enum": [
+                  "{value}"
+                ],
+                "default": "{value}"
+              },
+              "comparator": {
+                "type": "string",
+                "enum": [
+                  "==",
+                  "!=",
+                  "<",
+                  ">",
+                  "<=",
+                  ">="
+                ],
+                "default": "=="
+              },
+              "value": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "path",
+              "comparator",
+              "value"
+            ]
+          },
+          {
+            "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiBarChart.ChartBarColorFilter"
+          }
+        ]
       }
     },
     "TcHmi.Controls.Beckhoff.TcHmiBarChart.ChartBarGraphArrangement": {
@@ -5039,6 +5256,204 @@
         "Auto"
       ],
       "default": "Number"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiBarChart.ChartReferenceLineDefinition": {
+      "title": "ChartReferenceLineDefinition",
+      "type": "object",
+      "engineeringColumns": [
+        "name",
+        "value",
+        "orientation"
+      ],
+      "propertiesMeta": [
+        {
+          "name": "show",
+          "category": "General",
+          "displayName": "Show",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": true
+        },
+        {
+          "name": "name",
+          "category": "General",
+          "displayName": "Name",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": ""
+        },
+        {
+          "name": "orientation",
+          "category": "General",
+          "displayName": "Orientation",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Horizontal"
+        },
+        {
+          "name": "value",
+          "category": "General",
+          "displayName": "Value",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 0
+        },
+        {
+          "name": "color",
+          "category": "Colors",
+          "displayName": "Color",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": "%tr%Control::TcHmi.Controls.Beckhoff.TcHmiBarChart::ReferenceLineColor%/tr%",
+          "defaultValueInternal": {
+            "color": "#4794da"
+          }
+        },
+        {
+          "name": "lineWidth",
+          "category": "General",
+          "displayName": "Line width",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 1
+        },
+        {
+          "name": "showLabel",
+          "category": "General",
+          "displayName": "Show label",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": true
+        },
+        {
+          "name": "labelHorizontalAlignment",
+          "category": "General",
+          "displayName": "Label horizontal alignment",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Right"
+        },
+        {
+          "name": "labelVerticalAlignment",
+          "category": "General",
+          "displayName": "Label vertical alignment",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Top"
+        },
+        {
+          "name": "labelFontFamily",
+          "category": "General",
+          "displayName": "Label font-family",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "labelFontSize",
+          "category": "General",
+          "displayName": "Label font-size",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 12
+        },
+        {
+          "name": "labelFontSizeUnit",
+          "refTo": "labelFontSize",
+          "category": "General",
+          "displayName": "Label font-size unit",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "px"
+        },
+        {
+          "name": "labelFontWeight",
+          "category": "General",
+          "displayName": "Label font-weight",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Auto"
+        }
+      ],
+      "properties": {
+        "show": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "Horizontal",
+            "Vertical"
+          ]
+        },
+        "value": {
+          "type": "number"
+        },
+        "color": {
+          "$ref": "tchmi:framework#/definitions/SolidColor"
+        },
+        "lineWidth": {
+          "type": "number"
+        },
+        "showLabel": {
+          "type": "boolean"
+        },
+        "labelHorizontalAlignment": {
+          "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+        },
+        "labelVerticalAlignment": {
+          "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+        },
+        "labelFontFamily": {
+          "$ref": "tchmi:framework#/definitions/FontFamily"
+        },
+        "labelFontSize": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        },
+        "labelFontSizeUnit": {
+          "$ref": "tchmi:framework#/definitions/PixelUnit"
+        },
+        "labelFontWeight": {
+          "$ref": "tchmi:framework#/definitions/FontWeight"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "orientation"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiBarChart.ChartReferenceLineDefinitionList": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "ChartReferenceLineDefinitionList",
+      "type": "array",
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiBarChart.ChartReferenceLineDefinition"
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiBarChart.ChartReferenceLinesPosition": {
+      "title": "ChartReferenceLinesPosition",
+      "type": "string",
+      "enum": [
+        "Background",
+        "Foreground"
+      ],
+      "default": "Background"
     },
     "TcHmiBarChart": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiBarChart"
@@ -5474,7 +5889,7 @@
                 "displayName": "Width unit",
                 "category": "General",
                 "displayPriority": 10,
-                "description": "Width unit for this column. px defines an absolute width, % is relative to the control witdth and factor can be used to divide the available space into fractions.",
+                "description": "Width unit for this column. px defines an absolute width, % is relative to the control width and factor can be used to divide the available space into fractions.",
                 "defaultValue": "px",
                 "defaultValueInternal": "px"
               },
@@ -5596,6 +6011,24 @@
                 "description": "When set to true a backslash in a text will be shown verbatim in the HMI",
                 "defaultValue": false,
                 "defaultValueInternal": false
+              },
+              {
+                "name": "autoFocusOut",
+                "displayName": "Auto Focus-Out",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "When set to true the control will automatically lose focus when the user presses the enter or escape key",
+                "defaultValue": true,
+                "defaultValueInternal": true
+              },
+              {
+                "name": "autoSelectText",
+                "displayName": "Auto Select Text",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "When set to true all text within the control will be selected when the control gains focus",
+                "defaultValue": false,
+                "defaultValueInternal": false
               }
             ],
             "properties": {
@@ -5680,6 +6113,12 @@
                 "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiDatagrid.DataDefinitionList"
               },
               "ignoreEscapeSequences": {
+                "type": "boolean"
+              },
+              "autoFocusOut": {
+                "type": "boolean"
+              },
+              "autoSelectText": {
                 "type": "boolean"
               }
             },
@@ -5874,6 +6313,24 @@
               "description": "When set to true a backslash in a text will be shown verbatim in the HMI",
               "defaultValue": false,
               "defaultValueInternal": false
+            },
+            {
+              "name": "autoFocusOut",
+              "displayName": "Auto Focus-Out",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "When set to true the control will automatically lose focus when the user presses the enter or escape key",
+              "defaultValue": true,
+              "defaultValueInternal": true
+            },
+            {
+              "name": "autoSelectText",
+              "displayName": "Auto Select Text",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "When set to true all text within the control will be selected when the control gains focus",
+              "defaultValue": false,
+              "defaultValueInternal": false
             }
           ],
           "properties": {
@@ -5954,6 +6411,12 @@
               "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiDatagrid.DataDefinitionList"
             },
             "ignoreEscapeSequences": {
+              "type": "boolean"
+            },
+            "autoFocusOut": {
+              "type": "boolean"
+            },
+            "autoSelectText": {
               "type": "boolean"
             }
           },
@@ -6111,35 +6574,14 @@
           "title": "Definition for a numeric input control",
           "properties": {
             "minValue": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "type": "number"
             },
             "maxValue": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "type": "number"
             },
             "decimalDigits": {
-              "anyOf": [
-                {
-                  "type": "number",
-                  "minimum": 0
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "type": "number",
+              "minimum": 0
             }
           },
           "propertiesMeta": [
@@ -6177,35 +6619,14 @@
           "title": "Definition for a spinbox input control",
           "properties": {
             "minValue": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "type": "number"
             },
             "maxValue": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "type": "number"
             },
             "decimalDigits": {
-              "anyOf": [
-                {
-                  "type": "number",
-                  "minimum": 0
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "type": "number",
+              "minimum": 0
             },
             "step": {
               "type": "number"
@@ -6363,7 +6784,7 @@
                 "displayName": "Width Unit",
                 "category": "General",
                 "displayPriority": 10,
-                "description": "Width unit of this column. px defines an absolute width, % is relative to the control witdth and factor can be used to divide the available space into fractions.",
+                "description": "Width unit of this column. px defines an absolute width, % is relative to the control width and factor can be used to divide the available space into fractions.",
                 "defaultValue": null,
                 "defaultValueInternal": "px"
               },
@@ -6374,6 +6795,25 @@
                 "displayPriority": 10,
                 "description": "Whether it should be possible to sort this column",
                 "defaultValue": true,
+                "defaultValueInternal": null
+              },
+              {
+                "name": "format",
+                "displayName": "Format",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "A reference of function which is called with each entry",
+                "allowedFunctions": {
+                  "returnType": "tchmi:general#/definitions/String",
+                  "requiredArguments": [
+                    {
+                      "type": "tchmi:general#/definitions/Any",
+                      "description": "The value to format."
+                    }
+                  ],
+                  "waitMode": "Synchronous"
+                },
+                "defaultValue": null,
                 "defaultValueInternal": null
               }
             ],
@@ -6409,6 +6849,9 @@
               "sortable": {
                 "type": "boolean",
                 "default": true
+              },
+              "format": {
+                "$ref": "tchmi:framework#/definitions/Function"
               }
             },
             "required": [
@@ -6455,7 +6898,7 @@
                 "displayName": "Width Unit",
                 "category": "General",
                 "displayPriority": 10,
-                "description": "Width unit of this column. px defines an absolute width, % is relative to the control witdth and factor can be used to divide the available space into fractions.",
+                "description": "Width unit of this column. px defines an absolute width, % is relative to the control width and factor can be used to divide the available space into fractions.",
                 "defaultValue": null,
                 "defaultValueInternal": "px"
               },
@@ -6466,6 +6909,25 @@
                 "displayPriority": 10,
                 "description": "Whether it should be possible to sort this column",
                 "defaultValue": true,
+                "defaultValueInternal": null
+              },
+              {
+                "name": "format",
+                "displayName": "Format",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "A reference of function which is called with each entry",
+                "allowedFunctions": {
+                  "returnType": "tchmi:general#/definitions/String",
+                  "requiredArguments": [
+                    {
+                      "type": "tchmi:general#/definitions/Any",
+                      "description": "The value to format."
+                    }
+                  ],
+                  "waitMode": "Synchronous"
+                },
+                "defaultValue": null,
                 "defaultValueInternal": null
               }
             ],
@@ -6486,6 +6948,9 @@
               "sortable": {
                 "type": "boolean",
                 "default": true
+              },
+              "format": {
+                "$ref": "tchmi:framework#/definitions/Function"
               }
             },
             "required": [
@@ -6664,6 +7129,14 @@
         ]
       }
     },
+    "TcHmi.Controls.Beckhoff.TcHmiEventLine.TextOverflow": {
+      "type": "string",
+      "enum": [
+        "Ellipsis",
+        "MarqueeLeftToRight",
+        "MarqueeRightToLeft"
+      ]
+    },
     "TcHmi.Controls.Beckhoff.TcHmiFileExplorer": {
       "type": "object",
       "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
@@ -6789,6 +7262,15 @@
             "description": "Scales all values with this scale factor.",
             "defaultValue": null,
             "defaultValueInternal": 1
+          },
+          {
+            "name": "colorRanges",
+            "category": "General",
+            "displayName": "Bar color ranges",
+            "displayPriority": 10,
+            "description": "An array of colors to be used in different ranges.",
+            "defaultValue": null,
+            "defaultValueInternal": null
           }
         ],
         "properties": {
@@ -6800,9 +7282,65 @@
           },
           "scaleFactor": {
             "type": "number"
+          },
+          "colorRanges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "color": {
+                  "$ref": "tchmi:framework#/definitions/SolidColor"
+                },
+                "expression": {
+                  "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart.ChartBarColorFilter"
+                }
+              }
+            }
           }
-        },
-        "required": []
+        }
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart.ChartBarColorFilter": {
+      "title": "ChartBarColorFilter",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "enum": [
+                  "{value}"
+                ],
+                "default": "{value}"
+              },
+              "comparator": {
+                "type": "string",
+                "enum": [
+                  "==",
+                  "!=",
+                  "<",
+                  ">",
+                  "<=",
+                  ">="
+                ],
+                "default": "=="
+              },
+              "value": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "path",
+              "comparator",
+              "value"
+            ]
+          },
+          {
+            "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart.ChartBarColorFilter"
+          }
+        ]
       }
     },
     "TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart.ChartAxisLabeling": {
@@ -6814,6 +7352,204 @@
         "Auto"
       ],
       "default": "Number"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart.ChartReferenceLineDefinition": {
+      "title": "ChartReferenceLineDefinition",
+      "type": "object",
+      "engineeringColumns": [
+        "name",
+        "value",
+        "orientation"
+      ],
+      "propertiesMeta": [
+        {
+          "name": "show",
+          "category": "General",
+          "displayName": "Show",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": true
+        },
+        {
+          "name": "name",
+          "category": "General",
+          "displayName": "Name",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": ""
+        },
+        {
+          "name": "orientation",
+          "category": "General",
+          "displayName": "Orientation",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Horizontal"
+        },
+        {
+          "name": "value",
+          "category": "General",
+          "displayName": "Value",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 0
+        },
+        {
+          "name": "color",
+          "category": "Colors",
+          "displayName": "Color",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": "%tr%Control::TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart::ReferenceLineColor%/tr%",
+          "defaultValueInternal": {
+            "color": "#4794da"
+          }
+        },
+        {
+          "name": "lineWidth",
+          "category": "General",
+          "displayName": "Line width",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 1
+        },
+        {
+          "name": "showLabel",
+          "category": "General",
+          "displayName": "Show label",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": true
+        },
+        {
+          "name": "labelHorizontalAlignment",
+          "category": "General",
+          "displayName": "Label horizontal alignment",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Right"
+        },
+        {
+          "name": "labelVerticalAlignment",
+          "category": "General",
+          "displayName": "Label vertical alignment",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Top"
+        },
+        {
+          "name": "labelFontFamily",
+          "category": "General",
+          "displayName": "Label font-family",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "labelFontSize",
+          "category": "General",
+          "displayName": "Label font-size",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 12
+        },
+        {
+          "name": "labelFontSizeUnit",
+          "refTo": "labelFontSize",
+          "category": "General",
+          "displayName": "Label font-size unit",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "px"
+        },
+        {
+          "name": "labelFontWeight",
+          "category": "General",
+          "displayName": "Label font-weight",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Auto"
+        }
+      ],
+      "properties": {
+        "show": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "Horizontal",
+            "Vertical"
+          ]
+        },
+        "value": {
+          "type": "number"
+        },
+        "color": {
+          "$ref": "tchmi:framework#/definitions/SolidColor"
+        },
+        "lineWidth": {
+          "type": "number"
+        },
+        "showLabel": {
+          "type": "boolean"
+        },
+        "labelHorizontalAlignment": {
+          "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+        },
+        "labelVerticalAlignment": {
+          "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+        },
+        "labelFontFamily": {
+          "$ref": "tchmi:framework#/definitions/FontFamily"
+        },
+        "labelFontSize": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        },
+        "labelFontSizeUnit": {
+          "$ref": "tchmi:framework#/definitions/PixelUnit"
+        },
+        "labelFontWeight": {
+          "$ref": "tchmi:framework#/definitions/FontWeight"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "orientation"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart.ChartReferenceLineDefinitionList": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "ChartReferenceLineDefinitionList",
+      "type": "array",
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart.ChartReferenceLineDefinition"
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart.ChartReferenceLinesPosition": {
+      "title": "ChartReferenceLinesPosition",
+      "type": "string",
+      "enum": [
+        "Background",
+        "Foreground"
+      ],
+      "default": "Background"
     },
     "TcHmiHorizontalBarChart": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiHorizontalBarChart"
@@ -7019,51 +7755,73 @@
     },
     "TcHmi.Controls.Beckhoff.TcHmiLineChart.ChartLineGraphDataDefinitionList": {
       "title": "ChartLineGraphDataDefinitionList",
-      "type": "array",
-      "items": {
-        "type": "array",
-        "title": "List of coordinate pairs",
-        "items": {
-          "type": "object",
-          "title": "Coordinate pair",
-          "engineeringColumns": [
-            "x",
-            "y"
-          ],
-          "propertiesMeta": [
-            {
-              "name": "x",
-              "displayName": "X",
-              "category": "General",
-              "displayPriority": 10,
-              "description": "x coordinate",
-              "defaultValue": null,
-              "defaultValueInternal": null
-            },
-            {
-              "name": "y",
-              "displayName": "Y",
-              "category": "General",
-              "displayPriority": 10,
-              "description": "y coordinate",
-              "defaultValue": null,
-              "defaultValueInternal": null
+      "anyOf": [
+        {
+          "type": "array",
+          "title": "Array<Array<Coordinate pair>>",
+          "items": {
+            "type": "array",
+            "title": "List of coordinate pairs",
+            "items": {
+              "type": "object",
+              "title": "Coordinate pair",
+              "engineeringColumns": [
+                "x",
+                "y"
+              ],
+              "propertiesMeta": [
+                {
+                  "name": "x",
+                  "displayName": "X",
+                  "category": "General",
+                  "displayPriority": 10,
+                  "description": "x coordinate",
+                  "defaultValue": null,
+                  "defaultValueInternal": null
+                },
+                {
+                  "name": "y",
+                  "displayName": "Y",
+                  "category": "General",
+                  "displayPriority": 10,
+                  "description": "y coordinate",
+                  "defaultValue": null,
+                  "defaultValueInternal": null
+                }
+              ],
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "x",
+                "y"
+              ]
             }
-          ],
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
+          }
+        },
+        {
+          "type": "array",
+          "title": "Array<Array<number>>",
+          "items": {
+            "type": "array",
+            "items": {
               "type": "number"
             }
-          },
-          "required": [
-            "x",
-            "y"
-          ]
+          }
+        },
+        {
+          "type": "array",
+          "title": "Array<number>",
+          "items": {
+            "type": "number"
+          }
         }
-      }
+      ]
     },
     "TcHmi.Controls.Beckhoff.TcHmiLineChart.ChartLineGraphDescriptionDefinitionList": {
       "title": "ChartLineGraphDescriptionDefinitionList",
@@ -7173,6 +7931,33 @@
             "description": "Scales all y values with this scale factor.",
             "defaultValue": null,
             "defaultValueInternal": 1
+          },
+          {
+            "name": "fillMode",
+            "displayName": "Fill mode",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Fill mode for the fill area",
+            "defaultValue": null,
+            "defaultValueInternal": "None"
+          },
+          {
+            "name": "fillColor",
+            "displayName": "Fill color",
+            "category": "Colors",
+            "displayPriority": 10,
+            "description": "Color for the fill area",
+            "defaultValue": "%tr%Control::TcHmi.Controls.Beckhoff.TcHmiLineChart::LineGraphDescriptionFillColor%/tr%",
+            "defaultValueInternal": null
+          },
+          {
+            "name": "fillTransparency",
+            "displayName": "Fill transparency",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Fill transparency for the fill area",
+            "defaultValue": null,
+            "defaultValueInternal": 50
           }
         ],
         "properties": {
@@ -7209,6 +7994,23 @@
             "type": "number"
           },
           "yScaleFactor": {
+            "type": "number"
+          },
+          "fillMode": {
+            "type": "string",
+            "enum": [
+              "None",
+              "HorizontalZero",
+              "Top",
+              "Bottom",
+              "Center",
+              "Source"
+            ]
+          },
+          "fillColor": {
+            "$ref": "tchmi:framework#/definitions/SolidColor"
+          },
+          "fillTransparency": {
             "type": "number"
           }
         },
@@ -7374,7 +8176,7 @@
           "displayPriority": 10,
           "description": "",
           "defaultValue": null,
-          "defaultValueInternal": 15
+          "defaultValueInternal": 12
         },
         {
           "name": "axisNameFontSizeUnit",
@@ -7496,6 +8298,216 @@
         "Auto"
       ],
       "default": "Number"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiLineChart.ChartReferenceLineDefinition": {
+      "title": "ChartReferenceLineDefinition",
+      "type": "object",
+      "engineeringColumns": [
+        "name",
+        "value",
+        "orientation"
+      ],
+      "propertiesMeta": [
+        {
+          "name": "show",
+          "category": "General",
+          "displayName": "Show",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": true
+        },
+        {
+          "name": "name",
+          "category": "General",
+          "displayName": "Name",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": ""
+        },
+        {
+          "name": "orientation",
+          "category": "General",
+          "displayName": "Orientation",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Horizontal"
+        },
+        {
+          "name": "yAxisId",
+          "category": "General",
+          "displayName": "Y-Axis id",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "value",
+          "category": "General",
+          "displayName": "Value",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 0
+        },
+        {
+          "name": "color",
+          "category": "Colors",
+          "displayName": "Color",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": "%tr%Control::TcHmi.Controls.Beckhoff.TcHmiLineChart::ReferenceLineColor%/tr%",
+          "defaultValueInternal": {
+            "color": "#4794da"
+          }
+        },
+        {
+          "name": "lineWidth",
+          "category": "General",
+          "displayName": "Line width",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 1
+        },
+        {
+          "name": "showLabel",
+          "category": "General",
+          "displayName": "Show label",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": true
+        },
+        {
+          "name": "labelHorizontalAlignment",
+          "category": "General",
+          "displayName": "Label horizontal alignment",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Right"
+        },
+        {
+          "name": "labelVerticalAlignment",
+          "category": "General",
+          "displayName": "Label vertical alignment",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Top"
+        },
+        {
+          "name": "labelFontFamily",
+          "category": "General",
+          "displayName": "Label font-family",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "labelFontSize",
+          "category": "General",
+          "displayName": "Label font-size",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 15
+        },
+        {
+          "name": "labelFontSizeUnit",
+          "refTo": "labelFontSize",
+          "category": "General",
+          "displayName": "Label font-size unit",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "px"
+        },
+        {
+          "name": "labelFontWeight",
+          "category": "General",
+          "displayName": "Label font-weight",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Auto"
+        }
+      ],
+      "properties": {
+        "show": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "Horizontal",
+            "Vertical"
+          ]
+        },
+        "yAxisId": {
+          "type": "number"
+        },
+        "value": {
+          "type": "number"
+        },
+        "color": {
+          "$ref": "tchmi:framework#/definitions/SolidColor"
+        },
+        "lineWidth": {
+          "type": "number"
+        },
+        "showLabel": {
+          "type": "boolean"
+        },
+        "labelHorizontalAlignment": {
+          "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+        },
+        "labelVerticalAlignment": {
+          "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+        },
+        "labelFontFamily": {
+          "$ref": "tchmi:framework#/definitions/FontFamily"
+        },
+        "labelFontSize": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        },
+        "labelFontSizeUnit": {
+          "$ref": "tchmi:framework#/definitions/PixelUnit"
+        },
+        "labelFontWeight": {
+          "$ref": "tchmi:framework#/definitions/FontWeight"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "orientation"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiLineChart.ChartReferenceLineDefinitionList": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "ChartReferenceLineDefinitionList",
+      "type": "array",
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiLineChart.ChartReferenceLineDefinition"
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiLineChart.ChartReferenceLinesPosition": {
+      "title": "ChartReferenceLinesPosition",
+      "type": "string",
+      "enum": [
+        "Background",
+        "Foreground"
+      ],
+      "default": "Background"
     },
     "TcHmiLineChart": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiLineChart"
@@ -7833,6 +8845,33 @@
             "description": "Scales all values with this scale factor.",
             "defaultValue": null,
             "defaultValueInternal": 1
+          },
+          {
+            "name": "fillMode",
+            "displayName": "Fill mode",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Fill mode for the fill area",
+            "defaultValue": null,
+            "defaultValueInternal": "None"
+          },
+          {
+            "name": "fillColor",
+            "displayName": "Fill color",
+            "category": "Colors",
+            "displayPriority": 10,
+            "description": "Color for the fill area",
+            "defaultValue": "%tr%Control::TcHmi.Controls.Beckhoff.TcHmiLineChart::LineGraphDescriptionFillColor%/tr%",
+            "defaultValueInternal": null
+          },
+          {
+            "name": "fillTransparency",
+            "displayName": "Fill transparency",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Fill transparency for the fill area",
+            "defaultValue": null,
+            "defaultValueInternal": 50
           }
         ],
         "properties": {
@@ -7872,6 +8911,21 @@
             "type": "string"
           },
           "scaleFactor": {
+            "type": "number"
+          },
+          "fillMode": {
+            "type": "string",
+            "enum": [
+              "None",
+              "HorizontalZero",
+              "Top",
+              "Bottom"
+            ]
+          },
+          "fillColor": {
+            "$ref": "tchmi:framework#/definitions/SolidColor"
+          },
+          "fillTransparency": {
             "type": "number"
           }
         },
@@ -8293,6 +9347,215 @@
     "TrendLineChartTooltipInformationObject": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTrendLineChart.ChartTooltipInformationObject"
     },
+    "TcHmi.Controls.Beckhoff.TcHmiTrendLineChart.ChartReferenceLineDefinition": {
+      "title": "ChartReferenceLineDefinition",
+      "type": "object",
+      "engineeringColumns": [
+        "name",
+        "value",
+        "orientation"
+      ],
+      "propertiesMeta": [
+        {
+          "name": "show",
+          "category": "General",
+          "displayName": "Show",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": true
+        },
+        {
+          "name": "name",
+          "category": "General",
+          "displayName": "Name",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": ""
+        },
+        {
+          "name": "orientation",
+          "category": "General",
+          "displayName": "Orientation",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Horizontal"
+        },
+        {
+          "name": "yAxisId",
+          "category": "General",
+          "displayName": "Y-Axis id",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "value",
+          "category": "General",
+          "displayName": "Value",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 0
+        },
+        {
+          "name": "color",
+          "category": "Colors",
+          "displayName": "Color",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": "%tr%Control::TcHmi.Controls.Beckhoff.TcHmiTrendLineChart::ReferenceLineColor%/tr%",
+          "defaultValueInternal": {
+            "color": "#4794da"
+          }
+        },
+        {
+          "name": "lineWidth",
+          "category": "General",
+          "displayName": "Line width",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 1
+        },
+        {
+          "name": "showLabel",
+          "category": "General",
+          "displayName": "Show label",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": true
+        },
+        {
+          "name": "labelHorizontalAlignment",
+          "category": "General",
+          "displayName": "Label horizontal alignment",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Right"
+        },
+        {
+          "name": "labelVerticalAlignment",
+          "category": "General",
+          "displayName": "Label vertical alignment",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Top"
+        },
+        {
+          "name": "labelFontFamily",
+          "category": "General",
+          "displayName": "Label font-family",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "labelFontSize",
+          "category": "General",
+          "displayName": "Label font-size",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": 12
+        },
+        {
+          "name": "labelFontSizeUnit",
+          "refTo": "labelFontSize",
+          "category": "General",
+          "displayName": "Label font-size unit",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "px"
+        },
+        {
+          "name": "labelFontWeight",
+          "category": "General",
+          "displayName": "Label font-weight",
+          "displayPriority": 10,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": "Auto"
+        }
+      ],
+      "properties": {
+        "show": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "Horizontal"
+          ]
+        },
+        "yAxisId": {
+          "type": "number"
+        },
+        "value": {
+          "type": "number"
+        },
+        "color": {
+          "$ref": "tchmi:framework#/definitions/SolidColor"
+        },
+        "lineWidth": {
+          "type": "number"
+        },
+        "showLabel": {
+          "type": "boolean"
+        },
+        "labelHorizontalAlignment": {
+          "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+        },
+        "labelVerticalAlignment": {
+          "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+        },
+        "labelFontFamily": {
+          "$ref": "tchmi:framework#/definitions/FontFamily"
+        },
+        "labelFontSize": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        },
+        "labelFontSizeUnit": {
+          "$ref": "tchmi:framework#/definitions/PixelUnit"
+        },
+        "labelFontWeight": {
+          "$ref": "tchmi:framework#/definitions/FontWeight"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "orientation"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTrendLineChart.ChartReferenceLineDefinitionList": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "title": "ChartReferenceLineDefinitionList",
+      "type": "array",
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTrendLineChart.ChartReferenceLineDefinition"
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTrendLineChart.ChartReferenceLinesPosition": {
+      "title": "ChartReferenceLinesPosition",
+      "type": "string",
+      "enum": [
+        "Background",
+        "Foreground"
+      ],
+      "default": "Background"
+    },
     "TcHmi.Controls.Beckhoff.TcHmiVideo": {
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "object",
@@ -8496,7 +9759,9 @@
         "BothLeft",
         "BothRight",
         "PlusLeftAndMinusRight",
-        "MinusLeftAndPlusRight"
+        "MinusLeftAndPlusRight",
+        "PlusTopAndMinusBottom",
+        "MinusTopAndPlusBottom"
       ],
       "default": "MinusLeftAndPlusRight"
     },
@@ -8924,6 +10189,1191 @@
     "TcHmiUserManagement": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiUserManagement"
     },
+    "TcHmi.Controls.Beckhoff.TcHmiTreeView": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiTreeView",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTreeView.Index": {
+      "type": "array",
+      "title": "The hierarchical index of treeview data.",
+      "items": {
+        "type": "number"
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTreeView.DataSymbol": {
+      "allOf": [
+        {
+          "$ref": "tchmi:framework#/definitions/Symbol"
+        },
+        {
+          "frameworkSymbolSubType": {
+            "$ref": "tchmi:general#/definitions/Array"
+          }
+        }
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTreeView.ColumnDefinitionList": {
+      "title": "ColumnDefinitionList",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "engineeringColumns": [
+              "name",
+              "label",
+              "control",
+              "width",
+              "widthUnit"
+            ],
+            "propertiesMeta": [
+              {
+                "name": "cellBackground",
+                "displayName": "Cell background",
+                "category": "Colors",
+                "displayPriority": 10,
+                "description": "Background color of the cells in this column",
+                "defaultValue": null,
+                "defaultValueInternal": null
+              },
+              {
+                "name": "textColor",
+                "displayName": "Text color",
+                "category": "Colors",
+                "displayPriority": 10,
+                "description": "Text color of the cells in this column",
+                "defaultValue": null,
+                "defaultValueInternal": null
+              },
+              {
+                "name": "name",
+                "displayName": "Name",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Name of the property in the srcData object",
+                "defaultValue": "",
+                "defaultValueInternal": null
+              },
+              {
+                "name": "label",
+                "displayName": "Label",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Name of the label for this column",
+                "defaultValue": "",
+                "defaultValueInternal": null
+              },
+              {
+                "name": "control",
+                "displayName": "Control",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Type of the input elements for this column",
+                "defaultValue": "TextBox",
+                "defaultValueInternal": null
+              },
+              {
+                "name": "width",
+                "displayName": "Width",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Width for this column",
+                "defaultValue": 100,
+                "defaultValueInternal": null
+              },
+              {
+                "name": "widthUnit",
+                "refTo": "width",
+                "displayName": "Width unit",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Width unit for this column. px defines an absolute width, % is relative to the control width and factor can be used to divide the available space into fractions.",
+                "defaultValue": "px",
+                "defaultValueInternal": "px"
+              },
+              {
+                "name": "resize",
+                "displayName": "Resize",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Can this column be resized? Columns that have factor as their widthUnit can never be resizeable.",
+                "defaultValue": false,
+                "defaultValueInternal": false
+              },
+              {
+                "name": "minWidth",
+                "displayName": "Min width",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Minimum width for this column",
+                "defaultValue": 100,
+                "defaultValueInternal": null
+              },
+              {
+                "name": "minWidthUnit",
+                "refTo": "minWidth",
+                "displayName": "Min width unit",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Minimum width unit for this column",
+                "defaultValue": "px",
+                "defaultValueInternal": "px"
+              },
+              {
+                "name": "editable",
+                "displayName": "Editable",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Can this column be edited (text, number) or operated (button, checkbox)?",
+                "defaultValue": false,
+                "defaultValueInternal": false
+              },
+              {
+                "name": "sortable",
+                "displayName": "Sortable",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Can this column be sortedby user interaction?",
+                "defaultValue": true,
+                "defaultValueInternal": true
+              },
+              {
+                "name": "horizontalAlignment",
+                "displayName": "Horizontal alignment",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Horizontal alignment of this column",
+                "defaultValue": "Left",
+                "defaultValueInternal": "Left"
+              },
+              {
+                "name": "verticalAlignment",
+                "displayName": "Vertical alignment",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Vertical alignment of this column",
+                "defaultValue": "Center",
+                "defaultValueInternal": "Center"
+              },
+              {
+                "name": "headerHorizontalAlignment",
+                "displayName": "Header Horizontal alignment",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Horizontal alignment of the header of this column",
+                "defaultValue": "Center",
+                "defaultValueInternal": "Center"
+              },
+              {
+                "name": "headerVerticalAlignment",
+                "displayName": "Header Vertical alignment",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Vertical alignment of the header of this column",
+                "defaultValue": "Center",
+                "defaultValueInternal": "Center"
+              },
+              {
+                "name": "format",
+                "displayName": "Format",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "A reference of function which is called with each entry",
+                "allowedFunctions": {
+                  "returnType": "tchmi:general#/definitions/String",
+                  "requiredArguments": [
+                    {
+                      "type": "tchmi:general#/definitions/Any",
+                      "description": "The value to format."
+                    }
+                  ],
+                  "waitMode": "Synchronous"
+                },
+                "defaultValue": null,
+                "defaultValueInternal": null
+              },
+              {
+                "name": "dataDefinitions",
+                "displayName": "Data definitions",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "Mapping from the srcData to a combobox or image selection. \nText to show on Buttons. \nRestrictions for number inputs.",
+                "defaultValue": null,
+                "defaultValueInternal": null
+              },
+              {
+                "name": "ignoreEscapeSequences",
+                "displayName": "Ignore Escape Sequences",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "When set to true a backslash in a text will be shown verbatim in the HMI",
+                "defaultValue": false,
+                "defaultValueInternal": false
+              },
+              {
+                "name": "autoFocusOut",
+                "displayName": "Auto Focus-Out",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "When set to true the control will automatically lose focus when the user presses the enter or escape key",
+                "defaultValue": true,
+                "defaultValueInternal": true
+              },
+              {
+                "name": "autoSelectText",
+                "displayName": "Auto Select Text",
+                "category": "General",
+                "displayPriority": 10,
+                "description": "When set to true all text within the control will be selected when the control gains focus",
+                "defaultValue": false,
+                "defaultValueInternal": false
+              }
+            ],
+            "properties": {
+              "cellBackground": {
+                "$ref": "tchmi:framework#/definitions/Color"
+              },
+              "textColor": {
+                "anyOf": [
+                  {
+                    "$ref": "tchmi:framework#/definitions/SolidColor"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "label": {
+                "type": "string"
+              },
+              "control": {
+                "type": "string",
+                "enum": [
+                  "TextBox",
+                  "TextBlock",
+                  "CheckBox",
+                  "Image",
+                  "ComboBox",
+                  "NumericInput",
+                  "SpinboxInput",
+                  "PasswordInput",
+                  "Button",
+                  "ToggleButton",
+                  "ToggleSwitch",
+                  "RadioButton",
+                  "DateTimeInput",
+                  "TimespanInput",
+                  "AutoDetectControl"
+                ]
+              },
+              "width": {
+                "type": "number",
+                "minimum": 0
+              },
+              "widthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnitOrFactor"
+              },
+              "resize": {
+                "type": "boolean"
+              },
+              "minWidth": {
+                "type": "number",
+                "minimum": 0
+              },
+              "minWidthUnit": {
+                "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+              },
+              "editable": {
+                "type": "boolean"
+              },
+              "sortable": {
+                "type": "boolean"
+              },
+              "horizontalAlignment": {
+                "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+              },
+              "verticalAlignment": {
+                "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+              },
+              "headerHorizontalAlignment": {
+                "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+              },
+              "headerVerticalAlignment": {
+                "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+              },
+              "format": {
+                "$ref": "tchmi:framework#/definitions/Function"
+              },
+              "dataDefinitions": {
+                "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiDatagrid.DataDefinitionList"
+              },
+              "ignoreEscapeSequences": {
+                "type": "boolean"
+              },
+              "autoFocusOut": {
+                "type": "boolean"
+              },
+              "autoSelectText": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "label",
+              "control",
+              "width",
+              "widthUnit",
+              "resize",
+              "minWidth",
+              "minWidthUnit",
+              "editable",
+              "horizontalAlignment",
+              "verticalAlignment"
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "propertiesMeta": [
+            {
+              "name": "cellBackground",
+              "displayName": "Cell background",
+              "category": "Colors",
+              "displayPriority": 10,
+              "description": "Background color of the cells in this column",
+              "defaultValue": null,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "textColor",
+              "displayName": "Text color",
+              "category": "Colors",
+              "displayPriority": 10,
+              "description": "Text color of the cells in this column",
+              "defaultValue": null,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "label",
+              "displayName": "Label",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Name of the label for this column",
+              "defaultValue": "",
+              "defaultValueInternal": null
+            },
+            {
+              "name": "control",
+              "displayName": "Control",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Type of the input elements for this column",
+              "defaultValue": "TextBox",
+              "defaultValueInternal": null
+            },
+            {
+              "name": "width",
+              "displayName": "Width",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Width for this column",
+              "defaultValue": 100,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "widthUnit",
+              "refTo": "width",
+              "displayName": "Width unit",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Width unit for this column",
+              "defaultValue": "px",
+              "defaultValueInternal": "px"
+            },
+            {
+              "name": "resize",
+              "displayName": "Resize",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Can this column be resized?",
+              "defaultValue": false,
+              "defaultValueInternal": false
+            },
+            {
+              "name": "minWidth",
+              "displayName": "Min width",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Minimum width for this column",
+              "defaultValue": 100,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "minWidthUnit",
+              "refTo": "minWidth",
+              "displayName": "Min width unit",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Minimum width unit for this column",
+              "defaultValue": "px",
+              "defaultValueInternal": "px"
+            },
+            {
+              "name": "editable",
+              "displayName": "Editable",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Can this column be edited (text, number) or operated (button, checkbox)?",
+              "defaultValue": false,
+              "defaultValueInternal": false
+            },
+            {
+              "name": "sortable",
+              "displayName": "Sortable",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Can this column be sorted by user interaction?",
+              "defaultValue": true,
+              "defaultValueInternal": false
+            },
+            {
+              "name": "horizontalAlignment",
+              "displayName": "Horizontal alignment",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Horizontal alignment of this column",
+              "defaultValue": "Left",
+              "defaultValueInternal": "Left"
+            },
+            {
+              "name": "verticalAlignment",
+              "displayName": "Vertical alignment",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Vertical alignment of this column",
+              "defaultValue": "Center",
+              "defaultValueInternal": "Center"
+            },
+            {
+              "name": "headerHorizontalAlignment",
+              "displayName": " Header Horizontal alignment",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Horizontal alignment of the header of this column",
+              "defaultValue": "Center",
+              "defaultValueInternal": "Center"
+            },
+            {
+              "name": "headerVerticalAlignment",
+              "displayName": "Header Vertical alignment",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Vertical alignment of the header of this column",
+              "defaultValue": "Center",
+              "defaultValueInternal": "Center"
+            },
+            {
+              "name": "format",
+              "displayName": "Format",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "A reference of function which is called with each entry",
+              "allowedFunctions": {
+                "returnType": "tchmi:general#/definitions/String",
+                "requiredArguments": [
+                  {
+                    "type": "tchmi:general#/definitions/Number",
+                    "description": "The value to format."
+                  }
+                ],
+                "waitMode": "Synchronous"
+              },
+              "defaultValue": null,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "dataDefinitions",
+              "displayName": "Data definitions",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "Mapping from the srcData to a combobox or image selection. \nText to show on Buttons. \nRestrictions for number inputs.",
+              "defaultValue": null,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "ignoreEscapeSequences",
+              "displayName": "Ignore Escape Sequences",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "When set to true a backslash in a text will be shown verbatim in the HMI",
+              "defaultValue": false,
+              "defaultValueInternal": false
+            },
+            {
+              "name": "autoFocusOut",
+              "displayName": "Auto Focus-Out",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "When set to true the control will automatically lose focus when the user presses the enter or escape key",
+              "defaultValue": true,
+              "defaultValueInternal": true
+            },
+            {
+              "name": "autoSelectText",
+              "displayName": "Auto Select Text",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "When set to true all text within the control will be selected when the control gains focus",
+              "defaultValue": false,
+              "defaultValueInternal": false
+            }
+          ],
+          "properties": {
+            "cellBackground": {
+              "$ref": "tchmi:framework#/definitions/Color"
+            },
+            "textColor": {
+              "anyOf": [
+                {
+                  "$ref": "tchmi:framework#/definitions/SolidColor"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "label": {
+              "type": "string"
+            },
+            "control": {
+              "type": "string",
+              "enum": [
+                "TextBox",
+                "TextBlock",
+                "CheckBox",
+                "Image",
+                "ComboBox",
+                "NumericInput",
+                "SpinboxInput",
+                "PasswordInput",
+                "Button",
+                "ToggleButton",
+                "ToggleSwitch",
+                "RadioButton",
+                "DateTimeInput",
+                "TimespanInput",
+                "AutoDetectControl"
+              ]
+            },
+            "width": {
+              "type": "number",
+              "minimum": 0
+            },
+            "widthUnit": {
+              "$ref": "tchmi:framework#/definitions/MeasurementUnitOrFactor"
+            },
+            "resize": {
+              "type": "boolean"
+            },
+            "minWidth": {
+              "type": "number",
+              "minimum": 0
+            },
+            "minWidthUnit": {
+              "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+            },
+            "editable": {
+              "type": "boolean"
+            },
+            "sortable": {
+              "type": "boolean"
+            },
+            "horizontalAlignment": {
+              "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+            },
+            "verticalAlignment": {
+              "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+            },
+            "headerHorizontalAlignment": {
+              "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+            },
+            "headerVerticalAlignment": {
+              "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+            },
+            "format": {
+              "$ref": "tchmi:framework#/definitions/Function"
+            },
+            "dataDefinitions": {
+              "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiDatagrid.DataDefinitionList"
+            },
+            "ignoreEscapeSequences": {
+              "type": "boolean"
+            },
+            "autoFocusOut": {
+              "type": "boolean"
+            },
+            "autoSelectText": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "label",
+            "control",
+            "width",
+            "widthUnit",
+            "resize",
+            "minWidth",
+            "minWidthUnit",
+            "editable",
+            "horizontalAlignment",
+            "verticalAlignment"
+          ]
+        }
+      ]
+    },
+    "TcHmiTreeView": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTreeView"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiObjectBrowser": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiObjectBrowser",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmiObjectBrowser": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiObjectBrowser"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiObjectBrowser.Index": {
+      "type": "array",
+      "title": "The hierarchical index of treeview data.",
+      "items": {
+        "type": "number"
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiObjectBrowser.DataSymbol": {
+      "allOf": [
+        {
+          "$ref": "tchmi:framework#/definitions/Symbol"
+        },
+        {
+          "frameworkSymbolSubType": {
+            "anyOf": [
+              {
+                "$ref": "tchmi:general#/definitions/Object"
+              },
+              {
+                "$ref": "tchmi:general#/definitions/Array"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiObjectBrowser.ColumnName": {
+      "type": "string",
+      "enum": [
+        "Name",
+        "Value",
+        "Datatype",
+        "ValueDisplay"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiObjectBrowser.ColumnDefinitionList": {
+      "title": "ColumnDefinitionList",
+      "type": "array",
+      "items": {
+        "title": "ColumnDefinition",
+        "type": "object",
+        "engineeringColumns": [
+          "columnData",
+          "width",
+          "widthUnit"
+        ],
+        "propertiesMeta": [
+          {
+            "name": "cellBackground",
+            "displayName": "Cell background",
+            "category": "Colors",
+            "displayPriority": 10,
+            "description": "Background color of the cells in this column",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "textColor",
+            "displayName": "Text color",
+            "category": "Colors",
+            "displayPriority": 10,
+            "description": "Text color of the cells in this column",
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "columnData",
+            "displayName": "Column data",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "The data that will be displayed in the column.",
+            "defaultValue": "",
+            "defaultValueInternal": null
+          },
+          {
+            "name": "width",
+            "displayName": "Width",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Width for this column",
+            "defaultValue": 100,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "widthUnit",
+            "refTo": "width",
+            "displayName": "Width unit",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Width unit for this column. px defines an absolute width, % is relative to the control width and factor can be used to divide the available space into fractions.",
+            "defaultValue": "px",
+            "defaultValueInternal": "px"
+          },
+          {
+            "name": "resize",
+            "displayName": "Resize",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Can this column be resized? Columns that have factor as their widthUnit can never be resizeable.",
+            "defaultValue": false,
+            "defaultValueInternal": false
+          },
+          {
+            "name": "minWidth",
+            "displayName": "Min width",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Minimum width for this column",
+            "defaultValue": 100,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "minWidthUnit",
+            "refTo": "minWidth",
+            "displayName": "Min width unit",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Minimum width unit for this column",
+            "defaultValue": "px",
+            "defaultValueInternal": "px"
+          },
+          {
+            "name": "editable",
+            "displayName": "Editable",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Can this column be edited (text, number) or operated (button, checkbox)?",
+            "defaultValue": false,
+            "defaultValueInternal": false
+          },
+          {
+            "name": "sortable",
+            "displayName": "Sortable",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Can this column be sortedby user interaction?",
+            "defaultValue": true,
+            "defaultValueInternal": true
+          },
+          {
+            "name": "horizontalAlignment",
+            "displayName": "Horizontal alignment",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Horizontal alignment of this column",
+            "defaultValue": "Left",
+            "defaultValueInternal": "Left"
+          },
+          {
+            "name": "verticalAlignment",
+            "displayName": "Vertical alignment",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Vertical alignment of this column",
+            "defaultValue": "Center",
+            "defaultValueInternal": "Center"
+          },
+          {
+            "name": "headerHorizontalAlignment",
+            "displayName": "Header Horizontal alignment",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Horizontal alignment of the header of this column",
+            "defaultValue": "Center",
+            "defaultValueInternal": "Center"
+          },
+          {
+            "name": "headerVerticalAlignment",
+            "displayName": "Header Vertical alignment",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "Vertical alignment of the header of this column",
+            "defaultValue": "Center",
+            "defaultValueInternal": "Center"
+          },
+          {
+            "name": "format",
+            "displayName": "Format",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "A reference of function which is called with each entry",
+            "allowedFunctions": {
+              "returnType": "tchmi:general#/definitions/String",
+              "requiredArguments": [
+                {
+                  "type": "tchmi:general#/definitions/Any",
+                  "description": "The value to format."
+                }
+              ],
+              "waitMode": "Synchronous"
+            },
+            "defaultValue": null,
+            "defaultValueInternal": null
+          },
+          {
+            "name": "ignoreEscapeSequences",
+            "displayName": "Ignore Escape Sequences",
+            "category": "General",
+            "displayPriority": 10,
+            "description": "When set to true a backslash in a text will be shown verbatim in the HMI",
+            "defaultValue": false,
+            "defaultValueInternal": false
+          }
+        ],
+        "properties": {
+          "cellBackground": {
+            "$ref": "tchmi:framework#/definitions/Color"
+          },
+          "textColor": {
+            "$ref": "tchmi:framework#/definitions/SolidColor"
+          },
+          "columnData": {
+            "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiObjectBrowser.ColumnName"
+          },
+          "width": {
+            "type": "number",
+            "minimum": 0
+          },
+          "widthUnit": {
+            "$ref": "tchmi:framework#/definitions/MeasurementUnitOrFactor"
+          },
+          "resize": {
+            "type": "boolean"
+          },
+          "minWidth": {
+            "type": "number",
+            "minimum": 0
+          },
+          "minWidthUnit": {
+            "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "sortable": {
+            "type": "boolean"
+          },
+          "horizontalAlignment": {
+            "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+          },
+          "verticalAlignment": {
+            "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+          },
+          "headerHorizontalAlignment": {
+            "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+          },
+          "headerVerticalAlignment": {
+            "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+          },
+          "format": {
+            "$ref": "tchmi:framework#/definitions/Function"
+          },
+          "ignoreEscapeSequences": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "columnData",
+          "width",
+          "widthUnit",
+          "resize",
+          "minWidth",
+          "minWidthUnit",
+          "horizontalAlignment",
+          "verticalAlignment"
+        ]
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTabNavigation": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiTabNavigation",
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff"
+    },
+    "TcHmiTabNavigation": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTabNavigation"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTabNavigation.TabAlignment": {
+      "type": "string",
+      "enum": [
+        "Top",
+        "Right",
+        "Bottom",
+        "Left"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTabNavigation.TabList": {
+      "type": "array",
+      "title": "Tabs",
+      "description": "A list of tabs",
+      "items": {
+        "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTabNavigation.Tab"
+      }
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTabNavigation.TargetFile": {
+      "type": "object",
+      "description": "An object ({ path: string; attributes?: Dictionary<any>; }) with a file path and an attributes dictionary for the target file host control (when path points to a *.usercontrol file).",
+      "properties": {
+        "path": {
+          "anyOf": [
+            {
+              "$ref": "tchmi:framework#/definitions/UserControlPath"
+            },
+            {
+              "$ref": "tchmi:framework#/definitions/ContentPath"
+            }
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "object",
+              "array",
+              "string",
+              "boolean",
+              "integer",
+              "number"
+            ]
+          }
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiTabNavigation.Tab": {
+      "type": "object",
+      "title": "Tab",
+      "description": "A single tab",
+      "engineeringColumns": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "targetFile": {
+          "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiTabNavigation.TargetFile"
+        },
+        "targetFileHostPreload": {
+          "type": "boolean"
+        },
+        "targetFileHostPreAttach": {
+          "type": "boolean"
+        },
+        "targetFileHostKeepAlive": {
+          "type": "boolean"
+        },
+        "horizontalAlignment": {
+          "$ref": "tchmi:framework#/definitions/HorizontalAlignment"
+        },
+        "verticalAlignment": {
+          "$ref": "tchmi:framework#/definitions/VerticalAlignment"
+        },
+        "icon": {
+          "type": "object",
+          "properties": {
+            "iconPath": {
+              "$ref": "tchmi:framework#/definitions/Path"
+            },
+            "iconWidth": {
+              "$ref": "tchmi:framework#/definitions/MeasurementValue"
+            },
+            "iconWidthUnit": {
+              "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+            },
+            "iconHeight": {
+              "$ref": "tchmi:framework#/definitions/MeasurementValue"
+            },
+            "iconHeightUnit": {
+              "$ref": "tchmi:framework#/definitions/MeasurementUnit"
+            }
+          },
+          "propertiesMeta": [
+            {
+              "name": "iconPath",
+              "displayName": "Icon Path",
+              "category": "General",
+              "displayPriority": 10,
+              "description": "The icon that will be displayed in the tab bar.",
+              "defaultValue": null,
+              "defaultValueInternal": null
+            },
+            {
+              "name": "iconWidth",
+              "displayName": "Icon Width",
+              "category": "General",
+              "displayPriority": 11,
+              "description": "",
+              "defaultValue": null,
+              "defaultValueInternal": 32
+            },
+            {
+              "name": "iconWidthUnit",
+              "displayName": "Icon Width Unit",
+              "category": "General",
+              "displayPriority": 11,
+              "description": "",
+              "defaultValue": null,
+              "defaultValueInternal": "px",
+              "refTo": "iconWidth"
+            },
+            {
+              "name": "iconHeight",
+              "displayName": "Icon Height",
+              "category": "General",
+              "displayPriority": 12,
+              "description": "",
+              "defaultValue": null,
+              "defaultValueInternal": 32
+            },
+            {
+              "name": "iconHeightUnit",
+              "displayName": "Icon Height Unit",
+              "category": "General",
+              "displayPriority": 12,
+              "description": "",
+              "defaultValue": null,
+              "defaultValueInternal": "px",
+              "refTo": "iconHeight"
+            }
+          ],
+          "required": [
+            "iconPath",
+            "iconWidth",
+            "iconWidthUnit",
+            "iconHeight",
+            "iconHeightUnit"
+          ]
+        }
+      },
+      "propertiesMeta": [
+        {
+          "name": "name",
+          "displayName": "Name",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "Name of the Tab.",
+          "defaultValue": "newTab",
+          "defaultValueInternal": null
+        },
+        {
+          "name": "displayName",
+          "displayName": "Display Name",
+          "category": "General",
+          "displayPriority": 10,
+          "description": "Name of the Tab that will be displayed in the tab bar.",
+          "defaultValue": "New Tab",
+          "defaultValueInternal": null
+        },
+        {
+          "name": "targetFile",
+          "displayName": "Target File",
+          "category": "General",
+          "displayPriority": 11,
+          "description": "",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "targetFileHostPreload",
+          "displayName": "Target File Host Preload",
+          "category": "General",
+          "displayPriority": 13,
+          "description": "Defines whether the target file host is preloaded when the tab navigation control is initialized or loaded when the tab is selected.",
+          "defaultValue": null,
+          "defaultValueInternal": false
+        },
+        {
+          "name": "targetFileHostPreAttach",
+          "displayName": "Target File Host Pre Attach",
+          "category": "General",
+          "displayPriority": 14,
+          "description": "Defines whether the target file host is pre attached to the DOM even if the tab is not yet selected. Does only have an effect if TargetFileHostPreload is true.",
+          "defaultValue": null,
+          "defaultValueInternal": false
+        },
+        {
+          "name": "targetFileHostKeepAlive",
+          "displayName": "Target File Host Keep Alive",
+          "category": "General",
+          "displayPriority": 15,
+          "description": "Defines whether the target file host is kept alive when the tab is unselected. Has no effect when TargetFileHostPreload is set to true.",
+          "defaultValue": null,
+          "defaultValueInternal": false
+        },
+        {
+          "name": "horizontalAlignment",
+          "displayName": "Horizontal alignment",
+          "category": "General",
+          "displayPriority": 20,
+          "description": "Horizontal alignment of the text in the tab bar.",
+          "defaultValue": "Left",
+          "defaultValueInternal": "Left"
+        },
+        {
+          "name": "verticalAlignment",
+          "displayName": "Vertical alignment",
+          "category": "General",
+          "displayPriority": 21,
+          "description": "Vertical alignment of the text in the tab bar.",
+          "defaultValue": "Center",
+          "defaultValueInternal": "Center"
+        },
+        {
+          "name": "icon",
+          "displayName": "Icon",
+          "category": "General",
+          "displayPriority": 30,
+          "description": "The Icon displayed in the tab bar.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        }
+      ],
+      "required": [
+        "name"
+      ]
+    },
     "TcHmi.Controls.Beckhoff.TcHmiEcDiagnostics": {
       "$schema": "http://json-schema.org/draft-04/schema",
       "type": "object",
@@ -8933,6 +11383,48 @@
     },
     "TcHmiEcDiagnostics": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.Beckhoff.TcHmiEcDiagnostics"
+    },
+    "TcHmi.Controls.Beckhoff.TcHmiEcDiagnostics.InitTopologyView": {
+      "title": "InitTopologyView",
+      "description": "Definition of cell options in the grid.",
+      "type": "object",
+      "propertiesMeta": [
+        {
+          "name": "posX",
+          "displayName": "PosX",
+          "displayPriority": 10,
+          "description": "Default is zero. Set a number to adjust the initial horizontal translation of the topology view in pixels.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "posY",
+          "displayName": "PosY",
+          "displayPriority": 11,
+          "description": "Default is zero. Set a number to adjust the initial vertical translation of the topology view in pixels.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        },
+        {
+          "name": "zoom",
+          "displayName": "Zoom",
+          "displayPriority": 12,
+          "description": "Default is the calculated zoom factor so that the topology covers the available space. Set a number to adjust the initial zoom of the topology view. Zoom 100 renders a terminal with 400px x 100px.",
+          "defaultValue": null,
+          "defaultValueInternal": null
+        }
+      ],
+      "properties": {
+        "posX": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        },
+        "posY": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        },
+        "zoom": {
+          "$ref": "tchmi:framework#/definitions/MeasurementValue"
+        }
+      }
     },
     "TcHmi.Controls.System.TcHmiControl": {
       "$schema": "http://json-schema.org/draft-04/schema",
@@ -8963,6 +11455,47 @@
     },
     "TcHmiPartial": {
       "$ref": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiPartial"
+    },
+    "TcHmi.Controls.System.TcHmiPopup": {
+      "$schema": "http://json-schema.org/draft-04/schema",
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "TcHmiPopup",
+      "frameworkControlNamespace": "TcHmi.Controls.System"
+    },
+    "TcHmiPopup": {
+      "$ref": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiPopup"
+    },
+    "TcHmi.Controls.System.TcHmiPopup.TargetFile": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "anyOf": [
+            {
+              "$ref": "tchmi:framework#/definitions/UserControlPath"
+            },
+            {
+              "$ref": "tchmi:framework#/definitions/ContentPath"
+            }
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "object",
+              "array",
+              "string",
+              "boolean",
+              "integer",
+              "number"
+            ]
+          }
+        }
+      },
+      "required": [
+        "path"
+      ]
     },
     "TcHmi.Controls.System.TcHmiContainer": {
       "$schema": "http://json-schema.org/draft-04/schema",
@@ -9033,7 +11566,7 @@
             "category": "Layout",
             "displayPriority": 60,
             "displayName": "Padding",
-            "description": "Inner padding of the cell.",
+            "description": "Inner padding of the cell. \nNote: Percentages always refer to the width of the cell, never its height (even for top and bottom).",
             "defaultValueInternal": null
           },
           {
@@ -9165,7 +11698,7 @@
               },
               {
                 "title": "Padding",
-                "description": "Inner padding of the cell.",
+                "description": "Inner padding of the cell. \nNote: Percentages always refer to the width of the cell, never its height (even for top and bottom).",
                 "default": null,
                 "category": "Layout",
                 "displayPriority": 60
