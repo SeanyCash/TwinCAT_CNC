@@ -369,13 +369,6 @@
             "PROCESSID": -1,
             "REQUIRED": true,
             "STARTUPTYPE": 1
-        },
-        "TcHmiVision": {
-            "ENABLED": true,
-            "NAME": "TcHmiVision",
-            "PATH": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Vision.13.7.109\\runtimes\\win\\net472\\",
-            "REQUIRED": false,
-            "STARTUPTYPE": 1
         }
     },
     "FILES": {},
