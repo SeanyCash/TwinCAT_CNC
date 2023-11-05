@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
-		<SystemId>{14FD2A9A-4998-6444-BA45-1343C1AA00D2}</SystemId>
-		<IssueTime>2023-11-04T13:41:00</IssueTime>
-		<ExpireTime>2023-11-12T00:00:00</ExpireTime>
-		<LicenseKey>5cbdabed7744823c00994bd9109e3d8fc3d8bfeed7172c683e2d054d18a268812d18623306cd37c375bf14d5c7878523a8408e88a7a402b50d62066cb21ed3bc66f3129bc368bebe89640d0278ff10d310c487c6743a49160a67aea8637dcc21183c22aedcdaf404a375e7650eb0ffef4e59c52fc52c256ace9e42aebe7c1e7d1bfedc190147e5f6e0d6bd4761f681257a082e131ffbb059e8fecd62da0ddbe95cfa74647279439a50dff3ae43b06017d6257269777c83fe78bfddf1f4b5a284a8cd6c455e196b33f6b85e403dae484f84ce68e2709f4a6369ca468c1e9507def7568cfe4404b949362f93aefaad6666fde4109ecda1bde6433dad18626ce148</LicenseKey>
+		<SystemId>{3C05E3A2-3F3C-F807-78ED-6055D9212FEB}</SystemId>
+		<IssueTime>2023-11-05T16:02:00</IssueTime>
+		<ExpireTime>2023-11-13T00:00:00</ExpireTime>
+		<LicenseKey>cdb7d41a011af37a54acd5bd3a498a8ef8112742d6dab31e9d054efc74ef05a5279b8fd339ac77bc7f3a8848c27c889fc66dc8a53694942d2364660dacea44d4e7bac00d410f2ad4fded9e8916cb88edf4ad7cb6fb3ac61c8838e87da377730e18c6e31bc0673dac0ab327f0738ae34e1ffe572e5d1555e9c85beded728f03976bc2e84a01734b083ecd649b9f9a0bec1c9aded1b1c6a7a8954c6014bc670dbd7ceb598e0f83e5429468f23c8b41e3568e5222953031f98c4369854a2551830c4eac96aa3a375f9ee9f08b664658cf6010bb5438401d17af5de3a497e616cdf626c3f42475f385bcd9e5d01ec67fa1ed0dd15624dc6679cc06e892000fd76db9</LicenseKey>
 		<License>
 			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
 			<Name>TC3 ADS</Name>

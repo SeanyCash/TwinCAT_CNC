@@ -389,15 +389,6 @@
     <Content Include="Imports\Images\warning_rot_pressed.svg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Server\ADS\ADS.Config.default.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\ADS\ADS.Config.remote.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\ADS\ADS.Storage.json">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Server\TcHmiEventLogger\TcHmiEventLogger.Config.default.json">
       <SubType>Content</SubType>
     </Content>

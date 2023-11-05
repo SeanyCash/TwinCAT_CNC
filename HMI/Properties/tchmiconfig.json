@@ -1,5 +1,5 @@
 ﻿{
-  "$schema": "./../Packages/Beckhoff.TwinCAT.HMI.Framework.12.752.0/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
+  "$schema": "./../../Packages/Beckhoff.TwinCAT.HMI.Framework.12.760.42/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
   "basePath": "./framework",
   "scaleMode": "None",
   "startupView": "Desktop.view",
@@ -78,7 +78,7 @@
   "userControls": [],
   "content": [
     {
-      "url": "Contents/Alarms.content",
+      "url": "Contents/Overview.content",
       "preload": false,
       "keepAlive": false,
       "loadSync": false,
@@ -92,28 +92,21 @@
       "preloadBindings": false
     },
     {
+      "url": "Contents/GCode.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/Offsets_Region.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
       "url": "Contents/Jog.content",
-      "preload": false,
-      "keepAlive": false,
-      "loadSync": false,
-      "preloadBindings": false
-    },
-    {
-      "url": "Contents/Main.content",
-      "preload": false,
-      "keepAlive": false,
-      "loadSync": false,
-      "preloadBindings": false
-    },
-    {
-      "url": "Contents/MetricUnits.content",
-      "preload": false,
-      "keepAlive": false,
-      "loadSync": false,
-      "preloadBindings": false
-    },
-    {
-      "url": "Contents/Offsets.content",
       "preload": false,
       "keepAlive": false,
       "loadSync": false,
@@ -146,6 +139,34 @@
       "keepAlive": false,
       "loadSync": false,
       "preloadBindings": false
+    },
+    {
+      "url": "Contents/Offsets.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/Alarms.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/Main.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/MetricUnits.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
     }
   ],
   "views": [
@@ -171,7 +192,8 @@
         "persist": false,
         "readonly": false
       }
-    }
+    },
+    "themedResources": {}
   },
   "trigger": [],
   "actionTemplates": [],
@@ -191,6 +213,10 @@
     "symbolError": "Ignore"
   },
   "packages": [
+    {
+      "name": "Beckhoff.TwinCAT.HMI.BaseTemplate",
+      "basePath": "/Beckhoff.TwinCAT.HMI.BaseTemplate"
+    },
     {
       "name": "Beckhoff.TwinCAT.HMI.Controls",
       "basePath": "/Beckhoff.TwinCAT.HMI.Controls"

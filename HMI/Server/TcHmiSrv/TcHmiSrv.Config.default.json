@@ -10588,14 +10588,14 @@
     "VIDEOSEGMENTSIZE": 1048576,
     "VIRTUALDIRECTORIES": {
         "/": "..\\..\\HMI\\",
-        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.760.48\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.760.48\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.760.48\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.760.48\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.760.48\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.760.42\\runtimes\\native1.12-tchmi",
         "/bin": "..\\..\\HMI\\bin\\",
         "/bin/framework": "..\\..\\HMI\\bin\\framework",
-        "/framework": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.760.48\\runtimes\\native1.12-tchmi"
+        "/framework": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.760.42\\runtimes\\native1.12-tchmi"
     }
 }
