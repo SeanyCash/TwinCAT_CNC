@@ -14,7 +14,7 @@
     <HmiCommunicationRouterPort>10114</HmiCommunicationRouterPort>
     <HmiCommunicationServerPort>3000</HmiCommunicationServerPort>
     <HmiInitial>1.10.1336.404</HmiInitial>
-    <HmiRecent>1.12.758.8</HmiRecent>
+    <HmiRecent>1.12.760.54</HmiRecent>
     <TargetFrameworkMoniker>native,Version=v1.12.0,Profile=tchmi</TargetFrameworkMoniker>
     <TargetFramework>native1.12-tchmi</TargetFramework>
     <HmiLogTcHmiServerMessages>false</HmiLogTcHmiServerMessages>

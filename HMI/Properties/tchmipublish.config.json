@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "serverExtensions": [
       {
@@ -47,11 +47,11 @@
     "destinationUrl": "",
     "passiveMode": true,
     "savePassword": true,
-    "deleteAllFilesBeforePublish": false,
+    "deleteAllFilesBeforePublish": true,
     "deleteExtensionDataBeforePublish": false,
     "alwaysPublishLocalServerConfiguration": true,
     "temporaryPublishWithoutServerConfiguration": false,
-    "abortOnErrors": false,
+    "abortOnErrors": true,
     "createPublishLog": false,
     "userName": "",
     "encryptedPassword": "",
@@ -65,7 +65,7 @@
     "launchBrowserAfterPublish": true,
     "createVirtualDirectoriesOnTargetSystem": false,
     "tcHmiServerUserName": "__SystemAdministrator",
-    "tcHmiDestinationUrl": "https://localhost:1020",
+    "tcHmiDestinationUrl": "https://localhost:1020/",
     "publishConfiguration": "remote",
     "tcHmiSavePassword": true,
     "tcHmiIgnoreCertificateErrors": true
