@@ -135,6 +135,9 @@
     <Content Include="Contents\Offsets.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Imports\Images\beyondkinematicswithletters.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Imports\Images\icons_down_pressed.svg">
       <SubType>Content</SubType>
     </Content>

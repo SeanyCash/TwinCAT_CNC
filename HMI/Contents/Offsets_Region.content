@@ -1,202 +1,8 @@
 <div id="Jog_1" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="938" data-tchmi-height="243" data-tchmi-left-unit="px" data-tchmi-top-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-width-unit="px" data-tchmi-height-unit="px" data-tchmi-zindex="0" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-creator-viewport-width="1920" data-tchmi-creator-viewport-height="1080" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
-<div id="TcHmiDatagrid_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDatagrid" data-tchmi-height="190" data-tchmi-height-unit="px" data-tchmi-left="27" data-tchmi-left-unit="px" data-tchmi-top="5" data-tchmi-top-unit="px" data-tchmi-width="400" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-zindex="3" data-tchmi-show-row-numbers="false" data-tchmi-row-numbers-start-number="1" data-tchmi-row-numbers-width="50" data-tchmi-row-numbers-resizable="false" data-tchmi-header-height="30" data-tchmi-row-height="50" data-tchmi-table-border-width="4" data-tchmi-row-numbers-font-size="22" data-tchmi-header-font-size="22" data-tchmi-row-numbers-font-size-unit="px" data-tchmi-grid-font-size="22" data-tchmi-grid-font-family="Ubuntu Mono" data-tchmi-header-font-family="Ubuntu Mono" data-tchmi-row-numbers-horizontal-alignment="Center" data-tchmi-row-numbers-vertical-alignment="Center" data-tchmi-row-numbers-font-family="Ubuntu Mono">
-<script data-tchmi-target-attribute="data-tchmi-cell-content-padding" type="application/json">
-{
-  "left": 4,
-  "right": 4,
-  "top": 0,
-  "bottom": 0,
-  "leftUnit": "px",
-  "rightUnit": "px",
-  "topUnit": "px",
-  "bottomUnit": "px"
-}
-</script>
-<script data-tchmi-target-attribute="data-tchmi-selected-row-value" type="application/json">
-
-</script>
-<script data-tchmi-target-attribute="data-tchmi-selected-cell-value" type="application/json">
-
-</script>
-
-
-
-
-<script data-tchmi-target-attribute="data-tchmi-src-column" type="application/json">
-[
-  {
-    "name": "G54",
-    "label": "G54",
-    "control": "TextBlock",
-    "width": 100,
-    "widthUnit": "px",
-    "resize": false,
-    "sortable": false,
-    "minWidth": 100,
-    "minWidthUnit": "px",
-    "cellBackground": null,
-    "textColor": null,
-    "editable": false,
-    "horizontalAlignment": "Center",
-    "verticalAlignment": "Center",
-    "headerHorizontalAlignment": "Center",
-    "headerVerticalAlignment": "Center",
-    "format": {
-      "objectType": "Function",
-      "active": true,
-      "fn": "TcHmi.Functions.Beckhoff.GaugeValueFormatter",
-      "fnParams": [
-        {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/Number",
-          "value": 3.0
-        }
-      ]
-    }
-  },
-  {
-    "name": "G55",
-    "label": "G55",
-    "control": "TextBlock",
-    "width": 100,
-    "widthUnit": "px",
-    "resize": false,
-    "sortable": false,
-    "minWidth": 100,
-    "minWidthUnit": "px",
-    "cellBackground": null,
-    "textColor": null,
-    "editable": false,
-    "horizontalAlignment": "Center",
-    "verticalAlignment": "Center",
-    "headerHorizontalAlignment": "Center",
-    "headerVerticalAlignment": "Center",
-    "format": {
-      "objectType": "Function",
-      "active": true,
-      "fn": "TcHmi.Functions.Beckhoff.GaugeValueFormatter",
-      "fnParams": [
-        {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/Number",
-          "value": 3.0
-        }
-      ]
-    },
-    "dataDefinitions": {
-      "minValue": 0.0,
-      "maxValue": 9999.0,
-      "decimalDigits": 0.0
-    }
-  },
-  {
-    "name": "G56",
-    "label": "G56",
-    "control": "TextBlock",
-    "width": 100,
-    "widthUnit": "px",
-    "resize": false,
-    "sortable": false,
-    "minWidth": 100,
-    "minWidthUnit": "px",
-    "cellBackground": null,
-    "textColor": null,
-    "editable": false,
-    "horizontalAlignment": "Center",
-    "verticalAlignment": "Center",
-    "headerHorizontalAlignment": "Center",
-    "headerVerticalAlignment": "Center",
-    "format": {
-      "objectType": "Function",
-      "active": true,
-      "fn": "TcHmi.Functions.Beckhoff.GaugeValueFormatter",
-      "fnParams": [
-        {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/Number",
-          "value": 3.0
-        }
-      ]
-    },
-    "dataDefinitions": {
-      "minValue": 0,
-      "maxValue": 9999.0,
-      "decimalDigits": 3.0
-    }
-  },
-  {
-    "name": "G57",
-    "label": "G57",
-    "control": "TextBlock",
-    "width": 100,
-    "widthUnit": "px",
-    "resize": false,
-    "sortable": false,
-    "minWidth": 100,
-    "minWidthUnit": "px",
-    "cellBackground": null,
-    "textColor": null,
-    "editable": false,
-    "horizontalAlignment": "Center",
-    "verticalAlignment": "Center",
-    "headerHorizontalAlignment": "Center",
-    "headerVerticalAlignment": "Center",
-    "format": {
-      "objectType": "Function",
-      "active": true,
-      "fn": "TcHmi.Functions.Beckhoff.GaugeValueFormatter",
-      "fnParams": [
-        {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/Number",
-          "value": 3.0
-        }
-      ]
-    },
-    "dataDefinitions": {
-      "minValue": 0,
-      "maxValue": 9999.0,
-      "decimalDigits": 3.0
-    }
-  }
-]
-</script>
-
-
-
-
-
-<script data-tchmi-target-attribute="data-tchmi-src-data" type="application/json">
-[
-  {
-    "G54": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[0]::fShiftX%/s%",
-    "G55": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[1]::fShiftX%/s%",
-    "G56": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[2]::fShiftX%/s%",
-    "G57": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[3]::fShiftX%/s%"
-  },
-  {
-    "G54": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[0]::fShiftY%/s%",
-    "G55": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[1]::fShiftY%/s%",
-    "G56": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[2]::fShiftY%/s%",
-    "G57": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[3]::fShiftY%/s%"
-  },
-  {
-    "G54": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[0]::fShiftZ%/s%",
-    "G55": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[1]::fShiftZ%/s%",
-    "G56": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[2]::fShiftZ%/s%",
-    "G57": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[3]::fShiftZ%/s%"
-  }
-]
-</script>
-</div>
 <div id="TcHmiTextblock_118" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="437" data-tchmi-left-unit="px" data-tchmi-text="ZERO SHIFT OFFSET" data-tchmi-top="5" data-tchmi-top-unit="px" data-tchmi-width="213" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-text-font-size="24" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="3" data-tchmi-text-font-family="Ubuntu Mono">
 </div>
 <div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="Execute_Zero_Shift_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="40" data-tchmi-height-unit="px" data-tchmi-left="296" data-tchmi-left-unit="px" data-tchmi-text="EXECUTE" data-tchmi-top="197" data-tchmi-top-unit="px" data-tchmi-width="131" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="22" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-icon-width-unit="px" data-tchmi-icon-height-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-text-font-family="Ubuntu Mono">
-<script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
-{
-  "color": "rgba(11, 11, 11, 1)"
-}
-</script>
+
 
 
 
@@ -465,6 +271,196 @@
         "asyncWait": true
       }
     ]
+  }
+]
+</script>
+</div>
+<div id="TcHmiDatagrid_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDatagrid" data-tchmi-height="190" data-tchmi-height-unit="px" data-tchmi-left="27" data-tchmi-left-unit="px" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="400" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-zindex="3" data-tchmi-show-row-numbers="false" data-tchmi-row-numbers-start-number="1" data-tchmi-row-numbers-width="50" data-tchmi-row-numbers-resizable="false" data-tchmi-header-height="30" data-tchmi-row-height="50" data-tchmi-table-border-width="4" data-tchmi-row-numbers-font-size="22" data-tchmi-header-font-size="22" data-tchmi-row-numbers-font-size-unit="px" data-tchmi-grid-font-size="22" data-tchmi-grid-font-family="Ubuntu Mono" data-tchmi-header-font-family="Ubuntu Mono" data-tchmi-row-numbers-horizontal-alignment="Center" data-tchmi-row-numbers-vertical-alignment="Center" data-tchmi-row-numbers-font-family="Ubuntu Mono">
+<script data-tchmi-target-attribute="data-tchmi-cell-content-padding" type="application/json">
+{
+  "left": 4,
+  "right": 4,
+  "top": 0,
+  "bottom": 0,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-selected-row-value" type="application/json">
+
+</script>
+<script data-tchmi-target-attribute="data-tchmi-selected-cell-value" type="application/json">
+
+</script>
+
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-src-column" type="application/json">
+[
+  {
+    "name": "G54",
+    "label": "G54",
+    "control": "TextBlock",
+    "width": 100,
+    "widthUnit": "px",
+    "resize": false,
+    "sortable": false,
+    "minWidth": 100,
+    "minWidthUnit": "px",
+    "cellBackground": null,
+    "textColor": null,
+    "editable": false,
+    "horizontalAlignment": "Center",
+    "verticalAlignment": "Center",
+    "headerHorizontalAlignment": "Center",
+    "headerVerticalAlignment": "Center",
+    "format": {
+      "objectType": "Function",
+      "active": true,
+      "fn": "TcHmi.Functions.Beckhoff.GaugeValueFormatter",
+      "fnParams": [
+        {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/Number",
+          "value": 3.0
+        }
+      ]
+    }
+  },
+  {
+    "name": "G55",
+    "label": "G55",
+    "control": "TextBlock",
+    "width": 100,
+    "widthUnit": "px",
+    "resize": false,
+    "sortable": false,
+    "minWidth": 100,
+    "minWidthUnit": "px",
+    "cellBackground": null,
+    "textColor": null,
+    "editable": false,
+    "horizontalAlignment": "Center",
+    "verticalAlignment": "Center",
+    "headerHorizontalAlignment": "Center",
+    "headerVerticalAlignment": "Center",
+    "format": {
+      "objectType": "Function",
+      "active": true,
+      "fn": "TcHmi.Functions.Beckhoff.GaugeValueFormatter",
+      "fnParams": [
+        {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/Number",
+          "value": 3.0
+        }
+      ]
+    },
+    "dataDefinitions": {
+      "minValue": 0.0,
+      "maxValue": 9999.0,
+      "decimalDigits": 0.0
+    }
+  },
+  {
+    "name": "G56",
+    "label": "G56",
+    "control": "TextBlock",
+    "width": 100,
+    "widthUnit": "px",
+    "resize": false,
+    "sortable": false,
+    "minWidth": 100,
+    "minWidthUnit": "px",
+    "cellBackground": null,
+    "textColor": null,
+    "editable": false,
+    "horizontalAlignment": "Center",
+    "verticalAlignment": "Center",
+    "headerHorizontalAlignment": "Center",
+    "headerVerticalAlignment": "Center",
+    "format": {
+      "objectType": "Function",
+      "active": true,
+      "fn": "TcHmi.Functions.Beckhoff.GaugeValueFormatter",
+      "fnParams": [
+        {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/Number",
+          "value": 3.0
+        }
+      ]
+    },
+    "dataDefinitions": {
+      "minValue": 0,
+      "maxValue": 9999.0,
+      "decimalDigits": 3.0
+    }
+  },
+  {
+    "name": "G57",
+    "label": "G57",
+    "control": "TextBlock",
+    "width": 100,
+    "widthUnit": "px",
+    "resize": false,
+    "sortable": false,
+    "minWidth": 100,
+    "minWidthUnit": "px",
+    "cellBackground": null,
+    "textColor": null,
+    "editable": false,
+    "horizontalAlignment": "Center",
+    "verticalAlignment": "Center",
+    "headerHorizontalAlignment": "Center",
+    "headerVerticalAlignment": "Center",
+    "format": {
+      "objectType": "Function",
+      "active": true,
+      "fn": "TcHmi.Functions.Beckhoff.GaugeValueFormatter",
+      "fnParams": [
+        {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/Number",
+          "value": 3.0
+        }
+      ]
+    },
+    "dataDefinitions": {
+      "minValue": 0,
+      "maxValue": 9999.0,
+      "decimalDigits": 3.0
+    }
+  }
+]
+</script>
+
+
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-src-data" type="application/json">
+[
+  {
+    "G54": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[0]::fShiftX%/s%",
+    "G55": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[1]::fShiftX%/s%",
+    "G56": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[2]::fShiftX%/s%",
+    "G57": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[3]::fShiftX%/s%"
+  },
+  {
+    "G54": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[0]::fShiftY%/s%",
+    "G55": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[1]::fShiftY%/s%",
+    "G56": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[2]::fShiftY%/s%",
+    "G57": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[3]::fShiftY%/s%"
+  },
+  {
+    "G54": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[0]::fShiftZ%/s%",
+    "G55": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[1]::fShiftZ%/s%",
+    "G56": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[2]::fShiftZ%/s%",
+    "G57": "%s%PLC1.GVL.stHMI_Out.ZeroShiftDesc[3]::fShiftZ%/s%"
   }
 ]
 </script>

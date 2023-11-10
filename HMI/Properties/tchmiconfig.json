@@ -5,12 +5,12 @@
   "startupView": "Desktop.view",
   "loginPage": "",
   "tcHmiServer": {
-    "websocketIntervalTime": 500,
+    "websocketIntervalTime": 250,
     "websocketTimeout": 10000,
     "websocketSystemTimeout": 0,
     "websocketSubscriptionMode": "Change"
   },
-  "activeTheme": "Base",
+  "activeTheme": "Base-Dark",
   "themes": {
     "Base": {
       "resources": [
@@ -199,8 +199,8 @@
   "disableLoadingOptimization": false,
   "creatorSettings": {
     "viewport": {
-      "defaultWidth": 1024,
-      "defaultHeight": 768
+      "defaultWidth": 1080,
+      "defaultHeight": 1920
     }
   },
   "binding": {

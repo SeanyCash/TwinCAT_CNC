@@ -1,4 +1,4 @@
-﻿/**
+/**
         About font inclusion in TcHmi
 
     As a default we include Roboto Condensed (in Fonts folder) as a webfont which will render latin, greek, vietnamese, cyrillic glyphs.
@@ -16,7 +16,7 @@
 */
 
 html {
-    font-family:RobotoCondensed,
+    font-family:Ubuntu Mono,
         'Microsoft YaHei', '微软雅黑', 
         'Hiragino Sans GB', '冬青黑体',
         'STXihei', '华文细黑', 
