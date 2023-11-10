@@ -4284,7 +4284,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Channel Id="2" ChannelType="2" InterpreterType="2" LoadBufSize="67108864" AxesColumns="#x3f">
+				<Channel Id="2" ChannelType="2" InterpreterType="1" LoadBufSize="67108864" AxesColumns="#x3f">
 					<Name>NC Channel</Name>
 					<Vars VarGrpType="1">
 						<Name>Inputs</Name>
@@ -4413,7 +4413,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64EA087B-AF6F-4600-AB87-345CEDCA4F88}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" CopyTmcToTarget="true" CopyTpyToTarget="false" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Main\Main.tmc" TmcHash="{70DFAD5C-6D52-433B-92DE-20666A5AA91A}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Main\Main.tmc" TmcHash="{C78E5346-3B2F-2AE6-236A-C2E4CEDE296A}">
 					<Name>Main Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
