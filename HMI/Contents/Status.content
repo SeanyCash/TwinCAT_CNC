@@ -1093,11 +1093,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-value-color" type="application/json">
-{
-  "color": "rgba(0, 0, 0, 1)"
-}
-</script>
+
 </div>
 <div id="TcHmiRectangle_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="162" data-tchmi-height-unit="px" data-tchmi-left="9" data-tchmi-left-unit="px" data-tchmi-top="33" data-tchmi-top-unit="px" data-tchmi-width="578" data-tchmi-width-unit="px" data-tchmi-zindex="3">
 </div>

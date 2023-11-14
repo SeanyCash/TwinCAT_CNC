@@ -5820,7 +5820,7 @@ External Setpoint Generation:
 					<SyncUnit Name="IO" NoDeleteIfUnused="true"/>
 				</EtherCAT>
 			</Device>
-			<Device Id="1" DevType="112" AmsPort="28673" AmsNetId="132.154.239.141.2.1" RemoteName="Device 1 (EtherCAT Automation Protocol)">
+			<Device Id="1" Disabled="true" DevType="112" AmsPort="28673" AmsNetId="132.154.239.141.2.1" RemoteName="Device 1 (EtherCAT Automation Protocol)">
 				<Name>Device 1 (EtherCAT Automation Protocol)</Name>
 				<AddressInfo>
 					<Pnp>
