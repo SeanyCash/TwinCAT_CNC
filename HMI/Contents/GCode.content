@@ -47,10 +47,10 @@
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {
-  "left": "Solid",
-  "right": "Solid",
-  "top": "Solid",
-  "bottom": "Solid"
+  "left": "None",
+  "right": "None",
+  "top": "None",
+  "bottom": "None"
 }
 </script>
 </div>
@@ -72,10 +72,10 @@
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {
-  "left": "Solid",
-  "right": "Solid",
-  "top": "Solid",
-  "bottom": "Solid"
+  "left": "None",
+  "right": "None",
+  "top": "None",
+  "bottom": "None"
 }
 </script>
 </div>
@@ -95,10 +95,10 @@
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {
-  "left": "Solid",
-  "right": "Solid",
-  "top": "Solid",
-  "bottom": "Solid"
+  "left": "None",
+  "right": "None",
+  "top": "None",
+  "bottom": "None"
 }
 </script>
 </div>

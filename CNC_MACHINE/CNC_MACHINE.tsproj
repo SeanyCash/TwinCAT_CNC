@@ -3406,7 +3406,7 @@ External Setpoint Generation:
 			</NC>
 		</Motion>
 		<Plc>
-			<Project GUID="{64EA087B-AF6F-4600-AB87-345CEDCA4F88}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" CopyTmcToTarget="true" CopyTpyToTarget="false" SymbolicMapping="true">
+			<Project GUID="{64EA087B-AF6F-4600-AB87-345CEDCA4F88}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" TargetArchiveSettings="#x000f" FileArchiveSettings="#x000e" CopyTmcToTarget="true" CopyTpyToTarget="false" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Main\Main.tmc" TmcHash="{70DFAD5C-6D52-433B-92DE-20666A5AA91A}">
 					<Name>Main Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
@@ -5819,21 +5819,6 @@ External Setpoint Generation:
 					<SyncUnit Name="Motion" NoDeleteIfUnused="true"/>
 					<SyncUnit Name="IO" NoDeleteIfUnused="true"/>
 				</EtherCAT>
-			</Device>
-			<Device Id="1" Disabled="true" DevType="112" AmsPort="28673" AmsNetId="132.154.239.141.2.1" RemoteName="Device 1 (EtherCAT Automation Protocol)">
-				<Name>Device 1 (EtherCAT Automation Protocol)</Name>
-				<AddressInfo>
-					<Pnp>
-						<DeviceDesc>em0 (TwinCAT Intel Ethernet Adapter)</DeviceDesc>
-						<DeviceName>em0</DeviceName>
-						<DeviceData>b885849aef8d</DeviceData>
-					</Pnp>
-				</AddressInfo>
-				<Image Id="5" AddrType="1" ImageType="3">
-					<Name>Image</Name>
-				</Image>
-				<Ethernet DeviceDesc="em0 (TwinCAT Intel Ethernet Adapter)"/>
-				<Eap EapDeviceGuid="{7CFA1A64-D11D-4259-B195-050374A8902A}"/>
 			</Device>
 		</Io>
 	</Project>

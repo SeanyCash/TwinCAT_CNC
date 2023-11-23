@@ -5820,21 +5820,6 @@ External Setpoint Generation:
 					<SyncUnit Name="IO" NoDeleteIfUnused="true"/>
 				</EtherCAT>
 			</Device>
-			<Device Id="1" Disabled="true" DevType="112" AmsPort="28673" AmsNetId="132.154.239.141.2.1" RemoteName="Device 1 (EtherCAT Automation Protocol)">
-				<Name>Device 1 (EtherCAT Automation Protocol)</Name>
-				<AddressInfo>
-					<Pnp>
-						<DeviceDesc>em0 (TwinCAT Intel Ethernet Adapter)</DeviceDesc>
-						<DeviceName>em0</DeviceName>
-						<DeviceData>b885849aef8d</DeviceData>
-					</Pnp>
-				</AddressInfo>
-				<Image Id="5" AddrType="1" ImageType="3">
-					<Name>Image</Name>
-				</Image>
-				<Ethernet DeviceDesc="em0 (TwinCAT Intel Ethernet Adapter)"/>
-				<Eap EapDeviceGuid="{7CFA1A64-D11D-4259-B195-050374A8902A}"/>
-			</Device>
 		</Io>
 	</Project>
 	<Mappings>
