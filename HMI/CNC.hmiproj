@@ -7,7 +7,7 @@
     <AvailablePlatforms>TwinCAT HMI</AvailablePlatforms>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <TcHmiCreatorVersion>[1.12,]</TcHmiCreatorVersion>
-    <HmiTitle>Avid CNC</HmiTitle>
+    <HmiTitle>BSD CNC</HmiTitle>
     <HmiVerboseLevel>2</HmiVerboseLevel>
     <HmiVersion>1.0.0.0</HmiVersion>
     <Name>CNC</Name>
@@ -26,10 +26,11 @@
     <TcHmiDirectory>$(registry:HKEY_CURRENT_USER\Software\Beckhoff\TwinCAT3\3.1@InstallDir)\..\Functions\TE2000-HMI-Engineering</TcHmiDirectory>
     <TcHmiDirectory Condition="'$(TcHmiDirectory)'==''">$(registry:HKEY_LOCAL_MACHINE\Software\Beckhoff\TwinCAT3\3.1@InstallDir)\..\Functions\TE2000-HMI-Engineering</TcHmiDirectory>
     <TcHmiDirectory Condition="'$(TcHmiDirectory)'==''">$(registry:HKEY_LOCAL_MACHINE\Software\Wow6432Node\Beckhoff\TwinCAT3\3.1@InstallDir)\..\Functions\TE2000-HMI-Engineering</TcHmiDirectory>
-    <HmiCompanyName>Peterson Digital Fabrication</HmiCompanyName>
+    <HmiCompanyName>Beyond Kinematics</HmiCompanyName>
     <HmiServerNodeAdvancedSettingsView>True</HmiServerNodeAdvancedSettingsView>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <HmiCompanyWebsite>www.beyond-kinematics.com</HmiCompanyWebsite>
   </PropertyGroup>
   <PropertyGroup>
     <TwinCATHmi_Tasks>$(TcHmiDirectory)\MSBuild\Beckhoff.TwinCAT.HMI.tasks</TwinCATHmi_Tasks>
