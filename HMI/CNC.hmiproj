@@ -112,6 +112,9 @@
     <Content Include="Contents\EtherCATDiagnostics.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Contents\PathPlotter.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\GCode.content">
       <SubType>Content</SubType>
     </Content>
@@ -124,7 +127,7 @@
     <Content Include="Contents\Overview.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\PathVisualization.content">
+    <Content Include="Contents\SpindleLiveView.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Spindle.content">
