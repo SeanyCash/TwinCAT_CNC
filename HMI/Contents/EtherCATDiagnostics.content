@@ -1,4 +1,4 @@
-﻿<div id="EtherCATDiagnostics" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="1900" data-tchmi-height="798">
+<div id="EtherCATDiagnostics" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="1900" data-tchmi-height="798">
 
 <div id="TcHmiEcDiagnostics" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEcDiagnostics" data-tchmi-allow-zoom-and-pan="true" data-tchmi-height="798" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-toolbox-reset-view="true" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="1900" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-device="CNC">
 </div>

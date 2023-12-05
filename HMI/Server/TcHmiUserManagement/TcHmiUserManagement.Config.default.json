@@ -11,6 +11,12 @@
             "ENABLED": true,
             "PASSWORD": "",
             "SALT": ""
+        },
+        "__SystemUser": {
+            "ALGORITHM": 0,
+            "ENABLED": true,
+            "PASSWORD": "",
+            "SALT": ""
         }
     }
 }
