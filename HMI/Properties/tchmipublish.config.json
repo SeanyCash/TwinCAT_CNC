@@ -55,7 +55,7 @@
     "createPublishLog": false,
     "userName": "",
     "encryptedPassword": "",
-    "encryptedTcHmiServerPassword": "GP3QFFawVKdQ6Eryx1Mvlg==",
+    "encryptedTcHmiServerPassword": "KbRi6UDVxPBlnaddd5TTDw==",
     "tcHmiServerHost": "10.89.0.2",
     "tcHmiServerPort": "1020",
     "socketTimeout": "60",

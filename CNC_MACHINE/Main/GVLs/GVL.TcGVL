@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <GVL Name="GVL" Id="{1cf9ca76-df72-4f66-8cff-9316cd7fcaa5}">
     <Declaration><![CDATA[VAR_GLOBAL
     
@@ -22,7 +22,7 @@ bOverride			: INT	:=100;
 bProgramDone		: BOOL;
 bBuild3DGroup		: BOOL;
 bAxisReset          : BOOL;
-sAMSNetID           : STRING :='10.89.0.1.3.1';
+sAMSNetID           : STRING :='132.154.239.141.3.1';
 
 END_VAR
 
