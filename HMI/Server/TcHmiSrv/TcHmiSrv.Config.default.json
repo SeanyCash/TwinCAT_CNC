@@ -10764,6 +10764,8 @@
         "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.760.42\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.760.42\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.760.42\\runtimes\\native1.12-tchmi",
+        "/JB.TcHmiGalleryFontawesome": "..\\..\\Packages\\JB.TcHmiGalleryFontawesome.1.0.0\\runtimes\\native1.12-tchmi",
+        "/JB.TcHmiProgressBar": "..\\..\\Packages\\JB.TcHmiProgressBar.1.0.0\\runtimes\\native1.12-tchmi",
         "/bin": "..\\..\\HMI\\bin\\",
         "/bin/framework": "..\\..\\HMI\\bin\\framework",
         "/framework": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.760.42\\runtimes\\native1.12-tchmi"

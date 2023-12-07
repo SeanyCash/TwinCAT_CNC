@@ -1,5 +1,11 @@
 {
-    "devices": {},
+    "devices": {
+        "PLC1": {
+            "enabled": true,
+            "masterNetId": "132.154.239.141.3.1",
+            "targetNetId": "132.154.239.141.1.1"
+        }
+    },
     "updateIntervals": {
         "MasterList": 1000,
         "MasterOnlineInfo": 300,

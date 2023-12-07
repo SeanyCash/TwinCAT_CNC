@@ -12851,6 +12851,12 @@
         "name"
       ]
     },
+    "TcHmi.Controls.JB_TcHmiProgressBar.JB_TcHmiProgressBarControl": {
+      "type": "object",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkControlType": "JB_TcHmiProgressBarControl",
+      "frameworkControlNamespace": "TcHmi.Controls.JB_TcHmiProgressBar"
+    },
     "TcHmi.Functions.BaseTemplate.MediaQueryList": {
       "id": "tchmi:framework#/definitions/TcHmi.Functions.BaseTemplate.MediaQueryList",
       "type": "array",

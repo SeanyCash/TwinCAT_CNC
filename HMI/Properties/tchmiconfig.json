@@ -86,6 +86,13 @@
       "preloadBindings": false
     },
     {
+      "url": "Contents/PathPlotter.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
       "url": "Contents/GCode.content",
       "preload": false,
       "keepAlive": false,
@@ -108,6 +115,13 @@
     },
     {
       "url": "Contents/Overview.content",
+      "preload": false,
+      "keepAlive": false,
+      "loadSync": false,
+      "preloadBindings": false
+    },
+    {
+      "url": "Contents/SpindleLiveView.content",
       "preload": false,
       "keepAlive": false,
       "loadSync": false,
@@ -150,20 +164,6 @@
     },
     {
       "url": "Contents/MetricUnits.content",
-      "preload": false,
-      "keepAlive": false,
-      "loadSync": false,
-      "preloadBindings": false
-    },
-    {
-      "url": "Contents/PathPlotter.content",
-      "preload": false,
-      "keepAlive": false,
-      "loadSync": false,
-      "preloadBindings": false
-    },
-    {
-      "url": "Contents/SpindleLiveView.content",
       "preload": false,
       "keepAlive": false,
       "loadSync": false,
@@ -241,6 +241,14 @@
     {
       "name": "Beckhoff.TwinCAT.HMI.ResponsiveNavigation",
       "basePath": "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation"
+    },
+    {
+      "name": "JB.TcHmiGalleryFontawesome",
+      "basePath": "/JB.TcHmiGalleryFontawesome"
+    },
+    {
+      "name": "JB.TcHmiProgressBar",
+      "basePath": "/JB.TcHmiProgressBar"
     }
   ],
   "keyboardLayouts": [
