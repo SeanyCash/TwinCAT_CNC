@@ -19,10 +19,6 @@
       },
       {
         "publishServerExtension": true,
-        "name": "TcHmiRecipeManagement"
-      },
-      {
-        "publishServerExtension": true,
         "name": "TcHmiSqliteLogger"
       },
       {

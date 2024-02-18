@@ -3,8 +3,15 @@
     "REQUIREAUTH": 2,
     "VIRTUALDIRECTORIES": {
         "/": "www",
+        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.PDFViewer": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.PDFViewer.12.760.42\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.ResponsiveNavigation.12.760.42\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\TwinCAT_CNC\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.752.0\\runtimes\\native1.12-tchmi",
         "/Libraries/Controls/Custom/TcHmiOpcUa": "www\\.hmipkgs\\0fa87e6c-8e1c-49ea-a968-f8a36d8c5858\\Content",
-        "/NCPrograms": "/usr/local/etc/TwinCAT/Mc/Nci"
+        "/NCPrograms": "/usr/local/etc/TwinCAT/Mc/Nci",
+        "/framework": "..\\..\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.760.42\\runtimes\\native1.12-tchmi"
     }
 }

@@ -11,10 +11,10 @@
     <HmiVerboseLevel>2</HmiVerboseLevel>
     <HmiVersion>1.0.0.0</HmiVersion>
     <Name>CNC</Name>
-    <HmiCommunicationRouterPort>10115</HmiCommunicationRouterPort>
+    <HmiCommunicationRouterPort>10117</HmiCommunicationRouterPort>
     <HmiCommunicationServerPort>3000</HmiCommunicationServerPort>
     <HmiInitial>1.10.1336.404</HmiInitial>
-    <HmiRecent>1.12.760.54</HmiRecent>
+    <HmiRecent>1.12.760.59</HmiRecent>
     <TargetFrameworkMoniker>native,Version=v1.12.0,Profile=tchmi</TargetFrameworkMoniker>
     <TargetFramework>native1.12-tchmi</TargetFramework>
     <HmiLogTcHmiServerMessages>false</HmiLogTcHmiServerMessages>
@@ -27,7 +27,7 @@
     <TcHmiDirectory Condition="'$(TcHmiDirectory)'==''">$(registry:HKEY_LOCAL_MACHINE\Software\Beckhoff\TwinCAT3\3.1@InstallDir)\..\Functions\TE2000-HMI-Engineering</TcHmiDirectory>
     <TcHmiDirectory Condition="'$(TcHmiDirectory)'==''">$(registry:HKEY_LOCAL_MACHINE\Software\Wow6432Node\Beckhoff\TwinCAT3\3.1@InstallDir)\..\Functions\TE2000-HMI-Engineering</TcHmiDirectory>
     <HmiCompanyName>Beyond Kinematics</HmiCompanyName>
-    <HmiServerNodeAdvancedSettingsView>True</HmiServerNodeAdvancedSettingsView>
+    <HmiServerNodeAdvancedSettingsView>False</HmiServerNodeAdvancedSettingsView>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <HmiCompanyWebsite>www.beyond-kinematics.com</HmiCompanyWebsite>
@@ -228,15 +228,6 @@
       <SubType>Content</SubType>
       <Visible>True</Visible>
     </Content>
-    <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Config.default.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Config.remote.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Storage.json">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Config.default.json">
       <SubType>Content</SubType>
       <Visible>True</Visible>
@@ -301,8 +292,6 @@
     <Folder Include="Server\TcHmiEcDiagnostics" />
     <Folder Include="Server\TcHmiEventLogger" />
     <Folder Include="Server\TcHmiLua" />
-    <Folder Include="Server\TcHmiRecipeManagement" />
-    <Folder Include="Server\TcHmiSqliteHistorize" />
     <Folder Include="Server\TcHmiSqliteLogger" />
     <Folder Include="Server\TcHmiSrv" />
     <Folder Include="Server\TcHmiTextStorage" />
@@ -393,15 +382,6 @@
     <Content Include="Imports\Images\warning_rot_pressed.svg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Server\TcHmiEventLogger\TcHmiEventLogger.Config.default.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiEventLogger\TcHmiEventLogger.Config.remote.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiEventLogger\TcHmiEventLogger.Storage.json">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Server\TcHmiLua\TcHmiLua.Config.default.json">
       <SubType>Content</SubType>
     </Content>
@@ -409,24 +389,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Server\TcHmiLua\TcHmiLua.Storage.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Config.default.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Config.remote.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiRecipeManagement\TcHmiRecipeManagement.Storage.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiSqliteHistorize\TcHmiSqliteHistorize.Config.default.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiSqliteHistorize\TcHmiSqliteHistorize.Config.remote.json">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Server\TcHmiSqliteHistorize\TcHmiSqliteHistorize.Storage.json">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Config.default.json">

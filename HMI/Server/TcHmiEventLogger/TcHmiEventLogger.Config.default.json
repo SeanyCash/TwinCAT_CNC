@@ -2,7 +2,7 @@
     "LIMIT_EVENT_COUNT": 1000,
     "TARGET_SYSTEMS": {
         "Local": {
-            "ADDRESS": "132.154.239.141.1.1",
+            "ADDRESS": "127.0.0.1.1.1",
             "ENABLED": true
         }
     },
