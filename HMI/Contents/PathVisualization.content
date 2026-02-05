@@ -2,10 +2,9 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "PathVisualization.onAttached",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onAttached",
     "actions": [
       {
         "objectType": "JavaScript",
@@ -17,6 +16,5 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>

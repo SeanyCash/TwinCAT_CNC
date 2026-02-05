@@ -322,10 +322,9 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiTextblockCallPage_Overview.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -363,7 +362,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Overview::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -380,7 +379,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Overview::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -423,7 +422,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Overview::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -440,7 +439,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Overview::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -455,8 +454,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {
@@ -510,8 +508,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "TcHmiTextblockCallPage_Jog_2.onPressed",
     "actions": [
@@ -611,7 +608,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Spindle::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -628,7 +625,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Spindle::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -644,7 +641,7 @@
     ]
   },
   {
-    "event": "TcHmiTextblockCallPage_Spindle.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -682,7 +679,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Spindle::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -699,7 +696,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Spindle::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -714,8 +711,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {
@@ -754,15 +750,14 @@
 </div>
 <div id="StatusRegion" data-tchmi-type="TcHmi.Controls.System.TcHmiRegion" data-tchmi-height="766" data-tchmi-height-unit="px" data-tchmi-left="792" data-tchmi-left-unit="px" data-tchmi-top="33" data-tchmi-top-unit="px" data-tchmi-width="1107" data-tchmi-width-unit="px" data-tchmi-zindex="31" data-tchmi-is-enabled="true" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "StatusRegion.onInitialized",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onInitialized",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%ctrl%StatusRegion::TargetContent%/ctrl%",
+        "symbolExpression": "%ctx%owner::TargetContent%/ctx%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
@@ -772,8 +767,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTachometer" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTachometer" data-tchmi-base-animation-time="1000" data-tchmi-height="162" data-tchmi-height-unit="px" data-tchmi-left="587" data-tchmi-left-unit="px" data-tchmi-show-labels="true" data-tchmi-show-ticks="true" data-tchmi-show-value-text="true" data-tchmi-top="33" data-tchmi-top-unit="px" data-tchmi-width="195" data-tchmi-width-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-value-font-family="Ubuntu Mono" data-tchmi-label-font-family="Ubuntu Mono" data-tchmi-label-font-size="16" data-tchmi-label-position="Inside" data-tchmi-label-range="20" data-tchmi-unit="Drive Temp" data-tchmi-unit-font-family="Barlow" data-tchmi-value="%s%PLC1.GVL.stHMI_Out.nYDriveTemp|Interval=100%/s%" data-tchmi-value-font-size="36" data-tchmi-unit-font-size="16" data-tchmi-zindex="5">
 <script data-tchmi-target-attribute="data-tchmi-range" type="application/json">

@@ -198,7 +198,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorX1_Green::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "valueType": "tchmi:framework#/definitions/Visibility",
                 "value": {
                   "objectType": "StaticValue",
@@ -236,7 +236,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorX1_Green::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "valueType": "tchmi:framework#/definitions/Visibility",
                 "value": {
                   "objectType": "StaticValue",
@@ -277,8 +277,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.fbCNC.Y_MC_OUT.bPowerStatus%/s%",
     "actions": [
@@ -307,7 +306,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_Indicator_Red::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Visibility",
@@ -322,7 +321,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_Indicator_Red::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Visibility",
@@ -337,8 +336,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="AxisEnable_IndicatorX2_Green" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="363" data-tchmi-left-unit="px" data-tchmi-top="66" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-zindex="29">
@@ -389,7 +387,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorX2_Green::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "valueType": "tchmi:framework#/definitions/Visibility",
                 "value": {
                   "objectType": "StaticValue",
@@ -405,7 +403,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorX2_Green::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "valueType": "tchmi:framework#/definitions/Visibility",
                 "value": {
                   "objectType": "StaticValue",
@@ -471,7 +469,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorY_Green::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "valueType": "tchmi:framework#/definitions/Visibility",
                 "value": {
                   "objectType": "StaticValue",
@@ -487,7 +485,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorY_Green::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "valueType": "tchmi:framework#/definitions/Visibility",
                 "value": {
                   "objectType": "StaticValue",
@@ -553,7 +551,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorZ_Green::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "valueType": "tchmi:framework#/definitions/Visibility",
                 "value": {
                   "objectType": "StaticValue",
@@ -569,7 +567,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorZ_Green::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "valueType": "tchmi:framework#/definitions/Visibility",
                 "value": {
                   "objectType": "StaticValue",
@@ -606,8 +604,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.fbCNC.Y2_MC_OUT.bPowerStatus%/s%",
     "actions": [
@@ -636,7 +633,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorY2_Red::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Visibility",
@@ -651,7 +648,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorY2_Red::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Visibility",
@@ -666,8 +663,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="AxisEnable_IndicatorX_Red" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="363" data-tchmi-left-unit="px" data-tchmi-top="126" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-zindex="30" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
@@ -689,8 +685,7 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.fbCNC.X_MC_OUT.bPowerStatus%/s%",
     "actions": [
@@ -719,7 +714,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorX_Red::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Visibility",
@@ -734,7 +729,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorX_Red::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Visibility",
@@ -749,8 +744,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="AxisEnable_IndicatorZ_Red" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="363" data-tchmi-left-unit="px" data-tchmi-top="186" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-zindex="30" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px">
@@ -774,8 +768,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.fbCNC.Z_MC_OUT.bPowerStatus%/s%",
     "actions": [
@@ -804,7 +797,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorZ_Red::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Visibility",
@@ -819,7 +812,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%AxisEnable_IndicatorZ_Red::Visibility%/ctrl%",
+                "symbolExpression": "%ctx%owner::Visibility%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Visibility",
@@ -834,8 +827,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="Y1Homed_Image" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="774" data-tchmi-left-unit="px" data-tchmi-top="8" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-is-enabled="True" data-tchmi-zindex="14" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-visibility="%s%PLC1.GVL.stHMI_Out.stXRef.Status.Homed%/s%">
@@ -851,8 +843,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.stYRef.Status.Homed%/s%",
     "actions": [
@@ -881,7 +872,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%Y1Homed_Image::Src%/ctrl%",
+                "symbolExpression": "%ctx%owner::Src%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
@@ -896,7 +887,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%Y1Homed_Image::Src%/ctrl%",
+                "symbolExpression": "%ctx%owner::Src%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
@@ -911,8 +902,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="Y2Homed_Image" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="774" data-tchmi-left-unit="px" data-tchmi-top="69" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-is-enabled="True" data-tchmi-zindex="14" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-visibility="%s%PLC1.GVL.stHMI_Out.stX2Ref.Status.Homed%/s%">
@@ -928,8 +918,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.stY2Ref.Status.Homed%/s%",
     "actions": [
@@ -958,7 +947,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%Y2Homed_Image::Src%/ctrl%",
+                "symbolExpression": "%ctx%owner::Src%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
@@ -973,7 +962,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%Y2Homed_Image::Src%/ctrl%",
+                "symbolExpression": "%ctx%owner::Src%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
@@ -988,8 +977,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="XHomed_Image" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="774" data-tchmi-left-unit="px" data-tchmi-top="129" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-is-enabled="True" data-tchmi-zindex="14" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px">
@@ -1005,8 +993,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.stXRef.Status.Homed%/s%",
     "actions": [
@@ -1035,7 +1022,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%XHomed_Image::Src%/ctrl%",
+                "symbolExpression": "%ctx%owner::Src%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
@@ -1050,7 +1037,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%XHomed_Image::Src%/ctrl%",
+                "symbolExpression": "%ctx%owner::Src%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
@@ -1065,8 +1052,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="ZHomed_Image" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="774" data-tchmi-left-unit="px" data-tchmi-top="188" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="px" data-tchmi-is-enabled="True" data-tchmi-zindex="14" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-visibility="%s%PLC1.GVL.stHMI_Out.stZRef.Status.Homed%/s%">
@@ -1080,8 +1066,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.stZRef.Status.Homed%/s%",
     "actions": [
@@ -1110,7 +1095,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%ZHomed_Image::Src%/ctrl%",
+                "symbolExpression": "%ctx%owner::Src%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
@@ -1125,7 +1110,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%ZHomed_Image::Src%/ctrl%",
+                "symbolExpression": "%ctx%owner::Src%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Path",
@@ -1140,8 +1125,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="Home_Y_PB" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="143" data-tchmi-left-unit="px" data-tchmi-text="HOME Y" data-tchmi-top="6" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="22" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-icon-width-unit="px" data-tchmi-icon-height-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-text-font-family="Barlow">
@@ -1153,8 +1137,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "AutoZero_PB_6.onStatePressed",
     "actions": [
@@ -1199,7 +1182,7 @@
     ]
   },
   {
-    "event": "Home_Y_PB.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1226,7 +1209,7 @@
     ]
   },
   {
-    "event": "Home_Y_PB.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1241,8 +1224,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="Home_X_PB" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="144" data-tchmi-left-unit="px" data-tchmi-text="HOME X" data-tchmi-top="126" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="22" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-icon-width-unit="px" data-tchmi-icon-height-unit="px" data-tchmi-text-font-family="Barlow">
@@ -1256,10 +1238,9 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "Home_X_PB.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1286,7 +1267,7 @@
     ]
   },
   {
-    "event": "Home_X_PB.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1301,8 +1282,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="AutoZero_PB_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="144" data-tchmi-left-unit="px" data-tchmi-text="HOME Z" data-tchmi-top="186" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="22" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-icon-width-unit="px" data-tchmi-icon-height-unit="px" data-tchmi-text-font-family="Barlow">
@@ -1316,10 +1296,9 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_9.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1346,7 +1325,7 @@
     ]
   },
   {
-    "event": "AutoZero_PB_9.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1361,8 +1340,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="AutoZero_PB_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="168" data-tchmi-height-unit="px" data-tchmi-left="9" data-tchmi-left-unit="px" data-tchmi-text="HOME ALL AXES" data-tchmi-top="8" data-tchmi-top-unit="px" data-tchmi-width="125" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="22" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-icon-width-unit="px" data-tchmi-icon-height-unit="px" data-tchmi-text-font-family="Barlow">
@@ -1376,10 +1354,9 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_10.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1406,7 +1383,7 @@
     ]
   },
   {
-    "event": "AutoZero_PB_10.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1421,8 +1398,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="AutoZero_PB_11" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="9" data-tchmi-left-unit="px" data-tchmi-text="MAX ALL AXES" data-tchmi-top="186" data-tchmi-top-unit="px" data-tchmi-width="125" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="22" data-tchmi-text-font-size="18" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-text-font-family="Barlow">
@@ -1432,10 +1408,9 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_11.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1451,7 +1426,7 @@
     ]
   },
   {
-    "event": "AutoZero_PB_11.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1466,8 +1441,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="TcHmiRectangle" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="270" data-tchmi-height-unit="px" data-tchmi-left="9" data-tchmi-left-unit="px" data-tchmi-top="246" data-tchmi-top-unit="px" data-tchmi-width="815" data-tchmi-width-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="3" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-creator-locked="True" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-visibility="Visible">
@@ -1535,7 +1509,7 @@
 
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_15.onStateChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateChanged",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1574,7 +1548,7 @@
 
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_16.onStateChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateChanged",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1620,7 +1594,7 @@
 
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_17.onStateChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateChanged",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1670,7 +1644,7 @@
 
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_18.onStateChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateChanged",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1698,7 +1672,7 @@
 
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_19.onStateChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateChanged",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1727,10 +1701,9 @@
 </script>
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiSpinboxInput_4.onValueChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onValueChanged",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1739,24 +1712,22 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_4::Value%/ctrl%"
+          "symbolExpression": "%ctx%owner::Value%/ctx%"
         },
         "asyncWait": true
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="AutoZero_PB_20" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="239" data-tchmi-left-unit="px" data-tchmi-text="100%" data-tchmi-top="334" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-zindex="22" data-tchmi-text-font-size="22" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-text-font-family="Barlow">
 
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "AutoZero_PB_20.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1771,8 +1742,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTextblock_21" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="14" data-tchmi-left-unit="px" data-tchmi-text="Override Speed:" data-tchmi-top="294" data-tchmi-top-unit="px" data-tchmi-width="215" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="28" data-tchmi-zindex="12" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-text-font-family="Barlow">
 </div>
@@ -1807,15 +1777,14 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "Jog_Region.onInitialized",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onInitialized",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%ctrl%Jog_Region::TargetContent%/ctrl%",
+        "symbolExpression": "%ctx%owner::TargetContent%/ctx%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
@@ -1825,8 +1794,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTextblockCallPage_Jog" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="24" data-tchmi-height-unit="px" data-tchmi-left="955" data-tchmi-left-unit="px" data-tchmi-text="JOGGING" data-tchmi-top="520" data-tchmi-top-unit="px" data-tchmi-width="80" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="4" data-tchmi-text-font-size="14" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-creator-locked="True" data-tchmi-text-font-family="Barlow">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
@@ -1845,10 +1813,9 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiTextblockCallPage_Jog.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1891,7 +1858,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Jog::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -1908,7 +1875,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Jog::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -1923,8 +1890,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {
@@ -1985,15 +1951,14 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "GCodeRegionDisplay.onInitialized",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onInitialized",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%ctrl%GCodeRegionDisplay::TargetContent%/ctrl%",
+        "symbolExpression": "%ctx%owner::TargetContent%/ctx%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
@@ -2003,8 +1968,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTextblock_38" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="27" data-tchmi-height-unit="px" data-tchmi-left="796" data-tchmi-left-unit="px" data-tchmi-text="CURRENT TOOL" data-tchmi-top="523" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="18" data-tchmi-zindex="12" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Top" data-tchmi-text-font-family="Barlow">
 </div>
@@ -2100,10 +2064,9 @@
 </script>
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiNumericInput_2.onValueChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onValueChanged",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -2112,21 +2075,19 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiNumericInput_2::Value%/ctrl%"
+          "symbolExpression": "%ctx%owner::Value%/ctx%"
         },
         "asyncWait": true
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTextblock_114" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="719" data-tchmi-left-unit="px" data-tchmi-text="RPM" data-tchmi-top="614" data-tchmi-top-unit="px" data-tchmi-width="40" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="18" data-tchmi-zindex="12" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-is-enabled="true" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-text-font-family="Ubuntu Mono">
 </div>
 <div id="TcHmiEllipse_32" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="749" data-tchmi-left-unit="px" data-tchmi-top="670" data-tchmi-top-unit="px" data-tchmi-width="25" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-zindex="32" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bSpindleAtRequestedSpeed%/s%",
     "actions": [
@@ -2155,7 +2116,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_32::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2172,7 +2133,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_32::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2187,8 +2148,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTextblock_115" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="779" data-tchmi-left-unit="px" data-tchmi-text="AT SETPOINT" data-tchmi-top="670" data-tchmi-top-unit="px" data-tchmi-width="137" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-is-enabled="true" data-tchmi-text-font-size="18" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="2" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-text-font-family="Barlow">
 </div>
@@ -2209,10 +2169,9 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiTextblockCallPage_Offsets_Region.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -2255,7 +2214,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Offsets_Region::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2272,7 +2231,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Offsets_Region::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2287,8 +2246,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {

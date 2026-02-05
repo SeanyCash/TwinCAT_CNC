@@ -6,8 +6,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "AutoZero_PB_6.onStatePressed",
     "actions": [
@@ -52,7 +51,7 @@
     ]
   },
   {
-    "event": "Execute_Zero_Shift_2.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -68,7 +67,7 @@
     ]
   },
   {
-    "event": "Execute_Zero_Shift_2.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -83,8 +82,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="TcHmiTextblock_119" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="7" data-tchmi-left-unit="px" data-tchmi-text="Y" data-tchmi-top="100" data-tchmi-top-unit="px" data-tchmi-width="20" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="22" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-family="Barlow">
 </div>
@@ -119,10 +117,9 @@
 ]
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiCombobox_1.onSelectionChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onSelectionChanged",
     "actions": [
       {
         "objectType": "SwitchCase",
@@ -230,7 +227,7 @@
     ]
   },
   {
-    "event": "TcHmiCombobox_1.onUserInteractionFinished",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onUserInteractionFinished",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -246,7 +243,7 @@
     ]
   },
   {
-    "event": "TcHmiCombobox_1.onAttached",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onAttached",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -272,8 +269,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiDatagrid_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDatagrid" data-tchmi-height="190" data-tchmi-height-unit="px" data-tchmi-left="27" data-tchmi-left-unit="px" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="400" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-zindex="3" data-tchmi-show-row-numbers="false" data-tchmi-row-numbers-start-number="1" data-tchmi-row-numbers-width="50" data-tchmi-row-numbers-resizable="false" data-tchmi-header-height="30" data-tchmi-row-height="50" data-tchmi-table-border-width="4" data-tchmi-row-numbers-font-size="22" data-tchmi-header-font-size="22" data-tchmi-row-numbers-font-size-unit="px" data-tchmi-grid-font-size="22" data-tchmi-grid-font-family="Barlow" data-tchmi-header-font-family="Ubuntu Mono" data-tchmi-row-numbers-horizontal-alignment="Center" data-tchmi-row-numbers-vertical-alignment="Center" data-tchmi-row-numbers-font-family="Barlow">
 <script data-tchmi-target-attribute="data-tchmi-cell-content-padding" type="application/json">

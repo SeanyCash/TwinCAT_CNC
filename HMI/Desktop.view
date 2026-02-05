@@ -87,10 +87,9 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "StopPB.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -117,7 +116,7 @@
     ]
   },
   {
-    "event": "StopPB.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -132,8 +131,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="TcHmiButton" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="60" data-tchmi-height-unit="px" data-tchmi-left="1227" data-tchmi-left-unit="px" data-tchmi-text="RESET" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="175" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="28" data-tchmi-zindex="5" data-tchmi-visibility="Visible" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-state-symbol="%s%PLC1.GVL.stHMI_In.bReset%/s%" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-text-font-family="Barlow">
@@ -195,8 +193,7 @@
 <div id="TcHmiRegionMain" data-tchmi-type="TcHmi.Controls.System.TcHmiRegion" data-tchmi-height="851" data-tchmi-height-unit="px" data-tchmi-left="10" data-tchmi-left-unit="px" data-tchmi-top="150" data-tchmi-top-unit="px" data-tchmi-width="1903" data-tchmi-width-unit="px" data-tchmi-zindex="0" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-creator-locked="True" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "StatusRegionMain.onInitialized",
     "actions": [
@@ -214,12 +211,12 @@
     ]
   },
   {
-    "event": "TcHmiRegionMain.onInitialized",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onInitialized",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%ctrl%TcHmiRegionMain::TargetContent%/ctrl%",
+        "symbolExpression": "%ctx%owner::TargetContent%/ctx%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
@@ -229,8 +226,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <div id="TcHmiTextblockCallPage_Status" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="160" data-tchmi-left-unit="px" data-tchmi-text="STATUS" data-tchmi-top="115" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="5" data-tchmi-text-font-size="18" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-text-font-family="Barlow">
@@ -242,10 +238,9 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiTextblockCallPage_Status.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -288,7 +283,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Status::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -305,7 +300,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Status::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -320,8 +315,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-radius" type="application/json">
 {
@@ -364,10 +358,9 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiTextblockCallPage_Main.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -410,7 +403,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Main::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -427,7 +420,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Main::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -442,8 +435,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {
@@ -513,10 +505,9 @@
 <div id="TcHmiTextblock_CallAlarmPage" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="310" data-tchmi-left-unit="px" data-tchmi-text="EVENTS" data-tchmi-top="115" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-font-size="18" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-zindex="4" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-text-font-family="Barlow">
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiTextblock_CallAlarmPage.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -559,7 +550,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblock_CallAlarmPage::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -576,7 +567,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblock_CallAlarmPage::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -591,8 +582,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 
 
@@ -663,10 +653,9 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiButton_1.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -682,7 +671,7 @@
     ]
   },
   {
-    "event": "TcHmiButton_1.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -725,7 +714,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiButton_1::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -742,7 +731,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiButton_1::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -759,8 +748,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 
 </div>
@@ -789,8 +777,7 @@
 <div id="TcHmiTextblockCallPage_Offsets" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="460" data-tchmi-left-unit="px" data-tchmi-text="OFFSETS" data-tchmi-top="115" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="5" data-tchmi-text-font-size="18" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center" data-tchmi-text-font-family="Barlow">
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "TcHmiTextblockCallPage_Main_1.onPressed",
     "actions": [
@@ -835,7 +822,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Offsets::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -852,7 +839,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_Offsets::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -868,7 +855,7 @@
     ]
   },
   {
-    "event": "TcHmiTextblockCallPage_Offsets.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -883,8 +870,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
 {
@@ -930,8 +916,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "TcHmiTextblockCallPage_Status_1.onPressed",
     "actions": [
@@ -976,7 +961,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_ECDiag::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -993,7 +978,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiTextblockCallPage_ECDiag::BackgroundColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -1009,7 +994,7 @@
     ]
   },
   {
-    "event": "TcHmiTextblockCallPage_ECDiag.onPressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -1024,8 +1009,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-radius" type="application/json">
 {

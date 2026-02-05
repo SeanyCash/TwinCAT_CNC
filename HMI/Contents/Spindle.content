@@ -4,8 +4,7 @@
 <div id="TcHmiTextblock_44" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="27" data-tchmi-height-unit="px" data-tchmi-left="591" data-tchmi-left-unit="px" data-tchmi-text="PARAMETERS" data-tchmi-top="-1" data-tchmi-top-unit="px" data-tchmi-width="176" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-font-size="26" data-tchmi-zindex="36" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-is-enabled="true" data-tchmi-text-font-family="Barlow">
 </div>
 <div id="DigitalIn1_Ellipse" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="716" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="3" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bDigitalInput1%/s%",
     "actions": [
@@ -34,7 +33,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%DigitalIn1_Ellipse::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -51,7 +50,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%DigitalIn1_Ellipse::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -66,8 +65,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTextblock_47" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="9" data-tchmi-left-unit="px" data-tchmi-text="Drive Faulted" data-tchmi-top="541" data-tchmi-top-unit="px" data-tchmi-width="136" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-text-font-size="20" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="21" data-tchmi-is-enabled="true" data-tchmi-text-font-family="Barlow">
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
@@ -203,8 +201,7 @@
 </script>
 </div>
 <div id="DigitalIn2_Ellipse" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="203" data-tchmi-left-unit="px" data-tchmi-top="716" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="0" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bDigitalInput2%/s%",
     "actions": [
@@ -233,7 +230,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%DigitalIn2_Ellipse::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -250,7 +247,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%DigitalIn2_Ellipse::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -265,12 +262,10 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="DigitalIn3_Ellipse" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="248" data-tchmi-left-unit="px" data-tchmi-top="716" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="1" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bDigitalInput3%/s%",
     "actions": [
@@ -299,7 +294,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%DigitalIn3_Ellipse::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -316,7 +311,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%DigitalIn3_Ellipse::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -331,12 +326,10 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="DigitalIn4_Ellipse" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="293" data-tchmi-left-unit="px" data-tchmi-top="716" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="2" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bDigitalInput4%/s%",
     "actions": [
@@ -365,7 +358,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%DigitalIn4_Ellipse::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -382,7 +375,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%DigitalIn4_Ellipse::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -397,12 +390,10 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="VFDRunningIndicator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="506" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="20" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bDriveRunning%/s%",
     "actions": [
@@ -431,7 +422,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDRunningIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -448,7 +439,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDRunningIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -463,12 +454,10 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="VFDDriveFaultIndicator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="541" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="20" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bDriveFault%/s%",
     "actions": [
@@ -497,7 +486,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDDriveFaultIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -514,7 +503,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDDriveFaultIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -529,12 +518,10 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="VFDStandbyModeIndicator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="576" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="20" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bStandbyMode%/s%",
     "actions": [
@@ -563,7 +550,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDStandbyModeIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -580,7 +567,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDStandbyModeIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -595,12 +582,10 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="VFDReadyIndicator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="611" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="20" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bDriveReady%/s%",
     "actions": [
@@ -629,7 +614,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDReadyIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -646,7 +631,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDReadyIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -661,12 +646,10 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiEllipse_18" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="646" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="20" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bDriveEnabled%/s%",
     "actions": [
@@ -695,7 +678,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_18::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -712,7 +695,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_18::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -727,12 +710,10 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="VFDRelayOutputIndicator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="35" data-tchmi-height-unit="px" data-tchmi-left="158" data-tchmi-left-unit="px" data-tchmi-top="681" data-tchmi-top-unit="px" data-tchmi-width="35" data-tchmi-width-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-zindex="20" data-tchmi-is-enabled="true">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.fbSpindle.stSpindleStatus.nRelayOutputStatus%/s%",
     "actions": [
@@ -761,7 +742,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDRelayOutputIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -778,7 +759,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%VFDRelayOutputIndicator::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -795,8 +776,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 
 <script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
@@ -1961,8 +1941,7 @@
 </div>
 <div id="TcHmiEllipse_24" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="871" data-tchmi-left-unit="px" data-tchmi-top="602" data-tchmi-top-unit="px" data-tchmi-width="25" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-zindex="3">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bRxRequest%/s%",
     "actions": [
@@ -1991,7 +1970,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_24::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2008,7 +1987,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_24::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2027,13 +2006,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiEllipse_25" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="871" data-tchmi-left-unit="px" data-tchmi-top="627" data-tchmi-top-unit="px" data-tchmi-width="25" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-zindex="3">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bInitAccepted%/s%",
     "actions": [
@@ -2062,7 +2039,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_25::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2079,7 +2056,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_25::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2094,13 +2071,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiEllipse_26" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="871" data-tchmi-left-unit="px" data-tchmi-top="652" data-tchmi-top-unit="px" data-tchmi-width="25" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-zindex="3">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bBufferFull%/s%",
     "actions": [
@@ -2129,7 +2104,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_26::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2146,7 +2121,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_26::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2161,13 +2136,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiEllipse_27" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="871" data-tchmi-left-unit="px" data-tchmi-top="677" data-tchmi-top-unit="px" data-tchmi-width="25" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-zindex="3">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bParityError%/s%",
     "actions": [
@@ -2196,7 +2169,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_27::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2213,7 +2186,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_27::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2228,13 +2201,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiEllipse_28" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="871" data-tchmi-left-unit="px" data-tchmi-top="577" data-tchmi-top-unit="px" data-tchmi-width="25" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-zindex="3">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bTxAccepted%/s%",
     "actions": [
@@ -2263,7 +2234,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_28::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2280,7 +2251,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_28::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2295,15 +2266,13 @@
       }
     ]
   }
-]
-</script>
+]</script>
 
 
 </div>
 <div id="TcHmiEllipse_29" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="871" data-tchmi-left-unit="px" data-tchmi-top="702" data-tchmi-top-unit="px" data-tchmi-width="25" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-zindex="3">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bFramingError%/s%",
     "actions": [
@@ -2332,7 +2301,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_29::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2349,7 +2318,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_29::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2364,13 +2333,11 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="TcHmiEllipse_31" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="871" data-tchmi-left-unit="px" data-tchmi-top="727" data-tchmi-top-unit="px" data-tchmi-width="25" data-tchmi-width-unit="px" data-tchmi-is-enabled="true" data-tchmi-zindex="3">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "%s%PLC1.GVL.stHMI_Out.bOverrunError%/s%",
     "actions": [
@@ -2399,7 +2366,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_31::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2416,7 +2383,7 @@
               {
                 "objectType": "WriteToSymbol",
                 "active": true,
-                "symbolExpression": "%ctrl%TcHmiEllipse_31::FillColor%/ctrl%",
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/Color",
@@ -2431,8 +2398,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTextblock_91" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="25" data-tchmi-height-unit="px" data-tchmi-left="906" data-tchmi-left-unit="px" data-tchmi-text="Transmit Accepted" data-tchmi-top="577" data-tchmi-top-unit="px" data-tchmi-width="173" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-is-enabled="true" data-tchmi-text-font-size="20" data-tchmi-text-horizontal-alignment="Left" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-family="Barlow" data-tchmi-zindex="3">
 </div>
@@ -2496,10 +2462,9 @@
 }
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiButton_3.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -2515,7 +2480,7 @@
     ]
   },
   {
-    "event": "TcHmiButton_3.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -2530,7 +2495,6 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 </div>

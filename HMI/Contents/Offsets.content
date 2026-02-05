@@ -282,8 +282,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "AutoZero_PB_6.onStatePressed",
     "actions": [
@@ -327,8 +326,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiTextblock_36" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="539" data-tchmi-left-unit="px" data-tchmi-text="ZERO SHIFT OFFSET" data-tchmi-top="17" data-tchmi-top-unit="px" data-tchmi-width="222" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-text-font-size="24" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-zindex="3" data-tchmi-text-font-family="Barlow">
 </div>
@@ -379,8 +377,7 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
     "event": "AutoZero_PB_6.onStatePressed",
     "actions": [
@@ -425,7 +422,7 @@
     ]
   },
   {
-    "event": "Execute_Zero_Shift_1.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -441,7 +438,7 @@
     ]
   },
   {
-    "event": "Execute_Zero_Shift_1.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -456,8 +453,7 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div data-tchmi-grid-row-index="0" data-tchmi-grid-column-index="0" id="ZPosition_17" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="115" data-tchmi-left-unit="px" data-tchmi-top="220" data-tchmi-top-unit="px" data-tchmi-width="260" data-tchmi-width-unit="px" data-tchmi-word-wrap="True" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size="28" data-tchmi-zindex="25" data-tchmi-right-unit="px" data-tchmi-bottom-unit="px" data-tchmi-text-font-size-unit="px" data-tchmi-max-width-unit="px" data-tchmi-max-height-unit="px" data-tchmi-min-width-unit="px" data-tchmi-min-height-unit="px" data-tchmi-background-image-width-unit="px" data-tchmi-background-image-height-unit="px" data-tchmi-text="%f%TcHmi.Functions.Beckhoff.GaugeValueFormatter(%s%PLC1.GVL.stHMI_Out.stZRef.NcToPlc.ActPos|SubscriptionMode=Poll|Interval=50%/s%, 3)%/f%" data-tchmi-text-font-family="Barlow">
 
@@ -502,10 +498,9 @@
 ]
 </script>
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiCombobox.onSelectionChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onSelectionChanged",
     "actions": [
       {
         "objectType": "SwitchCase",
@@ -513,7 +508,7 @@
         "compare": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/UDINT",
-          "symbolExpression": "%ctrl%TcHmiCombobox::SelectedId%/ctrl%"
+          "symbolExpression": "%ctx%owner::SelectedId%/ctx%"
         },
         "cases": [
           {
@@ -613,7 +608,7 @@
     ]
   },
   {
-    "event": "TcHmiCombobox.onUserInteractionFinished",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onUserInteractionFinished",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -629,7 +624,7 @@
     ]
   },
   {
-    "event": "TcHmiCombobox.onAttached",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onAttached",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -645,7 +640,7 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%ctrl%TcHmiCombobox::SelectedId%/ctrl%",
+        "symbolExpression": "%ctx%owner::SelectedId%/ctx%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/UDINT",
@@ -655,20 +650,18 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 <div id="TcHmiRegion" data-tchmi-type="TcHmi.Controls.System.TcHmiRegion" data-tchmi-height="243" data-tchmi-height-unit="px" data-tchmi-left="856" data-tchmi-left-unit="px" data-tchmi-top="43" data-tchmi-top-unit="px" data-tchmi-width="948" data-tchmi-width-unit="px" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiRegion.onAttached",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onAttached",
     "actions": [
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%ctrl%TcHmiRegion::TargetContent%/ctrl%",
+        "symbolExpression": "%ctx%owner::TargetContent%/ctx%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/ContentPath",
@@ -678,7 +671,6 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 </div>

@@ -1,9 +1,8 @@
 <div id="GCode" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="1059" data-tchmi-height="510">
 <div id="TcHmiFileExplorer" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiFileExplorer" data-tchmi-height="445" data-tchmi-height-unit="px" data-tchmi-left="10" data-tchmi-left-unit="px" data-tchmi-top="60" data-tchmi-top-unit="px" data-tchmi-width="1039" data-tchmi-width-unit="px" data-tchmi-root="/NCPrograms" data-tchmi-zindex="3" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-background-image-vertical-alignment="Center">
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiFileExplorer.onSelectionChanged",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onSelectionChanged",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -12,7 +11,7 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiFileExplorer::SelectedItems%/ctrl%"
+          "symbolExpression": "%ctx%owner::SelectedItems%/ctx%"
         },
         "asyncWait": true
       },
@@ -23,14 +22,13 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiFileExplorer::SelectedItems%/ctrl%"
+          "symbolExpression": "%ctx%owner::SelectedItems%/ctx%"
         },
         "asyncWait": true
       }
     ]
   }
-]
-</script>
+]</script>
 
 <script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
 {
@@ -127,10 +125,9 @@
 
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[
   {
-    "event": "TcHmiButton_2.onStatePressed",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStatePressed",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -146,7 +143,7 @@
     ]
   },
   {
-    "event": "TcHmiButton_2.onStateReleased",
+    "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onStateReleased",
     "actions": [
       {
         "objectType": "WriteToSymbol",
@@ -161,7 +158,6 @@
       }
     ]
   }
-]
-</script>
+]</script>
 </div>
 </div>
