@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Refactors>
+  <Renames>
+    <RenamedType>
+      <Type guid="8a81af85-91f2-4db6-863a-27513369e464">FB_PACKML_STATEDRIVER_2</Type>
+      <From>FB_PackML_StateDriver_2</From>
+      <To>FB_PackML_StateDriver</To>
+    </RenamedType>
+  </Renames>
+</Refactors>

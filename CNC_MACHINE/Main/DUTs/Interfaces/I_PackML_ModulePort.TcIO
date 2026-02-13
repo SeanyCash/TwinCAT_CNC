@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <Itf Name="I_PackML_ModulePort" Id="{3180a63a-8edb-4bad-9327-02bac440c836}">
+    <Declaration><![CDATA[INTERFACE I_PackML_ModulePort]]></Declaration>
+    <Method Name="Cycle" Id="{87351396-7abe-46d9-9f43-deb2d6afdff4}">
+      <Declaration><![CDATA[METHOD Cycle : BOOL
+VAR_INPUT
+	iCmd : ST_PML_Cmd;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="GetName" Id="{51400b11-5499-4499-9174-5fd4dee730c4}">
+      <Declaration><![CDATA[METHOD GetName : STRING
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="GetStatus" Id="{bf124305-2f9b-46c9-bb50-8ce78b53ed77}">
+      <Declaration><![CDATA[METHOD GetStatus : ST_PML_Status;
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

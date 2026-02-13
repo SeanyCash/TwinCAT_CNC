@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC IMPLEMENTS I_HMI;
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC EXTENDS FB_PackML_ModuleBase IMPLEMENTS I_HMI , I_PackML_StateMethods
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
@@ -295,6 +295,15 @@ M_ProgramLoader();
 M_Inputs();
 M_Outputs();]]></ST>
     </Implementation>
+    <Folder Name="PackML Methods" Id="{1e22cf03-556f-44f9-a115-d11ff27f8c6e}" />
+    <Method Name="Faulted" Id="{e64c8654-bdd6-4c28-8267-5ce11cac97e6}" FolderPath="PackML Methods\">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Faulted : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_CoEStatus" Id="{478f4fc3-02da-43bf-9a5d-4cea12eb7ced}">
       <Declaration><![CDATA[METHOD M_CoEStatus : BOOL
 VAR_INPUT
@@ -854,6 +863,30 @@ END_CASE
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Paused" Id="{c262ce4a-3955-486a-a64e-12d9ffd95db5}" FolderPath="PackML Methods\">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Paused : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Running" Id="{7bc1b892-1276-4ab6-a190-61c3072d3f9b}" FolderPath="PackML Methods\">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Running : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Stopped" Id="{2eb20adc-4172-4579-9b43-b908d91d3cd0}" FolderPath="PackML Methods\">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Stopped : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_CNC">
       <LineId Id="13935" Count="7" />
       <LineId Id="14882" Count="0" />
@@ -885,6 +918,9 @@ END_CASE
       <LineId Id="14637" Count="0" />
       <LineId Id="14089" Count="9" />
       <LineId Id="680" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.Faulted">
+      <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_CoEStatus">
       <LineId Id="6" Count="11" />
@@ -1108,6 +1144,15 @@ END_CASE
       <LineId Id="213" Count="0" />
       <LineId Id="215" Count="18" />
       <LineId Id="48" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.Paused">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.Running">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.Stopped">
+      <LineId Id="4" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

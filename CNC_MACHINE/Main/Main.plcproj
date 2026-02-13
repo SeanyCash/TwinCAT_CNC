@@ -18,6 +18,15 @@
     <Compile Include="DUTs\Enums\E_InterpreterState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Enums\E_Module_Fault.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Enums\E_PML_Command.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Enums\E_PML_State.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\Enums\E_Programs.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +34,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Interfaces\I_HMI.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Interfaces\I_PackML_ModulePort.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Interfaces\I_PackML_StateHooks.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Interfaces\I_PackML_StateMethods.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Structures\PackML\ST_PML_Cmd.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Structures\PackML\ST_PML_Status.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Structures\ST_HMI_In.TcDUT">
@@ -76,6 +100,12 @@
     <Compile Include="POUs\FB_MotionFunctions.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\PackML\FB_PackML_ModuleBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PackML\FB_PackML_StateDriver.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Utilities\FB_ModbusRTU_SerialComms.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -88,7 +118,9 @@
     <Folder Include="DUTs\Interfaces" />
     <Folder Include="DUTs\Enums" />
     <Folder Include="DUTs\Structures" />
+    <Folder Include="DUTs\Structures\PackML" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\PackML" />
     <Folder Include="POUs\Utilities" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

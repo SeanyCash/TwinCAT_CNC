@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <Itf Name="I_PackML_StateMethods" Id="{8eb7f78c-56fc-4531-94ad-e7a9b630b473}">
+    <Declaration><![CDATA[INTERFACE I_PackML_StateMethods
+]]></Declaration>
+    <Folder Name="PackML Methods" Id="{4c0274b9-72dc-4c19-880b-65ab7aa96844}" />
+    <Method Name="Faulted" Id="{efc822db-977f-42ee-8bb8-a8defc941e6f}" FolderPath="PackML Methods\">
+      <Declaration><![CDATA[METHOD Faulted : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Paused" Id="{6ec8aee5-6779-429a-89e3-4056dc4edf39}" FolderPath="PackML Methods\">
+      <Declaration><![CDATA[METHOD Paused : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Running" Id="{c703377d-b021-4cce-ba0d-b902b8b76bf5}" FolderPath="PackML Methods\">
+      <Declaration><![CDATA[METHOD Running : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Stopped" Id="{76ec4329-da74-4ead-a909-c692eeb8447a}" FolderPath="PackML Methods\">
+      <Declaration><![CDATA[METHOD Stopped : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

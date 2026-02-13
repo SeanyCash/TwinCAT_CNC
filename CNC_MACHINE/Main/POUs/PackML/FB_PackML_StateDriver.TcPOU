@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_PackML_StateDriver" Id="{8a81af85-91f2-4db6-863a-27513369e464}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PackML_StateDriver
+VAR_INPUT
+    // Module state-method target. Use TwinCAT "Implement Interfaces" on the module FB
+    // to auto-generate these methods (Stopped/Running/Paused/Faulted).
+    pTarget : REFERENCE TO I_PackML_StateMethods;
+
+    // Lite command packet (Cmd + SeqId)
+    iCmd    : ST_Lite_Cmd;
+
+    // Timeouts (set to T#0S to disable)
+    bEnableTimeouts : BOOL := TRUE;
+    tTimeoutRunning : TIME := T#0S;
+    tTimeoutPaused  : TIME := T#0S;
+END_VAR
+
+VAR_IN_OUT
+    ioStatus : ST_Lite_Status; // standardized lite status (module may extend/override fields)
+END_VAR
+
+VAR_OUTPUT
+    eState          : E_PML_State;
+    ePrevState      : E_PML_State;
+    eRequestedState : E_PML_State; // derived from the most recent command
+    bAtRequested    : BOOL;        // TRUE when eState == eRequestedState
+    bEnterState     : BOOL;        // TRUE for one cycle when entering eState
+    bExitState      : BOOL;        // TRUE for one cycle when exiting ePrevState (before update)
+END_VAR
+
+VAR
+    _lastSeqId      : UDINT;
+    _cmd            : E_PML_Command;
+    _tState         : TON;
+    _timeoutPT      : TIME;
+    _timeoutLatched : BOOL;
+    _faultLatched   : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Default outputs (one-shot flags)
+bEnterState := FALSE;
+bExitState  := FALSE;
+
+// Initialize on first scan if needed
+IF eState = E_PML_State.Undefined THEN
+    eState := E_PML_State.Stopped;
+END_IF
+IF ePrevState = E_PML_State.Undefined THEN
+    ePrevState := eState;
+END_IF
+IF eRequestedState = E_PML_State.Undefined THEN
+    eRequestedState := eState;
+END_IF
+
+// Detect new command (edge by SeqId)
+IF iCmd.SeqId <> _lastSeqId THEN
+    _lastSeqId := iCmd.SeqId;
+    _cmd := iCmd.Cmd;
+END_IF
+
+// If fault is latched, ignore all commands except Reset
+IF _faultLatched AND (_cmd <> E_LiteCmd.Reset) THEN
+    _cmd := E_LiteCmd.None;
+END_IF
+
+// Map command -> requested state (handshake target)
+CASE _cmd OF
+    E_PML_Command.Start:  eRequestedState := E_PML_State.Running;
+    E_PML_Command.Stop:   eRequestedState := E_PML_State.Stopped;
+    E_PML_Command.Pause:  eRequestedState := E_PML_State.Paused;
+    E_PML_Command.Resume: eRequestedState := E_PML_State.Running;
+    E_PML_Command.Reset:  eRequestedState := E_PML_State.Stopped;
+ELSE
+    // no-op
+END_CASE
+
+// Apply command effects
+CASE _cmd OF
+    E_PML_Command.Reset:
+        // Clear latched faults and standardized status
+        _faultLatched := FALSE;
+        _timeoutLatched := FALSE;
+        ioStatus.Error := FALSE;
+        ioStatus.Info := '';
+        eState := E_PML_State.Stopped;
+
+    E_PML_Command.Stop:
+        eState := E_PML_State.Stopped;
+
+    E_PML_Command.Start:
+        eState := E_PML_State.Running;
+
+    E_PML_Command.Pause:
+        eState := E_PML_State.Paused;
+
+    E_PML_Command.Resume:
+        eState := E_PML_State.Running;
+
+ELSE
+    // no-op
+END_CASE
+
+// Consume command (SeqId is the real edge)
+_cmd := E_PML_Command.None;
+
+// State change detection (enter/exit)
+IF eState <> ePrevState THEN
+    bExitState  := (ePrevState <> E_PML_State.Undefined);
+    bEnterState := TRUE;
+
+    // Reset state timer on transition
+    _tState(IN := FALSE);
+    _timeoutLatched := FALSE;
+
+    // Update previous state after capturing exit pulse
+    ePrevState := eState;
+END_IF
+
+// Choose timeout PT for the current state
+_timeoutPT := T#0S;
+CASE eState OF
+    E_PML_State.Running: _timeoutPT := tTimeoutRunning;
+    E_PML_State.Paused:  _timeoutPT := tTimeoutPaused;
+ELSE
+    _timeoutPT := T#0S;
+END_CASE
+
+// Run timeout timer
+IF bEnableTimeouts AND (_timeoutPT > T#0S) THEN
+    _tState(IN := TRUE, PT := _timeoutPT);
+ELSE
+    _tState(IN := FALSE);
+END_IF
+
+// Standardized status defaults (module may override inside its state methods)
+ioStatus.State := eState;
+ioStatus.Busy  := (eState = E_PML_State.Running); // Running implies active; module can refine
+// For lite, Done usually isn't needed; keep false unless module sets it
+// ioStatus.Done := FALSE;
+
+// Timeout handling (latch once) -> Faulted
+IF _tState.Q AND NOT _timeoutLatched THEN
+    _timeoutLatched := TRUE;
+    ioStatus.Error := TRUE;
+    ioStatus.Info  := 'State timeout';
+    _faultLatched := TRUE;
+    eState := E_PML_State.Faulted;
+END_IF
+
+// Call the state method on the target (module logic runs here)
+IF pTarget <> 0 THEN
+    CASE eState OF
+        E_PML_State.Stopped: pTarget.Stopped();
+        E_PML_State.Running: pTarget.Running();
+        E_PML_State.Paused:  pTarget.Paused();
+        E_PML_State.Faulted: pTarget.Faulted();
+    ELSE
+        // no-op
+    END_CASE
+END_IF
+
+// If module reported an error, latch fault and force Faulted
+IF ioStatus.Error AND NOT _faultLatched THEN
+    _faultLatched := TRUE;
+    eState := E_PML_State.Faulted;
+END_IF
+
+// Handshake output
+bAtRequested := (eState = eRequestedState);
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_PackML_StateDriver">
+      <LineId Id="19" Count="49" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="133" Count="14" />
+      <LineId Id="69" Count="63" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

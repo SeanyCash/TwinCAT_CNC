@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <DUT Name="E_Module_Fault" Id="{ee34969d-7d09-4397-a8e0-02a1b77554fb}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+TYPE E_Module_Fault :
+(
+    None := 0,
+    GenericFault,
+    NotReady,
+    Timeout
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
