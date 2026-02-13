@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-cnc-bg: #020617;
+  --color-cnc-panel: #0f172a;
+  --color-cnc-border: #1e293b;
+  --color-cnc-accent: #06b6d4;
+  --color-cnc-success: #10b981;
+  --color-cnc-homed: #22c55e;
+  --color-cnc-nothomed: #fbbf24;
+  --color-cnc-warning: #f59e0b;
+  --color-cnc-danger: #ef4444;
+  --color-cnc-moving: #a5f3fc;
+  --color-cnc-text: #d1d5db;
+  --color-cnc-background: #0f172a;
+
+  /* Animation */
+  --animate-slow-pulse: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+body {
+  @apply bg-cnc-bg text-cnc-text;
+}

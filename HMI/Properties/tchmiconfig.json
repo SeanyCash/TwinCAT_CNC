@@ -11,8 +11,9 @@
   "tcHmiServer": {
     "websocketIntervalTime": 250,
     "websocketTimeout": 10000,
-    "websocketSystemTimeout": 0,
-    "websocketSubscriptionMode": null
+    "websocketSystemTimeout": 60000,
+    "websocketSubscriptionMode": null,
+    "disableOptionalSystemSubscriptions": false
   },
   "activeTheme": "Base-Dark",
   "themes": {
@@ -81,6 +82,7 @@
     }
   ],
   "userControls": [],
+  "controls": [],
   "content": [
     {
       "url": "Contents/Alarms.content",
@@ -192,7 +194,8 @@
       }
     },
     "themedResources": {},
-    "timer": {}
+    "timer": {},
+    "package": {}
   },
   "intervals": {},
   "trigger": [],
@@ -216,31 +219,52 @@
   "packages": [
     {
       "name": "Beckhoff.TwinCAT.HMI.BaseTemplate",
-      "basePath": "/Beckhoff.TwinCAT.HMI.BaseTemplate"
+      "basePath": "/Beckhoff.TwinCAT.HMI.BaseTemplate",
+      "symbols": {
+        "package": {}
+      }
     },
     {
       "name": "Beckhoff.TwinCAT.HMI.Controls",
-      "basePath": "/Beckhoff.TwinCAT.HMI.Controls"
+      "basePath": "/Beckhoff.TwinCAT.HMI.Controls",
+      "symbols": {
+        "package": {}
+      }
     },
     {
       "name": "Beckhoff.TwinCAT.HMI.EcDiagnosticsControl",
-      "basePath": "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl"
+      "basePath": "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl",
+      "symbols": {
+        "package": {}
+      }
     },
     {
       "name": "Beckhoff.TwinCAT.HMI.Framework",
-      "basePath": "/Beckhoff.TwinCAT.HMI.Framework"
+      "basePath": "/Beckhoff.TwinCAT.HMI.Framework",
+      "symbols": {
+        "package": {}
+      }
     },
     {
       "name": "Beckhoff.TwinCAT.HMI.Functions",
-      "basePath": "/Beckhoff.TwinCAT.HMI.Functions"
+      "basePath": "/Beckhoff.TwinCAT.HMI.Functions",
+      "symbols": {
+        "package": {}
+      }
     },
     {
       "name": "Beckhoff.TwinCAT.HMI.PDFViewer",
-      "basePath": "/Beckhoff.TwinCAT.HMI.PDFViewer"
+      "basePath": "/Beckhoff.TwinCAT.HMI.PDFViewer",
+      "symbols": {
+        "package": {}
+      }
     },
     {
       "name": "Beckhoff.TwinCAT.HMI.ResponsiveNavigation",
-      "basePath": "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation"
+      "basePath": "/Beckhoff.TwinCAT.HMI.ResponsiveNavigation",
+      "symbols": {
+        "package": {}
+      }
     }
   ],
   "keyboardLayouts": [

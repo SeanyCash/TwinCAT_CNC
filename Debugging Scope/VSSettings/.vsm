@@ -4,50 +4,10 @@
   <FileName></FileName>
   <Children>
     <Node>
-      <Title>YT Scope Project</Title>
+      <Title>YT Scope Project.tcscopex</Title>
       <Expanded>False</Expanded>
-      <FileName>C:\Users\seand\Documents\TwinCAT_CNC\Debugging Scope\YT Scope Project.tcscopex</FileName>
-      <Children>
-        <Node>
-          <Title>DataPool</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>bPollingPulse</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>YT Chart</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
-            <Node>
-              <Title>Axis Group</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>bPollingPulse</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
-            </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Trigger</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children />
-        </Node>
-      </Children>
+      <FileName></FileName>
+      <Children />
     </Node>
   </Children>
 </Node>
