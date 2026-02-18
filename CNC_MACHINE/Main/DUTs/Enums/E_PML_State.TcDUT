@@ -4,11 +4,20 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 TYPE E_PML_State :
 (
-	Undefined,
+    Undefined := 0,
     Stopped,
-	Running,
-	Paused,
-	Faulted
+    Resetting,
+    Idle,
+    Starting,
+    Execute,
+    Completing,
+    Complete,
+    Holding,
+    Held,
+    Unholding,
+    Stopping,
+    Aborting,
+    Aborted
 ) := Stopped;
 END_TYPE
 ]]></Declaration>

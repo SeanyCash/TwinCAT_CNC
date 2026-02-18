@@ -3,27 +3,81 @@
   <Itf Name="I_PackML_StateMethods" Id="{8eb7f78c-56fc-4531-94ad-e7a9b630b473}">
     <Declaration><![CDATA[INTERFACE I_PackML_StateMethods
 ]]></Declaration>
-    <Folder Name="PackML Methods" Id="{4c0274b9-72dc-4c19-880b-65ab7aa96844}" />
-    <Method Name="Faulted" Id="{efc822db-977f-42ee-8bb8-a8defc941e6f}" FolderPath="PackML Methods\">
-      <Declaration><![CDATA[METHOD Faulted : BOOL
+    <Folder Name="States" Id="{13bcc04c-c678-48f5-9f45-438551dc6b2f}" />
+    <Method Name="Aborted" Id="{95d4ae8c-9e7e-42de-811c-08cf8a81a719}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Aborted : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="Paused" Id="{6ec8aee5-6779-429a-89e3-4056dc4edf39}" FolderPath="PackML Methods\">
-      <Declaration><![CDATA[METHOD Paused : BOOL
+    <Method Name="Aborting" Id="{2bd2245c-65fc-430a-94cb-dbb214d8fed0}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Aborting : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="Running" Id="{c703377d-b021-4cce-ba0d-b902b8b76bf5}" FolderPath="PackML Methods\">
-      <Declaration><![CDATA[METHOD Running : BOOL
+    <Method Name="Complete" Id="{79c6c7f1-ff57-40ca-81ff-0f63d76725c1}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Complete : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="Stopped" Id="{76ec4329-da74-4ead-a909-c692eeb8447a}" FolderPath="PackML Methods\">
+    <Method Name="Completing" Id="{a2ddadc7-80ad-49f0-9812-c40985de00d6}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Completing : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Execute" Id="{1189b5ed-9558-4be2-b4b4-b55b03ceecef}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Execute : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Held" Id="{b5ab0106-f773-445e-b901-d7332220ad97}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Held : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Holding" Id="{91ecdca2-fc04-4e69-b1e6-9b9ab6654883}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Holding : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Idle" Id="{da92f215-6580-458e-8a4a-e1755399f511}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Idle : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Resetting" Id="{07f05103-c904-47e8-b589-0150d82b4d51}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Resetting : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Starting" Id="{5c3f57db-fb06-40e0-8bfb-33f8d7b11e17}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Starting : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Stopped" Id="{4394198a-97ee-4107-aa2c-320067de34e5}" FolderPath="States\">
       <Declaration><![CDATA[METHOD Stopped : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Stopping" Id="{ceb29cb0-0927-4e17-af32-cec191a23676}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Stopping : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Unholding" Id="{ea4a8f9c-5e35-49b0-805a-078e28b77eac}" FolderPath="States\">
+      <Declaration><![CDATA[METHOD Unholding : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>

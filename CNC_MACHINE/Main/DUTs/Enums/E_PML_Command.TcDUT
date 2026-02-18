@@ -5,11 +5,12 @@
 TYPE E_PML_Command :
 (
     None := 0,
+    Reset,
     Start,
     Stop,
-    Pause,
-    Resume,
-    Reset
+    Pause,    // maps to Hold/Held path
+    Resume,   // maps to Unholding->Execute
+    Abort
 ) := None;
 END_TYPE
 ]]></Declaration>

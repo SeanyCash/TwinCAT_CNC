@@ -6,5 +6,35 @@
       <From>FB_PackML_StateDriver_2</From>
       <To>FB_PackML_StateDriver</To>
     </RenamedType>
+    <RenamedType>
+      <Type guid="c703377d-b021-4cce-ba0d-b902b8b76bf5">RUNNING</Type>
+      <From>Running</From>
+      <To>Execute</To>
+    </RenamedType>
+    <RenamedType>
+      <Type guid="7bc1b892-1276-4ab6-a190-61c3072d3f9b">RUNNING</Type>
+      <From>Running</From>
+      <To>Execute</To>
+    </RenamedType>
+    <RenamedType>
+      <Type guid="6ec8aee5-6779-429a-89e3-4056dc4edf39">PAUSED</Type>
+      <From>Paused</From>
+      <To>Holding</To>
+    </RenamedType>
+    <RenamedType>
+      <Type guid="c262ce4a-3955-486a-a64e-12d9ffd95db5">PAUSED</Type>
+      <From>Paused</From>
+      <To>Holding</To>
+    </RenamedType>
+    <RenamedType>
+      <Type guid="efc822db-977f-42ee-8bb8-a8defc941e6f">FAULTED</Type>
+      <From>Faulted</From>
+      <To>Aborted</To>
+    </RenamedType>
+    <RenamedType>
+      <Type guid="e64c8654-bdd6-4c28-8267-5ce11cac97e6">FAULTED</Type>
+      <From>Faulted</From>
+      <To>Aborted</To>
+    </RenamedType>
   </Renames>
 </Refactors>

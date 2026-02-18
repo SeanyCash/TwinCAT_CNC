@@ -8,7 +8,7 @@ VAR_INPUT
     pTarget : REFERENCE TO I_PackML_StateMethods;
 
     // Lite command packet (Cmd + SeqId)
-    iCmd    : ST_Lite_Cmd;
+    iCmd    : E_PML_Command;
 
     // Timeouts (set to T#0S to disable)
     bEnableTimeouts : BOOL := TRUE;
