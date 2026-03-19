@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <DUT Name="ST_SubInterface" Id="{1e0d2b36-7c87-4b38-b743-71824f9a8dc2}">
+    <Declaration><![CDATA[TYPE ST_SubInterface :
+STRUCT
+	    // ── Main → Sub ───────────────────────────────────────────────────────────
+    Request     : E_PackMLState;    // Main tells sub which state to act on
+                                    // Main sets to Idle to acknowledge Done/Error
+
+    // ── Sub → Main ───────────────────────────────────────────────────────────
+    Status      : E_SubStatus;      // Current execution status
+    ErrorCode   : DINT;             // Populated when Status = Error
+    ErrorText   : STRING(80);       // Human-readable fault description
+
+    // ── Diagnostics (optional, useful for HMI) ───────────────────────────────
+    SubName     : STRING(32);       // Set once at init, e.g. 'Spindle'
+    BusyTimeMs  : UDINT;            // How long sub has been Busy (ms)
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

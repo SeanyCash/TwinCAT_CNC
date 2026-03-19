@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="MAIN" Id="{e6da0cd2-c9ac-4b6b-b1e1-4989c7274b85}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	
-
+	stCnc	:  ST_SubInterface;
 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbCNC();
+      <ST><![CDATA[fbCNC(IF_Sub := stCnc);
 bFirstScan:=FALSE;
 
 

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <DUT Name="E_SubStatus" Id="{8d315f08-09e3-4a8f-aedd-d8795e7b9b18}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_SubStatus :
+(
+    Idle    := 0,   // Sub not active; ready to receive a new request
+    Busy    := 1,   // Sub is executing its logic for the requested state
+    Done    := 2,   // Sub finished successfully; waiting for Main to acknowledge
+    Error   := 3    // Sub hit a fault; Main should read ErrorCode and escalate
+) := Idle;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

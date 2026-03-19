@@ -24,10 +24,13 @@
     <Compile Include="DUTs\Enums\E_PML_Command.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Enums\E_PML_State.TcDUT">
+    <Compile Include="DUTs\Enums\E_PackMLState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Enums\E_Programs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\Enums\E_SubStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Enums\E_VFDErrors.TcDUT">
@@ -45,10 +48,7 @@
     <Compile Include="DUTs\Interfaces\I_PackML_StateMethods.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\Structures\PackML\ST_PML_Cmd.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\Structures\PackML\ST_PML_Status.TcDUT">
+    <Compile Include="DUTs\Structures\PackML\ST_SubInterface.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Structures\ST_HMI_In.TcDUT">
@@ -100,10 +100,10 @@
     <Compile Include="POUs\FB_MotionFunctions.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PackML\FB_PackML_ModuleBase.TcPOU">
+    <Compile Include="POUs\PackML\FB_PackML_Main.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PackML\FB_PackML_StateDriver.TcPOU">
+    <Compile Include="POUs\PackML\FB_PackML_SubBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Utilities\FB_ModbusRTU_SerialComms.TcPOU">

@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC EXTENDS FB_PackML_ModuleBase IMPLEMENTS I_HMI , I_PackML_StateMethods
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC EXTENDS FB_PackML_SubBase IMPLEMENTS I_HMI
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+	
+	//  Only overrides the states where spindle has real work to do.
+	//  All other states auto-complete via the base class defaults.
 	
     // Event Logger Instances	
     fbEventLogger	: FB_TcEventLogger;
@@ -295,15 +298,7 @@ M_ProgramLoader();
 M_Inputs();
 M_Outputs();]]></ST>
     </Implementation>
-    <Folder Name="PackML Methods" Id="{1e22cf03-556f-44f9-a115-d11ff27f8c6e}" />
-    <Method Name="Faulted" Id="{e64c8654-bdd6-4c28-8267-5ce11cac97e6}" FolderPath="PackML Methods\">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD Faulted : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
+    <Folder Name="PackML" Id="{d3da6e27-ea48-4171-b5b0-87034ad0f838}" />
     <Method Name="M_CoEStatus" Id="{478f4fc3-02da-43bf-9a5d-4cea12eb7ced}">
       <Declaration><![CDATA[METHOD M_CoEStatus : BOOL
 VAR_INPUT
@@ -365,6 +360,58 @@ fbZAxisCoEStatus(
 	bError=> , 
 	nErrId=> , 
 	cbRead=> );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Execute_Execute" Id="{fef31608-7634-420c-8c0d-25ff7815b887}" FolderPath="PackML\">
+      <Declaration><![CDATA[METHOD PROTECTED M_Execute_Execute : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ============================================================================
+//  OVERRIDE: Execute — maintain speed, watch for loss-of-speed fault
+// ============================================================================
+
+(* Example logic
+
+SpindleEnable  := TRUE;
+SpeedReference := SpeedSetpoint;
+
+// Loss of speed during cutting = fault
+IF NOT SpindleAtSpeed AND IF_Sub.BusyTimeMs > 500 THEN
+    M_SetError(1101, 'Spindle lost speed during Execute');
+END_IF
+
+// NOTE: Do NOT call M_SetDone() here unless the cycle is complete.
+// Spindle runs continuously; completion is signalled by NCChannel sub.
+
+*)]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Execute_Starting" Id="{56e53a00-5955-4b0e-9049-7f36a55f7ef5}" FolderPath="PackML\">
+      <Declaration><![CDATA[METHOD PROTECTED M_Execute_Starting : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ============================================================================
+//  OVERRIDE: Starting — ramp spindle to speed
+// ============================================================================
+
+(* example implementation 
+
+// Arm ramp timer on first cycle (BusyTimeMs = 0 on entry)
+tonRamp(IN := TRUE, PT := UDINT_TO_TIME(RampTimeMs));
+
+SpindleEnable  := TRUE;
+SpeedReference := SpeedSetpoint;
+
+IF SpindleAtSpeed OR tonRamp.Q THEN
+    tonRamp(IN := FALSE);
+    M_SetDone();
+END_IF
+
+*)]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_HMI_In" Id="{d9c64941-408b-44a2-8a91-175c813c4e4d}">
@@ -863,30 +910,6 @@ END_CASE
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Paused" Id="{c262ce4a-3955-486a-a64e-12d9ffd95db5}" FolderPath="PackML Methods\">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD Paused : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Running" Id="{7bc1b892-1276-4ab6-a190-61c3072d3f9b}" FolderPath="PackML Methods\">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD Running : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Stopped" Id="{2eb20adc-4172-4579-9b43-b908d91d3cd0}" FolderPath="PackML Methods\">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD Stopped : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <LineIds Name="FB_CNC">
       <LineId Id="13935" Count="7" />
       <LineId Id="14882" Count="0" />
@@ -919,9 +942,6 @@ METHOD Stopped : BOOL
       <LineId Id="14089" Count="9" />
       <LineId Id="680" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CNC.Faulted">
-      <LineId Id="4" Count="0" />
-    </LineIds>
     <LineIds Name="FB_CNC.M_CoEStatus">
       <LineId Id="6" Count="11" />
       <LineId Id="5" Count="0" />
@@ -936,6 +956,25 @@ METHOD Stopped : BOOL
       <LineId Id="96" Count="0" />
       <LineId Id="91" Count="4" />
       <LineId Id="47" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_Execute_Execute">
+      <LineId Id="6" Count="2" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="10" Count="8" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_Execute_Starting">
+      <LineId Id="6" Count="2" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="10" Count="8" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_HMI_In">
       <LineId Id="5" Count="0" />
@@ -1144,15 +1183,6 @@ METHOD Stopped : BOOL
       <LineId Id="213" Count="0" />
       <LineId Id="215" Count="18" />
       <LineId Id="48" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.Paused">
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.Running">
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.Stopped">
-      <LineId Id="4" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

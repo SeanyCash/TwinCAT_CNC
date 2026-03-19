@@ -6,20 +6,20 @@
     <Method Name="OnEnter" Id="{4d16dc4b-927d-4900-b2e0-42d57509458f}">
       <Declaration><![CDATA[METHOD OnEnter : BOOL
     VAR_INPUT
-        eState : E_PML_State;
+        eState : E_PackMLState;
     END_VAR]]></Declaration>
     </Method>
     <Method Name="OnExecute" Id="{78301360-ed48-4ea2-aa98-059e3e385d05}">
       <Declaration><![CDATA[METHOD OnExecute : BOOL
     VAR_INPUT
-        eState : E_PML_State;
+        eState : E_PackMLState;
     END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="OnExit" Id="{c5c30816-f05e-4341-8efd-e8be82d32e39}">
       <Declaration><![CDATA[METHOD OnExit : BOOL
     VAR_INPUT
-        eState : E_PML_State;
+        eState : E_PackMLState;
     END_VAR
 ]]></Declaration>
     </Method>

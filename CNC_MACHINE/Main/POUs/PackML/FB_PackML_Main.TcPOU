@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_PackML_Main" Id="{bee96afe-316d-4e32-a4bb-d243338d7b4d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PackML_Main
+VAR_INPUT
+    // Operator / SCADA commands  (rising-edge evaluated)
+    cmd_Reset   : BOOL;
+    cmd_Start   : BOOL;
+    cmd_Hold    : BOOL;
+    cmd_Unhold  : BOOL;
+    cmd_Stop    : BOOL;
+    cmd_Abort   : BOOL;
+    cmd_Clear   : BOOL;     // Clears Aborted → Stopped when E-Stop is also reset
+
+    // Safety
+    eStopActive : BOOL;     // TRUE = E-Stop chain open (hardwired NC contact)
+END_VAR
+VAR_IN_OUT
+    // ── Submodule interfaces (Main writes Request; subs write Status back) ───
+    ifSpindle   : ST_SubInterface;
+    ifAxes      : ST_SubInterface;
+    ifNCChannel : ST_SubInterface;
+    ifHMI       : ST_SubInterface;
+    ifAlarms    : ST_SubInterface;
+END_VAR
+VAR_OUTPUT
+    State       : E_PackMLState;    // Current PackML state (read by HMI / SCADA)
+    StateName   : STRING(32);
+    FaultActive : BOOL;
+    FaultCode   : DINT;
+    FaultText   : STRING(80);
+END_VAR
+VAR
+    // ── Edge detectors ───────────────────────────────────────────────────────
+    rReset      : R_TRIG;
+    rStart      : R_TRIG;
+    rHold       : R_TRIG;
+    rUnhold     : R_TRIG;
+    rStop       : R_TRIG;
+    rAbort      : R_TRIG;
+    rClear      : R_TRIG;
+
+    // ── Internal state ───────────────────────────────────────────────────────
+    eState      : E_PackMLState := E_PackMLState.Stopped;
+
+    // ── State entry timestamp for BusyTimeMs tracking ────────────────────────
+    tEntry      : TIME;
+
+    // ── Fault latch ──────────────────────────────────────────────────────────
+    bFault      : BOOL;
+    iFaultCode  : DINT;
+    sFaultText  : STRING(80);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ============================================================================
+//  FB_PackML_Main
+//  Pure orchestrator — owns the state machine, dispatches requests to
+//  submodules, waits for ALL of them to report Done, then transitions.
+//
+//  HOW TO ADD / REMOVE A SUBMODULE:
+//    1. Add its ST_SubInterface to the VAR_IN_OUT block
+//    2. Add it to M_DispatchRequest  (one line)
+//    3. Add it to M_AllSubsDone      (one AND term)
+//    4. Add it to M_AnySubError      (one OR term)
+//    5. Add it to M_AcknowledgeSubs  (one line)
+
+// ============================================================================
+//  EDGE DETECTORS — always first
+// ============================================================================
+rReset  (CLK := cmd_Reset);
+rStart  (CLK := cmd_Start);
+rHold   (CLK := cmd_Hold);
+rUnhold (CLK := cmd_Unhold);
+rStop   (CLK := cmd_Stop);
+rAbort  (CLK := cmd_Abort);
+rClear  (CLK := cmd_Clear);
+
+// ============================================================================
+//  PRIORITY 1 — E-STOP / ABORT  (overrides everything)
+// ============================================================================
+IF eStopActive OR rAbort.Q THEN
+    IF eState <> E_PackMLState.Aborting
+    AND eState <> E_PackMLState.Aborted THEN
+        IF eStopActive THEN
+            iFaultCode := 9001;  sFaultText := 'E-Stop chain open';
+        ELSE
+            iFaultCode := 9002;  sFaultText := 'Abort command received';
+        END_IF
+        bFault := TRUE;
+        M_EnterState(E_PackMLState.Aborting);
+    END_IF
+END_IF
+
+// ============================================================================
+//  PRIORITY 2 — STOP  (orderly, lower priority than abort)
+// ============================================================================
+IF rStop.Q
+AND eState <> E_PackMLState.Stopping
+AND eState <> E_PackMLState.Stopped
+AND eState <> E_PackMLState.Aborting
+AND eState <> E_PackMLState.Aborted THEN
+    M_EnterState(E_PackMLState.Stopping);
+END_IF
+
+// ============================================================================
+//  PRIORITY 3 — SUBMODULE ERROR ESCALATION
+//  If any sub reports Error, Main escalates to Aborting and latches the fault.
+// ============================================================================
+IF M_AnySubError() THEN
+    bFault     := TRUE;
+    iFaultCode := M_FirstErrorCode();
+    sFaultText := M_FirstErrorText();
+    IF eState <> E_PackMLState.Aborting
+    AND eState <> E_PackMLState.Aborted THEN
+        M_EnterState(E_PackMLState.Aborting);
+    END_IF
+END_IF
+
+// ============================================================================
+//  STATE MACHINE
+// ============================================================================
+CASE eState OF
+
+// ── STOPPED ──────────────────────────────────────────────────────────────────
+E_PackMLState.Stopped:
+    IF rReset.Q OR rClear.Q THEN
+        bFault     := FALSE;
+        iFaultCode := 0;
+        sFaultText := '';
+        M_EnterState(E_PackMLState.Resetting);
+    END_IF
+
+// ── RESETTING ────────────────────────────────────────────────────────────────
+E_PackMLState.Resetting:
+    IF M_AllSubsDone() THEN
+        M_AcknowledgeSubs();
+        M_EnterState(E_PackMLState.Idle);
+    END_IF
+
+// ── IDLE ─────────────────────────────────────────────────────────────────────
+E_PackMLState.Idle:
+    // No sub action needed in Idle — just wait for Start
+    IF rStart.Q THEN
+        M_EnterState(E_PackMLState.Starting);
+    END_IF
+
+// ── STARTING ─────────────────────────────────────────────────────────────────
+E_PackMLState.Starting:
+    IF M_AllSubsDone() THEN
+        M_AcknowledgeSubs();
+        M_EnterState(E_PackMLState.Execute);
+    END_IF
+
+// ── EXECUTE ───────────────────────────────────────────────────────────────────
+E_PackMLState.Execute:
+    // Subs run continuously in Execute — Done here means "cycle complete"
+    IF M_AllSubsDone() THEN
+        M_AcknowledgeSubs();
+        M_EnterState(E_PackMLState.Completing);
+    ELSIF rHold.Q THEN
+        M_EnterState(E_PackMLState.Holding);
+    END_IF
+
+// ── COMPLETING ───────────────────────────────────────────────────────────────
+E_PackMLState.Completing:
+    IF M_AllSubsDone() THEN
+        M_AcknowledgeSubs();
+        M_EnterState(E_PackMLState.Complete);
+    END_IF
+
+// ── COMPLETE ──────────────────────────────────────────────────────────────────
+E_PackMLState.Complete:
+    IF rReset.Q THEN
+        M_EnterState(E_PackMLState.Resetting);
+    END_IF
+
+// ── HOLDING ──────────────────────────────────────────────────────────────────
+E_PackMLState.Holding:
+    IF M_AllSubsDone() THEN
+        M_AcknowledgeSubs();
+        M_EnterState(E_PackMLState.Held);
+    END_IF
+
+// ── HELD ─────────────────────────────────────────────────────────────────────
+E_PackMLState.Held:
+    IF rUnhold.Q THEN
+        M_EnterState(E_PackMLState.Unholding);
+    END_IF
+
+// ── UNHOLDING ────────────────────────────────────────────────────────────────
+E_PackMLState.Unholding:
+    IF M_AllSubsDone() THEN
+        M_AcknowledgeSubs();
+        M_EnterState(E_PackMLState.Execute);
+    END_IF
+
+// ── STOPPING ─────────────────────────────────────────────────────────────────
+E_PackMLState.Stopping:
+    IF M_AllSubsDone() THEN
+        M_AcknowledgeSubs();
+        M_EnterState(E_PackMLState.Stopped);
+    END_IF
+
+// ── ABORTING ─────────────────────────────────────────────────────────────────
+E_PackMLState.Aborting:
+    IF M_AllSubsDone() THEN
+        M_AcknowledgeSubs();
+        M_EnterState(E_PackMLState.Aborted);
+    END_IF
+
+// ── ABORTED ──────────────────────────────────────────────────────────────────
+E_PackMLState.Aborted:
+    IF rClear.Q AND NOT eStopActive THEN
+        bFault     := FALSE;
+        iFaultCode := 0;
+        sFaultText := '';
+        M_EnterState(E_PackMLState.Stopped);
+    END_IF
+
+END_CASE
+
+// ============================================================================
+//  OUTPUTS
+// ============================================================================
+State       := eState;
+StateName   := M_StateName(eState);
+FaultActive := bFault;
+FaultCode   := iFaultCode;
+FaultText   := sFaultText;
+
+// ============================================================================
+//  METHOD: M_EnterState
+//  Called whenever Main changes state. Dispatches the new request to all subs.
+// ============================================================================
+// NOTE: TwinCAT doesn't allow METHOD bodies here in the FB body —
+// see the separate METHOD blocks below. This comment is a structural marker.]]></ST>
+    </Implementation>
+    <Method Name="M_AcknowledgeSubs" Id="{b4dc546f-2ab0-492f-8368-ce1736ff4d33}">
+      <Declaration><![CDATA[METHOD PRIVATE M_AcknowledgeSubs : BOOL
+VAR_INPUT
+END_VAR
+
+//  Called by Main after all subs are Done. Resets each sub's Request to Idle.
+//  The sub sees Request = Idle and resets its own Status to Idle.
+//  ★ ADD NEW SUBMODULES HERE (one line each).
+// ────────────────────────────────────────────────────────────────────────────
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ── body ────────────────────────────────────────────────────────────────────
+ifSpindle.Request   := E_PackMLState.Idle;
+ifAxes.Request      := E_PackMLState.Idle;
+ifNCChannel.Request := E_PackMLState.Idle;
+ifHMI.Request       := E_PackMLState.Idle;
+ifAlarms.Request    := E_PackMLState.Idle;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_AllSubsDone" Id="{44d214b1-2e0a-4863-b952-3e987b3bb8a1}">
+      <Declaration><![CDATA[METHOD M_AllSubsDone : BOOL
+VAR_INPUT
+END_VAR
+
+//  Returns TRUE when every submodule has reported Done.
+//  ★ ADD NEW SUBMODULES HERE (AND each one in).
+// ────────────────────────────────────────────────────────────────────────────]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ── body ────────────────────────────────────────────────────────────────────
+M_AllSubsDone :=
+    (ifSpindle.Status   = E_SubStatus.Done) AND
+    (ifAxes.Status      = E_SubStatus.Done) AND
+    (ifNCChannel.Status = E_SubStatus.Done) AND
+    (ifHMI.Status       = E_SubStatus.Done) AND
+    (ifAlarms.Status    = E_SubStatus.Done);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_AnySubError" Id="{41312596-e28c-410f-92c6-502b709517c2}">
+      <Declaration><![CDATA[METHOD M_AnySubError : BOOL
+VAR_INPUT
+END_VAR
+
+//  Returns TRUE if any submodule is in Error state.
+//  ★ ADD NEW SUBMODULES HERE (OR each one in).
+// ────────────────────────────────────────────────────────────────────────────]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ── body ────────────────────────────────────────────────────────────────────
+M_AnySubError :=
+    (ifSpindle.Status   = E_SubStatus.Error) OR
+    (ifAxes.Status      = E_SubStatus.Error) OR
+    (ifNCChannel.Status = E_SubStatus.Error) OR
+    (ifHMI.Status       = E_SubStatus.Error) OR
+    (ifAlarms.Status    = E_SubStatus.Error);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_DispatchRequest" Id="{88840ebd-9ffd-44b1-a160-1256ed09ac93}">
+      <Declaration><![CDATA[METHOD M_DispatchRequest : BOOL
+VAR_INPUT
+	eReq : E_PackMLState;
+END_VAR
+
+//  Writes the requested state to every submodule interface.
+//  ★ ADD NEW SUBMODULES HERE (one line each).
+// ────────────────────────────────────────────────────────────────────────────]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ── body ────────────────────────────────────────────────────────────────────
+ifSpindle.Request   := eReq;
+ifAxes.Request      := eReq;
+ifNCChannel.Request := eReq;
+ifHMI.Request       := eReq;
+ifAlarms.Request    := eReq;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_EnterState" Id="{75e1d0df-d012-4691-aec2-277706489031}">
+      <Declaration><![CDATA[METHOD M_EnterState : BOOL
+VAR_INPUT
+	eNewState : E_PackMLState;
+END_VAR
+
+//  Transitions to a new state and dispatches the request to all submodules.
+//  Submodules that have no logic for a given state should simply
+//  self-complete (see FB_PackML_SubBase).
+// ────────────────────────────────────────────────────────────────────────────]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ── body ────────────────────────────────────────────────────────────────────
+eState := eNewState;
+tEntry := TIME();
+
+// Dispatch: set every sub's Request to the new state.
+// Subs that are already Busy will see the new request on their next cycle.
+M_DispatchRequest(eNewState);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_FirstErrorCode" Id="{6d2c2c44-9a13-4c37-8edc-820148a979d3}">
+      <Declaration><![CDATA[METHOD M_FirstErrorCode : DINT
+VAR_INPUT
+END_VAR
+
+//  Returns the ErrorCode from the first sub reporting Error.
+//  Used when escalating a sub fault to Main's fault latch.
+// ────────────────────────────────────────────────────────────────────────────]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ── body ────────────────────────────────────────────────────────────────────
+IF ifSpindle.Status   = E_SubStatus.Error THEN M_FirstErrorCode := ifSpindle.ErrorCode;
+ELSIF ifAxes.Status   = E_SubStatus.Error THEN M_FirstErrorCode := ifAxes.ErrorCode;
+ELSIF ifNCChannel.Status = E_SubStatus.Error THEN M_FirstErrorCode := ifNCChannel.ErrorCode;
+ELSIF ifHMI.Status    = E_SubStatus.Error THEN M_FirstErrorCode := ifHMI.ErrorCode;
+ELSIF ifAlarms.Status = E_SubStatus.Error THEN M_FirstErrorCode := ifAlarms.ErrorCode;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_FirstErrorText" Id="{3faf9966-8c98-41d5-bce8-836241c71928}">
+      <Declaration><![CDATA[METHOD M_FirstErrorText : STRING(80)
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ── body ────────────────────────────────────────────────────────────────────
+IF ifSpindle.Status   = E_SubStatus.Error THEN M_FirstErrorText := ifSpindle.ErrorText;
+ELSIF ifAxes.Status   = E_SubStatus.Error THEN M_FirstErrorText := ifAxes.ErrorText;
+ELSIF ifNCChannel.Status = E_SubStatus.Error THEN M_FirstErrorText := ifNCChannel.ErrorText;
+ELSIF ifHMI.Status    = E_SubStatus.Error THEN M_FirstErrorText := ifHMI.ErrorText;
+ELSIF ifAlarms.Status = E_SubStatus.Error THEN M_FirstErrorText := ifAlarms.ErrorText;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_StateName" Id="{a543c54c-07f1-4d58-8b79-ca6950782a46}">
+      <Declaration><![CDATA[METHOD M_StateName : STRING(32)
+VAR_INPUT
+	eS : E_PackMLState;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ── body ────────────────────────────────────────────────────────────────────
+CASE eS OF
+    E_PackMLState.Stopped    : M_StateName := 'Stopped';
+    E_PackMLState.Resetting  : M_StateName := 'Resetting';
+    E_PackMLState.Idle       : M_StateName := 'Idle';
+    E_PackMLState.Starting   : M_StateName := 'Starting';
+    E_PackMLState.Execute    : M_StateName := 'Execute';
+    E_PackMLState.Completing : M_StateName := 'Completing';
+    E_PackMLState.Complete   : M_StateName := 'Complete';
+    E_PackMLState.Holding    : M_StateName := 'Holding';
+    E_PackMLState.Held       : M_StateName := 'Held';
+    E_PackMLState.Unholding  : M_StateName := 'Unholding';
+    E_PackMLState.Stopping   : M_StateName := 'Stopping';
+    E_PackMLState.Aborting   : M_StateName := 'Aborting';
+    E_PackMLState.Aborted    : M_StateName := 'Aborted';
+    ELSE                       M_StateName := 'Undefined';
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_PackML_Main">
+      <LineId Id="58" Count="9" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="69" Count="162" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="235" Count="5" />
+      <LineId Id="234" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PackML_Main.M_AcknowledgeSubs">
+      <LineId Id="11" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PackML_Main.M_AllSubsDone">
+      <LineId Id="6" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PackML_Main.M_AnySubError">
+      <LineId Id="6" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PackML_Main.M_DispatchRequest">
+      <LineId Id="7" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PackML_Main.M_EnterState">
+      <LineId Id="6" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PackML_Main.M_FirstErrorCode">
+      <LineId Id="9" Count="6" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PackML_Main.M_FirstErrorText">
+      <LineId Id="6" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PackML_Main.M_StateName">
+      <LineId Id="7" Count="15" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
