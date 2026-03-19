@@ -4,23 +4,32 @@ import {
   List, // Note: Use 'List' or 'ClipboardList'
   Target, 
   Cpu, 
-  Settings 
+  Settings,
+  type LucideIcon,
+  Workflow,
 } from 'lucide-react';
-
-type TabID = 'MAIN' | 'STATUS' | 'EVENTS' | 'OFFSETS' | 'DIAGNOSTICS';
+import type { TabID } from '../types/tabs';
 
 interface SidebarProps {
   activeTab: TabID;
   setActiveTab: (tab: TabID) => void;
 }
 
+interface MenuItem {
+  id: TabID;
+  icon: LucideIcon;
+  label: string;
+}
+
 export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { id: 'MAIN', icon: LayoutDashboard, label: 'Main Control' },
     { id: 'STATUS', icon: Activity, label: 'Machine Status' },
     { id: 'EVENTS', icon: List, label: 'Alarms & Logs' }, // Using 'List-bullet' logic
+    { id: 'STATE_DIAGRAMS', icon: Workflow, label: 'State Diagrams' },
     { id: 'OFFSETS', icon: Target, label: 'Work Offsets' },
     { id: 'DIAGNOSTICS', icon: Cpu, label: 'ADS Diagnostics' },
+
   ];
 
   return (
@@ -30,7 +39,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
         return (
           <button
             key={item.id}
-            onClick={() => setActiveTab(item.id as TabID)}
+            onClick={() => setActiveTab(item.id)}
             title={item.label}
             className={`
               relative group p-3 rounded-xl transition-all duration-200

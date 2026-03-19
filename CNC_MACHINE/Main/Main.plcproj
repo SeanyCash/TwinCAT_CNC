@@ -6,7 +6,7 @@
     <ProjectGuid>{64ea087b-af6f-4600-ab87-345cedca4f88}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <Name>Main</Name>
-    <ProgramVersion>3.1.4022.7</ProgramVersion>
+    <ProgramVersion>3.1.4026.19</ProgramVersion>
     <Application>{5ca1f0e5-9ddf-4df6-b418-f0cc49430edc}</Application>
     <TypeSystem>{1e467e10-31fb-4b34-9478-239545c017d1}</TypeSystem>
     <Implicit_Task_Info>{517f5362-fdad-45fe-923e-8ea9252b5942}</Implicit_Task_Info>
@@ -23,8 +23,9 @@
     </Compile>
     <Compile Include="DUTs\Enums\E_PML_Command.TcDUT">
       <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
-    <Compile Include="DUTs\Enums\E_PackMLState.TcDUT">
+    <Compile Include="DUTs\Enums\E_MachineState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\Enums\E_Programs.TcDUT">
@@ -41,12 +42,15 @@
     </Compile>
     <Compile Include="DUTs\Interfaces\I_PackML_ModulePort.TcIO">
       <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="DUTs\Interfaces\I_PackML_StateHooks.TcIO">
       <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="DUTs\Interfaces\I_PackML_StateMethods.TcIO">
       <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="DUTs\Structures\PackML\ST_SubInterface.TcDUT">
       <SubType>Code</SubType>
@@ -102,9 +106,11 @@
     </Compile>
     <Compile Include="POUs\PackML\FB_PackML_Main.TcPOU">
       <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="POUs\PackML\FB_PackML_SubBase.TcPOU">
       <SubType>Code</SubType>
+      <ExcludeFromBuild>true</ExcludeFromBuild>
     </Compile>
     <Compile Include="POUs\Utilities\FB_ModbusRTU_SerialComms.TcPOU">
       <SubType>Code</SubType>

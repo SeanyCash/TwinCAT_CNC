@@ -1,44 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="FB_SpindleFunctions" Id="{d33eb993-f1a5-484e-9d4d-ae7861108719}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_SpindleFunctions IMPLEMENTS I_HMI;
 
 // Spindle VFD control for Invertek Optidrive E3 (240V single phase input, 240V three phase output, 2.2KW) and GMT 400hz 2.2kw 3 HP Spindle using Modbus RTU
 VAR_INPUT
     
-nSpindleSpeedFromNC     : UINT;
-bManualSpindleOverride  : BOOL;
+nSpindleSpeedFromNC     		: UINT;
+bManualSpindleOverride  		: BOOL;
+bEnable							: BOOL;
+bStart							: BOOL;
+bReset							: BOOL;
+eRequestedState					: E_MachineState;
 
 END_VAR
 
 
 VAR
 	
-fbModbusRTUComms			: FB_ModbusRTU_SerialComms;
-    
- fbModbusMasterEL           : ModbusRtuMasterV2_KL6x22B;
- fbSpeedRefScale            : FB_CTRL_SCALE;
- fbSpeedRefScaleforHMI      : FB_CTRL_SCALE;
- fbMessage		    		: FB_TcMessage;
- stSpeedRefScaleParams            : ST_CTRL_SCALE_PARAMS;
- stSpeedRefScaleParamsforHMI      : ST_CTRL_SCALE_PARAMS;
- fScaledSpindleSpeedRef    : LREAL;
- nModbusReadBlk1    : ARRAY [1..46] OF INT;
- nModbusReadBlk2    : ARRAY [129..188] OF INT;
+
+ eLastState						: E_MachineState;
+ bStateEntry					: BOOL;
+ 
+ fbModbusMasterEL           	: ModbusRtuMasterV2_KL6x22B;
+ fbSpeedRefScale            	: FB_CTRL_SCALE;
+ fbSpeedRefScaleforHMI      	: FB_CTRL_SCALE;
+ fbMessage		    			: FB_TcMessage;
+ stSpeedRefScaleParams       	: ST_CTRL_SCALE_PARAMS;
+ stSpeedRefScaleParamsforHMI	: ST_CTRL_SCALE_PARAMS;
+ fScaledSpindleSpeedRef    		: LREAL;
+ nModbusReadBlk1    			: ARRAY [1..46] OF INT;
+ nModbusReadBlk2    			: ARRAY [129..188] OF INT;
  // Need to put into a modbus DUT
- nModbusID          : BYTE :=1;
- nModbusReadQty     : WORD :=24;
- nModbusReadAddr    : WORD;
- bReadExecute       : BOOL;
- bDiagExecute       : BOOL;
- eReadErrorID       : MODBUS_ERRORS;
- nCbRead            : UINT;
- bReadBusy          : BOOL;
- bReadError         : BOOL;
- bWriteBusy         : BOOL;
- bWriteError        : BOOL;
- nCbWrite           : UINT;
- bResetSerialComm   : BOOL;
+ nModbusID          			: BYTE :=1;
+ nModbusReadQty     			: WORD :=24;
+ nModbusReadAddr    			: WORD;
+ bReadExecute       			: BOOL;
+ bDiagExecute       			: BOOL;
+ eReadErrorID       			: MODBUS_ERRORS;
+ nCbRead            			: UINT;
+ bReadBusy          			: BOOL;
+ bReadError         			: BOOL;
+ bWriteBusy         			: BOOL;
+ bWriteError        			: BOOL;
+ nCbWrite           			: UINT;
+ bResetSerialComm   			: BOOL;
  
  bWriteDriveCommand             : BOOL;
  bWriteDriveSetpoint            : BOOL;
@@ -52,27 +58,30 @@ fbModbusRTUComms			: FB_ModbusRTU_SerialComms;
  trigWriteExecute               : R_TRIG;
  PulseWriteExecute              : TP;
  
- eVFDErrors         : E_VFDErrors;
- stSpindleStatus	: ST_SpindleStatus;
- stSpindleParams    : ST_SpindleParameters;
- stSpindleControl   : ST_SpindleControl;
+ eVFDErrors         			: E_VFDErrors;
+ stSpindleStatus				: ST_SpindleStatus;
+ stSpindleParams    			: ST_SpindleParameters;
+ stSpindleControl   			: ST_SpindleControl;
 
 // Sequence Enumerations
- nEnableSpindleSeq      :INT;
- eReadVFDParamsSeq      :(INIT_FIRST,READ_FIRST_BLOCK,INIT_SECOND,READ_SECOND_BLOCK,FINISH);
- eSetSpindleSpeedSeq    :(START,SET_ACCEL,SET_SPEED,FINISH_SPEED,START_ENABLE,ENABLE_DRIVE,RESET_DRIVE,FINISH_ENABLE,SPINDLE_ACTIVE);
- eCoastStop             :(INIT_STOP,ENABLE_STOP,WAIT_FOR_STOPPED,DISABLE_DRIVE,FINISH_STOP);
+ nEnableSpindleSeq      		:INT;
+ eReadVFDParamsSeq      		:(INIT_FIRST,READ_FIRST_BLOCK,INIT_SECOND,READ_SECOND_BLOCK,FINISH);
+ eSetSpindleSpeedSeq    		:(START,SET_ACCEL,SET_SPEED,FINISH_SPEED,START_ENABLE,ENABLE_DRIVE,RESET_DRIVE,FINISH_ENABLE,SPINDLE_ACTIVE);
+ eCoastStop             		:(INIT_STOP,ENABLE_STOP,WAIT_FOR_STOPPED,DISABLE_DRIVE,FINISH_STOP);
 
-bTestEnable: BOOL;
-bTestSetSpeed: BOOL;
-bTestAccel  : BOOL;
-nManualSpindleSetpoint  : UINT;
-nSpindleSetpoint        : UINT;
+
+nManualSpindleSetpoint  		: UINT;
+nSpindleSetpoint        		: UINT;
 
 END_VAR
 
 VAR_OUTPUT
     bSpindleAtRequestedSpeed    : BOOL;
+	eCurrentState				: E_MachineState;
+	bStateDone					: BOOL;
+	bReady						: BOOL;
+	bBusy						: BOOL;
+	bError						: BOOL;
 END_VAR
 
 
@@ -83,26 +92,9 @@ M_InputMapping();
 M_OutputMapping();
 M_DriveErrors();
 M_HMI_In();
-M_HMI_Out();
-M_SpindleTesting();
-
-(*
-                                       
-fbModbusRTUComms(
-	nModbusStationAddress:= , 
-	bReadExecute:= , 
-	nReadQuantity:= , 
-	nModbusReadDataAddress:= , 
-	nModbusReadData:= , 
-	bWriteExecute:= , 
-	nWriteQuantity:= , 
-	nModbusWriteDataAddress:= , 
-	nModbusWriteData:= , 
-	bReadComplete=> , 
-	bReadFailed=> , 
-	bWriteComplete=> , 
-	bWriteFailed=> );	*)]]></ST>
+M_HMI_Out();]]></ST>
     </Implementation>
+    <Folder Name="State Machine" Id="{3873f6fc-5a3d-4287-91cc-401f0647d882}" />
     <Method Name="M_ActiveSpeedChange" Id="{8c91d8ac-e153-43a1-8a22-2e9bee5bdf48}">
       <Declaration><![CDATA[METHOD M_ActiveSpeedChange : BOOL
 VAR_INPUT
@@ -163,7 +155,7 @@ ENABLE_STOP:
      END_IF
      
 WAIT_FOR_STOPPED:
-    IF stSpindleStatus.nOutputFreq = 0 THEN
+    IF stSpindleStatus.nOutputFreq <= 0.1 THEN
         PulseWriteExecute(IN:=FALSE);
         eCoastStop:=DISABLE_DRIVE; 
      END_IF
@@ -280,6 +272,7 @@ END_CASE]]></ST>
     <Method Name="M_FastStop" Id="{de81cf2d-b911-460a-8df3-f1e95bcc53de}">
       <Declaration><![CDATA[METHOD M_FastStop : BOOL
 VAR_INPUT
+    bExecute    : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -561,7 +554,24 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[(*                                                    
+RESET_DRIVE:
+    bWriteTimerExec := TRUE;
+    stSpindleControl.bRunEnable:= TRUE;
+    stSpindleControl.bResetReq := TRUE;
+
+    fbModbusMasterEL.WriteSingleRegister(   
+                                                                UnitID:=1,
+                                                                Quantity:=1,
+                                                                MBAddr:=0,
+                                                                cbLength:=SIZEOF(nModbusWriteDriveCommand),
+                                                                pMemoryAddr:=ADR(nModbusWriteDriveCommand),
+                                                                Execute:=TRUE,
+                                                                Timeout:=T#400MS, );
+     IF stSpindleControl.bRunEnable AND stSpindleControl.bResetReq AND tWriteTimer.Q THEN 
+          eSetSpindleSpeedSeq:=FINISH_ENABLE;
+     END_IF 
+*)]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_SetSpeed" Id="{0d91e475-0382-4cfa-b413-5ce8843a481a}">
@@ -576,7 +586,6 @@ CASE eSetSpindleSpeedSeq OF
     
 START:
     M_SetSpeed:=FALSE;
-    bSpindleAtRequestedSpeed := FALSE;
     bWriteDriveSetpoint := FALSE;
     bWriteAccel_Decel := FALSE;
     IF stSpindleStatus.bDriveReady AND stSpindleStatus.bDriveEnabled AND bExecute THEN
@@ -663,30 +672,11 @@ ENABLE_DRIVE:
         trigWriteExecute(CLK := FALSE);
         eSetSpindleSpeedSeq:=FINISH_ENABLE; 
      END_IF 
-(*                                                    
-RESET_DRIVE:
-    bWriteTimerExec := TRUE;
-    stSpindleControl.bRunEnable:= TRUE;
-    stSpindleControl.bResetReq := TRUE;
 
-    fbModbusMasterEL.WriteSingleRegister(   
-                                                                UnitID:=1,
-                                                                Quantity:=1,
-                                                                MBAddr:=0,
-                                                                cbLength:=SIZEOF(nModbusWriteDriveCommand),
-                                                                pMemoryAddr:=ADR(nModbusWriteDriveCommand),
-                                                                Execute:=TRUE,
-                                                                Timeout:=T#400MS, );
-     IF stSpindleControl.bRunEnable AND stSpindleControl.bResetReq AND tWriteTimer.Q THEN 
-          eSetSpindleSpeedSeq:=FINISH_ENABLE;
-     END_IF 
-*)
 FINISH_ENABLE:
  
 	IF stSpindleStatus.bDriveRunning AND stSpindleStatus.nSpeedRefSetpoint = nModbusWriteDriveSetpoint THEN
-		bSpindleAtRequestedSpeed := TRUE;
     	M_SetSpeed:=TRUE;
-    	bExecute := FALSE;
 		eSetSpindleSpeedSeq :=START;
 		fbMessage.CreateEx(TC_Events.CNC_Events.Spindle_Active,0); 
     	fbMessage.Send(0);
@@ -694,60 +684,74 @@ FINISH_ENABLE:
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_SpindleTesting" Id="{27b70598-57d2-4a29-8336-ceb84a506860}">
-      <Declaration><![CDATA[METHOD M_SpindleTesting : BOOL
+    <Method Name="StateManager" Id="{41ddc753-3b32-4bf2-8aa9-5484efb3ad6b}" FolderPath="State Machine\">
+      <Declaration><![CDATA[METHOD StateManager : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF bTestEnable THEN
+        <ST><![CDATA[bStateEntry := (eCurrentState <> eLastState);
 
-fbModbusMasterEL.WriteSingleRegister(   
-                                            UnitID:=1,
-                                            Quantity:=1,
-                                            MBAddr:=0,
-                                            cbLength:=SIZEOF(nModbusWriteDriveCommand),
-                                            pMemoryAddr:=ADR(nModbusWriteDriveCommand),
-                                            Execute:=bTestEnable,
-                                            Timeout:=T#400MS, );
-                                            
-END_IF
- 
-IF bTestAccel THEN                                                          
-fbModbusMasterEL.WriteSingleRegister(   
-                                             UnitID:=1,
-                                             Quantity:=1,
-                                             MBAddr:=3,
-                                             cbLength:=SIZEOF(nModbusWriteDriveAccel_Decel),
-                                             pMemoryAddr:=ADR(nModbusWriteDriveAccel_Decel),
-                                             Execute:=bTestAccel,
-                                             Timeout:=T#400MS,
-                                             Busy => bWriteBusy );
-                                             
-END_IF
+CASE eCurrentState OF
 
-IF bTestSetSpeed THEN
-fbModbusMasterEL.WriteSingleRegister(   
-                                              UnitID:=1,
-                                              Quantity:=1,
-                                              MBAddr:=1,
-                                              cbLength:=SIZEOF(nModbusWriteDriveSetpoint),
-                                              pMemoryAddr:=ADR(nModbusWriteDriveSetpoint),
-                                              Execute:=bTestSetSpeed,
-                                              Timeout:=T#400MS,
-                                              Busy => bWriteBusy );
-END_IF                                                            ]]></ST>
+    E_MachineState.IDLE:
+        // Follower Logic: If Master requests STARTING or EXECUTE, we move.
+        IF eRequestedState = E_MachineState.STARTING OR eRequestedState = E_MachineState.EXECUTE THEN
+            eCurrentState := E_MachineState.STARTING;
+        END_IF
+        
+    E_MachineState.STARTING:
+        // We stay here until the Method confirms we are up to speed
+        IF M_SetSpeed(bExecute := bStateEntry) THEN
+            eCurrentState := E_MachineState.EXECUTE;
+			bStateDone := TRUE;
+        END_IF
+        
+    E_MachineState.EXECUTE:
+        // Global Check: If VFD trips, jump to Aborting
+        IF eVFDErrors <> 0 THEN
+            eCurrentState := E_MachineState.ABORTING;
+        
+        // Follower Logic: If Master moves to COMPLETING or STOPPING, we follow
+        ELSIF eRequestedState = E_MachineState.COMPLETING OR eRequestedState = E_MachineState.STOPPED THEN
+            eCurrentState := E_MachineState.COMPLETING; // Use your ramp-down logic
+			bStateDone := TRUE;
+        END_IF
+    
+    E_MachineState.COMPLETING:
+        // Action: Coast/Ramp down
+        IF M_CoastStop(bExecute := bStateEntry) THEN
+             eCurrentState := E_MachineState.IDLE;
+			 bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.ABORTING:
+        // Force an immediate stop
+        IF M_FastStop(bExecute := bStateEntry) THEN
+            eCurrentState := E_MachineState.ABORTED;
+			bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.ABORTED:
+        // Follower Logic: Only exit if the Master requests RESETTING
+        IF eRequestedState = E_MachineState.RESETTING AND (eVFDErrors = 0) THEN
+            eCurrentState := E_MachineState.IDLE;
+			bStateDone := TRUE;
+            // Clear message logic here...
+        END_IF
+
+END_CASE
+
+eLastState := eCurrentState; // Don't forget to update this at the end!
+// Reset bStateDone if the Master changes the request
+IF eCurrentState <> eRequestedState THEN
+    bStateDone := FALSE;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_SpindleFunctions">
       <LineId Id="2312" Count="3" />
       <LineId Id="2317" Count="1" />
-      <LineId Id="2560" Count="0" />
-      <LineId Id="2323" Count="2" />
-      <LineId Id="2639" Count="4" />
-      <LineId Id="2645" Count="3" />
-      <LineId Id="2650" Count="3" />
-      <LineId Id="1542" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ActiveSpeedChange">
       <LineId Id="6" Count="0" />
@@ -935,13 +939,13 @@ END_IF                                                            ]]></ST>
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_ResetDriveError">
+      <LineId Id="9" Count="16" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_SpindleFunctions.M_SetSpeed">
       <LineId Id="140" Count="0" />
       <LineId Id="151" Count="0" />
       <LineId Id="10" Count="2" />
-      <LineId Id="109" Count="0" />
       <LineId Id="164" Count="0" />
       <LineId Id="191" Count="0" />
       <LineId Id="15" Count="1" />
@@ -991,30 +995,30 @@ END_IF                                                            ]]></ST>
       <LineId Id="274" Count="0" />
       <LineId Id="299" Count="0" />
       <LineId Id="224" Count="0" />
-      <LineId Id="227" Count="19" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="245" Count="1" />
       <LineId Id="250" Count="0" />
       <LineId Id="275" Count="0" />
-      <LineId Id="283" Count="0" />
       <LineId Id="253" Count="0" />
-      <LineId Id="202" Count="0" />
       <LineId Id="277" Count="2" />
       <LineId Id="276" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_SpindleFunctions.M_SpindleTesting">
-      <LineId Id="36" Count="1" />
-      <LineId Id="6" Count="6" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="38" Count="1" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="7" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="41" Count="1" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="24" Count="8" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="45" Count="0" />
+    <LineIds Name="FB_SpindleFunctions.StateManager">
+      <LineId Id="71" Count="13" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="85" Count="9" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="95" Count="5" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="101" Count="5" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="107" Count="5" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="113" Count="4" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="119" Count="2" />
+      <LineId Id="118" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

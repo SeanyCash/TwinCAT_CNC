@@ -12,7 +12,7 @@
     <HmiVersion>1.0.0.0</HmiVersion>
     <Name>CNC</Name>
     <HmiCommunicationRouterPort>10117</HmiCommunicationRouterPort>
-    <HmiCommunicationServerPort>3000</HmiCommunicationServerPort>
+    <HmiCommunicationServerPort>3002</HmiCommunicationServerPort>
     <HmiInitial>1.10.1336.404</HmiInitial>
     <HmiRecent>14.3.602.1</HmiRecent>
     <TargetFrameworkMoniker>native,Version=v1.12.0,Profile=tchmi</TargetFrameworkMoniker>

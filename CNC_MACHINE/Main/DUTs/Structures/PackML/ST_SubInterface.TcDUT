@@ -4,7 +4,7 @@
     <Declaration><![CDATA[TYPE ST_SubInterface :
 STRUCT
 	    // ── Main → Sub ───────────────────────────────────────────────────────────
-    Request     : E_PackMLState;    // Main tells sub which state to act on
+    Request     : E_MachineState;    // Main tells sub which state to act on
                                     // Main sets to Idle to acknowledge Done/Error
 
     // ── Sub → Main ───────────────────────────────────────────────────────────

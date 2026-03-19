@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="FB_NCI" Id="{4f24b964-7729-4762-90ad-698d0a17343d}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_NCI IMPLEMENTS I_HMI; 
 VAR_INPUT
 	bExecute			: BOOL;
     bStop               : BOOL;
     sPrgName			: STRING(255);
+	eRequestedState		: E_MachineState;
 	
 	
 END_VAR
@@ -17,6 +18,8 @@ VAR_OUTPUT
     out_stItpToPlc	        : NCTOPLC_NCICHANNEL_REF;
     bSetSpindleSpeed        : BOOL;
     bEnableDustCollector    : BOOL;
+	eCurrentState			: E_MachineState;
+	bStateDone				: BOOL;
 END_VAR
 VAR_IN_OUT
 	stX					: AXIS_REF;
@@ -453,7 +456,7 @@ CASE nMCodeSeq OF
   
     IF NOT bSpindleActive THEN 
      tMCodePulse (IN:=TRUE,PT:=T#300MS);
-     bSpindleActive   := fbSpindle.M_SetSpeed(bExecute:=tMCodePulse.Q);
+     bSpindleActive   := fbSpindle.M_SetSpeed(bExecute:=tMCodePulse.Q); // Change this to call fbSpindle(bStart := TRUE) to trigger the spindles internal PackML style state machine. then IF fbSpindle.bDone THEN continue....
     END_IF
     IF bSpindleActive THEN
         bEnableDustCollector := TRUE;

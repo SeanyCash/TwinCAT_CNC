@@ -1,15 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC EXTENDS FB_PackML_SubBase IMPLEMENTS I_HMI
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC IMPLEMENTS I_HMI
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
 	
-	//  Only overrides the states where spindle has real work to do.
-	//  All other states auto-complete via the base class defaults.
+	
+	eCurrentState					: E_MachineState;
+	eRequestedState					: E_MachineState;
+ 	eLastState						: E_MachineState;
+ 	bStateEntry						: BOOL;
+	tWatchdogTimer					: TON;
+	sErrorMsg						: STRING;
+	bSubmoduleFault					: BOOL;
 	
     // Event Logger Instances	
     fbEventLogger	: FB_TcEventLogger;
@@ -113,9 +119,15 @@ VAR
     bXHomeDone  : BOOL;
     bZHomeDone  : BOOL;
 	
-	ProgramCall	: E_Programs;
-    sCurrentProgram : STRING;
-    fbStringTrimmer : FB_StringTrimmer;
+	bStartRequest	: BOOL;
+	bStopRequest	: BOOL;
+	bHoldRequest	: BOOL;
+	bResetRequest	: BOOL;
+	
+	ProgramCall			: E_Programs;
+	eHmiProgramRequest 	: E_Programs;
+    sCurrentProgram 	: STRING;
+    fbStringTrimmer 	: FB_StringTrimmer;
     
     // CoE Polling Timer
     tPollingTimerTP     : TP;
@@ -139,6 +151,8 @@ IF bSendEvent THEN
     fbMessage.Send(0); 
 END_IF
 
+StateManager();
+
 // Polling Timer
 
 tPollingTimerTP(IN:= NOT tPollingTimerTOF.Q, PT := T#100MS, );
@@ -146,7 +160,7 @@ tPollingTimerTOF(IN:= tPollingTimerTP.Q, PT := T#100MS);
 
 bPollingPulse := tPollingTimerTP.Q;
 
-
+WatchdogTimer();
 
 // Trigger Axis Gearing
 
@@ -159,13 +173,6 @@ rGearOutTrigger(CLK:= bGearOutTrigger);
 trigAxisEnable(CLK := stHMI_In.bAxisEnable);
 
 
-// Call Axis Status Action
-
-Y_Ref.ReadStatus();
-Y2_Ref.ReadStatus();
-X_Ref.ReadStatus();
-Z_Ref.ReadStatus();
-M_CoEStatus();
 
 // Call HMI Interface Methods
 
@@ -176,7 +183,264 @@ M_HMI_Out();
 
 M_LimitSwitchLogic();
 
-// Motion Calls
+M_Motion();
+                                        
+fbNCI(
+	        bExecute:= bExecuteNCProgram,
+            bStop:= bStopExecute,
+            sPrgName := sPrgName, 
+	        bBusy=> , 
+	        bError=> , 
+	        bDone=> , 
+	        stX:=X_Ref, 
+	        stY:=Y_Ref, 
+	        stZ:=Z_Ref, 
+            sLoadedProgram=>sCurrentProgram,
+            out_sTItpToPlc => CNC_stItpToPlc,
+            bEnableDustCollector => bEnableDustCollector);
+            
+
+// All Axes Ready Bit
+
+bAllAxesReady:= Y_MC_OUT.bPowerStatus AND Y2_MC_OUT.bPowerStatus AND X_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
+bAllAxesHomed:= Y_Ref.Status.Homed AND Y2_Ref.Status.Homed AND X_Ref.Status.Homed AND Z_Ref.Status.Homed;
+
+// Method Calls
+
+M_ProgramLoader();
+M_Inputs();
+M_Outputs();]]></ST>
+    </Implementation>
+    <Folder Name="State Machine" Id="{d3da6e27-ea48-4171-b5b0-87034ad0f838}" />
+    <Method Name="M_CoEStatus" Id="{478f4fc3-02da-43bf-9a5d-4cea12eb7ced}">
+      <Declaration><![CDATA[METHOD M_CoEStatus : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbYAxisCoEStatus(
+	sNetId:= sAMSNetID , 
+	nSlaveAddr:= 1003, 
+	nSubIndex:= 2, 
+	nIndex:= 16#F900, 
+	pDstBuf:= ADR(nYDriveTemp), 
+	cbBufLen:= SIZEOF(nYDriveTemp), 
+	bExecute:= bPollingPulse, 
+	tTimeout:= , 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> , 
+	cbRead=> );
+    
+fbY2AxisCoEStatus(
+	sNetId:= sAMSNetID , 
+	nSlaveAddr:= 1004, 
+	nSubIndex:= 2, 
+	nIndex:= 16#F900, 
+	pDstBuf:= ADR(nY2DriveTemp), 
+	cbBufLen:= SIZEOF(nY2DriveTemp), 
+	bExecute:= bPollingPulse, 
+	tTimeout:= , 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> , 
+	cbRead=> );
+    
+fbXAxisCoEStatus(
+	sNetId:= sAMSNetID , 
+	nSlaveAddr:= 1005, 
+	nSubIndex:= 2, 
+	nIndex:= 16#F900, 
+	pDstBuf:= ADR(nXDriveTemp), 
+	cbBufLen:= SIZEOF(nXDriveTemp), 
+	bExecute:= bPollingPulse, 
+	tTimeout:= , 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> , 
+	cbRead=> );
+    
+fbZAxisCoEStatus(
+	sNetId:= sAMSNetID , 
+	nSlaveAddr:= 1006, 
+	nSubIndex:= 2, 
+	nIndex:= 16#F900, 
+	pDstBuf:= ADR(nZDriveTemp), 
+	cbBufLen:= SIZEOF(nZDriveTemp), 
+	bExecute:= bPollingPulse, 
+	tTimeout:= , 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> , 
+	cbRead=> );]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_In" Id="{d9c64941-408b-44a2-8a91-175c813c4e4d}">
+      <Declaration><![CDATA[METHOD M_HMI_In : BOOL
+
+VAR
+
+
+
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Select Homing Various Programs
+
+trigProgramCall(CLK := stHMI_In.bTriggerProgramCall);
+IF trigProgramCall.Q THEN   
+    eHmiProgramRequest := stHMI_In.ProgramCall;    
+END_IF
+
+// Trigger axis enable button toggle but don't allow it to overwrite the program controlled axis enable
+
+IF trigAxisEnable.Q THEN
+    bAxisEnable := NOT bAxisEnable; // Simplified toggle
+END_IF
+
+// Trigger Y coupling
+
+bGearInTrigger := stHMI_In.bCoupleYAxes;
+bGearOutTrigger := stHMI_In.bDecoupleAxes;
+
+// 2. Production Requests
+bStartRequest := stHMI_In.bStart;
+bStopRequest := stHMI_In.bStop;
+bHoldRequest := stHMI_In.bHold;
+
+// Axis Reset
+
+bAxisReset := stHMI_In.bReset;
+
+// Axis Jogging 
+
+// NC Program Name
+
+fbStringTrimmer(
+                TriggerSequence:=stHMI_In.bInitiateNCProgramSelect,
+                TrimLeft:=3,
+                TrimRight:=3,
+                STR:=stHMI_In.sPrgName,
+                sString => sPrgName     );   
+                
+// Dust Collector
+bEnableDustCollectorPB := stHMI_In.bEnableDustCollectorPB;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Out" Id="{579ae688-d5bb-4d46-9cff-7ebda2f9644e}">
+      <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Limit and Homing Switch Mapping
+
+stHMI_Out.bY1HomeSwitch := bYHomingSwitch;	
+stHMI_Out.bY2HomeSwitch := bY2HomingSwitch;
+stHMI_Out.bYLimitSwitch := bYLimitSwitch;	
+stHMI_Out.bXHomeSwitch := bXHomingSwitch;
+stHMI_Out.bXLimitSwitch := bXLimitSwitch;	
+stHMI_Out.bZHomeSwitch  := bZHomingSwitch;
+stHMI_Out.bYAxesCoupled := Y2_Ref.Status.Coupled;
+
+// CoE Read EL7041 Drive Temps
+stHMI_Out.nYDriveTemp   := nYDriveTemp;
+stHMI_Out.nY2DriveTemp  := nY2DriveTemp;
+stHMI_Out.nXDriveTemp   := nXDriveTemp;
+stHMI_Out.nZDriveTemp   := nZDriveTemp;
+
+//
+stHMI_Out.bAllAxesReady	:= bAllAxesReady;
+
+// Main State machine status
+stHMI_Out.eCurrentState := eCurrentState;
+
+// Pass Axis Ref info to HMI
+
+stHMI_Out.stYRef  := Y_Ref;
+stHMI_Out.stY2Ref := Y2_Ref;
+stHMI_Out.stXRef  := X_Ref;
+stHMI_Out.stZRef  := Z_Ref;
+
+stHMI_Out.fActPosX:= LREAL_TO_REAL(X_Ref.NcToPlc.ActPos);
+stHMI_Out.fActPosY:= LREAL_TO_REAL(Y_Ref.NcToPlc.ActPos);
+stHMI_Out.fActPosY2:= LREAL_TO_REAL(Y2_Ref.NcToPlc.ActPos);
+stHMI_Out.fActPosZ:= LREAL_TO_REAL(Z_Ref.NcToPlc.ActPos);
+
+stHMI_Out.sCurrentProgramSelected := sCurrentProgram;
+
+
+
+
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Inputs" Id="{44930261-f7b3-46c2-ba50-0ddd8b114d05}">
+      <Declaration><![CDATA[METHOD M_Inputs : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Homing Switch Inputs
+
+bYHomingSwitch	:= i_bYHomingSwitch;	
+bY2HomingSwitch	:= i_bY2HomingSwitch;	
+bXHomingSwitch	:= i_bXHomingSwitch;	
+bZHomingSwitch	:= i_bZHomingSwitch;
+
+// Limit Switch Inputs
+
+bYLimitSwitch	:= i_bYLimitSwitch;
+bXLimitSwitch	:= i_bXLimitSwitch;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_LimitSwitchLogic" Id="{d221ad2e-2e3c-403f-a0d1-ca7284c8dd6e}">
+      <Declaration><![CDATA[METHOD M_LimitSwitchLogic : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Limit Switch Logic // Ignore "Home sensors" while running home routines. otherwise use Homing sensors to trigger a limit switch stop
+
+IF ProgramCall <> eNull THEN    
+    bYNegativeLimit  := FALSE;
+    bY2NegativeLimit := FALSE;
+    bXNegativeLimit  := FALSE;
+    bZPositiveLimit  := FALSE;
+    bYStopTrigger(CLK:= bYLimitSwitch);
+    bXStopTrigger(CLK:=bXLimitSwitch);
+    bZStopTrigger(CLK:= FALSE);    
+ELSE
+    bYNegativeLimit := bYHomingSwitch;
+    bY2NegativeLimit := bY2HomingSwitch;
+    bXNegativeLimit := bXHomingSwitch;
+    bZPositiveLimit := bZHomingSwitch;
+    //Stop Triggers
+    bYStopTrigger(CLK:=bYNegativeLimit OR bY2NegativeLimit OR bYLimitSwitch);
+    bXStopTrigger(CLK:=bXNegativeLimit OR bXLimitSwitch);
+    bZStopTrigger(CLK:=bZPositiveLimit);    
+END_IF
+
+// Limit Switch Rising Edge trigger to trigger MC_Stop when first active]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Motion" Id="{7fe0dfdc-a96d-4f6c-b4be-b4d6404e32bc}">
+      <Declaration><![CDATA[METHOD M_Motion : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Motion Calls
+
+
+// Call Axis Status Action
+
+Y_Ref.ReadStatus();
+Y2_Ref.ReadStatus();
+X_Ref.ReadStatus();
+Z_Ref.ReadStatus();
+M_CoEStatus();
 
 Y_Motion( 
 			Ref:= Y_Ref,
@@ -267,308 +531,7 @@ Z_Motion(
             bNegativeLimitSwitch := FALSE,
 			bHomeExecute := bHomeZ,
             bSetPosExecute := stHMI_In.bSetPosExecute,
-			fSetPosition := -212.69);
-
-
-
-                                        
-fbNCI(
-	        bExecute:= bExecuteNCProgram,
-            bStop:= bStopExecute,
-            sPrgName := sPrgName, 
-	        bBusy=> , 
-	        bError=> , 
-	        bDone=> , 
-	        stX:=X_Ref, 
-	        stY:=Y_Ref, 
-	        stZ:=Z_Ref, 
-            sLoadedProgram=>sCurrentProgram,
-            out_sTItpToPlc => CNC_stItpToPlc,
-            bEnableDustCollector => bEnableDustCollector);
-            
-
-// All Axes Ready Bit
-
-bAllAxesReady:= Y_MC_OUT.bPowerStatus AND Y2_MC_OUT.bPowerStatus AND X_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
-bAllAxesHomed:= Y_Ref.Status.Homed AND Y2_Ref.Status.Homed AND X_Ref.Status.Homed AND Z_Ref.Status.Homed;
-
-// Method Calls
-
-M_ProgramLoader();
-M_Inputs();
-M_Outputs();]]></ST>
-    </Implementation>
-    <Folder Name="PackML" Id="{d3da6e27-ea48-4171-b5b0-87034ad0f838}" />
-    <Method Name="M_CoEStatus" Id="{478f4fc3-02da-43bf-9a5d-4cea12eb7ced}">
-      <Declaration><![CDATA[METHOD M_CoEStatus : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[fbYAxisCoEStatus(
-	sNetId:= sAMSNetID , 
-	nSlaveAddr:= 1003, 
-	nSubIndex:= 2, 
-	nIndex:= 16#F900, 
-	pDstBuf:= ADR(nYDriveTemp), 
-	cbBufLen:= SIZEOF(nYDriveTemp), 
-	bExecute:= bPollingPulse, 
-	tTimeout:= , 
-	bBusy=> , 
-	bError=> , 
-	nErrId=> , 
-	cbRead=> );
-    
-fbY2AxisCoEStatus(
-	sNetId:= sAMSNetID , 
-	nSlaveAddr:= 1004, 
-	nSubIndex:= 2, 
-	nIndex:= 16#F900, 
-	pDstBuf:= ADR(nY2DriveTemp), 
-	cbBufLen:= SIZEOF(nY2DriveTemp), 
-	bExecute:= bPollingPulse, 
-	tTimeout:= , 
-	bBusy=> , 
-	bError=> , 
-	nErrId=> , 
-	cbRead=> );
-    
-fbXAxisCoEStatus(
-	sNetId:= sAMSNetID , 
-	nSlaveAddr:= 1005, 
-	nSubIndex:= 2, 
-	nIndex:= 16#F900, 
-	pDstBuf:= ADR(nXDriveTemp), 
-	cbBufLen:= SIZEOF(nXDriveTemp), 
-	bExecute:= bPollingPulse, 
-	tTimeout:= , 
-	bBusy=> , 
-	bError=> , 
-	nErrId=> , 
-	cbRead=> );
-    
-fbZAxisCoEStatus(
-	sNetId:= sAMSNetID , 
-	nSlaveAddr:= 1006, 
-	nSubIndex:= 2, 
-	nIndex:= 16#F900, 
-	pDstBuf:= ADR(nZDriveTemp), 
-	cbBufLen:= SIZEOF(nZDriveTemp), 
-	bExecute:= bPollingPulse, 
-	tTimeout:= , 
-	bBusy=> , 
-	bError=> , 
-	nErrId=> , 
-	cbRead=> );]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Execute_Execute" Id="{fef31608-7634-420c-8c0d-25ff7815b887}" FolderPath="PackML\">
-      <Declaration><![CDATA[METHOD PROTECTED M_Execute_Execute : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// ============================================================================
-//  OVERRIDE: Execute — maintain speed, watch for loss-of-speed fault
-// ============================================================================
-
-(* Example logic
-
-SpindleEnable  := TRUE;
-SpeedReference := SpeedSetpoint;
-
-// Loss of speed during cutting = fault
-IF NOT SpindleAtSpeed AND IF_Sub.BusyTimeMs > 500 THEN
-    M_SetError(1101, 'Spindle lost speed during Execute');
-END_IF
-
-// NOTE: Do NOT call M_SetDone() here unless the cycle is complete.
-// Spindle runs continuously; completion is signalled by NCChannel sub.
-
-*)]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Execute_Starting" Id="{56e53a00-5955-4b0e-9049-7f36a55f7ef5}" FolderPath="PackML\">
-      <Declaration><![CDATA[METHOD PROTECTED M_Execute_Starting : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// ============================================================================
-//  OVERRIDE: Starting — ramp spindle to speed
-// ============================================================================
-
-(* example implementation 
-
-// Arm ramp timer on first cycle (BusyTimeMs = 0 on entry)
-tonRamp(IN := TRUE, PT := UDINT_TO_TIME(RampTimeMs));
-
-SpindleEnable  := TRUE;
-SpeedReference := SpeedSetpoint;
-
-IF SpindleAtSpeed OR tonRamp.Q THEN
-    tonRamp(IN := FALSE);
-    M_SetDone();
-END_IF
-
-*)]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_HMI_In" Id="{d9c64941-408b-44a2-8a91-175c813c4e4d}">
-      <Declaration><![CDATA[METHOD M_HMI_In : BOOL
-
-VAR
-
-
-
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[
-
-// Select Homing Various Programs
-
-trigProgramCall(CLK := stHMI_In.bTriggerProgramCall);
-IF trigProgramCall.Q THEN
-    
-    ProgramCall := stHMI_In.ProgramCall;    
-
-END_IF
-
-// Trigger axis enable button toggle but don't allow it to overwrite the program controlled axis enable
-
-IF trigAxisEnable.Q THEN
-    
-    IF NOT bAxisEnable THEN
-    
-    bAxisEnable := TRUE;
-
-    ELSIF bAxisEnable THEN
-
-    bAxisEnable := FALSE;
-
-    END_IF    
-
-END_IF
-
-// Trigger Y coupling
-
-bGearInTrigger := stHMI_In.bCoupleYAxes;
-bGearOutTrigger := stHMI_In.bDecoupleAxes;
-
-// NCI Functions
-
-bExecuteNCProgram := stHMI_In.bStart;
-bStopExecute := stHMI_In.bStop;
-
-// Axis Reset
-
-bAxisReset := stHMI_In.bReset;
-
-// Axis Jogging 
-
-// NC Program Name
-
-fbStringTrimmer(
-                TriggerSequence:=stHMI_In.bInitiateNCProgramSelect,
-                TrimLeft:=3,
-                TrimRight:=3,
-                STR:=stHMI_In.sPrgName,
-                sString => sPrgName     );   
-                
-// Dust Collector
-bEnableDustCollectorPB := stHMI_In.bEnableDustCollectorPB;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_HMI_Out" Id="{579ae688-d5bb-4d46-9cff-7ebda2f9644e}">
-      <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// Limit and Homing Switch Mapping
-
-stHMI_Out.bY1HomeSwitch := bYHomingSwitch;	
-stHMI_Out.bY2HomeSwitch := bY2HomingSwitch;
-stHMI_Out.bYLimitSwitch := bYLimitSwitch;	
-stHMI_Out.bXHomeSwitch := bXHomingSwitch;
-stHMI_Out.bXLimitSwitch := bXLimitSwitch;	
-stHMI_Out.bZHomeSwitch  := bZHomingSwitch;
-stHMI_Out.bYAxesCoupled := Y2_Ref.Status.Coupled;
-
-// CoE Read EL7041 Drive Temps
-stHMI_Out.nYDriveTemp   := nYDriveTemp;
-stHMI_Out.nY2DriveTemp  := nY2DriveTemp;
-stHMI_Out.nXDriveTemp   := nXDriveTemp;
-stHMI_Out.nZDriveTemp   := nZDriveTemp;
-
-// Pass Axis Ref info to HMI
-
-stHMI_Out.stYRef  := Y_Ref;
-stHMI_Out.stY2Ref := Y2_Ref;
-stHMI_Out.stXRef  := X_Ref;
-stHMI_Out.stZRef  := Z_Ref;
-
-stHMI_Out.fActPosX:= LREAL_TO_REAL(X_Ref.NcToPlc.ActPos);
-stHMI_Out.fActPosY:= LREAL_TO_REAL(Y_Ref.NcToPlc.ActPos);
-stHMI_Out.fActPosY2:= LREAL_TO_REAL(Y2_Ref.NcToPlc.ActPos);
-stHMI_Out.fActPosZ:= LREAL_TO_REAL(Z_Ref.NcToPlc.ActPos);
-
-stHMI_Out.sCurrentProgramSelected := sCurrentProgram;
-
-
-
-
-
-
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Inputs" Id="{44930261-f7b3-46c2-ba50-0ddd8b114d05}">
-      <Declaration><![CDATA[METHOD M_Inputs : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// Homing Switch Inputs
-
-bYHomingSwitch	:= i_bYHomingSwitch;	
-bY2HomingSwitch	:= i_bY2HomingSwitch;	
-bXHomingSwitch	:= i_bXHomingSwitch;	
-bZHomingSwitch	:= i_bZHomingSwitch;
-
-// Limit Switch Inputs
-
-bYLimitSwitch	:= i_bYLimitSwitch;
-bXLimitSwitch	:= i_bXLimitSwitch;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_LimitSwitchLogic" Id="{d221ad2e-2e3c-403f-a0d1-ca7284c8dd6e}">
-      <Declaration><![CDATA[METHOD M_LimitSwitchLogic : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// Limit Switch Logic // Ignore "Home sensors" while running home routines. otherwise use Homing sensors to trigger a limit switch stop
-
-IF ProgramCall <> eNull THEN    
-    bYNegativeLimit  := FALSE;
-    bY2NegativeLimit := FALSE;
-    bXNegativeLimit  := FALSE;
-    bZPositiveLimit  := FALSE;
-    bYStopTrigger(CLK:= bYLimitSwitch);
-    bXStopTrigger(CLK:=bXLimitSwitch);
-    bZStopTrigger(CLK:= FALSE);    
-ELSE
-    bYNegativeLimit := bYHomingSwitch;
-    bY2NegativeLimit := bY2HomingSwitch;
-    bXNegativeLimit := bXHomingSwitch;
-    bZPositiveLimit := bZHomingSwitch;
-    //Stop Triggers
-    bYStopTrigger(CLK:=bYNegativeLimit OR bY2NegativeLimit OR bYLimitSwitch);
-    bXStopTrigger(CLK:=bXNegativeLimit OR bXLimitSwitch);
-    bZStopTrigger(CLK:=bZPositiveLimit);    
-END_IF
-
-// Limit Switch Rising Edge trigger to trigger MC_Stop when first active]]></ST>
+			fSetPosition := -212.69);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Outputs" Id="{bfb1dda8-5611-458d-bc52-800eff2f8798}">
@@ -910,8 +873,168 @@ END_CASE
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="StateManager" Id="{96e0bc36-18f3-4f77-a149-34b56bbbead3}" FolderPath="State Machine\">
+      <Declaration><![CDATA[METHOD StateManager : BOOL
+VAR_INPUT
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// ---------------------------------------------------------
+// 0. GLOBAL OVERRIDES (Faults & Stop)
+// ---------------------------------------------------------
+//bSubmoduleFault := (NOT Y_Ref.Status.Operational) OR (NOT X_Ref.Status.Operational) OR (NOT Z_Ref.Status.Operational);
+
+// Trigger ABORTING on any fault
+IF bSubmoduleFault AND (eCurrentState <> E_MachineState.ABORTING AND eCurrentState <> E_MachineState.ABORTED) THEN
+    eCurrentState := E_MachineState.ABORTING;
+END_IF
+
+// Manual STOP during motion moves to STOPPING (the handshake state)
+IF bStopRequest AND (eCurrentState = E_MachineState.EXECUTE OR eCurrentState = E_MachineState.STARTING) THEN
+    bStopRequest := FALSE;
+    eCurrentState := E_MachineState.STOPPING; 
+END_IF
+
+// ---------------------------------------------------------
+// 1. MASTER STATE MACHINE
+// ---------------------------------------------------------
+CASE eCurrentState OF
+
+    E_MachineState.RESETTING: 
+        eRequestedState := E_MachineState.RESETTING; 
+		
+        // Wait for ALL submodules to finish their internal reset
+        IF fbNCI.eCurrentState = E_MachineState.RESETTING AND fbNCI.bStateDone
+           AND NOT bSubmoduleFault THEN      
+            eCurrentState := E_MachineState.IDLE;
+        END_IF
+
+    E_MachineState.IDLE:
+        eRequestedState := E_MachineState.IDLE;
+        
+        // Handle Homing/Program Calls
+        IF eHmiProgramRequest <> eNull AND (ProgramCall = eNull) THEN
+            bProgramDone := FALSE;
+            ProgramCall := eHmiProgramRequest;
+            eHmiProgramRequest := eNull; 
+        END_IF
+
+        // Start Sequence Handshake
+        IF bStartRequest AND bAllAxesHomed AND (ProgramCall = eNull) THEN
+            // We set the REQUEST first. We don't change eCurrentState 
+            // until the submodules confirm they see the new request.
+            IF fbNCI.eCurrentState = E_MachineState.STARTING THEN
+                bStartRequest := FALSE;
+                eCurrentState := E_MachineState.STARTING;
+            END_IF
+        END_IF
+
+    E_MachineState.STARTING:
+        eRequestedState := E_MachineState.STARTING;
+		
+        // Wait for confirmation that Spindle is at speed and NCI is prepped
+        IF fbNCI.bStateDone THEN
+            eCurrentState := E_MachineState.EXECUTE;
+        END_IF
+
+    E_MachineState.EXECUTE:
+        eRequestedState := E_MachineState.EXECUTE;
+		
+        bExecuteNCProgram := TRUE; 
+        
+        IF fbNCI.bDone THEN
+            bExecuteNCProgram := FALSE;
+            eCurrentState := E_MachineState.COMPLETING;
+        ELSIF bHoldRequest THEN
+            bHoldRequest := FALSE;
+            eCurrentState := E_MachineState.HELD;
+        END_IF
+
+    E_MachineState.HELD:
+        eRequestedState := E_MachineState.HELD;
+		
+        // Pause/Resume Logic
+        IF bStartRequest THEN
+            bStartRequest := FALSE;
+            eCurrentState := E_MachineState.EXECUTE;
+        END_IF
+
+    E_MachineState.STOPPING:
+        eRequestedState := E_MachineState.STOPPING;
+        
+        // Wait for submodules to finish ramping down
+        IF fbNCI.bStateDone THEN
+            eCurrentState := E_MachineState.STOPPED;
+        END_IF
+
+    E_MachineState.STOPPED:
+        eRequestedState := E_MachineState.STOPPED;
+		
+        IF bResetRequest THEN
+            bResetRequest := FALSE;
+            eCurrentState := E_MachineState.RESETTING;
+        END_IF
+
+    E_MachineState.COMPLETING:
+        eRequestedState := E_MachineState.COMPLETING;
+        
+        // Wait for Spindle to stop and Gantry to park
+        IF fbNCI.bStateDone THEN
+            eCurrentState := E_MachineState.COMPLETE;
+        END_IF
+
+    E_MachineState.COMPLETE:
+        eRequestedState := E_MachineState.COMPLETE;
+		
+        IF bResetRequest OR bStartRequest THEN
+            bResetRequest := FALSE;
+            bStartRequest := FALSE;
+            eCurrentState := E_MachineState.RESETTING;
+        END_IF
+
+    E_MachineState.ABORTING:
+        eRequestedState := E_MachineState.ABORTING;
+        
+        // Wait for safety handshake (Spindle < 10 RPM, etc)
+        IF fbNCI.bStateDone THEN
+            eCurrentState := E_MachineState.ABORTED;
+        END_IF
+
+    E_MachineState.ABORTED:
+        eRequestedState := E_MachineState.ABORTED;
+		
+        IF bResetRequest THEN
+            bResetRequest := FALSE;
+            eCurrentState := E_MachineState.RESETTING;
+        END_IF
+
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WatchdogTimer" Id="{78f9e00d-b97e-45d3-9f37-7726e84608fd}" FolderPath="State Machine\">
+      <Declaration><![CDATA[METHOD WatchdogTimer : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// --- Watchdog Logic at the top of FB_CNC ---
+tWatchdogTimer(IN := (eCurrentState = E_MachineState.STARTING 
+                   OR eCurrentState = E_MachineState.RESETTING 
+                   OR eCurrentState = E_MachineState.STOPPING 
+                   OR eCurrentState = E_MachineState.COMPLETING 
+                   OR eCurrentState = E_MachineState.ABORTING), 
+               PT := T#15S); // 15-second timeout for any "Acting" state
+
+IF tWatchdogTimer.Q THEN
+    // If we've been stuck in an "-ING" state too long, force an Abort
+    sErrorMsg := 'Service Timeout: Submodule failed to respond';
+    eCurrentState := E_MachineState.ABORTING;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_CNC">
       <LineId Id="13935" Count="7" />
+      <LineId Id="15294" Count="0" />
+      <LineId Id="15293" Count="0" />
       <LineId Id="14882" Count="0" />
       <LineId Id="14881" Count="0" />
       <LineId Id="14884" Count="0" />
@@ -922,19 +1045,11 @@ END_CASE
       <LineId Id="14890" Count="0" />
       <LineId Id="13944" Count="6" />
       <LineId Id="14853" Count="0" />
-      <LineId Id="13961" Count="10" />
+      <LineId Id="13961" Count="3" />
       <LineId Id="14873" Count="0" />
-      <LineId Id="13972" Count="30" />
-      <LineId Id="14743" Count="0" />
-      <LineId Id="14003" Count="0" />
-      <LineId Id="14744" Count="0" />
-      <LineId Id="14004" Count="21" />
-      <LineId Id="14745" Count="0" />
-      <LineId Id="14026" Count="20" />
-      <LineId Id="14746" Count="0" />
-      <LineId Id="14047" Count="20" />
-      <LineId Id="14747" Count="0" />
-      <LineId Id="14068" Count="14" />
+      <LineId Id="13972" Count="9" />
+      <LineId Id="14068" Count="0" />
+      <LineId Id="14072" Count="10" />
       <LineId Id="14085" Count="0" />
       <LineId Id="14416" Count="0" />
       <LineId Id="15015" Count="0" />
@@ -957,46 +1072,11 @@ END_CASE
       <LineId Id="91" Count="4" />
       <LineId Id="47" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CNC.M_Execute_Execute">
-      <LineId Id="6" Count="2" />
-      <LineId Id="20" Count="1" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="10" Count="8" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_Execute_Starting">
-      <LineId Id="6" Count="2" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="10" Count="8" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
-    </LineIds>
     <LineIds Name="FB_CNC.M_HMI_In">
       <LineId Id="5" Count="0" />
-      <LineId Id="16" Count="0" />
       <LineId Id="15" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="24" Count="1" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="45" Count="1" />
-      <LineId Id="40" Count="1" />
-      <LineId Id="47" Count="1" />
-      <LineId Id="42" Count="1" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="49" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="44" Count="0" />
+      <LineId Id="144" Count="6" />
+      <LineId Id="164" Count="2" />
       <LineId Id="37" Count="0" />
       <LineId Id="101" Count="0" />
       <LineId Id="100" Count="0" />
@@ -1004,9 +1084,9 @@ END_CASE
       <LineId Id="102" Count="0" />
       <LineId Id="110" Count="0" />
       <LineId Id="57" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="59" Count="1" />
+      <LineId Id="167" Count="1" />
       <LineId Id="58" Count="0" />
+      <LineId Id="169" Count="0" />
       <LineId Id="69" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="71" Count="0" />
@@ -1027,6 +1107,10 @@ END_CASE
       <LineId Id="65" Count="0" />
       <LineId Id="44" Count="0" />
       <LineId Id="68" Count="1" />
+      <LineId Id="71" Count="2" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="74" Count="0" />
       <LineId Id="47" Count="0" />
       <LineId Id="46" Count="0" />
       <LineId Id="49" Count="0" />
@@ -1059,6 +1143,13 @@ END_CASE
       <LineId Id="5" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="18" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.M_Motion">
+      <LineId Id="6" Count="0" />
+      <LineId Id="98" Count="7" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="7" Count="89" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_CNC.M_Outputs">
       <LineId Id="20" Count="0" />
@@ -1183,6 +1274,31 @@ END_CASE
       <LineId Id="213" Count="0" />
       <LineId Id="215" Count="18" />
       <LineId Id="48" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.StateManager">
+      <LineId Id="392" Count="22" />
+      <LineId Id="520" Count="0" />
+      <LineId Id="416" Count="1" />
+      <LineId Id="419" Count="0" />
+      <LineId Id="421" Count="17" />
+      <LineId Id="441" Count="6" />
+      <LineId Id="521" Count="0" />
+      <LineId Id="449" Count="6" />
+      <LineId Id="522" Count="0" />
+      <LineId Id="456" Count="11" />
+      <LineId Id="523" Count="0" />
+      <LineId Id="468" Count="15" />
+      <LineId Id="524" Count="0" />
+      <LineId Id="484" Count="14" />
+      <LineId Id="525" Count="0" />
+      <LineId Id="499" Count="15" />
+      <LineId Id="526" Count="0" />
+      <LineId Id="515" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CNC.WatchdogTimer">
+      <LineId Id="6" Count="11" />
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

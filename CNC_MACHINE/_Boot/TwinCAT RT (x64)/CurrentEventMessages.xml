@@ -1,78 +1,97 @@
 <?xml version="1.0"?>
 <TcEventSources Version="2">
+	<Translations>
+		<Text TxtId="CNC Events"/>
+		<Text TxtId="NC Execute Failed"/>
+		<Text TxtId="NC Program Completed"/>
+		<Text TxtId="NC Program Failed to Execute. Check Execute Program Method"/>
+		<Text TxtId="NC Program Finished"/>
+		<Text TxtId="NC Program Started"/>
+		<Text TxtId="Spindle Active"/>
+		<Text TxtId="Spindle is currently enabled and active"/>
+		<Text TxtId="Spindle is currently stopped"/>
+		<Text TxtId="Spindle speed updated"/>
+		<Text TxtId="Starting X Home Sequence"/>
+		<Text TxtId="Starting Y Home Sequence"/>
+		<Text TxtId="Starting Z Homing Sequence"/>
+		<Text TxtId="The spindle speed has been updated"/>
+		<Text TxtId="X Home Start"/>
+		<Text TxtId="Y Home Start"/>
+		<Text TxtId="Z Home Start"/>
+	</Translations>
 	<Source>
 		<GUID>{2F971080-482F-48D4-BFCC-52F693D30290}</GUID>
-		<Name LcId="1033">CNC Events</Name>
+		<Name>CNC Events</Name>
 		<Event>
 			<Id>1</Id>
-			<Message LcId="1033">Z Home Start</Message>
+			<Message>Z Home Start</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">Starting Z Homing Sequence</Text>
+				<Text>Starting Z Homing Sequence</Text>
 			</Detail>
 		</Event>
 		<Event>
 			<Id>2</Id>
-			<Message LcId="1033">X Home Start</Message>
+			<Message>X Home Start</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">Starting X Home Sequence</Text>
+				<Text>Starting X Home Sequence</Text>
 			</Detail>
 		</Event>
 		<Event>
 			<Id>3</Id>
-			<Message LcId="1033">Y Home Start</Message>
+			<Message>Y Home Start</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">Starting Y Home Sequence</Text>
+				<Text>Starting Y Home Sequence</Text>
 			</Detail>
 		</Event>
 		<Event>
 			<Id>4</Id>
-			<Message LcId="1033">NC Execute Failed</Message>
+			<Message>NC Execute Failed</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">NC Program Failed to Execute. Check Execute Program Method</Text>
+				<Text>NC Program Failed to Execute. Check Execute Program Method</Text>
 			</Detail>
 		</Event>
 		<Event>
 			<Id>5</Id>
-			<Message LcId="1033">NC Program Started</Message>
+			<Message>NC Program Started</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">NC Program Started</Text>
+				<Text>NC Program Started</Text>
 			</Detail>
 		</Event>
 		<Event>
 			<Id>6</Id>
-			<Message LcId="1033">NC Program Finished</Message>
+			<Message>NC Program Finished</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">NC Program Completed</Text>
+				<Text>NC Program Completed</Text>
 			</Detail>
 		</Event>
 		<Event>
 			<Id>7</Id>
-			<Message LcId="1033">Spindle speed updated</Message>
+			<Message>Spindle speed updated</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">The spindle speed has been updated</Text>
+				<Text>The spindle speed has been updated</Text>
 			</Detail>
 		</Event>
 		<Event>
 			<Id>8</Id>
-			<Message LcId="1033">Spindle Active</Message>
+			<Message>Spindle Active</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">Spindle is currently enabled and active</Text>
+				<Text>Spindle is currently enabled and active</Text>
 			</Detail>
 		</Event>
 		<Event>
 			<Id>9</Id>
-			<Message LcId="1033">Spindle Active</Message>
+			<Message>Spindle Active</Message>
 			<Detail>
 				<Name>Comment</Name>
-				<Text LcId="1033">Spindle is currently stopped</Text>
+				<Text>Spindle is currently stopped</Text>
 			</Detail>
 		</Event>
 	</Source>

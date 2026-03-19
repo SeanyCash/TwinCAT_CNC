@@ -5,12 +5,17 @@ import JogPanel from '../components/JogPanel';
 import CncStatusPanel from '../components/CncStatusPanel';
 import GCodeConsole from '../components/GCodeConsole';
 import GCodeLoader from '../components/GCodeLoader';
+import type { HmiIn, HmiOut } from '../types/plc';
 
 interface MainViewProps {
   currentPos: { x: number; y: number; z: number };
+  hmiIn: HmiIn;
+  hmiOut: HmiOut;
+  writeFields: (fields: Partial<HmiIn>) => Promise<unknown>;
+  pulseField: (field: keyof HmiIn, durationMs?: number) => Promise<unknown>;
 }
 
-export default function MainView({ currentPos }: MainViewProps) {
+export default function MainView({ currentPos, hmiIn, hmiOut, writeFields, pulseField }: MainViewProps) {
   // --- STATE ---
   const [activeFile, setActiveFile] = useState<string | null>(null);
   const [currentLine, setCurrentLine] = useState(0); 
@@ -37,10 +42,10 @@ export default function MainView({ currentPos }: MainViewProps) {
 
   // Connect live currentPos to your UI cards
   const axesData = [
-    { label: 'Y1',  value: currentPos.x, isHomed: true, status: currentPos.x !== 0 ? 'moving' : 'idle' },
-    { label: 'Y2', value: currentPos.y, isHomed: true, status: currentPos.y !== 0 ? 'moving' : 'idle' },
-    { label: 'X', value: currentPos.y, isHomed: true, status: currentPos.y !== 0 ? 'moving' : 'idle' },
-    { label: 'Z',  value: currentPos.z, isHomed: false, status: currentPos.z !== 0 ? 'moving' : 'idle' },
+    { label: 'Y1', value: hmiOut.fActPosY, isHomed: hmiOut.bY1HomeSwitch, status: currentPos.y !== 0 ? 'moving' : 'idle' },
+    { label: 'Y2', value: hmiOut.fActPosY2, isHomed: hmiOut.bY2HomeSwitch, status: hmiOut.fActPosY2 !== 0 ? 'moving' : 'idle' },
+    { label: 'X', value: hmiOut.fActPosX, isHomed: hmiOut.bXHomeSwitch, status: currentPos.x !== 0 ? 'moving' : 'idle' },
+    { label: 'Z', value: hmiOut.fActPosZ, isHomed: hmiOut.bZHomeSwitch, status: currentPos.z !== 0 ? 'moving' : 'idle' },
   ];
 
   return (
@@ -63,10 +68,10 @@ export default function MainView({ currentPos }: MainViewProps) {
 
           <div className="bg-cnc-panel border border-cnc-border rounded-xl p-4 shadow-lg">
             <h3 className="text-slate-500 text-[10px] font-bold uppercase mb-4 tracking-widest">Manual Jogging</h3>
-            <JogPanel />
+            <JogPanel hmiIn={hmiIn} hmiOut={hmiOut} writeFields={writeFields} pulseField={pulseField} />
           </div>
 
-          <CncStatusPanel />
+          <CncStatusPanel hmiOut={hmiOut} />
         </div>
 
         {/* RIGHT COLUMN: Visualizer & Console */}

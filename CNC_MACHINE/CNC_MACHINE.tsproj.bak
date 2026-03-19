@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.62">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.19">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -2064,13 +2064,13 @@ External Setpoint Generation:
 			<Name GUID="{F7B9FC50-054E-4547-B468-83A9E72D8064}" Namespace="MC" TcBaseType="true" HideType="true">NCTOPLC_AXIS_REF_STATE3_FLAGS</Name>
 			<BitSize>32</BitSize>
 			<SubItem>
-				<Name>TouchProbe1InputState </Name>
+				<Name>TouchProbe1InputState</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
 				<BitSize>1</BitSize>
 				<BitOffs>0</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>TouchProbe2InputState </Name>
+				<Name>TouchProbe2InputState</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
 				<BitSize>1</BitSize>
 				<BitOffs>1</BitOffs>
@@ -2649,13 +2649,11 @@ External Setpoint Generation:
 		<ImageData Id="1004">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1005">424de6000000000000007600000028000000100000000e000000010004000000000070000000c30e0000c30e000010000000100000000000ff00ff00ff00ff000000ffff000000ff000000ffff0000008000800080008000000080800000008000000080800080808000c0c0c000ffffff00000000001111111111111111fffffffffffffffffcfcfcfcfffff44ff4f4f4f4fffff44ffffffffffffffffffffffffffffffffffcfcfcfcfffff44ff4f4f4f4fffff44fffffffffffffffff55555511111111115555551111111111555555111111111155555511111111115555551111111111</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{45C4C958-5975-4D24-9976-91ACD32D8925}" TargetNetId="132.154.239.141.1.1" Target64Bit="true" AutoPrioManagement="true" ShowHideConfigurations="#x306">
+	<Project ProjectGUID="{45C4C958-5975-4D24-9976-91ACD32D8925}" TargetNetId="199.4.42.250.1.1" Target64Bit="true" AutoPrioManagement="true" ShowHideConfigurations="#x306">
 		<System>
-			<Settings MaxCpus="4" NonWinCpus="3">
-				<Cpu CpuId="1"/>
-				<Cpu CpuId="2"/>
-				<Cpu CpuId="3"/>
-				<IoIdleTask Priority="6" Affinity="#x00000004"/>
+			<Settings MaxCpus="64" NonWinCpus="57">
+				<Cpu CpuId="7"/>
+				<IoIdleTask Priority="6"/>
 			</Settings>
 			<Licenses>
 				<Target>
@@ -2663,7 +2661,7 @@ External Setpoint Generation:
 				</Target>
 			</Licenses>
 			<Tasks>
-				<Task Id="3" Priority="10" CycleTime="100000" AmsPort="350" Affinity="#x00000004" AdtTasks="true">
+				<Task Id="3" Priority="10" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>StandardPlcTask</Name>
 				</Task>
 				<Task Id="6" Priority="32" AdtTasks="true" JobTask="true">
@@ -2674,7 +2672,7 @@ External Setpoint Generation:
 		</System>
 		<Motion>
 			<NC>
-				<SafTask Priority="4" CycleTime="20000" AmsPort="501" Affinity="#x00000008" IoAtBegin="true">
+				<SafTask Priority="4" CycleTime="20000" AmsPort="501" IoAtBegin="true" AmsNetId="192.168.36.1.1.1">
 					<Name>NC-Task 1 SAF</Name>
 					<Vars VarGrpType="1" InsertType="1">
 						<Name>Inputs</Name>
@@ -2686,10 +2684,10 @@ External Setpoint Generation:
 						<Name>Image</Name>
 					</Image>
 				</SafTask>
-				<SvbTask Priority="8" CycleTime="100000" AmsPort="511" Affinity="#x00000008">
+				<SvbTask Priority="8" CycleTime="100000" AmsPort="511">
 					<Name>NC-Task 1 SVB</Name>
 				</SvbTask>
-				<Axis Id="1" CreateSymbols="true" AxisType="1">
+				<Axis Id="1" CreateSymbols="true" AxisType="1" SimulationMode="true">
 					<Name>Y</Name>
 					<AxisPara>
 						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="206.208" Deceleration="206.208" Jerk="17355.9"/>
@@ -2851,7 +2849,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis Id="2" CreateSymbols="true" AxisType="1">
+				<Axis Id="2" CreateSymbols="true" AxisType="1" SimulationMode="true">
 					<Name>Y²</Name>
 					<AxisPara>
 						<Dynamic AccelerationMaximum="1500" DecelerationMaximum="1500" Acceleration="206.208" Deceleration="206.208" Jerk="17355.9"/>
@@ -3013,7 +3011,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis Id="3" CreateSymbols="true" AxisType="1">
+				<Axis Id="3" CreateSymbols="true" AxisType="1" SimulationMode="true">
 					<Name>X</Name>
 					<AxisPara>
 						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="252.5" Deceleration="252.5" Jerk="25502.5"/>
@@ -3175,7 +3173,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis Id="4" CreateSymbols="true" AxisType="1">
+				<Axis Id="4" CreateSymbols="true" AxisType="1" SimulationMode="true">
 					<Name>Z</Name>
 					<AxisPara>
 						<Dynamic AccelerationMaximum="600" DecelerationMaximum="600" Acceleration="101" Deceleration="101" Jerk="10201"/>
@@ -3407,19 +3405,62 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64EA087B-AF6F-4600-AB87-345CEDCA4F88}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" TargetArchiveSettings="#x000f" FileArchiveSettings="#x000e" CopyTmcToTarget="true" CopyTpyToTarget="false" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Main\Main.tmc" TmcHash="{A30B0BC5-021E-62FA-B112-808A13A1C8FB}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{AC3AB808-2201-D804-FFBD-404AB3CBA303}" TmcPath="Main\Main.tmc">
 					<Name>Main Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="1">
-						<Name>PlcTask Inputs</Name>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>GVL.fbCNC.fbNCI.fbSpindle.fbModbusRTUComms.fbModbusMasterEL.InData</Name>
-							<Type GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU">MB_KL6inData22B</Type>
+							<Name>GVL.fbCNC.fbNCI.fbSpindle.fbModbusMasterEL.OutData</Name>
+							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
 						</Var>
 						<Var>
-							<Name>GVL.fbCNC.fbNCI.fbSpindle.fbModbusRTUComms.fbModbusMasterEL.WcState</Name>
+							<Name>GVL.fbCNC.fbNCI.fbSpindle.stSpindleControl.q_fSpindleOverrideSpeed</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
+							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbCNC.Y_Ref.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbCNC.Y2_Ref.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbCNC.X_Ref.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.fbCNC.q_bEnableDustCollector</Name>
 							<Type>BOOL</Type>
 						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stY2Ref.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stXRef.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL.stHMI_Out.stZRef.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>GVL.fbCNC.fbNCI.fbSpindle.fbModbusMasterEL.InData</Name>
 							<Type GUID="{F852D9F7-9DB9-AE77-EE6D-D9BA52CDE308}" Namespace="Tc2_ModbusRTU">MB_KL6inData22B</Type>
@@ -3521,61 +3562,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL.stHMI_Out.bOverrunError</Name>
 							<Type>BOOL</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="2" AreaNo="1">
-						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>GVL.fbCNC.fbNCI.fbSpindle.fbModbusRTUComms.fbModbusMasterEL.OutData</Name>
-							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.fbNCI.fbSpindle.fbModbusMasterEL.OutData</Name>
-							<Type GUID="{E4C24E72-EF65-C814-8E17-663F53275EE3}" Namespace="Tc2_ModbusRTU">MB_KL6outData22B</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.fbNCI.fbSpindle.stSpindleControl.q_fSpindleOverrideSpeed</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.fbNCI.q_stPlcToItp</Name>
-							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.Y_Ref.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.Y2_Ref.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.X_Ref.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.Z_Ref.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.fbCNC.q_bEnableDustCollector</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stYRef.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stY2Ref.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stXRef.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL.stHMI_Out.stZRef.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2021-10-28T06:25:25">
@@ -3861,10 +3847,9 @@ External Setpoint Generation:
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<PlcAuxTask Affinity="#x00000004"/>
 		</Plc>
 		<Io>
-			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="132.154.239.141.3.1" RemoteName="CNC Controller (EtherCAT)" InfoImageId="4">
+			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="199.4.42.250.3.1" RemoteName="CNC Controller (EtherCAT)" InfoImageId="4">
 				<Name>CNC Controller (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -4593,7 +4578,7 @@ External Setpoint Generation:
 								<Entry Name="Status__Ready" Index="#x6010" Sub="#x02">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Warning" Index="#x6010" Sub="#x03" Flags="#x00008020">
+								<Entry Name="Status__Warning" Index="#x6010" Sub="#x03">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Status__Error" Index="#x6010" Sub="#x04">
@@ -5106,25 +5091,25 @@ External Setpoint Generation:
 								<ExcludePdo>#x1a01</ExcludePdo>
 								<ExcludePdo>#x1a02</ExcludePdo>
 								<ExcludePdo>#x1a05</ExcludePdo>
-								<Entry Name="Status__Transmit accepted" Index="#x6000" Sub="#x01" Flags="#x00008020">
+								<Entry Name="Status__Transmit accepted" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Receive request" Index="#x6000" Sub="#x02" Flags="#x00008020">
+								<Entry Name="Status__Receive request" Index="#x6000" Sub="#x02">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Init accepted" Index="#x6000" Sub="#x03" Flags="#x00008020">
+								<Entry Name="Status__Init accepted" Index="#x6000" Sub="#x03">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Buffer full" Index="#x6000" Sub="#x04" Flags="#x00008020">
+								<Entry Name="Status__Buffer full" Index="#x6000" Sub="#x04">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Parity error" Index="#x6000" Sub="#x05" Flags="#x00008020">
+								<Entry Name="Status__Parity error" Index="#x6000" Sub="#x05">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Framing error" Index="#x6000" Sub="#x06" Flags="#x00008020">
+								<Entry Name="Status__Framing error" Index="#x6000" Sub="#x06">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Overrun error" Index="#x6000" Sub="#x07" Flags="#x00008020">
+								<Entry Name="Status__Overrun error" Index="#x6000" Sub="#x07">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Status__">
@@ -5505,22 +5490,22 @@ External Setpoint Generation:
 								<ExcludePdo>#x1601</ExcludePdo>
 								<ExcludePdo>#x1602</ExcludePdo>
 								<ExcludePdo>#x1605</ExcludePdo>
-								<Entry Name="Ctrl__Transmit request" Index="#x7000" Sub="#x01" Flags="#x00008020">
+								<Entry Name="Ctrl__Transmit request" Index="#x7000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Ctrl__Receive accepted" Index="#x7000" Sub="#x02" Flags="#x00008020">
+								<Entry Name="Ctrl__Receive accepted" Index="#x7000" Sub="#x02">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Ctrl__Init request" Index="#x7000" Sub="#x03" Flags="#x00008020">
+								<Entry Name="Ctrl__Init request" Index="#x7000" Sub="#x03">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Ctrl__Send continues" Index="#x7000" Sub="#x04" Flags="#x00008020">
+								<Entry Name="Ctrl__Send continues" Index="#x7000" Sub="#x04">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Ctrl__">
 									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
 								</Entry>
-								<Entry Name="Ctrl__Output length" Index="#x7000" Sub="#x09" Flags="#x00008020">
+								<Entry Name="Ctrl__Output length" Index="#x7000" Sub="#x09">
 									<Type>USINT</Type>
 								</Entry>
 								<Entry Name="Data Out 0" Index="#x7000" Sub="#x11">
@@ -5831,8 +5816,6 @@ External Setpoint Generation:
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030020"/>
-		<MappingInfo Identifier="{00000000-0010-0304-3000-040310000403}" Id="#x02030010"/>
 		<MappingInfo Identifier="{05000010-2001-0850-3000-040300205008}" Id="#x02030030" Watchdog="14000000040000000400000004000000"/>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^X">
 			<OwnerB Name="TIID^CNC Controller (EtherCAT)^Term 1 (EK1100)^X (EL7041-1000)">
