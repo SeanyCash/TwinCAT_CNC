@@ -58,6 +58,22 @@ export default function ControlHeader({ connection, hmiOut, pulseField }: Contro
           <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
           Start
         </button>
+
+        <button
+          onClick={() => pulseField('bHomeAll', 100)}
+          className="bg-gray-600 hover:bg-gray-500 text-white px-6 py-1.5 rounded text-xs font-black uppercase flex items-center gap-2 transition-colors border-b-4 border-gray-800 active:border-b-0 active:translate-y-1"
+        >
+          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+          Home All
+        </button>
+
+        <button
+          onClick={() => pulseField('bDirectHome', 100)}
+          className="bg-cyan-700 hover:bg-cyan-600 text-white px-6 py-1.5 rounded text-xs font-black uppercase flex items-center gap-2 transition-colors border-b-4 border-cyan-900 active:border-b-0 active:translate-y-1"
+        >
+          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+          Home Direct
+        </button>
       </div>
 
       {/* Right: Machine Status */}

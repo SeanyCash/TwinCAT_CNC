@@ -1,218 +1,205 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
-  <POU Name="FB_CNC" Id="{aa8e508b-b3d9-4f69-bd41-818be025bca8}" SpecialFunc="None">
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_CNC" Id="{96a27fad-16a6-48a6-8015-980bd366c343}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_CNC IMPLEMENTS I_HMI
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	
-	
-	eCurrentState					: E_MachineState;
-	eRequestedState					: E_MachineState;
- 	eLastState						: E_MachineState;
- 	bStateEntry						: BOOL;
-	tWatchdogTimer					: TON;
-	sErrorMsg						: STRING;
-	bSubmoduleFault					: BOOL;
-	
-    // Event Logger Instances	
-    fbEventLogger	: FB_TcEventLogger;
-    fbAlarm			: FB_TcAlarm;
-    fbMessage		: FB_TcMessage;
-    bSendEvent    : BOOL;
-    bInitEvent    : BOOL;
-   // Motion Function Instances 
-	Y_Motion		: FB_MotionFunctions;
-	Y2_Motion 		: FB_MotionFunctions;
-	X_Motion		: FB_MotionFunctions;
-	Z_Motion		: FB_MotionFunctions;
-    fbNCI           : FB_NCI;
+	// ── PackML Controller ────────────────────────────────────────────────────
+	eRequestedState     : E_MachineState := E_MachineState.STOPPED;
+	eCurrentState       : E_MachineState;   // HMI mirror only
+	bAllSynced          : BOOL;
+	sBlockedBy          : STRING(80);
+	bHandshakeTimeout   : BOOL;
+	tonWatchdog         : TON;
+	sErrorMsg           : STRING(80);
 
-    
-    //eHomeYSeq       : E_HomeY;
-    eHomeYSeq :(INIT_HOME,GEAR_IN,POWER_ON,CHECK_HOMED,HOME_Y1,Y1_HOMED,HOME_Y2,Y2_HOMED,RE_GEAR,HOME_COMPLETE);
-	
-	Y_MC_IN			: ST_Motion_Inputs;
-	Y2_MC_IN		: ST_Motion_Inputs;
-	X_MC_IN			: ST_Motion_Inputs;
-	Z_MC_IN			: ST_Motion_Inputs;
-	
-	Y_MC_OUT		: ST_Motion_Outputs;
-	Y2_MC_OUT		: ST_Motion_Outputs;
-	X_MC_OUT		: ST_Motion_Outputs;
-	Z_MC_OUT		: ST_Motion_Outputs;
-	
-	
-	Y_Ref	        : AXIS_REF;
-	Y2_Ref	        : AXIS_REF;
-	X_Ref	        : AXIS_REF;
-	Z_Ref	        : AXIS_REF;
-    
-    fbYAxisCoEStatus      : FB_EcCoeSdoRead;
-    fbY2AxisCoEStatus     : FB_EcCoeSdoRead;
-    fbXAxisCoEStatus      : FB_EcCoeSdoRead;
-    fbZAxisCoEStatus      : FB_EcCoeSdoRead;
-    bCoEReadExecute       : BOOL;
-    nYDriveTemp           : INT;
-	nY2DriveTemp          : INT;
-    nXDriveTemp           : INT;
-    nZDriveTemp           : INT;
-	
-	i_bYHomingSwitch		AT %I* : BOOL;
-	i_bY2HomingSwitch		AT %I* : BOOL;
-    i_bYLimitSwitch			AT %I* : BOOL;
-	i_bXHomingSwitch		AT %I* : BOOL;
-    i_bXLimitSwitch			AT %I* : BOOL;
-	i_bZHomingSwitch		AT %I* : BOOL;
-    
-   // Homing / Limit Proxes 
-	
-	bYHomingSwitch		: BOOL;
-	bY2HomingSwitch		: BOOL;
-	bYLimitSwitch		: BOOL;
+	// ── Events ───────────────────────────────────────────────────────────────
+	fbEventLogger       : FB_TcEventLogger;
+	fbAlarm             : FB_TcAlarm;
+	fbMessage           : FB_TcMessage;
+	bSendEvent          : BOOL;
+	bInitEvent          : BOOL;
+
+	// ── Motion ───────────────────────────────────────────────────────────────
+	Y_Motion            : FB_MotionFunctions;
+	Y2_Motion           : FB_MotionFunctions;
+	X_Motion            : FB_MotionFunctions;
+	Z_Motion            : FB_MotionFunctions;
+	fbNCI               : FB_NCI;
+
+	eHomeYSeq : (INIT_HOME, GEAR_IN, POWER_ON, CHECK_HOMED, HOME_Y1, Y1_HOMED, HOME_Y2, Y2_HOMED, RE_GEAR, HOME_COMPLETE);
+
+	Y_MC_IN             : ST_Motion_Inputs;
+	Y2_MC_IN            : ST_Motion_Inputs;
+	X_MC_IN             : ST_Motion_Inputs;
+	Z_MC_IN             : ST_Motion_Inputs;
+	Y_MC_OUT            : ST_Motion_Outputs;
+	Y2_MC_OUT           : ST_Motion_Outputs;
+	X_MC_OUT            : ST_Motion_Outputs;
+	Z_MC_OUT            : ST_Motion_Outputs;
+
+	Y_Ref               : AXIS_REF;
+	Y2_Ref              : AXIS_REF;
+	X_Ref               : AXIS_REF;
+	Z_Ref               : AXIS_REF;
+
+	// ── CoE drive temps ──────────────────────────────────────────────────────
+	fbYAxisCoEStatus    : FB_EcCoeSdoRead;
+	fbY2AxisCoEStatus   : FB_EcCoeSdoRead;
+	fbXAxisCoEStatus    : FB_EcCoeSdoRead;
+	fbZAxisCoEStatus    : FB_EcCoeSdoRead;
+	nYDriveTemp         : INT;
+	nY2DriveTemp        : INT;
+	nXDriveTemp         : INT;
+	nZDriveTemp         : INT;
+
+	// ── Physical I/O ─────────────────────────────────────────────────────────
+	i_bYHomingSwitch    AT %I* : BOOL;
+	i_bY2HomingSwitch   AT %I* : BOOL;
+	i_bYLimitSwitch     AT %I* : BOOL;
+	i_bXHomingSwitch    AT %I* : BOOL;
+	i_bXLimitSwitch     AT %I* : BOOL;
+	i_bZHomingSwitch    AT %I* : BOOL;
+
+	// ── Homing / limit switch signals ────────────────────────────────────────
+	bYHomingSwitch      : BOOL;
+	bY2HomingSwitch     : BOOL;
+	bYLimitSwitch       : BOOL;
 	bYNegativeLimit     : BOOL;
-    bY2NegativeLimit    : BOOL;
-	bXHomingSwitch		: BOOL;
-	bZHomingSwitch		: BOOL;
-	bXLimitSwitch		: BOOL; 
-    bXNegativeLimit     : BOOL;
-    bZPositiveLimit     : BOOL;
-    
-    // Dust Collector Relay
-    bEnableDustCollector    : BOOL;     // enable dust collector automatically with spindle M3 code
-    bEnableDustCollectorPB  : BOOL;     // enable dust collector override from pushbutton
-    q_bEnableDustCollector  AT %Q* : BOOL;
-    
-    // Limit Switch Stop Triggers (use to one shot a stop command when axis limit switch is triggered)
-    bYStopTrigger       : R_TRIG;
-    bXStopTrigger       : R_TRIG;
-    bZStopTrigger       : R_TRIG;
-	
-	
-	bHomeY		    : BOOL;
-	bHomeY2		    : BOOL;
-	bHomeX		    : BOOL;
-	bHomeZ		    : BOOL;
-	eHomingMode		: MC_HomingMode;
-    bGearInTrigger  : BOOL;
-    bGearOutTrigger : BOOL;
-    rGearInTrigger  : R_TRIG;
-    rGearOutTrigger : R_TRIG;
-    rtrigAxisNotGeared  : R_TRIG;
-	bAllAxesReady	: BOOL;
-    bAllAxesHomed   : BOOL;
-    
-    trigProgramCall : R_TRIG;
-    trigAxisEnable : R_TRIG;
+	bY2NegativeLimit    : BOOL;
+	bXHomingSwitch      : BOOL;
+	bZHomingSwitch      : BOOL;
+	bXLimitSwitch       : BOOL;
+	bXNegativeLimit     : BOOL;
+	bZPositiveLimit     : BOOL;
 
-	
-// Program Call Variables	
-	
-	nHomeAllSeq	: INT;
-	nHomeYSeq	: INT;
-	nHomeXSeq	: INT;
-	nHomeZSeq	: INT;
-    
-    bYHomeDone  : BOOL;
-    bXHomeDone  : BOOL;
-    bZHomeDone  : BOOL;
-	
-	bStartRequest	: BOOL;
-	bStopRequest	: BOOL;
-	bHoldRequest	: BOOL;
-	bResetRequest	: BOOL;
-	
-	ProgramCall			: E_Programs;
-	eHmiProgramRequest 	: E_Programs;
-    sCurrentProgram 	: STRING;
-    fbStringTrimmer 	: FB_StringTrimmer;
-    
-    // CoE Polling Timer
-    tPollingTimerTP     : TP;
-    bPollingPulse       : BOOL;
-    tPollingTimerTOF     : TOF;    
-    
-	bExecuteNCProgram:	BOOL	:= FALSE;
-    sPrgName                : STRING[255];
-    out_stItpToPlc	    : NCTOPLC_NCICHANNEL_REF;
-    CNC_stItpToPlc      : NCTOPLC_NCICHANNEL_REF;
+	// ── Dust collector ───────────────────────────────────────────────────────
+	bEnableDustCollector    : BOOL;
+	bEnableDustCollectorPB  : BOOL;
+	q_bEnableDustCollector  AT %Q* : BOOL;
+
+	// ── Limit switch stop triggers ───────────────────────────────────────────
+	bYStopTrigger       : R_TRIG;
+	bXStopTrigger       : R_TRIG;
+	bZStopTrigger       : R_TRIG;
+
+	// ── Homing control ───────────────────────────────────────────────────────
+	bHomeY              : BOOL;
+	bHomeY2             : BOOL;
+	bHomeX              : BOOL;
+	bHomeZ              : BOOL;
+	bDirectHome         : BOOL;
+	eHomingMode         : MC_HomingMode;
+	bGearInTrigger      : BOOL;
+	bGearOutTrigger     : BOOL;
+	rGearInTrigger      : R_TRIG;
+	rGearOutTrigger     : R_TRIG;
+	rtrigAxisNotGeared  : R_TRIG;
+	bAllAxesReady       : BOOL;
+	bAllAxesHomed       : BOOL;
+
+	// ── Axis control ─────────────────────────────────────────────────────────
+//	bAxisEnable         : BOOL;
+//	bAxisReset          : BOOL;
+	trigAxisEnable      : R_TRIG;
+	trigProgramCall     : R_TRIG;
+
+	// ── Operator commands ────────────────────────────────────────────────────
+	bStartRequest       : BOOL;
+	bStopRequest        : BOOL;
+	bHoldRequest        : BOOL;
+	bResetRequest       : BOOL;
+	bHomeAllRequest     : BOOL;
+	bMachineFault       : BOOL;
+	bStopExecute        : BOOL;
+
+	// ── Program loader ───────────────────────────────────────────────────────
+	ProgramCall         : E_Programs;
+	eHmiProgramRequest  : E_Programs;
+	bProgramDone        : BOOL;
+	nHomeAllSeq         : INT;
+	nHomeYSeq           : INT;
+	nHomeXSeq           : INT;
+	nHomeZSeq           : INT;
+	bYHomeDone          : BOOL;
+	bXHomeDone          : BOOL;
+	bZHomeDone          : BOOL;
+
+	// ── NCI / NC ─────────────────────────────────────────────────────────────
+	bExecuteNCProgram   : BOOL := FALSE;
+	sPrgName            : STRING[255] := 'C:\ProgramData\Beckhoff\TwinCAT\Mc\Nci\Profile_Cut_HeartPlaque.NC';
+	sCurrentProgram     : STRING;
+	out_stItpToPlc      : NCTOPLC_NCICHANNEL_REF;
+	CNC_stItpToPlc      : NCTOPLC_NCICHANNEL_REF;
+	fbStringTrimmer     : FB_StringTrimmer;
+
+	// ── Polling timer ────────────────────────────────────────────────────────
+	tPollingTimerTP     : TP;
+	tPollingTimerTOF    : TOF;
+	bPollingPulse       : BOOL;
 
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF bInitEvent THEN
-    bInitEvent := FALSE; 
-    fbMessage.CreateEx(TC_Events.CNC_Events.X_Home_Start,0); 
+    bInitEvent := FALSE;
+    fbMessage.CreateEx(TC_Events.CNC_Events.X_Home_Start, 0);
 END_IF
-IF bSendEvent THEN 
-    bSendEvent := FALSE; 
-    fbMessage.Send(0); 
+IF bSendEvent THEN
+    bSendEvent := FALSE;
+    fbMessage.Send(0);
 END_IF
 
 StateManager();
-
-// Polling Timer
-
-tPollingTimerTP(IN:= NOT tPollingTimerTOF.Q, PT := T#100MS, );
-tPollingTimerTOF(IN:= tPollingTimerTP.Q, PT := T#100MS);
-
-bPollingPulse := tPollingTimerTP.Q;
-
 WatchdogTimer();
 
-// Trigger Axis Gearing
+// Polling Timer
+tPollingTimerTP(IN := NOT tPollingTimerTOF.Q, PT := T#100MS);
+tPollingTimerTOF(IN := tPollingTimerTP.Q, PT := T#100MS);
+bPollingPulse := tPollingTimerTP.Q;
 
+// WatchdogTimer();
+
+// Axis Gearing Triggers
 rtrigAxisNotGeared(CLK := Y_MC_OUT.bPowerStatus AND NOT Y_MC_OUT.bGearInDone);
+rGearInTrigger(CLK  := bGearInTrigger);
+rGearOutTrigger(CLK := bGearOutTrigger);
 
-rGearInTrigger(CLK:= bGearInTrigger);
-rGearOutTrigger(CLK:= bGearOutTrigger);
-
-// Rising triggers for HMI control. Having issues calling directly in the Methods
 trigAxisEnable(CLK := stHMI_In.bAxisEnable);
-
-
-
-// Call HMI Interface Methods
 
 M_HMI_In();
 M_HMI_Out();
-
-// Call Limit Switch Logic
-
 M_LimitSwitchLogic();
-
 M_Motion();
-                                        
+
+// FB_NCI — PackML Unit interface
 fbNCI(
-	        bExecute:= bExecuteNCProgram,
-            bStop:= bStopExecute,
-            sPrgName := sPrgName, 
-	        bBusy=> , 
-	        bError=> , 
-	        bDone=> , 
-	        stX:=X_Ref, 
-	        stY:=Y_Ref, 
-	        stZ:=Z_Ref, 
-            sLoadedProgram=>sCurrentProgram,
-            out_sTItpToPlc => CNC_stItpToPlc,
-            bEnableDustCollector => bEnableDustCollector);
-            
+    eRequestedState      := eRequestedState,
+    sPrgName             := sPrgName,
+    bEnable              := bAxisEnable,
+    bStop                := bStopExecute,
+    stX                  := X_Ref,
+    stY                  := Y_Ref,
+    stZ                  := Z_Ref,
+    sLoadedProgram       => sCurrentProgram,
+    out_stItpToPlc       => CNC_stItpToPlc,
+    bEnableDustCollector => bEnableDustCollector);
 
-// All Axes Ready Bit
-
-bAllAxesReady:= Y_MC_OUT.bPowerStatus AND Y2_MC_OUT.bPowerStatus AND X_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
-bAllAxesHomed:= Y_Ref.Status.Homed AND Y2_Ref.Status.Homed AND X_Ref.Status.Homed AND Z_Ref.Status.Homed;
-
-// Method Calls
+bAllAxesReady := Y_MC_OUT.bPowerStatus AND Y2_MC_OUT.bPowerStatus
+              AND X_MC_OUT.bPowerStatus AND Z_MC_OUT.bPowerStatus;
+bAllAxesHomed := Y_Ref.Status.Homed AND Y2_Ref.Status.Homed
+              AND X_Ref.Status.Homed AND Z_Ref.Status.Homed;
 
 M_ProgramLoader();
 M_Inputs();
-M_Outputs();]]></ST>
+M_Outputs();
+]]></ST>
     </Implementation>
-    <Folder Name="State Machine" Id="{d3da6e27-ea48-4171-b5b0-87034ad0f838}" />
-    <Method Name="M_CoEStatus" Id="{478f4fc3-02da-43bf-9a5d-4cea12eb7ced}">
+    <Folder Name="State Machine" Id="{0b1f1a18-1b70-4bbe-9d05-f55371677c43}" />
+    <Method Name="M_CoEStatus" Id="{425e84ec-496b-44e5-be31-8d117bba9219}">
       <Declaration><![CDATA[METHOD M_CoEStatus : BOOL
 VAR_INPUT
 END_VAR
@@ -275,23 +262,18 @@ fbZAxisCoEStatus(
 	cbRead=> );]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_HMI_In" Id="{d9c64941-408b-44a2-8a91-175c813c4e4d}">
+    <Method Name="M_HMI_In" Id="{44e46d1f-70c1-489a-bb58-f47ff09f9573}">
       <Declaration><![CDATA[METHOD M_HMI_In : BOOL
-
-VAR
-
-
-
-END_VAR]]></Declaration>
+VAR_INPUT
+END_VAR
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[
-// Select Homing Various Programs
+// Home All Axes
+bHomeAllRequest := stHMI_In.bHomeAll;
 
-trigProgramCall(CLK := stHMI_In.bTriggerProgramCall);
-IF trigProgramCall.Q THEN   
-    eHmiProgramRequest := stHMI_In.ProgramCall;    
-END_IF
-
+// Direct Home, force all axes to zero and "calibrated" for testing
+bDirectHome		:= stHMI_In.bDirectHome;
 // Trigger axis enable button toggle but don't allow it to overwrite the program controlled axis enable
 
 IF trigAxisEnable.Q THEN
@@ -299,7 +281,6 @@ IF trigAxisEnable.Q THEN
 END_IF
 
 // Trigger Y coupling
-
 bGearInTrigger := stHMI_In.bCoupleYAxes;
 bGearOutTrigger := stHMI_In.bDecoupleAxes;
 
@@ -307,6 +288,7 @@ bGearOutTrigger := stHMI_In.bDecoupleAxes;
 bStartRequest := stHMI_In.bStart;
 bStopRequest := stHMI_In.bStop;
 bHoldRequest := stHMI_In.bHold;
+bResetRequest := stHMI_In.bReset;
 
 // Axis Reset
 
@@ -318,8 +300,8 @@ bAxisReset := stHMI_In.bReset;
 
 fbStringTrimmer(
                 TriggerSequence:=stHMI_In.bInitiateNCProgramSelect,
-                TrimLeft:=3,
-                TrimRight:=3,
+                TrimLeft:=0, //3,
+                TrimRight:=0, //3,
                 STR:=stHMI_In.sPrgName,
                 sString => sPrgName     );   
                 
@@ -327,8 +309,10 @@ fbStringTrimmer(
 bEnableDustCollectorPB := stHMI_In.bEnableDustCollectorPB;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_HMI_Out" Id="{579ae688-d5bb-4d46-9cff-7ebda2f9644e}">
+    <Method Name="M_HMI_Out" Id="{8184d617-9b8a-4d2f-b43d-c3baf3e0a16e}">
       <Declaration><![CDATA[METHOD M_HMI_Out : BOOL
+VAR_INPUT
+END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Limit and Homing Switch Mapping
@@ -376,7 +360,7 @@ stHMI_Out.sCurrentProgramSelected := sCurrentProgram;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Inputs" Id="{44930261-f7b3-46c2-ba50-0ddd8b114d05}">
+    <Method Name="M_Inputs" Id="{08630c8a-d5b0-46e1-a791-1de7a6b0a230}">
       <Declaration><![CDATA[METHOD M_Inputs : BOOL
 VAR_INPUT
 END_VAR
@@ -395,7 +379,7 @@ bYLimitSwitch	:= i_bYLimitSwitch;
 bXLimitSwitch	:= i_bXLimitSwitch;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_LimitSwitchLogic" Id="{d221ad2e-2e3c-403f-a0d1-ca7284c8dd6e}">
+    <Method Name="M_LimitSwitchLogic" Id="{384c08ae-1c78-4a89-be5c-44432c41d4bb}">
       <Declaration><![CDATA[METHOD M_LimitSwitchLogic : BOOL
 VAR_INPUT
 END_VAR
@@ -425,7 +409,7 @@ END_IF
 // Limit Switch Rising Edge trigger to trigger MC_Stop when first active]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Motion" Id="{7fe0dfdc-a96d-4f6c-b4be-b4d6404e32bc}">
+    <Method Name="M_Motion" Id="{9ac27425-a044-42a2-a070-79369b8c40bd}">
       <Declaration><![CDATA[METHOD M_Motion : BOOL
 VAR_INPUT
 END_VAR
@@ -461,6 +445,7 @@ Y_Motion(
 			bPositiveLimitSwitch := bYLimitSwitch,
             bNegativeLimitSwitch := bYNegativeLimit OR bY2NegativeLimit,
 			bHomeExecute := bHomeY,
+			bDirectHomeExecute:= bDirectHome,
             bSetPosExecute := stHMI_In.bSetPosExecute,
 			fSetPosition :=	2500.00						
                                                                             );
@@ -469,7 +454,7 @@ Y_Motion(
 							
 Y2_Motion( 
 			Ref:= Y2_Ref,
-            bGearingEnabled := TRUE,
+            bGearingEnabled := FALSE,
             SlaveRef:= Y2_Ref,
 		  	Motion_In := Y2_MC_IN,
 		  	Motion_Out => Y2_MC_OUT,
@@ -480,12 +465,13 @@ Y2_Motion(
             bJogPositive := stHMI_In.bYJogPositive,
             bJogNegative := stHMI_In.bYJogNegative,
             bStopAxis := bStopExecute OR bYStopTrigger.Q,
-            bResetAxis := bAxisReset,
+            bResetAxis := bAxisReset AND (Y2_Ref.NcToPlc.CoupleState = 0) ,
 			bHomingInput := bY2HomingSwitch,
 			eHomingMode := eHomingMode,
 			bPositiveLimitSwitch := bYLimitSwitch,
             bNegativeLimitSwitch := bY2NegativeLimit OR bYNegativeLimit,
 			bHomeExecute := bHomeY2,
+			bDirectHomeExecute:= bDirectHome,
             bSetPosExecute := stHMI_In.bSetPosExecute,
 			fSetPosition :=	2500.00								);
 						
@@ -508,6 +494,7 @@ X_Motion(
 			bPositiveLimitSwitch := bXLimitSwitch,
             bNegativeLimitSwitch := bXNegativeLimit,
 			bHomeExecute := bHomeX,
+			bDirectHomeExecute:= bDirectHome,
             bSetPosExecute := stHMI_In.bSetPosExecute,
 			fSetPosition :=1285.00									);
 							
@@ -530,11 +517,12 @@ Z_Motion(
             bPositiveLimitSwitch := bZPositiveLimit,
             bNegativeLimitSwitch := FALSE,
 			bHomeExecute := bHomeZ,
+			bDirectHomeExecute:= bDirectHome,
             bSetPosExecute := stHMI_In.bSetPosExecute,
 			fSetPosition := -212.69);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Outputs" Id="{bfb1dda8-5611-458d-bc52-800eff2f8798}">
+    <Method Name="M_Outputs" Id="{8e119a18-dfec-4aa6-9ce4-524b96118a96}">
       <Declaration><![CDATA[METHOD M_Outputs : BOOL
 VAR_INPUT
 END_VAR
@@ -544,7 +532,7 @@ END_VAR
 q_bEnableDustCollector := bEnableDustCollector OR bEnableDustCollectorPB;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PRG_HomeAll" Id="{dab3d8ef-3b5b-4130-bf86-a872d94b2fd9}">
+    <Method Name="M_PRG_HomeAll" Id="{ee6f6b0e-a0da-4f4d-b48c-cd57411a7327}">
       <Declaration><![CDATA[METHOD M_PRG_HomeAll : BOOL
 VAR_INPUT
 END_VAR
@@ -578,7 +566,7 @@ CASE nHomeAllSeq OF
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PRG_HomeX" Id="{0559bf4f-f4eb-40eb-a1a9-aef1d5d76984}">
+    <Method Name="M_PRG_HomeX" Id="{97f5fa8e-2f8e-4532-8af3-4209f47af5d2}">
       <Declaration><![CDATA[METHOD M_PRG_HomeX : BOOL
 VAR_INPUT
 END_VAR
@@ -631,16 +619,11 @@ CASE nHomeXSeq OF
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PRG_HomeY" Id="{1d12177f-1165-4fe4-893e-75362f34ca0e}">
+    <Method Name="M_PRG_HomeY" Id="{9d66eb1b-b3bd-4c00-adc7-ac7d6db7eec3}">
       <Declaration><![CDATA[METHOD M_PRG_HomeY : BOOL
 VAR_INPUT
 END_VAR
-
-VAR
-    
-
-
-END_VAR]]></Declaration>
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[
 
@@ -739,7 +722,7 @@ RE_GEAR:
         bGearOutExecute:=FALSE;
         bGearInExecute:=TRUE;
         IF Y_Ref.NcToPlc.CoupleState = 1 AND Y2_Ref.NcToPlc.CoupleState = 3 THEN
-            eHomeYSeq:=END;      
+            eHomeYSeq:=HOME_COMPLETE;      
 		END_IF
         
         
@@ -753,7 +736,7 @@ HOME_COMPLETE:
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PRG_HomeZ" Id="{a0db440c-428a-4bcc-967b-6a14556f0e37}">
+    <Method Name="M_PRG_HomeZ" Id="{5ffc7e1c-953c-49bd-8560-22b8849ba64d}">
       <Declaration><![CDATA[METHOD M_PRG_HomeZ : BOOL
 VAR_INPUT
 END_VAR
@@ -807,7 +790,7 @@ CASE nHomeZSeq OF
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PRG_Null" Id="{95052e96-06a1-4162-a970-9a7ef220b3e3}">
+    <Method Name="M_PRG_Null" Id="{7673609a-8435-42cc-80b7-800836ad57b0}">
       <Declaration><![CDATA[METHOD M_PRG_Null : BOOL
 VAR_INPUT
 END_VAR
@@ -827,7 +810,7 @@ bHomeZ:=FALSE;
 /////////////////////////////////]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_ProgramLoader" Id="{89f9fb87-c1f3-4063-b9ac-059ba224bd26}">
+    <Method Name="M_ProgramLoader" Id="{9271de0b-a532-40f5-a91f-ed88e7e00954}">
       <Declaration><![CDATA[METHOD M_ProgramLoader : BOOL
 VAR_INPUT
 END_VAR
@@ -873,432 +856,160 @@ END_CASE
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="StateManager" Id="{96e0bc36-18f3-4f77-a149-34b56bbbead3}" FolderPath="State Machine\">
+    <Method Name="StateManager" Id="{c2803ebc-fe8b-4d7d-9f60-807288fd38fc}" FolderPath="State Machine\">
       <Declaration><![CDATA[METHOD StateManager : BOOL
 VAR_INPUT
-END_VAR]]></Declaration>
+END_VAR
+]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// ---------------------------------------------------------
-// 0. GLOBAL OVERRIDES (Faults & Stop)
-// ---------------------------------------------------------
-//bSubmoduleFault := (NOT Y_Ref.Status.Operational) OR (NOT X_Ref.Status.Operational) OR (NOT Z_Ref.Status.Operational);
+        <ST><![CDATA[// ============================================================================
+//  StateManager  —  PackML Controller
+//  Drives eRequestedState only. Never writes eCurrentState in the CASE.
+//  bAllSynced is evaluated POST-CASE so eRequestedState is always current.
+// ============================================================================
 
-// Trigger ABORTING on any fault
-IF bSubmoduleFault AND (eCurrentState <> E_MachineState.ABORTING AND eCurrentState <> E_MachineState.ABORTED) THEN
-    eCurrentState := E_MachineState.ABORTING;
+// ── 0. GLOBAL OVERRIDES ──────────────────────────────────────────────────────
+IF bMachineFault OR bHandshakeTimeout THEN
+    IF eRequestedState <> E_MachineState.ABORTING
+    AND eRequestedState <> E_MachineState.ABORTED THEN
+        eRequestedState := E_MachineState.ABORTING;
+    END_IF
 END_IF
 
-// Manual STOP during motion moves to STOPPING (the handshake state)
-IF bStopRequest AND (eCurrentState = E_MachineState.EXECUTE OR eCurrentState = E_MachineState.STARTING) THEN
-    bStopRequest := FALSE;
-    eCurrentState := E_MachineState.STOPPING; 
+IF bStopRequest
+AND eRequestedState <> E_MachineState.STOPPING
+AND eRequestedState <> E_MachineState.STOPPED
+AND eRequestedState <> E_MachineState.ABORTING
+AND eRequestedState <> E_MachineState.ABORTED THEN
+    bStopRequest    := FALSE;
+    eRequestedState := E_MachineState.STOPPING;
 END_IF
 
-// ---------------------------------------------------------
-// 1. MASTER STATE MACHINE
-// ---------------------------------------------------------
-CASE eCurrentState OF
+// ── 1. STATE MACHINE ─────────────────────────────────────────────────────────
+CASE eRequestedState OF
 
-    E_MachineState.RESETTING: 
-        eRequestedState := E_MachineState.RESETTING; 
-		
-        // Wait for ALL submodules to finish their internal reset
-        IF fbNCI.eCurrentState = E_MachineState.RESETTING AND fbNCI.bStateDone
-           AND NOT bSubmoduleFault THEN      
-            eCurrentState := E_MachineState.IDLE;
+    E_MachineState.STOPPED:
+        IF bResetRequest THEN
+            bResetRequest   := FALSE;
+            eRequestedState := E_MachineState.RESETTING;
+        END_IF
+
+    E_MachineState.RESETTING:
+        IF bAllSynced AND NOT bMachineFault THEN
+            eRequestedState := E_MachineState.IDLE;
         END_IF
 
     E_MachineState.IDLE:
-        eRequestedState := E_MachineState.IDLE;
-        
-        // Handle Homing/Program Calls
-        IF eHmiProgramRequest <> eNull AND (ProgramCall = eNull) THEN
+        IF bHomeAllRequest AND (ProgramCall = eNull) THEN
             bProgramDone := FALSE;
-            ProgramCall := eHmiProgramRequest;
-            eHmiProgramRequest := eNull; 
+            ProgramCall  := E_Programs.eHomeAll;
         END_IF
-
-        // Start Sequence Handshake
         IF bStartRequest AND bAllAxesHomed AND (ProgramCall = eNull) THEN
-            // We set the REQUEST first. We don't change eCurrentState 
-            // until the submodules confirm they see the new request.
-            IF fbNCI.eCurrentState = E_MachineState.STARTING THEN
-                bStartRequest := FALSE;
-                eCurrentState := E_MachineState.STARTING;
-            END_IF
+            bStartRequest   := FALSE;
+            eRequestedState := E_MachineState.STARTING;
         END_IF
 
     E_MachineState.STARTING:
-        eRequestedState := E_MachineState.STARTING;
-		
-        // Wait for confirmation that Spindle is at speed and NCI is prepped
-        IF fbNCI.bStateDone THEN
-            eCurrentState := E_MachineState.EXECUTE;
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.EXECUTE;
         END_IF
 
     E_MachineState.EXECUTE:
-        eRequestedState := E_MachineState.EXECUTE;
-		
-        bExecuteNCProgram := TRUE; 
-        
-        IF fbNCI.bDone THEN
+        bExecuteNCProgram := TRUE;
+        IF bAllSynced THEN
             bExecuteNCProgram := FALSE;
-            eCurrentState := E_MachineState.COMPLETING;
+            eRequestedState   := E_MachineState.COMPLETING;
         ELSIF bHoldRequest THEN
-            bHoldRequest := FALSE;
-            eCurrentState := E_MachineState.HELD;
+            bHoldRequest    := FALSE;
+            eRequestedState := E_MachineState.HOLDING;
+        END_IF
+
+    E_MachineState.HOLDING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.HELD;
         END_IF
 
     E_MachineState.HELD:
-        eRequestedState := E_MachineState.HELD;
-		
-        // Pause/Resume Logic
         IF bStartRequest THEN
-            bStartRequest := FALSE;
-            eCurrentState := E_MachineState.EXECUTE;
+            bStartRequest   := FALSE;
+            eRequestedState := E_MachineState.UNHOLDING;
         END_IF
 
-    E_MachineState.STOPPING:
-        eRequestedState := E_MachineState.STOPPING;
-        
-        // Wait for submodules to finish ramping down
-        IF fbNCI.bStateDone THEN
-            eCurrentState := E_MachineState.STOPPED;
-        END_IF
-
-    E_MachineState.STOPPED:
-        eRequestedState := E_MachineState.STOPPED;
-		
-        IF bResetRequest THEN
-            bResetRequest := FALSE;
-            eCurrentState := E_MachineState.RESETTING;
+    E_MachineState.UNHOLDING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.EXECUTE;
         END_IF
 
     E_MachineState.COMPLETING:
-        eRequestedState := E_MachineState.COMPLETING;
-        
-        // Wait for Spindle to stop and Gantry to park
-        IF fbNCI.bStateDone THEN
-            eCurrentState := E_MachineState.COMPLETE;
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.COMPLETE;
         END_IF
 
     E_MachineState.COMPLETE:
-        eRequestedState := E_MachineState.COMPLETE;
-		
         IF bResetRequest OR bStartRequest THEN
-            bResetRequest := FALSE;
-            bStartRequest := FALSE;
-            eCurrentState := E_MachineState.RESETTING;
+            bResetRequest   := FALSE;
+            bStartRequest   := FALSE;
+            eRequestedState := E_MachineState.RESETTING;
+        END_IF
+
+    E_MachineState.STOPPING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.STOPPED;
         END_IF
 
     E_MachineState.ABORTING:
-        eRequestedState := E_MachineState.ABORTING;
-        
-        // Wait for safety handshake (Spindle < 10 RPM, etc)
-        IF fbNCI.bStateDone THEN
-            eCurrentState := E_MachineState.ABORTED;
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.ABORTED;
         END_IF
 
     E_MachineState.ABORTED:
-        eRequestedState := E_MachineState.ABORTED;
-		
-        IF bResetRequest THEN
-            bResetRequest := FALSE;
-            eCurrentState := E_MachineState.RESETTING;
+        bExecuteNCProgram := FALSE;
+        IF bResetRequest AND NOT bMachineFault AND NOT bHandshakeTimeout THEN
+            bResetRequest   := FALSE;
+            eRequestedState := E_MachineState.RESETTING;
         END_IF
 
-END_CASE]]></ST>
+END_CASE
+
+// ── 2. POST-PROCESSING ───────────────────────────────────────────────────────
+// eRequestedState is fully updated above before any of these evaluate.
+
+// bAllSynced: follower must be working on current request AND report done.
+// ★ AND additional followers here:
+bAllSynced := (fbNCI.eActiveRequest = eRequestedState AND fbNCI.bStateDone);
+
+// Diagnostic: which follower is blocking
+// ★ Add additional followers here:
+sBlockedBy := '';
+IF NOT (fbNCI.eActiveRequest = eRequestedState AND fbNCI.bStateDone) THEN
+    sBlockedBy := 'NCI';
+END_IF
+
+// Watchdog: fires if any follower stuck longer than T#30S
+tonWatchdog(IN := NOT bAllSynced AND eRequestedState <> E_MachineState.EXECUTE, PT := T#30S);
+IF tonWatchdog.Q THEN
+    bHandshakeTimeout := TRUE;
+    sErrorMsg         := CONCAT('Watchdog: ', sBlockedBy);
+END_IF
+
+// HMI mirror
+eCurrentState := eRequestedState;
+]]></ST>
       </Implementation>
     </Method>
-    <Method Name="WatchdogTimer" Id="{78f9e00d-b97e-45d3-9f37-7726e84608fd}" FolderPath="State Machine\">
+    <Method Name="WatchdogTimer" Id="{bcf58919-6e3c-435d-9b5d-123a5f386c35}" FolderPath="State Machine\">
       <Declaration><![CDATA[METHOD WatchdogTimer : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// --- Watchdog Logic at the top of FB_CNC ---
-tWatchdogTimer(IN := (eCurrentState = E_MachineState.STARTING 
-                   OR eCurrentState = E_MachineState.RESETTING 
-                   OR eCurrentState = E_MachineState.STOPPING 
-                   OR eCurrentState = E_MachineState.COMPLETING 
-                   OR eCurrentState = E_MachineState.ABORTING), 
-               PT := T#15S); // 15-second timeout for any "Acting" state
-
-IF tWatchdogTimer.Q THEN
-    // If we've been stuck in an "-ING" state too long, force an Abort
-    sErrorMsg := 'Service Timeout: Submodule failed to respond';
-    eCurrentState := E_MachineState.ABORTING;
-END_IF]]></ST>
+        <ST><![CDATA[// Watchdog reset — call this to clear a timeout after fault is resolved
+IF bResetRequest THEN
+    bHandshakeTimeout := FALSE;
+    tonWatchdog(IN := FALSE);
+END_IF
+]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_CNC">
-      <LineId Id="13935" Count="7" />
-      <LineId Id="15294" Count="0" />
-      <LineId Id="15293" Count="0" />
-      <LineId Id="14882" Count="0" />
-      <LineId Id="14881" Count="0" />
-      <LineId Id="14884" Count="0" />
-      <LineId Id="14883" Count="0" />
-      <LineId Id="14891" Count="0" />
-      <LineId Id="14886" Count="0" />
-      <LineId Id="13943" Count="0" />
-      <LineId Id="14890" Count="0" />
-      <LineId Id="13944" Count="6" />
-      <LineId Id="14853" Count="0" />
-      <LineId Id="13961" Count="3" />
-      <LineId Id="14873" Count="0" />
-      <LineId Id="13972" Count="9" />
-      <LineId Id="14068" Count="0" />
-      <LineId Id="14072" Count="10" />
-      <LineId Id="14085" Count="0" />
-      <LineId Id="14416" Count="0" />
-      <LineId Id="15015" Count="0" />
-      <LineId Id="14637" Count="0" />
-      <LineId Id="14089" Count="9" />
-      <LineId Id="680" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_CoEStatus">
-      <LineId Id="6" Count="11" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="60" Count="11" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="72" Count="11" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="84" Count="5" />
-      <LineId Id="96" Count="0" />
-      <LineId Id="91" Count="4" />
-      <LineId Id="47" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_HMI_In">
-      <LineId Id="5" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="144" Count="6" />
-      <LineId Id="164" Count="2" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="100" Count="0" />
-      <LineId Id="103" Count="0" />
-      <LineId Id="102" Count="0" />
-      <LineId Id="110" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="167" Count="1" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="169" Count="0" />
-      <LineId Id="69" Count="0" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="71" Count="0" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="86" Count="1" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="88" Count="4" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="117" Count="2" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_HMI_Out">
-      <LineId Id="11" Count="7" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="67" Count="0" />
-      <LineId Id="66" Count="0" />
-      <LineId Id="65" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="68" Count="1" />
-      <LineId Id="71" Count="2" />
-      <LineId Id="76" Count="0" />
-      <LineId Id="75" Count="0" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="49" Count="0" />
-      <LineId Id="48" Count="0" />
-      <LineId Id="52" Count="2" />
-      <LineId Id="59" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="60" Count="2" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="32" Count="7" />
-      <LineId Id="10" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_Inputs">
-      <LineId Id="9" Count="1" />
-      <LineId Id="5" Count="3" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_LimitSwitchLogic">
-      <LineId Id="16" Count="1" />
-      <LineId Id="6" Count="4" />
-      <LineId Id="29" Count="1" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="11" Count="4" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="26" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="18" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_Motion">
-      <LineId Id="6" Count="0" />
-      <LineId Id="98" Count="7" />
-      <LineId Id="97" Count="0" />
-      <LineId Id="7" Count="89" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_Outputs">
-      <LineId Id="20" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_PRG_HomeAll">
-      <LineId Id="205" Count="5" />
-      <LineId Id="232" Count="0" />
-      <LineId Id="211" Count="17" />
-      <LineId Id="10" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_PRG_HomeX">
-      <LineId Id="6" Count="5" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="46" Count="28" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="42" Count="2" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_PRG_HomeY">
-      <LineId Id="6" Count="6" />
-      <LineId Id="172" Count="0" />
-      <LineId Id="146" Count="0" />
-      <LineId Id="137" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="161" Count="1" />
-      <LineId Id="165" Count="1" />
-      <LineId Id="163" Count="1" />
-      <LineId Id="69" Count="0" />
-      <LineId Id="152" Count="0" />
-      <LineId Id="155" Count="0" />
-      <LineId Id="154" Count="0" />
-      <LineId Id="15" Count="2" />
-      <LineId Id="138" Count="0" />
-      <LineId Id="18" Count="1" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="20" Count="1" />
-      <LineId Id="139" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="60" Count="0" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="59" Count="0" />
-      <LineId Id="71" Count="2" />
-      <LineId Id="110" Count="1" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="89" Count="0" />
-      <LineId Id="76" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="75" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="88" Count="0" />
-      <LineId Id="86" Count="1" />
-      <LineId Id="101" Count="2" />
-      <LineId Id="105" Count="4" />
-      <LineId Id="104" Count="0" />
-      <LineId Id="90" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="93" Count="7" />
-      <LineId Id="92" Count="0" />
-      <LineId Id="112" Count="1" />
-      <LineId Id="121" Count="0" />
-      <LineId Id="116" Count="4" />
-      <LineId Id="114" Count="1" />
-      <LineId Id="122" Count="0" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="125" Count="2" />
-      <LineId Id="131" Count="0" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="123" Count="1" />
-      <LineId Id="81" Count="3" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="145" Count="0" />
-      <LineId Id="80" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_PRG_HomeZ">
-      <LineId Id="6" Count="5" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="46" Count="28" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="41" Count="3" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_PRG_Null">
-      <LineId Id="5" Count="2" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="24" Count="3" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="19" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.M_ProgramLoader">
-      <LineId Id="242" Count="0" />
-      <LineId Id="200" Count="4" />
-      <LineId Id="240" Count="0" />
-      <LineId Id="205" Count="4" />
-      <LineId Id="246" Count="0" />
-      <LineId Id="210" Count="2" />
-      <LineId Id="247" Count="0" />
-      <LineId Id="213" Count="0" />
-      <LineId Id="215" Count="18" />
-      <LineId Id="48" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.StateManager">
-      <LineId Id="392" Count="22" />
-      <LineId Id="520" Count="0" />
-      <LineId Id="416" Count="1" />
-      <LineId Id="419" Count="0" />
-      <LineId Id="421" Count="17" />
-      <LineId Id="441" Count="6" />
-      <LineId Id="521" Count="0" />
-      <LineId Id="449" Count="6" />
-      <LineId Id="522" Count="0" />
-      <LineId Id="456" Count="11" />
-      <LineId Id="523" Count="0" />
-      <LineId Id="468" Count="15" />
-      <LineId Id="524" Count="0" />
-      <LineId Id="484" Count="14" />
-      <LineId Id="525" Count="0" />
-      <LineId Id="499" Count="15" />
-      <LineId Id="526" Count="0" />
-      <LineId Id="515" Count="4" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_CNC.WatchdogTimer">
-      <LineId Id="6" Count="11" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

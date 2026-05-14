@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="FB_MotionFunctions" Id="{500ca146-bff1-4570-8da1-57ff34083845}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_MotionFunctions IMPLEMENTS I_HMI;
 
@@ -17,6 +17,7 @@ bHomingInput		        : BOOL;
 bPositiveLimitSwitch		: BOOL;
 bNegativeLimitSwitch        : BOOL;
 bHomeExecute		        : BOOL;
+bDirectHomeExecute			: BOOL;
 bGearingEnabled             : BOOL;
 bStopAxis                   : BOOL;
 bResetAxis                  : BOOL;
@@ -91,6 +92,7 @@ M_Reset();
 M_FastStop();
 M_Halt();
 M_Home( );
+M_HomeDirect();
 M_Gearing( );
 M_HMI_In();
 M_Jog();
@@ -235,6 +237,28 @@ END_VAR
 	ErrorID=> Motion_Out.bHomeErrorID);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_HomeDirect" Id="{5e3374b5-fd26-4a87-830e-0277e7a0b4eb}">
+      <Declaration><![CDATA[METHOD M_HomeDirect : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[mcHome(
+	Axis:= Ref, 
+	Execute:= bDirectHomeExecute, 
+	Position:= 0.00, 
+	HomingMode:= MC_Direct,
+	BufferMode:= , 
+	Options:= , 
+//	bCalibrationCam:= bHomingInput, 
+	Done=> Motion_Out.bAxisHomed, 
+	Busy=> Motion_Out.bHomeBusy, 
+	Active=> Motion_Out.bHomeActive, 
+	CommandAborted=> Motion_Out.bHomeAborted, 
+	Error=> Motion_Out.bHomeError, 
+	ErrorID=> Motion_Out.bHomeErrorID);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Jog" Id="{0ffd9f33-8909-4c6d-aa47-c26c8d95be7b}">
       <Declaration><![CDATA[METHOD M_Jog : BOOL
 VAR_INPUT
@@ -353,80 +377,5 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_MotionFunctions">
-      <LineId Id="464" Count="16" />
-      <LineId Id="554" Count="0" />
-      <LineId Id="481" Count="0" />
-      <LineId Id="126" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_FastStop">
-      <LineId Id="6" Count="10" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_Gearing">
-      <LineId Id="35" Count="0" />
-      <LineId Id="37" Count="1" />
-      <LineId Id="9" Count="15" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="28" Count="6" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="39" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_Halt">
-      <LineId Id="6" Count="11" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_HMI_In">
-      <LineId Id="4" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_HMI_Out">
-      <LineId Id="18" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="37" Count="3" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_Home">
-      <LineId Id="6" Count="12" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_Jog">
-      <LineId Id="23" Count="0" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="6" Count="14" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="24" Count="1" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_PowerStepper">
-      <LineId Id="7" Count="12" />
-      <LineId Id="6" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_Reset">
-      <LineId Id="9" Count="5" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_SetPosition">
-      <LineId Id="6" Count="8" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_TouchProbe">
-      <LineId Id="6" Count="12" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_MotionFunctions.M_ZeroAxis">
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

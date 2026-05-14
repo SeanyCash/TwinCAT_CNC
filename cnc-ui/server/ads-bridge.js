@@ -1,14 +1,17 @@
 import express from 'express';
 import { WebSocket, WebSocketServer } from 'ws';
 import { Client } from 'ads-client';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
 
 const HTTP_PORT = Number(process.env.ADS_BRIDGE_PORT ?? 3001);
-const POLL_MS = Number(process.env.ADS_POLL_MS ?? 200);
-const TARGET_AMS_NET_ID = process.env.ADS_AMS_NET_ID ?? '192.168.36.1.1.1';
+const POLL_MS = Number(process.env.ADS_POLL_MS ?? 100);
+const TARGET_AMS_NET_ID = process.env.ADS_AMS_NET_ID ?? '192.168.0.99.1.1';
 const TARGET_IP = process.env.ADS_TARGET_IP;
 const TARGET_ADS_PORT = Number(process.env.ADS_PORT ?? 851);
 const SYMBOL_HMI_IN = process.env.ADS_SYMBOL_HMI_IN ?? 'GVL.stHMI_In';
 const SYMBOL_HMI_OUT = process.env.ADS_SYMBOL_HMI_OUT ?? 'GVL.stHMI_Out';
+const GCODE_ROOT = path.resolve(process.env.TWINCAT_NCI_ROOT ?? 'C:\\ProgramData\\Beckhoff\\TwinCAT\\Mc\\Nci');
 
 const app = express();
 app.use(express.json());
@@ -77,6 +80,61 @@ async function writeFields(fields) {
   }
 }
 
+function isAllowedGCodeFile(filePath) {
+  return ['.nc'].includes(path.extname(filePath).toLowerCase());
+}
+
+function resolveGCodePath(requestedPath = '') {
+  const candidatePath = path.resolve(GCODE_ROOT, requestedPath);
+  const relativePath = path.relative(GCODE_ROOT, candidatePath);
+
+  if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    throw new Error('Requested path is outside the TwinCAT NCI root');
+  }
+
+  return candidatePath;
+}
+
+async function collectGCodeFiles(currentDir, rootDir) {
+  const entries = await fs.readdir(currentDir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const entryPath = path.join(currentDir, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...await collectGCodeFiles(entryPath, rootDir));
+      continue;
+    }
+
+    if (!entry.isFile() || !isAllowedGCodeFile(entryPath)) {
+      continue;
+    }
+
+    files.push({
+      name: entry.name,
+      path: entryPath,
+      relativePath: path.relative(rootDir, entryPath),
+    });
+  }
+
+  return files.sort((left, right) => left.relativePath.localeCompare(right.relativePath));
+}
+
+function sanitizeUploadName(fileName = '') {
+  const baseName = path.basename(fileName).trim();
+
+  if (!baseName || baseName === '.' || baseName === '..') {
+    throw new Error('A valid file name is required');
+  }
+
+  if (!isAllowedGCodeFile(baseName)) {
+    throw new Error('Only .nc files are supported');
+  }
+
+  return baseName;
+}
+
 app.get('/api/plc/state', (_req, res) => {
   res.json(snapshot);
 });
@@ -87,6 +145,53 @@ app.post('/api/plc/write', async (req, res) => {
     res.json({ ok: true });
   } catch (error) {
     res.status(500).send(error instanceof Error ? error.message : 'ADS write failed');
+  }
+});
+
+app.get('/api/gcode/files', async (_req, res) => {
+  try {
+    const files = await collectGCodeFiles(GCODE_ROOT, GCODE_ROOT);
+    res.json({ root: GCODE_ROOT, files });
+  } catch (error) {
+    res.status(500).send(error instanceof Error ? error.message : 'Failed to read TwinCAT NCI directory');
+  }
+});
+
+app.get('/api/gcode/file', async (req, res) => {
+  try {
+    const requestedPath = typeof req.query.path === 'string' ? req.query.path : '';
+    const resolvedPath = resolveGCodePath(requestedPath);
+    const stats = await fs.stat(resolvedPath);
+
+    if (!stats.isFile() || !isAllowedGCodeFile(resolvedPath)) {
+      res.status(400).send('Requested file is not a supported G-code file');
+      return;
+    }
+
+    const content = await fs.readFile(resolvedPath, 'utf8');
+    res.json({ path: resolvedPath, name: path.basename(resolvedPath), content });
+  } catch (error) {
+    res.status(500).send(error instanceof Error ? error.message : 'Failed to read G-code file');
+  }
+});
+
+app.post('/api/gcode/upload', async (req, res) => {
+  try {
+    const fileName = sanitizeUploadName(req.body?.fileName);
+    const content = typeof req.body?.content === 'string' ? req.body.content : '';
+    const destinationPath = path.join(GCODE_ROOT, fileName);
+
+    await fs.mkdir(GCODE_ROOT, { recursive: true });
+    await fs.writeFile(destinationPath, content, 'utf8');
+
+    res.json({
+      ok: true,
+      path: destinationPath,
+      name: fileName,
+      content,
+    });
+  } catch (error) {
+    res.status(500).send(error instanceof Error ? error.message : 'Failed to upload G-code file');
   }
 });
 

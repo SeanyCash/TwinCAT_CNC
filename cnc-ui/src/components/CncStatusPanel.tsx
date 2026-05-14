@@ -6,23 +6,23 @@ export default function CncStatusPanel({ hmiOut }: { hmiOut: HmiOut }) {
   const isAtSetpoint = hmiOut.bSpindleAtRequestedSpeed; 
 
   return (
-    <div className="bg-cnc-bg border border-cnc-border rounded-lg p-4 font-mono text-cnc-text shadow-xl max-w-4xl">
+    <div className="bg-cnc-bg border border-cnc-border rounded-lg p-4 text-cnc-text shadow-xl max-w-4xl">
       
       {/* UPPER SECTION: Interpretation & Path */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="space-y-4">
           <div className="flex items-baseline gap-2">
             <span className="text-xs text-slate-500 font-bold">Block Number:</span>
-            <span className="text-lg font-bold text-cnc-accent">N0000</span>
+            <span className="text-lg font-mono font-bold text-cnc-accent">N0000</span>
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-xs text-slate-500 font-bold">Override Speed:</span>
-            <span className="text-lg font-bold text-cnc-text">{hmiOut.fChannelOverrideSpeed}%</span>
+            <span className="text-lg font-mono font-bold text-cnc-text">{hmiOut.fChannelOverrideSpeed}%</span>
           </div>
           <div className="mt-4">
              <span className="text-2xl font-black text-cnc-success">M</span>
              <div className="text-xs text-slate-500 mt-1 uppercase font-bold tracking-widest">NC Interpreter State:</div>
-             <div className={`text-sm mt-1 font-bold ${isWarmUp ? 'text-cnc-warning animate-slow-pulse' : 'text-cnc-success'}`}>
+             <div className={`text-sm mt-1 font-mono font-bold ${isWarmUp ? 'text-cnc-warning animate-slow-pulse' : 'text-cnc-success'}`}>
                {isWarmUp ? 'WARM-UP ACTIVE' : hmiOut.sInterpreterState || 'IDLE / READY'}
              </div>
           </div>
@@ -30,9 +30,9 @@ export default function CncStatusPanel({ hmiOut }: { hmiOut: HmiOut }) {
 
         <div className="text-right space-y-1">
           <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest">Path Velocity:</span>
-          <div className="text-3xl font-black text-white leading-none tabular-nums">{hmiOut.fFeedRate.toFixed(2)}</div>
+          <div className="text-3xl font-mono font-black text-white leading-none tabular-nums">{hmiOut.fFeedRate.toFixed(2)}</div>
           <div className="text-xs text-slate-400">mm/sec</div>
-          <div className="text-xs text-slate-600 italic">{hmiOut.fToolpathVelocityIPM.toFixed(2)} IPM</div>
+          <div className="text-xs font-mono text-slate-600 italic">{hmiOut.fToolpathVelocityIPM.toFixed(2)} IPM</div>
         </div>
       </div>
 
@@ -47,13 +47,13 @@ export default function CncStatusPanel({ hmiOut }: { hmiOut: HmiOut }) {
              {/* RPM Gauge */}
              <div className="flex-1 bg-black/60 border border-cnc-border px-3 py-2 rounded shadow-inner flex flex-col">
                <span className="text-[9px] text-slate-500 font-bold uppercase mb-1">RPM</span>
-               <span className="text-xl text-cnc-accent font-bold tabular-nums">{hmiOut.fScaledSpindleSpeedRef.toFixed(1)}</span>
+               <span className="text-xl font-mono text-cnc-accent font-bold tabular-nums">{hmiOut.fScaledSpindleSpeedRef.toFixed(1)}</span>
              </div>
              
              {/* Hz Gauge */}
              <div className="flex-1 bg-black/60 border border-cnc-border px-3 py-2 rounded shadow-inner flex flex-col">
                <span className="text-[9px] text-slate-500 font-bold uppercase mb-1">Frequency</span>
-               <span className="text-xl text-cnc-accent font-bold tabular-nums">{hmiOut.nOutputFreq.toFixed(1)} <span className="text-xs font-normal">Hz</span></span>
+               <span className="text-xl font-mono text-cnc-accent font-bold tabular-nums">{hmiOut.nOutputFreq.toFixed(1)} <span className="text-xs font-normal">Hz</span></span>
              </div>
           </div>
 

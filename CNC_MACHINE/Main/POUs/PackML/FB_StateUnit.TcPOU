@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_StateUnit" Id="{06cb6e47-27b6-4de1-a4ee-4917b32458ec}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StateUnit
+VAR_INPUT
+    eRequestedState     : E_MachineState;   // Written by Leader, read here
+    bSubmoduleFault     : BOOL;             // Hardware fault local to this sub
+END_VAR
+VAR_OUTPUT
+    eActiveRequest      : E_MachineState;   // What this follower is currently executing
+    bStateDone          : BOOL;             // TRUE = work complete for eActiveRequest
+    bError              : BOOL;             // TRUE = this follower is in fault
+    sErrorText          : STRING(80);       // Diagnostic for HMI / event log
+END_VAR
+VAR
+    bStateEntry         : BOOL;             // One-shot: TRUE on first scan of new request
+    bNewRequest         : BOOL;             // Internal: detected request change
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ============================================================================
+//  FB_StateFollower  —  Follower / Submodule base
+//
+//  CONTRACT:
+//  - Follower reads eRequestedState from Leader (VAR_INPUT)
+//  - On a new request: mirrors it into eActiveRequest, clears bStateDone,
+//    arms bStateEntry for one scan, then executes work methods
+//  - Follower NEVER writes eRequestedState or drives state transitions
+//  - bStateDone := FALSE is guaranteed visible to Leader for one full scan
+//    before any work method can set it TRUE  (post-CASE pattern)
+//  - eActiveRequest is what Leader checks in bAllSynced — confirms follower
+//    is working on the RIGHT request, not a stale one
+//
+//  TO EXTEND THIS INTO A REAL SUBMODULE:
+//  Replace each method stub (Resetting, Starting, etc.) with your real logic.
+//  Each method returns TRUE when its work is complete for that state.
+//  This FB is structured to become an INTERFACE or EXTENDS base easily.
+// ============================================================================
+
+// ============================================================================
+//  0. FAULT OVERRIDE
+//  Submodule fault escalates locally — Leader sees bError and should
+//  roll it into bMachineFault to trigger ABORTING from the top.
+// ============================================================================
+IF bSubmoduleFault
+   AND eActiveRequest <> E_MachineState.ABORTING
+   AND eActiveRequest <> E_MachineState.ABORTED THEN
+    bError      := TRUE;
+    sErrorText  := 'Submodule hardware fault';
+END_IF
+
+// ============================================================================
+//  1. FOLLOWER STATE LOGIC
+//     Keyed on eActiveRequest — only updated in post-processing below.
+//     Each work method gets bStateEntry as its one-shot execute trigger.
+//     Return TRUE from the method when work is done → sets bStateDone.
+// ============================================================================
+CASE eActiveRequest OF
+
+    // ── Transient states: follower has real work to do ────────────────────────
+    E_MachineState.RESETTING:
+        IF Resetting(bExecute := bStateEntry) THEN
+            bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.STARTING:
+        IF Starting(bExecute := bStateEntry) THEN
+            bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.EXECUTE:
+        IF Execute(bExecute := bStateEntry) THEN
+            bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.HOLDING:
+        IF Holding(bExecute := bStateEntry) THEN
+            bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.UNHOLDING:
+        IF Unholding(bExecute := bStateEntry) THEN
+            bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.COMPLETING:
+        IF Completing(bExecute := bStateEntry) THEN
+            bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.STOPPING:
+        IF Stopping(bExecute := bStateEntry) THEN
+            bStateDone := TRUE;
+        END_IF
+
+    E_MachineState.ABORTING:
+        IF Aborting(bExecute := bStateEntry) THEN
+            bStateDone := TRUE;
+        END_IF
+
+    // ── Resting states: no work — confirm immediately ─────────────────────────
+    // Leader uses these to park followers between cycles.
+    // Immediately returning done means Leader is never blocked by a resting sub.
+    E_MachineState.IDLE,
+    E_MachineState.HELD,
+    E_MachineState.STOPPED,
+    E_MachineState.COMPLETE,
+    E_MachineState.ABORTED:
+        bStateDone := TRUE;
+
+END_CASE
+
+// ============================================================================
+//  2. POST-PROCESSING  —  runs AFTER CASE every scan
+//
+//  New request detection and bStateDone clear happen here.
+//  This guarantees bStateDone = FALSE is visible to Leader for at least
+//  one full scan before any work method above can set it TRUE again.
+//
+//  Scan N:   Leader sets new eRequestedState
+//            POST: bNewRequest=TRUE, eActiveRequest updated,
+//                  bStateDone=FALSE written, bStateEntry=TRUE
+//
+//  Scan N+1: Leader reads bStateDone=FALSE → bAllSynced=FALSE (cannot skip)
+//            CASE runs work method with bStateEntry=TRUE (one-shot fires)
+//            POST: bStateEntry=FALSE
+//
+//  Scan N+X: Work method completes → bStateDone=TRUE
+//            Leader reads bAllSynced=TRUE → advances
+// ============================================================================
+bNewRequest := (eRequestedState <> eActiveRequest);
+
+IF bNewRequest THEN
+    eActiveRequest  := eRequestedState;     // Mirror new request
+    bStateDone      := FALSE;               // Clear — Leader sees this next scan
+    bStateEntry     := TRUE;               // Arm one-shot for work methods
+    bError          := FALSE;              // Clear previous error on new request
+    sErrorText      := '';
+ELSE
+    bStateEntry     := FALSE;              // Not a new request — one-shot stays off
+END_IF
+
+// Final error report to Leader
+bError := bError OR bSubmoduleFault OR (eActiveRequest = E_MachineState.ABORTED);
+
+
+// ============================================================================
+//  WORK METHOD STUBS
+//  Replace each with your real submodule logic.
+//  Return TRUE when the work for that state is complete.
+//  Use the internal sequencer pattern (nSeq + bStepEntry) inside each one.
+// ============================================================================
+
+// METHOD PRIVATE Resetting : BOOL
+// VAR_INPUT bExecute : BOOL; END_VAR
+//     Resetting := FALSE;
+//     // your homing / alarm clear logic here
+//     // Resetting := TRUE when done
+
+// METHOD PRIVATE Starting : BOOL
+// VAR_INPUT bExecute : BOOL; END_VAR
+//     Starting := FALSE;
+//     // your spindle ramp / interlock check here
+//     // Starting := TRUE when done
+
+// METHOD PRIVATE Execute : BOOL
+// VAR_INPUT bExecute : BOOL; END_VAR
+//     Execute := FALSE;
+//     // your NC program monitor here
+//     // Execute := TRUE when program complete
+
+// METHOD PRIVATE Holding : BOOL
+// VAR_INPUT bExecute : BOOL; END_VAR
+//     Holding := FALSE;
+//     // feed hold / spindle dwell here
+//     // Holding := TRUE when axes at rest
+
+// METHOD PRIVATE Unholding : BOOL
+// VAR_INPUT bExecute : BOOL; END_VAR
+//     Unholding := FALSE;
+//     // resume feed / restart motion here
+//     // Unholding := TRUE when running again
+
+// METHOD PRIVATE Completing : BOOL
+// VAR_INPUT bExecute : BOOL; END_VAR
+//     Completing := FALSE;
+//     // decel spindle / retract tool / park gantry here
+//     // Completing := TRUE when done
+
+// METHOD PRIVATE Stopping : BOOL
+// VAR_INPUT bExecute : BOOL; END_VAR
+//     Stopping := FALSE;
+//     // orderly ramp down here
+//     // Stopping := TRUE when stopped
+
+// METHOD PRIVATE Aborting : BOOL
+// VAR_INPUT bExecute : BOOL; END_VAR
+//     Aborting := FALSE;
+//     // immediate kill — disable drives, kill spindle
+//     // Aborting := TRUE immediately (no ramp)]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -14,7 +14,7 @@
     <HmiCommunicationRouterPort>10117</HmiCommunicationRouterPort>
     <HmiCommunicationServerPort>3002</HmiCommunicationServerPort>
     <HmiInitial>1.10.1336.404</HmiInitial>
-    <HmiRecent>14.3.602.1</HmiRecent>
+    <HmiRecent>14.3.683.1</HmiRecent>
     <TargetFrameworkMoniker>native,Version=v1.12.0,Profile=tchmi</TargetFrameworkMoniker>
     <TargetFramework>native1.12-tchmi</TargetFramework>
     <HmiLogTcHmiServerMessages>false</HmiLogTcHmiServerMessages>
@@ -30,6 +30,7 @@
     </NuGetPackageImportStamp>
     <HmiCompanyWebsite>www.beyond-kinematics.com</HmiCompanyWebsite>
     <TcHmi_Beckhoff_TwinCAT_HMI_Server_Engineering_IncludeInArchive>false</TcHmi_Beckhoff_TwinCAT_HMI_Server_Engineering_IncludeInArchive>
+    <HmiCommunicationServerPublicPort>3443</HmiCommunicationServerPublicPort>
   </PropertyGroup>
   <PropertyGroup>
     <TwinCATHmi_Tasks>$(TcHmiDirectory)\MSBuild\Beckhoff.TwinCAT.HMI.tasks</TwinCATHmi_Tasks>

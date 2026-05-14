@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 
 interface GCodeConsoleProps {
   lines: string[];
@@ -7,19 +7,36 @@ interface GCodeConsoleProps {
 
 export default function GCodeConsole({ lines, activeLineIndex }: GCodeConsoleProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const visibleWindow = useMemo(() => {
+    const maxVisibleLines = 300;
+
+    if (lines.length <= maxVisibleLines) {
+      return { startIndex: 0, visibleLines: lines };
+    }
+
+    const halfWindow = Math.floor(maxVisibleLines / 2);
+    const boundedActiveLine = Math.max(0, Math.min(activeLineIndex, lines.length - 1));
+    const startIndex = Math.max(0, Math.min(boundedActiveLine - halfWindow, lines.length - maxVisibleLines));
+
+    return {
+      startIndex,
+      visibleLines: lines.slice(startIndex, startIndex + maxVisibleLines),
+    };
+  }, [activeLineIndex, lines]);
 
   // Auto-scroll to the active line whenever it changes
   useEffect(() => {
     if (scrollRef.current) {
-      const activeElement = scrollRef.current.children[activeLineIndex] as HTMLElement;
+      const relativeIndex = activeLineIndex - visibleWindow.startIndex;
+      const activeElement = scrollRef.current.children[relativeIndex] as HTMLElement;
       if (activeElement) {
         activeElement.scrollIntoView({
-          behavior: 'smooth',
+          behavior: 'auto',
           block: 'center',
         });
       }
     }
-  }, [activeLineIndex]);
+  }, [activeLineIndex, visibleWindow.startIndex]);
 
   return (
     <div className="h-half flex flex-col bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-inner">
@@ -34,19 +51,23 @@ export default function GCodeConsole({ lines, activeLineIndex }: GCodeConsolePro
         ref={scrollRef}
         className="flex-1 overflow-y-auto p-2 font-mono text-xs scrollbar-hide select-none"
       >
-        {lines.map((line, index) => (
+        {visibleWindow.visibleLines.map((line, index) => {
+          const actualIndex = visibleWindow.startIndex + index;
+
+          return (
           <div
-            key={index}
+            key={actualIndex}
             className={`px-2 py-0.5 rounded transition-all duration-200 flex gap-4 ${
-              index === activeLineIndex
+              actualIndex === activeLineIndex
                 ? 'bg-cyan-500/20 text-cyan-400 border-l-2 border-cyan-500 shadow-[inset_0_0_10px_rgba(6,182,212,0.1)]'
                 : 'text-slate-600 hover:text-slate-400'
             }`}
           >
-            <span className="w-12 opacity-50 text-right">{index * 10}</span>
-            <span className={index === activeLineIndex ? 'font-bold' : ''}>{line}</span>
+            <span className="w-12 opacity-50 text-right">{actualIndex + 1}</span>
+            <span className={actualIndex === activeLineIndex ? 'font-bold' : ''}>{line}</span>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

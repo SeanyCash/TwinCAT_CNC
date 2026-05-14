@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_StateController" Id="{07ccb648-81c0-42b0-89e1-950b18e5f193}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StateController
+VAR_INPUT
+    // ── Operator / SCADA commands ────────────────────────────────────────────
+    bStartRequest       : BOOL;
+    bStopRequest        : BOOL;
+    bResetRequest       : BOOL;
+    bHoldRequest        : BOOL;
+    bHomeAllRequest     : BOOL;
+    bAllAxesHomed       : BOOL;
+
+    // ── Hardware fault roll-up (wire OR of all drive faults, safety, etc.) ───
+    bMachineFault       : BOOL;
+
+    // ── Handshake timeout duration (tune per machine) ────────────────────────
+    tHandshakeTimeout   : TIME := T#10S;
+END_VAR
+VAR_OUTPUT
+    eRequestedState     : E_MachineState := E_MachineState.STOPPED;
+    eCurrentState       : E_MachineState;   // HMI mirror — do not use for logic
+    bAllSynced          : BOOL;
+    sBlockedBy          : STRING(80);       // Diagnostic: which follower is blocking
+    bHandshakeTimeout   : BOOL;             // TRUE if a follower has been stuck too long
+END_VAR
+VAR
+    ProgramCall         : E_Programs;
+    bProgramDone        : BOOL;
+    bExecuteNCProgram   : BOOL;
+
+    // ── Watchdog ─────────────────────────────────────────────────────────────
+    tonWatchdog         : TON;
+END_VAR
+VAR_IN_OUT
+    // ── Follower interfaces ──────────────────────────────────────────────────
+    fbNCI               : FB_StateUnit; // ★ add more followers here
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// ============================================================================
+//  FB_StateManager  —  Leader / Orchestrator
+//
+//  CONTRACT:
+//  - Leader is the ONLY thing that writes eRequestedState
+//  - Leader waits for ALL followers to confirm bStateDone
+//    AND eActiveRequest = eRequestedState before advancing
+//  - bAllSynced is evaluated POST-CASE so eRequestedState is
+//    always current before the check runs
+//  - A watchdog at the leader level catches any follower that
+//    gets stuck and never reports done
+//
+//  TO ADD A NEW FOLLOWER:
+//  1. Add its interface to VAR (e.g. fbSpindle : FB_SubFollower)
+//  2. AND it into bAllSynced    (one line, marked below)
+//  3. AND it into sBlockedBy    (one line, marked below)
+// ============================================================================
+
+// ============================================================================
+//  0. GLOBAL OVERRIDES  —  highest priority, run every scan before CASE
+// ============================================================================
+
+// Any hardware fault → immediate ABORTING
+IF bMachineFault
+   AND eRequestedState <> E_MachineState.ABORTING
+   AND eRequestedState <> E_MachineState.ABORTED THEN
+    eRequestedState := E_MachineState.ABORTING;
+END_IF
+
+// Stop valid from any non-terminal, non-fault state
+IF bStopRequest
+   AND eRequestedState <> E_MachineState.STOPPING
+   AND eRequestedState <> E_MachineState.STOPPED
+   AND eRequestedState <> E_MachineState.ABORTING
+   AND eRequestedState <> E_MachineState.ABORTED THEN
+    bStopRequest        := FALSE;
+    eRequestedState     := E_MachineState.STOPPING;
+END_IF
+
+// ============================================================================
+//  1. LEADER STATE MACHINE
+//     Keyed on eRequestedState — leader drives this, nothing else does.
+//     All transitions wait for bAllSynced (computed post-CASE).
+// ============================================================================
+CASE eRequestedState OF
+
+    E_MachineState.STOPPED:
+        IF bResetRequest THEN
+            bResetRequest   := FALSE;
+            eRequestedState := E_MachineState.RESETTING;
+        END_IF
+
+    E_MachineState.RESETTING:
+        IF bAllSynced AND NOT bMachineFault THEN
+            eRequestedState := E_MachineState.IDLE;
+        END_IF
+
+    E_MachineState.IDLE:
+        IF bHomeAllRequest AND (ProgramCall = eNull) THEN
+            bProgramDone    := FALSE;
+            ProgramCall     := E_Programs.eHomeAll;
+        END_IF
+
+        IF bStartRequest AND bAllAxesHomed AND (ProgramCall = eNull) THEN
+            bStartRequest   := FALSE;
+            eRequestedState := E_MachineState.STARTING;
+        END_IF
+
+    E_MachineState.STARTING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.EXECUTE;
+        END_IF
+
+    E_MachineState.EXECUTE:
+        bExecuteNCProgram := TRUE;
+
+        IF bAllSynced THEN
+            bExecuteNCProgram := FALSE;
+            eRequestedState   := E_MachineState.COMPLETING;
+        ELSIF bHoldRequest THEN
+            bHoldRequest    := FALSE;
+            eRequestedState := E_MachineState.HOLDING;
+        END_IF
+
+    E_MachineState.HOLDING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.HELD;
+        END_IF
+
+    E_MachineState.HELD:
+        IF bStartRequest THEN
+            bStartRequest   := FALSE;
+            eRequestedState := E_MachineState.UNHOLDING;
+        END_IF
+
+    E_MachineState.UNHOLDING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.EXECUTE;
+        END_IF
+
+    E_MachineState.COMPLETING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.COMPLETE;
+        END_IF
+
+    E_MachineState.COMPLETE:
+        IF bResetRequest OR bStartRequest THEN
+            bResetRequest   := FALSE;
+            bStartRequest   := FALSE;
+            eRequestedState := E_MachineState.RESETTING;
+        END_IF
+
+    E_MachineState.STOPPING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.STOPPED;
+        END_IF
+
+    E_MachineState.ABORTING:
+        IF bAllSynced THEN
+            eRequestedState := E_MachineState.ABORTED;
+        END_IF
+
+    E_MachineState.ABORTED:
+        bExecuteNCProgram := FALSE;
+        IF bResetRequest AND NOT bMachineFault THEN
+            bResetRequest   := FALSE;
+            eRequestedState := E_MachineState.RESETTING;
+        END_IF
+
+END_CASE
+
+// ============================================================================
+//  2. POST-PROCESSING  —  runs AFTER CASE every scan
+// ============================================================================
+
+// ── bAllSynced ───────────────────────────────────────────────────────────────
+// eRequestedState is fully updated above before this evaluates.
+// Each follower must BOTH be working on the current request AND report done.
+// ★ AND additional followers in here:
+bAllSynced :=
+    (fbNCI.eActiveRequest = eRequestedState AND fbNCI.bStateDone);
+//  AND (fbSpindle.eActiveRequest = eRequestedState AND fbSpindle.bStateDone)
+//  AND (fbAxes.eActiveRequest    = eRequestedState AND fbAxes.bStateDone   )
+
+// ── Diagnostic: which follower is blocking ───────────────────────────────────
+// ★ Add additional followers in here:
+sBlockedBy := '';
+IF NOT (fbNCI.eActiveRequest = eRequestedState AND fbNCI.bStateDone) THEN
+    sBlockedBy := 'NCI';
+END_IF
+// IF NOT (fbSpindle.eActiveRequest = eRequestedState AND fbSpindle.bStateDone) THEN
+//     sBlockedBy := CONCAT(sBlockedBy, ' Spindle');
+// END_IF
+
+// ── Watchdog: follower stuck and never reporting done ────────────────────────
+// Resets whenever followers are synced. Fires if stuck longer than tHandshakeTimeout.
+tonWatchdog(IN := NOT bAllSynced, PT := tHandshakeTimeout);
+IF tonWatchdog.Q THEN
+    bHandshakeTimeout   := TRUE;
+    bMachineFault       := TRUE;    // triggers ABORTING via global override above
+END_IF
+
+// ── HMI mirror ───────────────────────────────────────────────────────────────
+eCurrentState := eRequestedState;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

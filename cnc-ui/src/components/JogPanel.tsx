@@ -36,6 +36,11 @@ export default function JogPanel({ hmiIn, hmiOut, writeFields, pulseField }: Jog
     await writeFields({ [field]: active } as Partial<HmiIn>);
   };
 
+  const handleSaveG54 = async () => {
+    await writeFields({ nZeroShiftNumber: 54 });
+    await pulseField('bExecuteZeroShift');
+  };
+
   return (
     <div className="flex flex-col gap-4 p-4 bg-slate-900/80 border border-slate-800 rounded-xl shadow-2xl">
       
@@ -113,6 +118,20 @@ export default function JogPanel({ hmiIn, hmiOut, writeFields, pulseField }: Jog
             onPressChange={(active) => handleMomentaryJog('bYJogNegative', active)}
           />
           <div />
+        </div>
+
+        {/* G54 Zero Shift */}
+        <div className="flex items-center justify-center p-2 bg-black/40 rounded-lg">
+          <button
+            onClick={handleSaveG54}
+            className="h-full min-h-[136px] w-20 bg-emerald-900/70 hover:bg-emerald-800 border border-emerald-600 rounded shadow-lg flex flex-col items-center justify-center gap-2 active:translate-y-0.5"
+          >
+            <span className="text-[10px] font-black tracking-widest text-emerald-300 uppercase">Save</span>
+            <span className="text-xl font-black text-white">G54</span>
+            <span className="px-2 text-center text-[9px] font-bold uppercase text-emerald-200/80">
+              Current Position
+            </span>
+          </button>
         </div>
 
         {/* Z Pad */}

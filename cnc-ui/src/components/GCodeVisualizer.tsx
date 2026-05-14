@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { memo, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, GizmoHelper, GizmoViewport, Line } from '@react-three/drei';
 import * as THREE from 'three';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 // Optimized component for rendering the paths
-const Toolpath = ({ gcodeText }: { gcodeText: string }) => {
+const Toolpath = memo(({ gcodeText }: { gcodeText: string }) => {
   const { feedPoints, rapidPoints } = useMemo(() => {
     const feeds: THREE.Vector3[] = [];
     const rapids: THREE.Vector3[] = [];
@@ -66,7 +66,7 @@ const Toolpath = ({ gcodeText }: { gcodeText: string }) => {
       )}
     </group>
   );
-};
+});
 
 export default function GCodeVisualizer({ gcodeText, currentPos, toolDiameter = 6 }: Props) {
   const controlsRef = useRef<any>(null);
@@ -81,10 +81,12 @@ export default function GCodeVisualizer({ gcodeText, currentPos, toolDiameter = 
 
   // Internal component to handle the "Follow Tool" logic within the R3F loop
   const CameraFollower = () => {
+    const targetRef = useRef(new THREE.Vector3());
+
     useFrame(() => {
       if (followTool && currentPos && controlsRef.current) {
-        const target = new THREE.Vector3(currentPos.x, currentPos.y, 0);
-        controlsRef.current.target.lerp(target, 0.1);
+        targetRef.current.set(currentPos.x, currentPos.y, 0);
+        controlsRef.current.target.lerp(targetRef.current, 0.1);
         controlsRef.current.update();
       }
     });
@@ -133,16 +135,16 @@ export default function GCodeVisualizer({ gcodeText, currentPos, toolDiameter = 
         {/* Machine Bed & Bounds */}
         <group>
           <gridHelper 
-            args={[2500, 25, "#334155", "#1e293b"]} 
+            args={[2500, 25, "#333333", "#1e293b"]} 
             rotation={[Math.PI / 2, 0, 0]} 
             position={[592.5, 1250, -0.1]} 
           />
           <Line
             points={[[0, 0, 0], [1185, 0, 0], [1185, 2500, 0], [0, 2500, 0], [0, 0, 0]]}
-            color="#22d3ee"
-            lineWidth={1}
+            color="#A0A0A0"
+            lineWidth={2}
             transparent
-            opacity={0.2}
+            opacity={0.6}
           />
         </group>
 
@@ -154,7 +156,7 @@ export default function GCodeVisualizer({ gcodeText, currentPos, toolDiameter = 
             {/* The Actual Bit */}
             <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 25]}>
               <cylinderGeometry args={[toolDiameter/2, toolDiameter/2, 50, 16]} />
-              <meshStandardMaterial color="#fbbf24" emissive="#fbbf24" emissiveIntensity={0.4} />
+              <meshStandardMaterial color="#F1FA8C" emissive="#F1FA8C" emissiveIntensity={0.4} />
             </mesh>
             
             {/* Projected Crosshair on the wasteboard */}
@@ -164,7 +166,7 @@ export default function GCodeVisualizer({ gcodeText, currentPos, toolDiameter = 
                   new THREE.Vector3(-50, 0, 0), new THREE.Vector3(50, 0, 0),
                   new THREE.Vector3(0, -50, 0), new THREE.Vector3(0, 50, 0)
                 ])} />
-                <lineBasicMaterial attach="material" color="#fbbf24" opacity={0.5} transparent />
+                <lineBasicMaterial attach="material" color="#F1FA8C" opacity={0.5} transparent />
               </lineSegments>
             </group>
           </group>

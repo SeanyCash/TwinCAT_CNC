@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { startTransition, useDeferredValue, useState } from 'react';
 import AxisCard from '../components/AxisCard';
 import GCodeVisualizer from '../components/GCodeVisualizer';
 import JogPanel from '../components/JogPanel';
@@ -21,23 +21,27 @@ export default function MainView({ currentPos, hmiIn, hmiOut, writeFields, pulse
   const [currentLine, setCurrentLine] = useState(0); 
   const [gcodeText, setGcodeText] = useState<string>("");
   const [consoleLines, setConsoleLines] = useState<string[]>([]);
+  const deferredGcodeText = useDeferredValue(gcodeText);
+  const deferredConsoleLines = useDeferredValue(consoleLines);
 
-  const handleFileSelect = (file: File) => {
-    setActiveFile(file.name);
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const text = e.target?.result as string;
-      setGcodeText(text);
-      const lines = text.split(/\r?\n/).filter(line => line.trim().length > 0);
+  const handleFileSelect = async (filePath: string, content: string) => {
+    setActiveFile(filePath);
+    setCurrentLine(0);
+    await writeFields({ sPrgName: filePath });
+    await pulseField('bInitiateNCProgramSelect');
+
+    const lines = content.split(/\r?\n/).filter(line => line.trim().length > 0);
+    startTransition(() => {
+      setGcodeText(content);
       setConsoleLines(lines);
-    };
-    reader.readAsText(file);
+    });
   };
 
-  const handleClear = () => {
+  const handleClear = async () => {
     setActiveFile(null);
     setGcodeText("");
     setConsoleLines([]);
+    await writeFields({ sPrgName: '' });
   };
 
   // Connect live currentPos to your UI cards
@@ -86,13 +90,7 @@ export default function MainView({ currentPos, hmiIn, hmiOut, writeFields, pulse
           <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
             {/* 3D Visualizer */}
             <div className="relative flex-grow min-h-[200px] border-b border-cnc-border/30">
-              <GCodeVisualizer gcodeText={gcodeText} currentPos={currentPos} />
-              
-              {!activeFile && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-10">
-                  <p className="text-slate-500 italic text-xs uppercase tracking-[0.2em] font-bold">Waiting for G-Code...</p>
-                </div>
-              )}
+              <GCodeVisualizer gcodeText={deferredGcodeText} currentPos={currentPos} />
             </div>
 
             {/* Console Ticker */}
@@ -102,7 +100,7 @@ export default function MainView({ currentPos, hmiIn, hmiOut, writeFields, pulse
                 <span className="text-[10px] font-mono text-cnc-accent">Line: {currentLine}</span>
               </div>
               <GCodeConsole 
-                lines={consoleLines.length > 0 ? consoleLines : ["SYSTEM READY - LOAD FILE"]} 
+                lines={deferredConsoleLines.length > 0 ? deferredConsoleLines : ["SYSTEM READY - LOAD FILE"]} 
                 activeLineIndex={currentLine} 
               />
             </div>

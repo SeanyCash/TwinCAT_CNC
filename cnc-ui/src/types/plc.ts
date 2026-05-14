@@ -56,16 +56,14 @@ export const JOG_MODE_VALUES = {
 export type PlcJogModeValue = (typeof JOG_MODE_VALUES)[keyof typeof JOG_MODE_VALUES];
 
 export interface HmiIn {
-  bZeroX: boolean;
-  bZeroY: boolean;
-  bZeroZ: boolean;
-  bZeroAllAxes: boolean;
   bAxisEnable: boolean;
   bSpindleEnable: boolean;
   bReset: boolean;
   bHold: boolean;
   bStop: boolean;
   bStart: boolean;
+  bHomeAll: boolean;
+  bDirectHome: boolean;
   bEnableDustCollectorPB: boolean;
   ProgramCall: number;
   bTriggerProgramCall: boolean;
@@ -221,6 +219,8 @@ export const defaultHmiIn: HmiIn = {
   bHold: false,
   bStop: false,
   bStart: false,
+  bHomeAll: false,
+  bDirectHome: false,
   bEnableDustCollectorPB: false,
   ProgramCall: PROGRAM_VALUES.eNull,
   bTriggerProgramCall: false,
